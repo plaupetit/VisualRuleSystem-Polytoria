@@ -1,0 +1,62 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Game Rules",
+  "idBase": "ACT_StartRound",
+  "type": "StartRound",
+  "apiType": "RuntimeState",
+  "label": "Start Round",
+  "value": "roundName=Main Round;duration=60",
+  "description": "Starts a named temporary round and optionally sets its countdown.",
+  "status": "Ready",
+  "previewTemplate": "Start ${roundName} for ${duration}s",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "round",
+    "match",
+    "start",
+    "timer",
+    "game rules"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "roundName",
+      "label": "Round Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Main Round",
+      "description": "Temporary round name.",
+      "valueSource": "Temporary Name"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "60",
+      "description": "Round duration. Use 0 for no countdown.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do start a named round timer.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Round"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Game Rules"
+    ]
+  ]
+}
+

@@ -1,0 +1,29 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_CeilNumber",
+  "type": "CeilNumber",
+  "apiType": "Number",
+  "label": "Ceil Number",
+  "value": "value=1.5",
+  "description": "Rounds a number up.",
+  "status": "Ready",
+  "previewTemplate": "Ceil ${value}",
+  "searchKeywords": ["math", "ceil", "ceiling", "round", "up", "number"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "value", "label": "Number", "type": "Number", "control": "Number", "required": true, "default": "1.5", "description": "Number to round up.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: round a number up to an integer.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Rounding"
+  ]
+}

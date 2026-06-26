@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.bodyposition",
+  "kind": "Condition",
+  "apiGroup": "Physics",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Body Position",
+  "idBase": "COND_BodyPositionForceAtLeast",
+  "type": "BodyPositionForceAtLeast",
+  "apiType": "BodyPosition",
+  "label": "Body Position Force At Least",
+  "value": "target=Self;amount=100",
+  "description": "Checks if a Body Position object is pulling with enough force.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} force is at least ${amount}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "body",
+    "position",
+    "force",
+    "minimum",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Body Position",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Body Position",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Body Position object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "BodyPositionObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "amount",
+      "label": "Force",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "100",
+      "description": "Minimum force needed.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a Body Position object is pulling with enough force.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Body Position"
+  ]
+}

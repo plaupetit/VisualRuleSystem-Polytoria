@@ -1,0 +1,66 @@
+{
+  "moduleId": "polytoria.physical.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectTouchEnded",
+  "type": "OnObjectTouchEnded",
+  "apiType": "Physical.TouchEnded",
+  "label": "On Object Touch Ended",
+  "value": "target=Self",
+  "description": "Starts when a physics object stops touching another object.",
+  "status": "Ready",
+  "fallbackMode": "Log And Skip",
+  "previewTemplate": "When ${target} stops touching another object",
+  "searchKeywords": [
+    "when",
+    "touch",
+    "ended",
+    "stop",
+    "collision",
+    "object"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Watched Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Watched Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object that should listen for touch ending.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "When this object stops touching another object, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Touch"
+  ]
+}

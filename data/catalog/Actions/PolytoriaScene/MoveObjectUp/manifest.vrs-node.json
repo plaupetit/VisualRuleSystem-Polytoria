@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_MoveObjectUp",
+  "type": "MoveObjectUp",
+  "apiType": "Part",
+  "label": "Move Object Up",
+  "value": "target=Self;distance=1",
+  "description": "Moves a scene object upward by a simple distance.",
+  "status": "Ready",
+  "previewTemplate": "Move ${target} up by ${distance}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "move",
+    "up",
+    "position",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "distance",
+      "label": "Distance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "How far to move upward.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move a scene object upward.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Movement"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

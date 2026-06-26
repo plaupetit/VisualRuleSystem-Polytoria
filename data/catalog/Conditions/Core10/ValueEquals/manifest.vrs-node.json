@@ -1,0 +1,103 @@
+{
+  "moduleId": "core.logic",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Logic",
+  "idBase": "COND_ValueEquals",
+  "type": "ValueEquals",
+  "apiType": "ValueBase",
+  "label": "Value Equals",
+  "value": "target=Self;left=ValueA;right=ValueB",
+  "description": "Compares two values. Example: mode equals Open.",
+  "comment": "[VSR] Simple text/value equality for beginner conditions.",
+  "status": "Ready",
+  "previewTemplate": "Is ${left} equal to ${right}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "is",
+    "equals",
+    "compare",
+    "same",
+    "value",
+    "logic"
+  ],
+  "selectorHints": [
+    {
+      "key": "left",
+      "label": "Left value",
+      "dataType": "String",
+      "allowedSources": [
+        "Constant",
+        "LocalVariable",
+        "GlobalVariable",
+        "ConnectedPort"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph",
+        "Global"
+      ]
+    },
+    {
+      "key": "right",
+      "label": "Right value",
+      "dataType": "String",
+      "allowedSources": [
+        "Constant",
+        "LocalVariable",
+        "GlobalVariable",
+        "ConnectedPort"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph",
+        "Global"
+      ]
+    }
+  ],
+  "debugHints": [
+    "Runtime debug should show the resolved left and right values.",
+    "Use properties when the same value is reused by several conditions."
+  ],
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "sketcher": "sketcher.vrs-test.json",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "description": "Who this trigger or condition is about. Self resolves to the deployed script parent.",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "left",
+      "label": "Left Value",
+      "type": "String",
+      "required": true,
+      "default": "ValueA",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "right",
+      "label": "Right Value",
+      "type": "String",
+      "required": true,
+      "default": "ValueB",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if two values read as the same value.",
+  "surface": "UserFacing",
+  "palettePath": ["Logic", "Values"]
+}
+

@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "NPC Health",
+  "idBase": "COND_NPCHealthAtMost",
+  "type": "NPCHealthAtMost",
+  "apiType": "NPC",
+  "label": "NPC Health Is At Most",
+  "value": "target=Self;amount=0",
+  "description": "Checks if an NPC has this much health or less.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} health is at most ${amount}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "health",
+    "at most",
+    "low",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "amount",
+      "label": "Health",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Health amount to compare against.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if an NPC has this much health or less.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Health"
+  ]
+}

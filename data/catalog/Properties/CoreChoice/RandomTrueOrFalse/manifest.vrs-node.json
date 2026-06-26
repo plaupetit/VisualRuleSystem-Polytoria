@@ -1,0 +1,42 @@
+{
+  "moduleId": "core.choice",
+  "kind": "Property",
+  "apiGroup": "Core",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Choice",
+  "idBase": "PROP_RandomTrueOrFalse",
+  "type": "RandomTrueOrFalse",
+  "apiType": "Boolean",
+  "label": "Random True Or False",
+  "value": "trueChance=50",
+  "description": "Returns true by random chance.",
+  "status": "Ready",
+  "previewTemplate": "True ${trueChance}% of the time",
+  "searchKeywords": [
+    "random",
+    "chance",
+    "true",
+    "false",
+    "coin",
+    "flip"
+  ],
+  "corePack": true,
+  "familyFolder": "Core Choice",
+  "utilityLayer": "Core",
+  "parameters": [
+    {
+      "key": "trueChance",
+      "label": "True Chance Percent",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "50",
+      "description": "Percent chance that the value becomes true.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: randomly choose true or false.",
+  "surface": "UserFacing",
+  "palettePath": ["Logic", "Boolean"]
+}

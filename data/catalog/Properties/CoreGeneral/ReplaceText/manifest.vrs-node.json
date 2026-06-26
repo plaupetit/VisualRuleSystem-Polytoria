@@ -1,0 +1,28 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_ReplaceText",
+  "type": "ReplaceText",
+  "apiType": "String",
+  "label": "Replace Text",
+  "value": "text=Hello World;search=World;replacement=Player",
+  "description": "Replaces matching text with new text.",
+  "status": "Ready",
+  "previewTemplate": "Replace ${search} in ${text}",
+  "searchKeywords": ["text", "string", "replace", "substitute", "change"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "text", "label": "Text", "type": "String", "control": "Text", "required": true, "default": "Hello World", "description": "Text to edit.", "valueSource": "String / Manual Text Input" },
+    { "key": "search", "label": "Search Text", "type": "String", "control": "Text", "required": true, "default": "World", "description": "Text to replace.", "valueSource": "String / Manual Text Input" },
+    { "key": "replacement", "label": "Replacement", "type": "String", "control": "Text", "required": true, "default": "Player", "description": "Text inserted in place of matches.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Value: replace one part of text with another.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Edit"]
+}

@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.input.values",
+  "kind": "Property",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Input",
+  "idBase": "PROP_InputVectorX",
+  "type": "InputVectorX",
+  "apiType": "Number",
+  "label": "Input Vector X",
+  "value": "actionName=Horizontal",
+  "description": "Outputs the X component of a named Vector2 input action.",
+  "status": "Ready",
+  "previewTemplate": "Input vector ${actionName} X",
+  "searchKeywords": ["value", "input", "vector", "x", "horizontal", "client"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "actionName", "label": "Input Action", "type": "String", "control": "Choice", "required": true, "default": "Horizontal", "description": "Name of the Input vector action.", "valueSource": "String / Choice" }
+  ],
+  "beginnerSummary": "Value: read the X axis of a Vector2 input.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

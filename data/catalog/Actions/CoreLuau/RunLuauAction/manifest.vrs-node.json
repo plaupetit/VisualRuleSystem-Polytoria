@@ -1,0 +1,60 @@
+{
+  "moduleId": "core.scripting.raw",
+  "kind": "Action",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Script",
+  "idBase": "ACT_RunLuauAction",
+  "type": "RunLuauAction",
+  "apiType": "Script",
+  "label": "Run Code Action",
+  "value": "code=print(\"Run code action\")",
+  "description": "Runs authored code when flow reaches this action.",
+  "comment": "[VSR] Advanced raw Luau action emitted inside a protected call.",
+  "status": "Ready",
+  "previewTemplate": "Run code action",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "run",
+    "luau",
+    "lua",
+    "code",
+    "script",
+    "raw",
+    "custom",
+    "advanced",
+    "action"
+  ],
+  "debugHints": [
+    "The code can use triggerObject, triggerContext, VRS, resolveTarget, and makeVector3.",
+    "Errors are caught and printed so the generated flow can continue."
+  ],
+  "corePack": true,
+  "familyFolder": "Advanced Scripting",
+  "utilityLayer": "Advanced",
+  "parameters": [
+    {
+      "key": "code",
+      "label": "Script Code",
+      "type": "Code",
+      "control": "Code",
+      "required": true,
+      "default": "print(\"Run code action\")",
+      "valueSource": "Manual Script Input",
+      "description": "Runs when flow reaches this action."
+    }
+  ],
+  "beginnerSummary": "Run authored script code as an action in the flow.",
+  "surface": "Advanced",
+  "palettePath": [
+    "Variables",
+    "Script"
+  ],
+  "paletteAliases": [
+    [
+      "Flow & Timing",
+      "Flow Control"
+    ]
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectHasParent",
+  "type": "ObjectHasParent",
+  "apiType": "Part",
+  "label": "Object Has Parent",
+  "value": "target=Self",
+  "description": "Checks whether an object exists in the hierarchy with a parent.",
+  "status": "Ready",
+  "previewTemplate": "Does ${target} have a parent",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "parent",
+    "hierarchy",
+    "exists",
+    "scene",
+    "attached"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to inspect.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    }
+  ],
+  "beginnerSummary": "Check if an object is still attached to the scene hierarchy.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Parent"]
+}
+

@@ -1,0 +1,146 @@
+{
+  "moduleId": "polytoria.tween.actions",
+  "kind": "Action",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Tween",
+  "idBase": "ACT_TweenObjectRotation",
+  "type": "TweenObjectRotation",
+  "apiType": "TweenService",
+  "label": "Animate Object Rotation",
+  "value": "target=Self;vector=0,90,0;x=0;y=90;z=0;duration=1;transition=Sine;direction=InOut;waitToComplete=true",
+  "description": "Animates an object to a target rotation with a smooth animation.",
+  "status": "Ready",
+  "previewTemplate": "Animate ${target} rotation to ${vector}",
+  "searchKeywords": [
+    "do",
+    "tween",
+    "animate",
+    "rotation",
+    "vector",
+    "rotate",
+    "object",
+    "smooth"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to animate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "vector",
+      "label": "Target Rotation",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "0,90,0",
+      "description": "Rotation in degrees to tween toward.",
+      "valueSource": "Manual 3D Vector"
+    },
+    {
+      "key": "x",
+      "label": "X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target X rotation.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "90",
+      "description": "Target Y rotation.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target Z rotation.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Animation duration in seconds.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "transition",
+      "label": "Transition",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Sine",
+      "description": "Animation transition curve.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic",
+        "Quart",
+        "Quint",
+        "Expo",
+        "Circ",
+        "Back",
+        "Elastic",
+        "Bounce"
+      ]
+    },
+    {
+      "key": "direction",
+      "label": "Direction",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "InOut",
+      "description": "Animation easing direction.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "In",
+        "Out",
+        "InOut"
+      ]
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "When true, the next action waits for the animation to finish.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do smoothly rotate an object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}
+

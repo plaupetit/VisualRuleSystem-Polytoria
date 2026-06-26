@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectName",
+  "type": "SetObjectName",
+  "apiType": "Instance",
+  "label": "Set Object Name",
+  "value": "target=Self;name=NewName",
+  "description": "Renames a scene object.",
+  "status": "Ready",
+  "previewTemplate": "Rename ${target} to ${name}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "name",
+    "rename",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to rename.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "name",
+      "label": "New Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "NewName",
+      "description": "New object name.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do rename an object in the scene.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Identity"]
+}
+

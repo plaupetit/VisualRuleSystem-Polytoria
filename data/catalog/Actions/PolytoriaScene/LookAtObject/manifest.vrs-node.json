@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_LookAtObject",
+  "type": "LookAtObject",
+  "apiType": "SceneObject",
+  "label": "Look At Object",
+  "value": "target=Self;lookTarget=Target",
+  "description": "Rotates an object to face another object's position.",
+  "status": "Ready",
+  "previewTemplate": "Look ${target} at ${lookTarget}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "look",
+    "look at",
+    "face",
+    "turn",
+    "rotate",
+    "target",
+    "position"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should rotate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "lookTarget",
+      "label": "Look Target",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Object to face.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "Do rotate an object to face another object.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Look At"
+  ]
+}
+

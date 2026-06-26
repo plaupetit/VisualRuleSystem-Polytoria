@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Condition",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "Custom UI",
+  "idBase": "COND_UITextIsEmpty",
+  "type": "UITextIsEmpty",
+  "apiType": "UILabel",
+  "label": "UI Text Is Empty",
+  "value": "target=Self",
+  "description": "Checks if a UI label or button has no text.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} text is empty",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "text",
+    "empty",
+    "blank",
+    "label"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Text Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI label or button to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UILabelObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if UI text is blank.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

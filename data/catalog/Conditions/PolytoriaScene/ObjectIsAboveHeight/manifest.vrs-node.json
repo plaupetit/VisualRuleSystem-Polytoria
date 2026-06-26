@@ -1,0 +1,59 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsAboveHeight",
+  "type": "ObjectIsAboveHeight",
+  "apiType": "Part",
+  "label": "Object Is Above Height",
+  "value": "target=Self;height=10",
+  "description": "Checks whether an object is higher than a chosen height.",
+  "status": "Ready",
+  "previewTemplate": "${target} is above ${height}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "height",
+    "above",
+    "position",
+    "y",
+    "fall"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "height",
+      "label": "Height",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Height to compare with.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if an object is higher than a chosen height.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Height"
+  ]
+}

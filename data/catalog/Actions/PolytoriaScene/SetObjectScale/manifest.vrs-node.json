@@ -1,0 +1,203 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_SetObjectScale",
+  "type": "SetObjectScale",
+  "apiType": "Vector3",
+  "label": "Scale Object",
+  "value": "target=Self;motionMode=Instant;vector=1,1,1;x=1;y=1;z=1;duration=1;smoothing=Sine;direction=InOut;waitToComplete=true",
+  "description": "Changes an object's scale instantly or smoothly when the object supports it.",
+  "status": "Ready",
+  "previewTemplate": "Scale ${target} to ${vector} (${motionMode})",
+  "searchKeywords": [
+    "object",
+    "part",
+    "scale",
+    "vector",
+    "size",
+    "resize",
+    "smooth",
+    "tween",
+    "x",
+    "y",
+    "z"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to scale.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "motionMode",
+      "label": "Motion Mode",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Instant",
+      "description": "Choose whether the scale changes immediately or smoothly over time.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Instant",
+        "Smooth"
+      ],
+      "optionDetails": [
+        {
+          "value": "Instant",
+          "label": "Instant",
+          "category": "Motion Mode",
+          "description": "Apply the scale immediately in one step.",
+          "searchKeywords": [
+            "instant",
+            "now",
+            "immediate"
+          ]
+        },
+        {
+          "value": "Smooth",
+          "label": "Smooth over time",
+          "category": "Motion Mode",
+          "description": "Animate the scale over a duration.",
+          "searchKeywords": [
+            "smooth",
+            "duration",
+            "animate",
+            "tween"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "vector",
+      "label": "Scale Vector",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "1,1,1",
+      "description": "Scale values on X, Y, and Z.",
+      "valueSource": "Manual 3D Vector"
+    },
+    {
+      "key": "x",
+      "label": "X Scale",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Scale on X.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y Scale",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Scale on Y.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z Scale",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Scale on Z.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "How long the smooth scale should take.",
+      "valueSource": "Suggested Value",
+      "visibleWhen": [
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "smoothing",
+      "label": "Smoothing",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Sine",
+      "description": "Shape of the smooth scale.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic"
+      ],
+      "visibleWhen": [
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "direction",
+      "label": "Smoothing Direction",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "InOut",
+      "description": "Where the smoothing is strongest.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "InOut",
+        "In",
+        "Out"
+      ],
+      "visibleWhen": [
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "When true, the next connected action waits until the smooth scale ends.",
+      "valueSource": "Suggested Value",
+      "visibleWhen": [
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    }
+  ],
+  "beginnerSummary": "Do resize an object instantly or smoothly.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Scaling"]
+}
+

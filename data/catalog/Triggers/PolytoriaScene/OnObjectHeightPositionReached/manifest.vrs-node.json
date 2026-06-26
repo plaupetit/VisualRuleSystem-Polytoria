@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.scene.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectHeightPositionReached",
+  "type": "OnObjectHeightPositionReached",
+  "apiType": "Part",
+  "label": "On Object Height Position Reached",
+  "value": "target=Self;height=10;interval=0.25",
+  "description": "Runs when an object's height position reaches a chosen number.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} height position reaches ${height}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["object", "position", "height", "up", "y", "watch", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "Watched Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "height", "label": "Height Position", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Height position that starts the connected nodes.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the object.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When an object's height position reaches the chosen number after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Height"]
+}

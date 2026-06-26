@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.lighting.objects",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetLightBrightness",
+  "type": "SetLightBrightness",
+  "apiType": "Light",
+  "label": "Set Light Brightness",
+  "value": "target=Self;brightness=1",
+  "description": "Changes how bright a light object is.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} brightness ${brightness}",
+  "searchKeywords": [
+    "lighting",
+    "light",
+    "brightness",
+    "lamp"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "LightObject"
+      ]
+    },
+    {
+      "key": "brightness",
+      "label": "Brightness",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "New brightness amount.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do make a light brighter or dimmer.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Settings"
+  ]
+}

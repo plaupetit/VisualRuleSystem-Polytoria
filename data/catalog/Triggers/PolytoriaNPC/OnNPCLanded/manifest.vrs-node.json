@@ -1,0 +1,68 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "NPC Movement",
+  "idBase": "EV_OnNPCLanded",
+  "type": "OnNPCLanded",
+  "apiType": "NPC",
+  "label": "On NPC Landed",
+  "value": "target=Self",
+  "description": "Starts when an NPC lands after jumping or falling.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} lands",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "landed",
+    "ground",
+    "jump",
+    "event"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned NPC",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Starts when an NPC lands after jumping or falling.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

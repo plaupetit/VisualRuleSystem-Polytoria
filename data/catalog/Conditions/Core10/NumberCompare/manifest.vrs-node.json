@@ -1,0 +1,63 @@
+{
+  "kind": "Condition",
+  "apiGroup": "Types",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Logic",
+  "idBase": "COND_NumberCompare",
+  "type": "NumberCompare",
+  "apiType": "NumberRange",
+  "label": "Number Compare",
+  "value": "target=Self;left=0;operator=>;right=0",
+  "description": "Compares two numbers. Example: health greater than 0.",
+  "comment": "[VSR] Operator is explicit so generated Luau stays readable.",
+  "status": "Ready",
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "sketcher": "sketcher.vrs-test.json",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "description": "Who this trigger or condition is about. Self resolves to the deployed script parent.",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "left",
+      "label": "Left Number",
+      "type": "Number",
+      "required": true,
+      "default": "0",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "operator",
+      "label": "Operator",
+      "type": "String",
+      "required": true,
+      "default": ">",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "right",
+      "label": "Right Number",
+      "type": "Number",
+      "required": true,
+      "default": "0",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if one number is greater, smaller, or equal to another.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Comparison"
+  ]
+}
+

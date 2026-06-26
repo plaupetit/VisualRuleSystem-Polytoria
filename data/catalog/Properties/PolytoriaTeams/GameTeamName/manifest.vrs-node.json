@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_GameTeamName",
+  "type": "GameTeamName",
+  "apiType": "String",
+  "label": "Game Team Name",
+  "value": "target=Target",
+  "description": "Outputs the display name of a chosen game team.",
+  "status": "Ready",
+  "previewTemplate": "Name of ${target}",
+  "searchKeywords": [
+    "team",
+    "name",
+    "display"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Game Team",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Team object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "TeamObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use a chosen game team's display name.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Game Teams"
+  ]
+}

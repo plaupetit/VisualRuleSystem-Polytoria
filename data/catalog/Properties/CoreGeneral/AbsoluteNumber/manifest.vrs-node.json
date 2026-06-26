@@ -1,0 +1,26 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_AbsoluteNumber",
+  "type": "AbsoluteNumber",
+  "apiType": "Number",
+  "label": "Absolute Number",
+  "value": "value=-1",
+  "description": "Outputs a number without its negative sign.",
+  "status": "Ready",
+  "previewTemplate": "Abs ${value}",
+  "searchKeywords": ["math", "absolute", "abs", "positive", "number"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "value", "label": "Number", "type": "Number", "control": "Number", "required": true, "default": "-1", "description": "Number to convert.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: convert a number to its positive size.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Arithmetic"]
+}

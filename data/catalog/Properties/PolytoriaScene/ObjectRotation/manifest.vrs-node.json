@@ -1,0 +1,44 @@
+{
+  "moduleId": "polytoria.scene.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectRotation",
+  "type": "ObjectRotation",
+  "apiType": "Vector3",
+  "label": "Object Rotation",
+  "value": "target=Self",
+  "description": "Outputs the current rotation of a scene object.",
+  "status": "Ready",
+  "previewTemplate": "Rotation of ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "rotation",
+    "rotate",
+    "scene",
+    "transform"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose rotation will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    }
+  ],
+  "beginnerSummary": "Value: use an object's current rotation.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rotation"]
+}
+

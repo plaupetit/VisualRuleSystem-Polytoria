@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.players.values",
+  "kind": "Property",
+  "apiGroup": "Players",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Players",
+  "idBase": "PROP_FindPlayerByName",
+  "type": "FindPlayerByName",
+  "apiType": "Any",
+  "label": "Find Player By Name",
+  "value": "username=",
+  "description": "Outputs a player found by username, or nil when no player matches.",
+  "status": "Ready",
+  "previewTemplate": "Find player ${username}",
+  "searchKeywords": ["value", "player", "find", "name", "username", "lookup"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "username", "label": "Username", "type": "String", "control": "Text", "required": true, "default": "", "description": "Player username to look up.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Value: find a player by username.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Lookup"]
+}

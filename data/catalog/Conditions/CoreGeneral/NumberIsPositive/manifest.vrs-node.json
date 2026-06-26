@@ -1,0 +1,46 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberIsPositive",
+  "type": "NumberIsPositive",
+  "apiType": "Number",
+  "label": "Number Is Positive",
+  "value": "value=1;includeZero=false",
+  "description": "Checks whether a number is above zero.",
+  "status": "Ready",
+  "previewTemplate": "Is ${value} positive",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["number", "math", "positive", "above zero", "greater", "zero"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Number to test.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "includeZero",
+      "label": "Include Zero",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "false",
+      "description": "When checked, zero counts as positive.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a number is positive.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Comparison"]
+}

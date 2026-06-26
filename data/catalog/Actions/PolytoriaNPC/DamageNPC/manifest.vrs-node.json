@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "NPC Health",
+  "idBase": "ACT_DamageNPC",
+  "type": "DamageNPC",
+  "apiType": "NPC",
+  "label": "Damage NPC",
+  "value": "target=Self;amount=10",
+  "description": "Takes health away from an NPC.",
+  "status": "Ready",
+  "previewTemplate": "Damage ${target} by ${amount}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "damage",
+    "hurt",
+    "health"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to damage.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "amount",
+      "label": "Damage",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Health amount to remove.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do take health away from an NPC.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Health"
+  ]
+}

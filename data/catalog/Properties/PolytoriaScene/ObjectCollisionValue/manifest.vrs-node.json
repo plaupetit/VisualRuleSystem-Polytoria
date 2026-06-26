@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.scene.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectCollisionValue",
+  "type": "ObjectCollisionValue",
+  "apiType": "Boolean",
+  "label": "Object Collision Value",
+  "value": "target=Self",
+  "description": "Outputs true when a scene object is solid.",
+  "status": "Ready",
+  "previewTemplate": "Collision value of ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "collision",
+    "solid",
+    "block",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose collision will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use whether an object is solid.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Collision"
+  ]
+}

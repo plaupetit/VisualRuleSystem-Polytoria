@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.obby.conditions",
+  "kind": "Condition",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player State",
+  "idBase": "COND_PlayerFlagIsTrue",
+  "type": "PlayerFlagIsTrue",
+  "apiType": "VRS.PlayerState",
+  "label": "Player Flag Is True",
+  "value": "player=;key=Flag",
+  "description": "Checks whether a named temporary player flag is true.",
+  "status": "Ready",
+  "previewTemplate": "Player flag ${key} is true",
+  "searchKeywords": ["check", "obby", "parcours", "player", "flag", "boolean", "true"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to check. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Flag", "description": "Temporary flag name.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a player's temporary flag is true.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

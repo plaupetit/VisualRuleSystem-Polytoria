@@ -1,0 +1,69 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Checkpoint",
+  "idBase": "ACT_SetPlayerCheckpoint",
+  "type": "SetPlayerCheckpoint",
+  "apiType": "VRS.PlayerState",
+  "label": "Set Player Checkpoint",
+  "value": "player=;target=Self;checkpointName=",
+  "description": "Stores the selected checkpoint object and position for the player in temporary graph state.",
+  "status": "Ready",
+  "previewTemplate": "Set player's checkpoint to ${target}",
+  "searchKeywords": [
+    "do",
+    "obby",
+    "parcours",
+    "checkpoint",
+    "save",
+    "stage",
+    "spawn",
+    "player"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "player",
+      "label": "Player",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Player to update. Empty means the current triggering player.",
+      "valueSource": "Trigger Context"
+    },
+    {
+      "key": "target",
+      "label": "Checkpoint Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Checkpoint object whose position will be saved.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Touchable" ]
+    },
+    {
+      "key": "checkpointName",
+      "label": "Checkpoint Name",
+      "type": "String",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Optional checkpoint name. Empty uses the object name.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do save this checkpoint for the player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Checkpoint"
+  ]
+}
+

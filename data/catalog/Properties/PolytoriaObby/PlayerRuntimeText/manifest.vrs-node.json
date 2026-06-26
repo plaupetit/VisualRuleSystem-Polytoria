@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.obby.values",
+  "kind": "Property",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player State",
+  "idBase": "PROP_PlayerRuntimeText",
+  "type": "PlayerRuntimeText",
+  "apiType": "String",
+  "label": "Player Temporary Text",
+  "value": "player=;key=Label",
+  "description": "Outputs a named temporary text value stored for one player.",
+  "status": "Ready",
+  "previewTemplate": "Player text ${key}",
+  "searchKeywords": ["value", "obby", "parcours", "player", "runtime", "text", "label", "state"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to read. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Label", "description": "Temporary text name.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: temporary text stored for this player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

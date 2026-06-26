@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Property",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Custom UI",
+  "idBase": "PROP_UIColor",
+  "type": "UIColorValue",
+  "apiType": "UIView",
+  "label": "UI Color",
+  "value": "target=Self",
+  "description": "Reads the background color of a UI object.",
+  "status": "Ready",
+  "previewTemplate": "Color of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "color",
+    "background",
+    "frame",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UIObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads a UI object's background color.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

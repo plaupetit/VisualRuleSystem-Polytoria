@@ -1,0 +1,66 @@
+{
+  "moduleId": "polytoria.obby.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Finish",
+  "idBase": "EV_OnFinishTouched",
+  "type": "OnFinishTouched",
+  "apiType": "Physical.Touched",
+  "label": "On Finish Touched",
+  "value": "target=Self",
+  "description": "Starts the rule when a player touches the finish line or course goal.",
+  "status": "Ready",
+  "previewTemplate": "When finish ${target} is touched",
+  "searchKeywords": [
+    "when",
+    "obby",
+    "parcours",
+    "finish",
+    "goal",
+    "complete",
+    "win",
+    "touch"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Finish Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Finish Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Finish object that listens for touches.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Touchable" ]
+    }
+  ],
+  "beginnerSummary": "When a player reaches the finish.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Finish"
+  ]
+}
+

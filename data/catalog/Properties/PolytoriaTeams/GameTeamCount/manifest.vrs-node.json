@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_GameTeamCount",
+  "type": "GameTeamCount",
+  "apiType": "Number",
+  "label": "Game Team Count",
+  "value": "",
+  "description": "Outputs how many game teams exist.",
+  "status": "Ready",
+  "previewTemplate": "Game team count",
+  "searchKeywords": [
+    "team",
+    "teams",
+    "count"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [],
+  "beginnerSummary": "Value: count the game teams in the place.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Game Teams"
+  ]
+}

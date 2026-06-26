@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.audio",
+  "kind": "Action",
+  "apiGroup": "Audio",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_PlaySoundOnce",
+  "type": "PlaySoundOnce",
+  "apiType": "Sound",
+  "label": "Play Sound Once",
+  "value": "target=Self;volume=1",
+  "description": "Plays a sound one time without changing its normal playback state.",
+  "status": "Ready",
+  "previewTemplate": "Play ${target} once at ${volume} volume",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "effect",
+    "one shot",
+    "play"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to play once.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    },
+    {
+      "key": "volume",
+      "label": "Volume",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "How loud the one-time sound should be.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do play a sound effect one time.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Playback"
+  ]
+}

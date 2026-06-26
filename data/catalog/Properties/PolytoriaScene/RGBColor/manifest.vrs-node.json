@@ -1,0 +1,55 @@
+{
+  "moduleId": "polytoria.scene.color",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Color",
+  "idBase": "PROP_RGBColor",
+  "type": "RGBColor",
+  "apiType": "Color",
+  "label": "RGB Color",
+  "value": "r=1;g=1;b=1",
+  "description": "Builds a color from red, green, and blue values between 0 and 1.",
+  "status": "Ready",
+  "previewTemplate": "RGB(${r}, ${g}, ${b})",
+  "searchKeywords": ["color", "rgb", "red", "green", "blue", "part"],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Red amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Green amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Blue amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: build a color from red, green, and blue.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Color"]
+}

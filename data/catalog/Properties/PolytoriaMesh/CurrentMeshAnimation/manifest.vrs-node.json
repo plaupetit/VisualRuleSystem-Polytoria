@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.mesh.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Mesh Animation",
+  "idBase": "PROP_CurrentMeshAnimation",
+  "type": "CurrentMeshAnimation",
+  "apiType": "String",
+  "label": "Current Mesh Animation",
+  "value": "target=Self",
+  "description": "Outputs the animation name currently playing on a mesh.",
+  "status": "Ready",
+  "previewTemplate": "Current animation on ${target}",
+  "searchKeywords": [
+    "mesh",
+    "animation",
+    "current",
+    "name"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Mesh",
+  "utilityLayer": "World",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Mesh",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Mesh object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "MeshObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: read the animation currently playing on a mesh.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Mesh Animation"
+  ]
+}

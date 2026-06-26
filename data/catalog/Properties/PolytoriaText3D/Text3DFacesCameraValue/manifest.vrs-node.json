@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "3D Text Display",
+  "idBase": "PROP_3DTextFacesCamera",
+  "type": "Text3DFacesCameraValue",
+  "apiType": "Text3D",
+  "label": "3D Text Faces Camera",
+  "value": "target=Self",
+  "description": "Reads whether 3D text turns toward the camera.",
+  "status": "Ready",
+  "previewTemplate": "Whether ${target} faces the camera",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "camera",
+    "face",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads whether 3D text faces the camera.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Display"
+  ]
+}

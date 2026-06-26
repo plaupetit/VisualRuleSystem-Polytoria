@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.scene.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectDepthSize",
+  "type": "ObjectDepthSize",
+  "apiType": "Number",
+  "label": "Object Depth Size",
+  "value": "target=Self",
+  "description": "Outputs how deep an object is.",
+  "status": "Ready",
+  "previewTemplate": "Depth size of ${target}",
+  "searchKeywords": [
+    "object",
+    "size",
+    "scale",
+    "depth",
+    "front",
+    "back",
+    "number"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose depth will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: read an object's depth size.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Dimensions"]
+}

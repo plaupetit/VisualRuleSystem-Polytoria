@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Property",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Custom UI",
+  "idBase": "PROP_UIText",
+  "type": "UITextValue",
+  "apiType": "UILabel",
+  "label": "UI Text",
+  "value": "target=Self",
+  "description": "Reads the text shown by a UI label or button.",
+  "status": "Ready",
+  "previewTemplate": "Text of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "text",
+    "label",
+    "button",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Text Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI label or button to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UILabelObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads the text from a UI label or button.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

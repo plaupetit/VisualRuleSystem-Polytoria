@@ -1,0 +1,52 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Variables",
+  "idBase": "COND_ScriptVariableExists",
+  "type": "ScriptVariableExists",
+  "apiType": "ValueBase",
+  "label": "Script Variable Exists",
+  "value": "name=Score",
+  "description": "Checks whether a script variable has a stored value.",
+  "status": "Ready",
+  "previewTemplate": "Variable ${name} exists",
+  "searchKeywords": [
+    "check",
+    "variable",
+    "exists",
+    "script",
+    "score",
+    "stored"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Variable to check.",
+      "valueSource": "Script Variable"
+    }
+  ],
+  "beginnerSummary": "Check if a script variable currently has a value.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Script"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

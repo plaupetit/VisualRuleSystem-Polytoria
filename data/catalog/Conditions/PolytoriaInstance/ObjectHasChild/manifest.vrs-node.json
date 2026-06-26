@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.instance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Instance",
+  "idBase": "COND_ObjectHasChild",
+  "type": "ObjectHasChild",
+  "apiType": "Instance",
+  "label": "Object Has Child",
+  "value": "target=Self;childName=",
+  "description": "Checks whether an object has a direct child with a given name.",
+  "status": "Ready",
+  "previewTemplate": "${target} has child ${childName}",
+  "searchKeywords": [
+    "check",
+    "object",
+    "child",
+    "find child",
+    "name",
+    "instance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Parent object to search.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "childName",
+      "label": "Child Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "",
+      "description": "Direct child name to find.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if an object has a named child.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Children"
+  ]
+}
+

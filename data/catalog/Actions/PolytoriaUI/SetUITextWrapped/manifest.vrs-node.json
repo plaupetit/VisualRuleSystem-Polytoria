@@ -1,0 +1,63 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Action",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Custom UI",
+  "idBase": "ACT_SetUITextWrapped",
+  "type": "SetUITextWrapped",
+  "apiType": "UILabel",
+  "label": "Set UI Text Wrapping",
+  "value": "target=Self;enabled=true",
+  "description": "Turns line wrapping on or off for UI text.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} text wrapping ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "text",
+    "wrap",
+    "wrapping",
+    "label"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Text Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI label or button to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UILabelObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Wrap Text",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Checked means long text can move onto another line.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn line wrapping on or off for UI text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

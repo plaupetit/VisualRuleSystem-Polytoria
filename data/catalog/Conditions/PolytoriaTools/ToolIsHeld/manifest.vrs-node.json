@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.tools.conditions",
+  "kind": "Condition",
+  "apiGroup": "Tools",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Tools",
+  "idBase": "COND_ToolIsHeld",
+  "type": "ToolIsHeld",
+  "apiType": "Boolean",
+  "label": "Tool Is Held",
+  "value": "target=Target",
+  "description": "Checks whether the chosen tool is currently held by someone.",
+  "status": "Ready",
+  "previewTemplate": "Tool is held: ${target}",
+  "searchKeywords": [
+    "tool",
+    "holder",
+    "held",
+    "player"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a chosen tool is being held.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

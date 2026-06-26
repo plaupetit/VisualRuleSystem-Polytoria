@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Image Display",
+  "idBase": "ACT_Set3DImageLighting",
+  "type": "Set3DImageLighting",
+  "apiType": "Image3D",
+  "label": "Set 3D Image Lighting",
+  "value": "target=Self;enabled=true",
+  "description": "Chooses whether a 3D image reacts to world lighting.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} lighting ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d image",
+    "image",
+    "lighting",
+    "light",
+    "shaded"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Image",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D image object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Image3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Use Lighting",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Checked means world lighting affects this image.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do choose whether a 3D image reacts to world lighting.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Image Display"
+  ]
+}

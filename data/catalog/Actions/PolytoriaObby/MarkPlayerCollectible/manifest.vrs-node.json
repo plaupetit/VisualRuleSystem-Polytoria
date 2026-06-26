@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Collectibles",
+  "idBase": "ACT_MarkPlayerCollectible",
+  "type": "MarkPlayerCollectible",
+  "apiType": "VRS.PlayerState",
+  "label": "Mark Player Collectible",
+  "value": "player=;collectibleId=Coin",
+  "description": "Remembers that the player collected a named pickup during this server session.",
+  "status": "Ready",
+  "previewTemplate": "Mark collectible ${collectibleId}",
+  "searchKeywords": ["do", "obby", "parcours", "collectible", "coin", "pickup", "once", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player receiving the collectible mark. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "collectibleId", "label": "Collectible Key", "type": "String", "control": "Text", "required": true, "default": "Coin", "description": "Stable collectible key, such as Coin01 or SecretGem.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do remember that this player picked up this collectible.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Collectibles"]
+}

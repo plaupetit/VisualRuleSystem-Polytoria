@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Hazard",
+  "idBase": "ACT_RespawnPlayer",
+  "type": "RespawnPlayer",
+  "apiType": "Player",
+  "label": "Respawn Player",
+  "value": "player=",
+  "description": "Respawns the player using the Polytoria Player Respawn method.",
+  "status": "Ready",
+  "previewTemplate": "Respawn player",
+  "searchKeywords": ["do", "obby", "parcours", "respawn", "death", "hazard", "reset", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to respawn. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Do force the player to respawn.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Hazard"]
+}

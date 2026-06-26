@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.obby.conditions",
+  "kind": "Condition",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Collectibles",
+  "idBase": "COND_PlayerHasCollectible",
+  "type": "PlayerHasCollectible",
+  "apiType": "VRS.PlayerState",
+  "label": "Player Has Collectible",
+  "value": "player=;collectibleId=Coin",
+  "description": "Checks whether the player already collected a named pickup.",
+  "status": "Ready",
+  "previewTemplate": "Player has collectible ${collectibleId}",
+  "searchKeywords": ["check", "obby", "parcours", "collectible", "coin", "pickup", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to check. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "collectibleId", "label": "Collectible Key", "type": "String", "control": "Text", "required": true, "default": "Coin", "description": "Collectible key to check.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether this player already picked up a collectible.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Collectibles"]
+}

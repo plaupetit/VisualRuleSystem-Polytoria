@@ -1,0 +1,50 @@
+{
+  "kind": "Action",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "State",
+  "idBase": "ACT_SetState",
+  "type": "SetState",
+  "apiType": "BoolValue",
+  "label": "Set State",
+  "value": "state=StateName;enabled=true",
+  "description": "Writes a named boolean state. Example: DoorOpen=true.",
+  "comment": "[VSR] Uses the generated state table.",
+  "status": "Ready",
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "sketcher": "sketcher.vrs-test.json",
+  "parameters": [
+    {
+      "key": "state",
+      "label": "State Name",
+      "type": "String",
+      "required": true,
+      "default": "StateName",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "enabled",
+      "label": "State Value",
+      "type": "Bool",
+      "required": true,
+      "default": "true",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do save a named true or false state for later checks.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "State"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

@@ -1,0 +1,54 @@
+{
+  "moduleId": "polytoria.instance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Tags",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Tags",
+  "idBase": "COND_ObjectHasTag",
+  "type": "ObjectHasTag",
+  "apiType": "Instance",
+  "label": "Object Has Tag",
+  "value": "target=Self;tag=",
+  "description": "Checks whether an object has a specific Polytoria tag.",
+  "status": "Ready",
+  "previewTemplate": "${target} has tag ${tag}",
+  "searchKeywords": [
+    "check",
+    "object",
+    "tag",
+    "tags",
+    "has tag",
+    "instance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "tag",
+      "label": "Tag",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "",
+      "description": "Tag name to check.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if an object has a tag.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Tags"]
+}
+

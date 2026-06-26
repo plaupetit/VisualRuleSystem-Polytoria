@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_PlayerGameTeamColor",
+  "type": "PlayerGameTeamColor",
+  "apiType": "Color",
+  "label": "Player Game Team Color",
+  "value": "",
+  "description": "Outputs the color of the triggering player's game team.",
+  "status": "Ready",
+  "previewTemplate": "Triggering player game team color",
+  "searchKeywords": [
+    "team",
+    "player",
+    "color"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [],
+  "beginnerSummary": "Value: use the triggering player's game team color.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Game Team"
+  ]
+}

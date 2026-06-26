@@ -1,0 +1,71 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Image Texture",
+  "idBase": "ACT_Set3DImageTextureScale",
+  "type": "Set3DImageTextureScale",
+  "apiType": "Image3D",
+  "label": "Set 3D Image Texture Scale",
+  "value": "target=Self;x=1;y=1",
+  "description": "Changes how large the texture appears on a 3D image.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} texture scale to ${x}, ${y}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d image",
+    "image",
+    "texture",
+    "scale",
+    "tile"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Image",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D image object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Image3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "x",
+      "label": "X Scale",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Horizontal texture scale.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y Scale",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Vertical texture scale.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how large a 3D image texture appears.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Image Texture"
+  ]
+}

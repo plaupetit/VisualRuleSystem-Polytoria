@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_HideObject",
+  "type": "HideObject",
+  "apiType": "Part",
+  "label": "Hide Object",
+  "value": "target=Self",
+  "description": "Makes a scene object hidden when the object supports it.",
+  "status": "Ready",
+  "previewTemplate": "Hide ${target}",
+  "searchKeywords": [
+    "object",
+    "hide",
+    "invisible",
+    "disappear",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to hide.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do hide a scene object.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Visibility"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

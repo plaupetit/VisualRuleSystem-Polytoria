@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "NPC Health",
+  "idBase": "ACT_KillNPC",
+  "type": "KillNPC",
+  "apiType": "NPC",
+  "label": "Kill NPC",
+  "value": "target=Self",
+  "description": "Makes an NPC die.",
+  "status": "Ready",
+  "previewTemplate": "Kill ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "kill",
+    "dead",
+    "health"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to kill.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do make an NPC die.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Health"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectTransparency",
+  "type": "SetObjectTransparency",
+  "apiType": "Part",
+  "label": "Set Object Transparency",
+  "value": "target=Self;transparency=0.5",
+  "description": "Sets an object's transparency when the object exposes that property.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} transparency ${transparency}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "transparent",
+    "transparency",
+    "fade",
+    "invisible",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "transparency",
+      "label": "Transparency",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.5",
+      "description": "0 is visible and 1 is fully invisible.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do make an object more or less transparent.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Transparency"]
+}
+

@@ -1,0 +1,63 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Action",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Custom UI",
+  "idBase": "ACT_SetUIText",
+  "type": "SetUIText",
+  "apiType": "UILabel",
+  "label": "Set UI Text",
+  "value": "target=Self;text=Hello",
+  "description": "Changes the text shown by a UI label or button.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} text to ${text}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "text",
+    "label",
+    "button",
+    "message"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Text Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI label or button to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UILabelObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    },
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text to show.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do change the text on a UI label or button.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.audio.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Audio",
+  "idBase": "PROP_SoundLength",
+  "type": "SoundLength",
+  "apiType": "Number",
+  "label": "Sound Length",
+  "value": "target=Self",
+  "description": "Outputs how long a loaded sound is in seconds.",
+  "status": "Ready",
+  "previewTemplate": "Length of ${target}",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "length",
+    "duration"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use the length of a loaded sound.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Status"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.tools.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Tools",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Tools",
+  "idBase": "EV_OnToolUnequipped",
+  "type": "OnToolUnequipped",
+  "apiType": "Tool",
+  "label": "On Tool Unequipped",
+  "value": "target=Self",
+  "description": "Runs when a player stops holding the chosen tool.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} is unequipped",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "tool",
+    "unequip",
+    "player",
+    "held"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Watched Tool",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Watched Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Tool object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "When this tool is no longer equipped, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

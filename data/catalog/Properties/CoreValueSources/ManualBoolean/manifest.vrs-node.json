@@ -1,0 +1,44 @@
+{
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Value Source",
+  "idBase": "PROP_ManualBoolean",
+  "type": "ManualBoolean",
+  "apiType": "Boolean",
+  "label": "Manual Boolean",
+  "value": "true",
+  "description": "Represents a true or false value selected by the graph author.",
+  "comment": "[VSR] Catalog-only boolean value source for future property pins.",
+  "status": "Value Source",
+  "corePack": false,
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Boolean",
+      "type": "Boolean",
+      "control": "Choice",
+      "required": true,
+      "default": "true",
+      "valueSource": "Suggested Value",
+      "options": [
+        "true",
+        "false"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use a true or false value you set by hand.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Values",
+    "Manual"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

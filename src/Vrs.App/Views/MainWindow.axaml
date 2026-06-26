@@ -1,0 +1,764 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Vrs.App.ViewModels"
+        xmlns:controls="using:Vrs.App.Controls"
+        xmlns:views="using:Vrs.App.Views"
+        xmlns:model="using:Vrs.Graph.Model"
+        xmlns:validation="using:Vrs.Core.Validation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="900"
+        x:Class="Vrs.App.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Width="1440"
+        Height="900"
+        MinWidth="1100"
+        MinHeight="720"
+        Title="VisualRuleSystem Polytoria 2.0 C#">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="#d7e2ee"/>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Foreground" Value="#e7eef7"/>
+            <Setter Property="Background" Value="#283241"/>
+            <Setter Property="BorderBrush" Value="#3d4a5c"/>
+            <Setter Property="Padding" Value="10,6"/>
+        </Style>
+        <Style Selector="ToggleButton">
+            <Setter Property="Foreground" Value="#e7eef7"/>
+            <Setter Property="Background" Value="#283241"/>
+            <Setter Property="BorderBrush" Value="#3d4a5c"/>
+            <Setter Property="Padding" Value="8,4"/>
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="Foreground" Value="#edf4ff"/>
+            <Setter Property="Background" Value="#111720"/>
+            <Setter Property="BorderBrush" Value="#3d4a5c"/>
+            <Setter Property="CaretBrush" Value="#edf4ff"/>
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Foreground" Value="#edf4ff"/>
+            <Setter Property="Background" Value="#111720"/>
+            <Setter Property="BorderBrush" Value="#3d4a5c"/>
+        </Style>
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Foreground" Value="#edf4ff"/>
+            <Setter Property="Background" Value="#111720"/>
+        </Style>
+        <Style Selector="NumericUpDown">
+            <Setter Property="Foreground" Value="#edf4ff"/>
+            <Setter Property="Background" Value="#111720"/>
+            <Setter Property="BorderBrush" Value="#3d4a5c"/>
+        </Style>
+        <Style Selector="CheckBox">
+            <Setter Property="Foreground" Value="#d7e2ee"/>
+        </Style>
+        <Style Selector="ListBox">
+            <Setter Property="Foreground" Value="#d7e2ee"/>
+            <Setter Property="Background" Value="#111720"/>
+            <Setter Property="BorderBrush" Value="#303642"/>
+        </Style>
+        <Style Selector="ListBoxItem">
+            <Setter Property="Foreground" Value="#d7e2ee"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="MinHeight" Value="36"/>
+        </Style>
+        <Style Selector="TreeView">
+            <Setter Property="Foreground" Value="#d7e2ee"/>
+            <Setter Property="Background" Value="#111720"/>
+            <Setter Property="BorderBrush" Value="#303642"/>
+        </Style>
+        <Style Selector="TreeViewItem" x:CompileBindings="False">
+            <Setter Property="Foreground" Value="#d7e2ee"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="MinHeight" Value="28"/>
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+        </Style>
+        <Style Selector="TabControl">
+            <Setter Property="Background" Value="#101318"/>
+        </Style>
+        <Style Selector="TabItem">
+            <Setter Property="Foreground" Value="#d7e2ee"/>
+        </Style>
+        <Style Selector="TextBlock.panel-title">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+        <Style Selector="Border.panel">
+            <Setter Property="BorderBrush" Value="#303642"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Background" Value="#161a21"/>
+        </Style>
+        <Style Selector="Border.node-card">
+            <Setter Property="BorderBrush" Value="#486070"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Background" Value="#202833"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="320,6,*,6,*" Background="#101318">
+        <Border Grid.Row="0" Grid.ColumnSpan="5" Background="#1e2430" Padding="10" BorderBrush="#303642" BorderThickness="0,0,0,1">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <WrapPanel Grid.Column="0"
+                           Orientation="Horizontal"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center">
+                    <Border Background="{Binding ProjectStatusBackgroundHex}"
+                            BorderBrush="{Binding ProjectStatusBorderHex}"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="10,6"
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"
+                            ToolTip.Tip="{Binding ProjectStatusDetail}">
+                        <TextBlock Text="{Binding ProjectStatusText}" Foreground="{Binding ProjectStatusForegroundHex}" FontWeight="SemiBold"/>
+                    </Border>
+                    <Border Background="{Binding BridgeBeatBackgroundHex}"
+                            BorderBrush="{Binding BridgeBeatBorderHex}"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="10,6"
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"
+                            ToolTip.Tip="{Binding BridgeBeatDetail}">
+                        <TextBlock Text="{Binding BridgeBeatText}" Foreground="{Binding BridgeBeatForegroundHex}" FontWeight="SemiBold"/>
+                    </Border>
+                    <Button Content="Change Project" Click="ChangeProjectClick" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="Reload Catalog" Command="{Binding ReloadCatalogCommand}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <TextBlock Text="Catalog loading..."
+                               IsVisible="{Binding IsCatalogLoading}"
+                               VerticalAlignment="Center"
+                               Foreground="#facc15"
+                               FontSize="12"
+                               Margin="0,0,8,4"/>
+                    <Button Content="New Script" ToolTip.Tip="Create an empty script graph. Script type is locked after creation." Margin="0,0,8,4" VerticalAlignment="Center">
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuItem Header="Server Script" Command="{Binding NewServerScriptCommand}"/>
+                                <MenuItem Header="Local Script" Command="{Binding NewLocalScriptCommand}"/>
+                                <MenuItem Header="Module Script" Command="{Binding NewModuleScriptCommand}"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                    <Border Background="#142338"
+                            BorderBrush="#5eb7ff"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="8,5"
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"
+                            ToolTip.Tip="{Binding ScriptBindingTooltip}">
+                        <TextBlock Text="{Binding ScriptBindingSummary}" Foreground="#9ed8ff" FontWeight="SemiBold"/>
+                    </Border>
+                    <Border Background="#101820"
+                            BorderBrush="#334557"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="8,5"
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"
+                            MaxWidth="300"
+                            ToolTip.Tip="{Binding ScriptFilePreviewText}">
+                        <TextBlock Text="{Binding ScriptFilePreviewText}"
+                                   Foreground="#b7c7d8"
+                                   FontSize="12"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </Border>
+                    <Button Content="Deploy File"
+                            Command="{Binding DeployScriptFileCommand}"
+                            ToolTip.Tip="Write or update the VRS .luau file in scripts/VRS. Instance deploy is done from the Creator hierarchy."
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"/>
+                    <Button Content="Input Manager"
+                            Command="{Binding EnsureInputManagerCommand}"
+                            ToolTip.Tip="Generate VRS input presets in input.json and ensure NetworkEvents under World/Hidden/VRS/Events/Input."
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"/>
+                    <Button Content="Graph" ToolTip.Tip="Save, load, import, and export the editable graph package." Margin="0,0,8,4" VerticalAlignment="Center">
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuItem Header="Save Graph" Command="{Binding SaveGraphCommand}"/>
+                                <MenuItem Header="Load Graph" Command="{Binding LoadGraphCommand}"/>
+                                <MenuItem Header="Export Graph" Command="{Binding ExportPortableGraphCommand}"/>
+                                <MenuItem Header="Import Graph" Command="{Binding ImportPortableGraphCommand}"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                    <CheckBox Content="Auto"
+                              IsChecked="{Binding GraphAutosaveEnabled}"
+                              Margin="0,0,8,4"
+                              VerticalAlignment="Center"
+                              ToolTip.Tip="{Binding GraphAutosaveTooltip}"/>
+                    <Button Content="Output: F11"
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"
+                            ToolTip.Tip="F11 toggle · Esc close">
+                        <Button.Flyout>
+                            <Flyout Placement="Bottom">
+                                <StackPanel Width="260" Spacing="10">
+                                    <TextBlock Text="Output overlay"
+                                               FontWeight="SemiBold"
+                                               Foreground="#f2f7ff"/>
+                                    <Button Content="Toggle Overlay (F11)"
+                                            Command="{Binding ToggleOutputOverlayCommand}"/>
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="Transparency"
+                                                   Foreground="#9aa8b5"
+                                                   FontSize="12"/>
+                                        <Slider Minimum="0.35"
+                                                Maximum="1"
+                                                TickFrequency="0.05"
+                                                Value="{Binding OutputOverlayOpacity, Mode=TwoWay}"/>
+                                    </StackPanel>
+                                    <CheckBox Content="Mouse interactive"
+                                              IsChecked="{Binding IsOutputOverlayMouseInteractive, Mode=TwoWay}"
+                                              ToolTip.Tip="Disable to click through the overlay to the graph behind it."/>
+                                    <TextBlock Text="Uncheck for click-through mode. F11 and Escape still control the overlay."
+                                               Foreground="#9aa8b5"
+                                               FontSize="11"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    <Button Content="Export Luau" Command="{Binding ExportLuauCommand}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="Queue Folder" Command="{Binding QueueCreateFolderCommand}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="Delete Selection" Command="{Binding DeleteSelectionCommand}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="Create Group"
+                            Command="{Binding CreateNodeGroupFromSelectionCommand}"
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"
+                            ToolTip.Tip="Select nodes with Shift-click or drag selection, then create a visual node group."/>
+                    <Button Content="Add Reroute"
+                            Command="{Binding AddRerouteToSelectedWireCommand}"
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"
+                            ToolTip.Tip="Select a wire, or right-click a wire and choose Add Reroute Here for precise placement."/>
+                    <Button Content="-" Command="{Binding ZoomOutCommand}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="100%" Command="{Binding ResetViewCommand}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="+" Command="{Binding ZoomInCommand}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="Fit" Command="{Binding FitGraphCommand}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="Rule Fragment" Command="{Binding CreateRuleFragmentFromSelectionCommand}" IsVisible="{Binding ShowsFragmentTools}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="State Fragment" Command="{Binding CreateStateFragmentFromSelectionCommand}" IsVisible="{Binding ShowsFragmentTools}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                    <Button Content="Expand Fragment" Command="{Binding ExpandSelectedFragmentCommand}" IsVisible="{Binding ShowsFragmentTools}" Margin="0,0,8,4" VerticalAlignment="Center"/>
+                </WrapPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding StartupStatus}" Foreground="#80c7ff" FontSize="12"/>
+                    <TextBlock Text="{Binding StatusText}" Foreground="#c8d3df" FontSize="12"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Grid.Column="0" RowDefinitions="*,6,260" Margin="10,10,5,5">
+            <Border Grid.Row="0" Classes="panel">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Spacing="8" Margin="0,0,0,10">
+                        <TextBlock Classes="panel-title" Text="Creator Hierarchy"/>
+                        <TextBlock Text="Loading snapshot..."
+                                   IsVisible="{Binding IsSnapshotLoading}"
+                                   Foreground="#facc15"
+                                   FontSize="12"/>
+                        <TextBlock Text="{Binding ProjectUiModeText}" Foreground="#80c7ff" FontSize="12"/>
+                        <TextBlock Text="{Binding ActiveProjectPath}" Foreground="#9aa8b5" FontSize="12" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding SnapshotStatus}" Foreground="#b7c7d8" FontSize="12" TextWrapping="Wrap"/>
+                        <TextBox Text="{Binding SceneFilter}" PlaceholderText="Filter snapshot paths"/>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <StackPanel Width="104">
+                                <TextBlock Text="Max" Foreground="#9aa8b5" FontSize="12"/>
+                                <NumericUpDown Value="{Binding SnapshotMaxObjects}" Minimum="25" Maximum="2000" Increment="25"/>
+                            </StackPanel>
+                            <StackPanel Width="86">
+                                <TextBlock Text="Depth" Foreground="#9aa8b5" FontSize="12"/>
+                                <NumericUpDown Value="{Binding SnapshotMaxDepth}" Minimum="1" Maximum="16" Increment="1"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <CheckBox Content="Include bridge trash" IsChecked="{Binding IncludeBridgeTrash}"/>
+                        <Button Content="Refresh Snapshot" Command="{Binding RefreshSnapshotCommand}"/>
+                    </StackPanel>
+                    <TreeView ItemsSource="{Binding SceneTreeRoots}"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate x:DataType="vm:SceneHierarchyItemViewModel" ItemsSource="{Binding Children}">
+                                <Grid ColumnDefinitions="Auto,Auto,Auto"
+                                      ColumnSpacing="8"
+                                      Margin="0,1"
+                                      ToolTip.Tip="{Binding IconTooltip}"
+                                      PointerPressed="SceneHierarchyItemPointerPressed">
+                                    <Border Grid.Column="0"
+                                            Background="{Binding IconBackgroundHex}"
+                                            BorderBrush="{Binding IconAccentHex}"
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Width="22"
+                                            Height="22"
+                                            VerticalAlignment="Center"
+                                            ToolTip.Tip="{Binding Kind}">
+                                        <Svg Path="{Binding IconPath}"
+                                             Width="14"
+                                             Height="14"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Name}"
+                                               Foreground="{Binding IconAccentHex}"
+                                               FontWeight="SemiBold"
+                                               VerticalAlignment="Center"
+                                               TextWrapping="NoWrap"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <Border Grid.Column="2"
+                                            IsVisible="{Binding ShowsScriptBadge}"
+                                            Background="#142338"
+                                            BorderBrush="#5eb7ff"
+                                            BorderThickness="1"
+                                            CornerRadius="3"
+                                            Padding="4,1"
+                                            VerticalAlignment="Center"
+                                            ToolTip.Tip="Left-click loads this visual graph when metadata exists. Right-click to deploy or load.">
+                                        <TextBlock Text="VRS"
+                                                   Foreground="#9ed8ff"
+                                                   FontSize="9"
+                                                   FontWeight="SemiBold"/>
+                                    </Border>
+                                </Grid>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </DockPanel>
+            </Border>
+
+            <GridSplitter Grid.Row="1"
+                          ResizeDirection="Rows"
+                          ResizeBehavior="PreviousAndNext"
+                          Background="#263140"
+                          ShowsPreview="False"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"/>
+
+            <Border Grid.Row="2" Classes="panel">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Spacing="8" Margin="0,0,0,10">
+                        <TextBlock Classes="panel-title" Text="File Browser"/>
+                        <TextBlock Text="Loading files..."
+                                   IsVisible="{Binding IsProjectFilesLoading}"
+                                   Foreground="#facc15"
+                                   FontSize="12"/>
+                        <TextBlock Text="{Binding ProjectUiModeText}" Foreground="#80c7ff" FontSize="12"/>
+                        <TextBlock Text="{Binding ProjectFileStatus}" Foreground="#9aa8b5" FontSize="12" TextWrapping="Wrap"/>
+                        <TextBox Text="{Binding ProjectFileFilter, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Search project files"/>
+                        <Button Content="Refresh Files" Command="{Binding RefreshProjectFilesCommand}"/>
+                    </StackPanel>
+                    <TreeView ItemsSource="{Binding ProjectFileTreeRoots}"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate x:DataType="vm:ProjectFileItemViewModel" ItemsSource="{Binding Children}">
+                                <Grid ColumnDefinitions="Auto,*"
+                                      ColumnSpacing="8"
+                                      Margin="0,1"
+                                      ToolTip.Tip="{Binding IconTooltip}"
+                                      PointerPressed="ProjectFileItemPointerPressed">
+                                    <Border Grid.Column="0"
+                                            Background="{Binding IconBackgroundHex}"
+                                            BorderBrush="{Binding IconAccentHex}"
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Width="22"
+                                            Height="22"
+                                            VerticalAlignment="Center"
+                                            ToolTip.Tip="{Binding Kind}">
+                                        <Svg Path="{Binding IconPath}"
+                                             Width="14"
+                                             Height="14"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Name}"
+                                               Foreground="{Binding IconAccentHex}"
+                                               FontWeight="SemiBold"
+                                               VerticalAlignment="Center"
+                                               TextWrapping="NoWrap"
+                                               TextTrimming="CharacterEllipsis"/>
+                                </Grid>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <GridSplitter Grid.Row="1"
+                      Grid.Column="1"
+                      ResizeDirection="Columns"
+                      ResizeBehavior="PreviousAndNext"
+                      Background="#263140"
+                      ShowsPreview="False"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"/>
+
+        <Border Grid.Row="1" Grid.Column="2" Classes="panel" Margin="5,10,5,5">
+            <Grid RowDefinitions="Auto,Auto,*">
+                <StackPanel Grid.Row="0" Margin="0,0,0,12">
+                    <TextBlock Classes="panel-title" Text="{Binding GraphName}"/>
+                    <TextBlock Text="Rule Flow Canvas" Foreground="#9aa8b5"/>
+                </StackPanel>
+                <views:StateRuleBuilderView Grid.Row="1" IsVisible="{Binding ShowsStateRuleBuilder}"/>
+                <controls:RuleGraphCanvas Grid.Row="2"
+                                          Nodes="{Binding Nodes}"
+                                          Connections="{Binding Connections}"
+                                          Fragments="{Binding Fragments}"
+                                          NodeGroups="{Binding NodeGroups}"
+                                          WireReroutes="{Binding WireReroutes}"
+                                          CatalogEntries="{Binding CatalogEntries}"
+                                          SelectedScriptKind="{Binding SelectedScriptKind}"
+                                          Host="{Binding}"
+                                          SelectedNode="{Binding SelectedNode, Mode=TwoWay}"
+                                          SelectedNodeIds="{Binding SelectedNodeIds}"
+                                          SelectedConnectionIndex="{Binding SelectedConnectionIndex, Mode=TwoWay}"
+                                          SelectedFragmentId="{Binding SelectedFragmentId, Mode=TwoWay}"
+                                          SelectedGroupId="{Binding SelectedGroupId, Mode=TwoWay}"
+                                          SelectedWireRerouteId="{Binding SelectedWireRerouteId, Mode=TwoWay}"
+                                          ViewMode="{Binding CurrentViewMode}"
+                                          ShowAdvancedPins="{Binding ShowAdvancedPins}"
+                                          RenderRevision="{Binding CanvasRevision}"
+                                          Zoom="{Binding CanvasZoom, Mode=TwoWay}"
+                                          PanX="{Binding CanvasPanX, Mode=TwoWay}"
+                                          PanY="{Binding CanvasPanY, Mode=TwoWay}"/>
+            </Grid>
+        </Border>
+
+        <GridSplitter Grid.Row="1"
+                      Grid.Column="3"
+                      ResizeDirection="Columns"
+                      ResizeBehavior="PreviousAndNext"
+                      Background="#263140"
+                      ShowsPreview="False"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"/>
+
+        <Grid Grid.Row="1" Grid.Column="4" RowDefinitions="*" Margin="5,10,10,5">
+            <Border Grid.Row="0" Classes="panel" Margin="0,0,0,5">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Classes="panel-title" Text="Inspector"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Spacing="8">
+                            <StackPanel Spacing="6" IsVisible="{Binding ShowsGenericInspectorHeader}">
+                                <TextBlock Text="{Binding InspectorTitle}" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding InspectorDescription}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding InspectorDetail}" TextWrapping="Wrap" Foreground="#9aa8b5"/>
+                            </StackPanel>
+                            <Border IsVisible="{Binding HasSelectedGroup}"
+                                    Background="#18212b"
+                                    BorderBrush="#4f6478"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Padding="10">
+                                <StackPanel Spacing="8">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="Node Group"
+                                                       FontSize="11"
+                                                       Foreground="#9aa8b5"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBox Text="{Binding SelectedGroupName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     PlaceholderText="Group name"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Width="110">
+                                            <TextBlock Text="Color"
+                                                       FontSize="11"
+                                                       Foreground="#9aa8b5"
+                                                       FontWeight="SemiBold"/>
+                                            <ComboBox ItemsSource="{Binding GroupColorChoices}"
+                                                      SelectedItem="{Binding SelectedGroupColor, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="Nodes" FontSize="11" Foreground="#9aa8b5"/>
+                                            <TextBlock Text="{Binding SelectedGroupMemberCount}" FontWeight="SemiBold"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="Size" FontSize="11" Foreground="#9aa8b5"/>
+                                            <TextBlock Text="{Binding SelectedGroupSizeText}" FontWeight="SemiBold"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="Parent" FontSize="11" Foreground="#9aa8b5"/>
+                                        <TextBlock Text="{Binding SelectedGroupParentText}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <Border IsVisible="{Binding HasSelectedWireReroute}"
+                                    Background="#18212b"
+                                    BorderBrush="#4f6478"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Padding="10">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Wire Reroute"
+                                               FontSize="11"
+                                               Foreground="#9aa8b5"
+                                               FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding SelectedWireRerouteWireText}"
+                                               TextWrapping="Wrap"
+                                               FontWeight="SemiBold"/>
+                                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="Input direction"
+                                                       FontSize="11"
+                                                       Foreground="#9aa8b5"/>
+                                            <ComboBox ItemsSource="{Binding WireRerouteDirectionChoices}"
+                                                      SelectedItem="{Binding SelectedWireRerouteInputDirection, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="Output direction"
+                                                       FontSize="11"
+                                                       Foreground="#9aa8b5"/>
+                                            <ComboBox ItemsSource="{Binding WireRerouteDirectionChoices}"
+                                                      SelectedItem="{Binding SelectedWireRerouteOutputDirection, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="Position" FontSize="11" Foreground="#9aa8b5"/>
+                                        <TextBlock Text="{Binding SelectedWireReroutePositionText}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <StackPanel Spacing="6" IsVisible="{Binding HasSelectedFragment}">
+                                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="4">
+                                    <StackPanel Grid.Row="0" Grid.Column="0">
+                                        <TextBlock Text="Fragment" FontSize="11" Foreground="#9aa8b5"/>
+                                        <TextBlock Text="{Binding SelectedFragmentKindText}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Collapsed" IsChecked="{Binding SelectedFragmentCollapsed, Mode=TwoWay}"/>
+                                    <Button Grid.Row="1" Grid.Column="1" Content="Expand" Command="{Binding ExpandSelectedFragmentCommand}"/>
+                                </Grid>
+                                <Separator/>
+                            </StackPanel>
+                            <Border IsVisible="{Binding HasSelectedNode}"
+                                    Background="{Binding SelectedNodeBlockFillHex}"
+                                    BorderBrush="{Binding SelectedNodeBlockAccentHex}"
+                                    BorderThickness="1"
+                                    CornerRadius="4">
+                                <Grid RowDefinitions="Auto,Auto">
+                                    <Border Grid.Row="0"
+                                            Background="{Binding SelectedNodeBlockAccentHex}"
+                                            Padding="8,6"
+                                            CornerRadius="4,4,0,0">
+                                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8">
+                                            <Border Grid.Column="0"
+                                                    Background="#1b1f27"
+                                                    CornerRadius="3"
+                                                    Padding="6,3"
+                                                    VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding SelectedNodeBlockBadge}"
+                                                           FontSize="10"
+                                                           Foreground="#edf4ff"
+                                                           FontWeight="SemiBold"/>
+                                            </Border>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="{Binding SelectedNodeBlockTitle}"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#ffffff"
+                                                           TextWrapping="NoWrap"/>
+                                                <TextBlock Text="{Binding SelectedNodeBlockSubtitle}"
+                                                           Foreground="#e5edf5"
+                                                           FontSize="11"
+                                                           TextWrapping="NoWrap"/>
+                                            </StackPanel>
+                                            <CheckBox Grid.Column="2"
+                                                      Content="Enabled"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding SelectedNodeEnabled, Mode=TwoWay}"/>
+                                            <ToggleButton Grid.Column="3"
+                                                          Content="Details"
+                                                          IsChecked="{Binding SelectedNodeDetailsOpen, Mode=TwoWay}"/>
+                                        </Grid>
+                                    </Border>
+
+                                    <Border Grid.Row="1"
+                                            Padding="8"
+                                            IsVisible="{Binding SelectedNodeDetailsOpen}">
+                                        <StackPanel Spacing="8">
+                                        <StackPanel Spacing="3">
+                                            <TextBlock Text="What it does"
+                                                       FontSize="11"
+                                                       Foreground="#9aa8b5"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding InspectorDescription}" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                        <StackPanel Spacing="3">
+                                            <TextBlock Text="Configured as"
+                                                       FontSize="11"
+                                                       Foreground="#9aa8b5"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding SelectedNodeConfiguredSummary}"
+                                                       TextWrapping="Wrap"
+                                                       Foreground="#e5edf5"/>
+                                        </StackPanel>
+                                        <Grid ColumnDefinitions="90,*" ColumnSpacing="8" RowDefinitions="Auto,Auto,Auto" RowSpacing="5">
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Fallback" Foreground="#9aa8b5"/>
+                                            <controls:SearchableChoicePickerControl Grid.Row="0"
+                                                                                     Grid.Column="1"
+                                                                                     ItemsSource="{Binding SelectedNodeFallbackChoices}"
+                                                                                     SelectedValue="{Binding SelectedNodeFallbackMode, Mode=TwoWay}"
+                                                                                     PlaceholderText="Fallback"
+                                                                                     SearchPlaceholderText="Search fallback modes..."
+                                                                                     PopupTitle="Choose Fallback Mode"
+                                                                                     PopupBreadcrumb="Fallback Modes"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Debug" Foreground="#9aa8b5"/>
+                                            <CheckBox Grid.Row="1" Grid.Column="1"
+                                                      Content="Debug logs"
+                                                      ToolTip.Tip="Adds non-essential success logs for this node in the generated Luau."
+                                                      IsChecked="{Binding SelectedNodeDebugEnabled, Mode=TwoWay}"/>
+                                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Author note" Foreground="#9aa8b5"/>
+                                            <TextBox Grid.Row="2" Grid.Column="1"
+                                                     Text="{Binding SelectedNodeUserComment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     AcceptsReturn="True"
+                                                     PlaceholderText="Why this node is used here..."
+                                                     MinHeight="44"/>
+                                        </Grid>
+                                        <ItemsControl ItemsSource="{Binding SelectedNodeColorPickers}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:NodeColorPickerViewModel">
+                                                    <controls:PolytoriaColorPickerControl/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <ItemsControl ItemsSource="{Binding SelectedNodeParameters}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:NodeParameterEditorViewModel">
+                                                    <controls:PropertySelectorControl/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <TextBlock Text="Tip: hover dropdowns and value fields for details."
+                                                   Foreground="#9aa8b5"
+                                                   FontSize="11"
+                                                   TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.RowSpan="2"
+              Grid.ColumnSpan="5"
+              IsVisible="{Binding IsOutputOverlayOpen}"
+              Panel.ZIndex="100">
+            <Border Background="#101318"
+                    Opacity="{Binding OutputOverlayOpacity}"
+                    IsHitTestVisible="False"/>
+            <Border Margin="24"
+                    Background="#151a21"
+                    BorderBrush="#5eb7ff"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    Padding="12"
+                    Opacity="{Binding OutputOverlayOpacity}"
+                    IsHitTestVisible="{Binding IsOutputOverlayMouseInteractive}">
+                <Grid RowDefinitions="Auto,*">
+                    <Grid Grid.Row="0"
+                          ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto"
+                          ColumnSpacing="14"
+                          Margin="0,0,0,10">
+                        <TextBlock Text="Output"
+                                   Foreground="#f2f7ff"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="2"
+                                   Text="F11 toggle · Esc close"
+                                   Foreground="#9aa8b5"
+                                   FontSize="12"
+                                   VerticalAlignment="Center"/>
+                        <StackPanel Grid.Column="3"
+                                    Orientation="Horizontal"
+                                    Spacing="8"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Transparency"
+                                       Foreground="#9aa8b5"
+                                       FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <Slider Width="160"
+                                    Minimum="0.35"
+                                    Maximum="1"
+                                    TickFrequency="0.05"
+                                    Value="{Binding OutputOverlayOpacity, Mode=TwoWay}"/>
+                        </StackPanel>
+                        <CheckBox Grid.Column="4"
+                                  Content="Mouse interactive"
+                                  IsChecked="{Binding IsOutputOverlayMouseInteractive, Mode=TwoWay}"
+                                  VerticalAlignment="Center"
+                                  ToolTip.Tip="Disable to click through the overlay to the graph behind it."/>
+                        <Button Grid.Column="5"
+                                Content="×"
+                                Command="{Binding CloseOutputOverlayCommand}"
+                                Width="34"
+                                Height="30"
+                                Padding="0"
+                                FontSize="18"
+                                ToolTip.Tip="Close output overlay."/>
+                    </Grid>
+                    <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedOutputTabIndex, Mode=TwoWay}">
+                        <TabItem Header="Script Code Preview">
+                            <Grid RowDefinitions="Auto,*">
+                                <TextBlock Grid.Row="0"
+                                           Text="Preparing Luau preview..."
+                                           IsVisible="{Binding IsLuauPreviewLoading}"
+                                           Foreground="#facc15"
+                                           Margin="8,4"/>
+                                <controls:LuauCodePreviewControl Grid.Row="1"
+                                                                 x:Name="LuauPreviewEditor"
+                                                                 CodeText="{Binding LuauPreview}"
+                                                                 HighlightedLineNumbers="{Binding LuauPreviewHighlightedLineNumbers}"
+                                                                 FocusLineNumber="{Binding LuauPreviewFocusLineNumber}"
+                                                                 FocusRequestId="{Binding LuauPreviewFocusRequestId}"
+                                                                 HorizontalAlignment="Stretch"
+                                                                 VerticalAlignment="Stretch"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Validation">
+                            <ListBox ItemsSource="{Binding ValidationMessages}"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="validation:ValidationMessage">
+                                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,4">
+                                            <TextBlock Text="{Binding Severity}" Width="80" Foreground="#80c7ff"/>
+                                            <TextBlock Text="{Binding Scope}" Width="180"/>
+                                            <TextBlock Text="{Binding Message}" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </TabItem>
+                        <TabItem Header="Logs">
+                            <ListBox ItemsSource="{Binding Logs}"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

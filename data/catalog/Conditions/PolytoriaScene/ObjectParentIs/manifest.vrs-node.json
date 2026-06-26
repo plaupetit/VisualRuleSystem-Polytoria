@@ -1,0 +1,58 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectParentIs",
+  "type": "ObjectParentIs",
+  "apiType": "Instance",
+  "label": "Object Parent Is",
+  "value": "target=Self;parent=Target",
+  "description": "Checks whether an object's direct parent is the expected object.",
+  "status": "Ready",
+  "previewTemplate": "${target} parent is ${parent}",
+  "searchKeywords": [
+    "check",
+    "object",
+    "parent",
+    "child",
+    "hierarchy",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Child Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose direct parent will be checked.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    },
+    {
+      "key": "parent",
+      "label": "Expected Parent",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Parent object expected above the child.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if an object is directly inside another object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Parent"]
+}

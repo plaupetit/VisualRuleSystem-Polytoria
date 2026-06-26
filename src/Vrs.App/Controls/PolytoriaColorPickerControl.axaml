@@ -1,0 +1,357 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:color="using:Avalonia.Controls.Primitives"
+             xmlns:vm="using:Vrs.App.ViewModels"
+             x:Class="Vrs.App.Controls.PolytoriaColorPickerControl"
+             x:DataType="vm:NodeColorPickerViewModel">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.color-label">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBlock.color-help">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="#9aa8b5"/>
+        </Style>
+        <Style Selector="Button.color-mode">
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="MinHeight" Value="28"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="NumericUpDown.color-number">
+            <Setter Property="Width" Value="74"/>
+            <Setter Property="MinHeight" Value="28"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Border Background="#242830"
+            BorderBrush="#3a414d"
+            BorderThickness="1"
+            CornerRadius="4"
+            Padding="8"
+            Margin="0,4,0,0"
+            ToolTip.Tip="{Binding TooltipText}">
+        <StackPanel Spacing="8">
+            <Grid ColumnDefinitions="72,*"
+                  ColumnSpacing="10">
+                <StackPanel Grid.Column="0" Spacing="5">
+                    <Border Height="58"
+                            CornerRadius="4"
+                            Background="{Binding PreviewHex}"
+                            BorderBrush="#d8dde4"
+                            BorderThickness="1"/>
+                    <TextBlock Text="{Binding HexColor}"
+                               FontFamily="Consolas"
+                               FontSize="11"
+                               TextAlignment="Center"
+                               Foreground="#edf4ff"/>
+                    <TextBlock Text="Polytoria RGB"
+                               Classes="color-help"
+                               TextAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Spacing="7">
+                    <Grid ColumnDefinitions="*,94" ColumnSpacing="8">
+                        <StackPanel Grid.Column="0" Spacing="2">
+                            <TextBlock Text="{Binding Title}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding PolytoriaValueText}"
+                                       Classes="color-help"
+                                       FontFamily="Consolas"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <TextBox Grid.Column="1"
+                                 Text="{Binding HexColor, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                 FontFamily="Consolas"
+                                 HorizontalContentAlignment="Center"
+                                 ToolTip.Tip="Hex color. Use #RRGGBB or RRGGBB."/>
+                    </Grid>
+
+                    <ItemsControl ItemsSource="{Binding Swatches}" x:CompileBindings="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ColorSwatchViewModel">
+                                <Button Width="22"
+                                        Height="22"
+                                        Padding="0"
+                                        Margin="0,0,5,5"
+                                        Background="{Binding Hex}"
+                                        BorderBrush="#4b5563"
+                                        BorderThickness="1"
+                                        ToolTip.Tip="{Binding Tooltip}"
+                                        Command="{Binding DataContext.ApplySwatchCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
+
+            <Border Background="#161b22"
+                    BorderBrush="#334155"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    Padding="8">
+                <StackPanel Spacing="8">
+                    <Grid ColumnDefinitions="*,46"
+                          ColumnSpacing="10"
+                          HorizontalAlignment="Center"
+                          MaxWidth="286">
+                        <color:ColorSpectrum Width="190"
+                                             Height="190"
+                                             Shape="Ring"
+                                             Components="HueSaturation"
+                                             HsvColor="{Binding SelectedHsvColor, Mode=TwoWay}"
+                                             ToolTip.Tip="Choose hue and saturation."/>
+                        <StackPanel Grid.Column="1"
+                                    Width="44"
+                                    VerticalAlignment="Stretch"
+                                    Spacing="5">
+                            <TextBlock Text="Value"
+                                       Classes="color-help"
+                                       TextAlignment="Center"/>
+                            <color:ColorSlider Height="158"
+                                               Orientation="Vertical"
+                                               ColorModel="Hsva"
+                                               ColorComponent="Component3"
+                                               HsvColor="{Binding SelectedHsvColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"
+                                               ToolTip.Tip="Adjust brightness without changing hue."/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="4">
+                        <Button Classes="color-mode"
+                                Content="RGB"
+                                Background="{Binding RgbModeBackgroundHex}"
+                                BorderBrush="{Binding RgbModeBorderHex}"
+                                Command="{Binding SetColorModeCommand}"
+                                CommandParameter="Rgb"
+                                ToolTip.Tip="Edit red, green, and blue as 0 to 255 values."/>
+                        <Button Grid.Column="1"
+                                Classes="color-mode"
+                                Content="HSV"
+                                Background="{Binding HsvModeBackgroundHex}"
+                                BorderBrush="{Binding HsvModeBorderHex}"
+                                Command="{Binding SetColorModeCommand}"
+                                CommandParameter="Hsv"
+                                ToolTip.Tip="Edit hue, saturation, and value like Polytoria Creator."/>
+                        <Button Grid.Column="2"
+                                Classes="color-mode"
+                                Content="Linear"
+                                Background="{Binding LinearModeBackgroundHex}"
+                                BorderBrush="{Binding LinearModeBorderHex}"
+                                Command="{Binding SetColorModeCommand}"
+                                CommandParameter="Linear"
+                                ToolTip.Tip="Edit normalized Polytoria Color.New channel values from 0 to 1."/>
+                    </Grid>
+
+                    <StackPanel Spacing="6" IsVisible="{Binding IsRgbMode}">
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="R" Foreground="#ff6b6b"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Rgba"
+                                               ColorComponent="Component1"
+                                               Color="{Binding SelectedColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding RedByte, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="255"
+                                           Increment="1"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="G" Foreground="#3ee07f"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Rgba"
+                                               ColorComponent="Component2"
+                                               Color="{Binding SelectedColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding GreenByte, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="255"
+                                           Increment="1"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="B" Foreground="#4aa3ff"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Rgba"
+                                               ColorComponent="Component3"
+                                               Color="{Binding SelectedColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding BlueByte, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="255"
+                                           Increment="1"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Spacing="6" IsVisible="{Binding IsHsvMode}">
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="H" Foreground="#ffcf4a"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Hsva"
+                                               ColorComponent="Component1"
+                                               HsvColor="{Binding SelectedHsvColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding HueDegrees, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="360"
+                                           Increment="1"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="S" Foreground="#f472b6"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Hsva"
+                                               ColorComponent="Component2"
+                                               HsvColor="{Binding SelectedHsvColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding SaturationPercent, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="100"
+                                           Increment="1"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="V" Foreground="#d8dde4"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Hsva"
+                                               ColorComponent="Component3"
+                                               HsvColor="{Binding SelectedHsvColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding ValuePercent, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="100"
+                                           Increment="1"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Spacing="6" IsVisible="{Binding IsLinearMode}">
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="R" Foreground="#ff6b6b"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Rgba"
+                                               ColorComponent="Component1"
+                                               Color="{Binding SelectedColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding LinearRed, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="1"
+                                           Increment="0.01"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="G" Foreground="#3ee07f"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Rgba"
+                                               ColorComponent="Component2"
+                                               Color="{Binding SelectedColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding LinearGreen, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="1"
+                                           Increment="0.01"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7">
+                            <TextBlock Classes="color-label" Text="B" Foreground="#4aa3ff"/>
+                            <color:ColorSlider Grid.Column="1"
+                                               Height="22"
+                                               ColorModel="Rgba"
+                                               ColorComponent="Component3"
+                                               Color="{Binding SelectedColor, Mode=TwoWay}"
+                                               IsAlphaVisible="False"
+                                               IsPerceptive="True"/>
+                            <NumericUpDown Grid.Column="2"
+                                           Classes="color-number"
+                                           Value="{Binding LinearBlue, Mode=TwoWay}"
+                                           Minimum="0"
+                                           Maximum="1"
+                                           Increment="0.01"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <Grid ColumnDefinitions="22,*,74" ColumnSpacing="7"
+                          ToolTip.Tip="{Binding AlphaTooltip}">
+                        <TextBlock Classes="color-label" Text="A" Foreground="#d8dde4"/>
+                        <Slider Grid.Column="1"
+                                Value="{Binding AlphaByte, Mode=OneWay}"
+                                Minimum="0"
+                                Maximum="255"
+                                IsEnabled="False"/>
+                        <NumericUpDown Grid.Column="2"
+                                       Classes="color-number"
+                                       Value="{Binding AlphaByte, Mode=OneWay}"
+                                       Minimum="0"
+                                       Maximum="255"
+                                       IsEnabled="False"/>
+                    </Grid>
+                    <TextBlock Text="{Binding AlphaLockText}"
+                               Classes="color-help"/>
+                </StackPanel>
+            </Border>
+
+            <Expander Header="Recent Colors"
+                      IsExpanded="True"
+                      IsVisible="{Binding HasRecentColors}">
+                <ItemsControl ItemsSource="{Binding RecentColors}" x:CompileBindings="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:ColorSwatchViewModel">
+                            <Button Width="22"
+                                    Height="22"
+                                    Padding="0"
+                                    Margin="0,4,5,1"
+                                    Background="{Binding Hex}"
+                                    BorderBrush="#4b5563"
+                                    BorderThickness="1"
+                                    ToolTip.Tip="{Binding Tooltip}"
+                                    Command="{Binding DataContext.ApplyRecentColorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Expander>
+        </StackPanel>
+    </Border>
+</UserControl>

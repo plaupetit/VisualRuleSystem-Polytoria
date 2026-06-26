@@ -1,0 +1,61 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_SubtractNumbers",
+  "type": "SubtractNumbers",
+  "apiType": "Number",
+  "label": "Subtract Numbers",
+  "value": "left=0;right=0",
+  "description": "Outputs the difference between two numbers.",
+  "status": "Ready",
+  "previewTemplate": "${left} - ${right}",
+  "searchKeywords": [
+    "math",
+    "subtract",
+    "minus",
+    "difference",
+    "number"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "left",
+      "label": "Start Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to subtract from.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "right",
+      "label": "Subtract",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number removed from the start number.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: subtract one number from another.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Arithmetic"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

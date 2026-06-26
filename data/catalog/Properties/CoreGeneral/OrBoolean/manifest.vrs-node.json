@@ -1,0 +1,27 @@
+{
+  "moduleId": "core.general.logic",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Logic",
+  "idBase": "PROP_OrBoolean",
+  "type": "OrBoolean",
+  "apiType": "Boolean",
+  "label": "Or Boolean",
+  "value": "left=true;right=false",
+  "description": "Outputs true when either input is true.",
+  "status": "Ready",
+  "previewTemplate": "${left} OR ${right}",
+  "searchKeywords": ["logic", "boolean", "or", "either", "true"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "left", "label": "Left Boolean", "type": "Boolean", "control": "Toggle", "required": true, "default": "true", "description": "First boolean.", "valueSource": "Suggested Value" },
+    { "key": "right", "label": "Right Boolean", "type": "Boolean", "control": "Toggle", "required": true, "default": "false", "description": "Second boolean.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: true when at least one boolean is true.",
+  "surface": "UserFacing",
+  "palettePath": ["Logic", "Boolean"]
+}

@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.players.values",
+  "kind": "Property",
+  "apiGroup": "Players",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Players",
+  "idBase": "PROP_TriggeringPlayer",
+  "type": "TriggeringPlayer",
+  "apiType": "Any",
+  "label": "Triggering Player",
+  "value": "",
+  "description": "Outputs the player supplied by the current player-related trigger.",
+  "status": "Ready",
+  "previewTemplate": "Triggering player",
+  "searchKeywords": [
+    "value",
+    "player",
+    "trigger",
+    "joined",
+    "left",
+    "context"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: use the player that caused this trigger.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Context"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

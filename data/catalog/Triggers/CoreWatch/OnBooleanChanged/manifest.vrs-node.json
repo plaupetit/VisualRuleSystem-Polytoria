@@ -1,0 +1,32 @@
+{
+  "moduleId": "core.watch.values",
+  "kind": "Trigger",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Logic",
+  "idBase": "EV_OnBooleanChanged",
+  "type": "OnBooleanChanged",
+  "apiType": "Boolean",
+  "label": "On Boolean Changed",
+  "value": "target=Self;value=false;interval=0.25",
+  "description": "Runs when a true or false value changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${value} changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["boolean", "true", "false", "watch", "changed", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Concerned Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Core Watch",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "target", "label": "Concerned Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Who this trigger is about.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "value", "label": "Value", "type": "Boolean", "control": "Toggle", "required": true, "default": "false", "description": "True or false value to watch.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the value.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When a true or false value changes after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Logic", "Boolean"]
+}

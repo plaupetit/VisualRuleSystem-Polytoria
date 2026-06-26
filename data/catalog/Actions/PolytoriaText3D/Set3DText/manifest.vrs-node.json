@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Text Content",
+  "idBase": "ACT_Set3DText",
+  "type": "Set3DText",
+  "apiType": "Text3D",
+  "label": "Set 3D Text",
+  "value": "target=Self;text=Hello world",
+  "description": "Changes the words shown by 3D text in the world.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} text to ${text}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "label",
+    "words",
+    "world"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello world",
+      "description": "Words to show in the world.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change the words shown by 3D text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Content"
+  ]
+}

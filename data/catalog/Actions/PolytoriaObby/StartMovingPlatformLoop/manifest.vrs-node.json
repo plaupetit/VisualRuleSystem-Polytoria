@@ -1,0 +1,99 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Moving Platform",
+  "idBase": "ACT_StartMovingPlatformLoop",
+  "type": "StartMovingPlatformLoop",
+  "apiType": "Physical",
+  "label": "Start Moving Platform Loop",
+  "value": "target=Self;x=0;y=5;z=0;duration=2;waitAtEnds=0.5",
+  "description": "Starts a defensive back-and-forth movement loop for a platform object.",
+  "status": "Ready",
+  "previewTemplate": "Loop ${target} by ${x}, ${y}, ${z}",
+  "searchKeywords": [
+    "do",
+    "obby",
+    "parcours",
+    "moving",
+    "platform",
+    "loop",
+    "tween",
+    "elevator"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Platform Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Platform object to move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "x",
+      "label": "Offset X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "X movement offset.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Offset Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "5",
+      "description": "Y movement offset.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Offset Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Z movement offset.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "2",
+      "description": "Seconds for one travel direction.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "waitAtEnds",
+      "label": "Wait At Ends",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.5",
+      "description": "Pause seconds at each end of the movement.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do start a looping moving platform.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Moving Platform"
+  ]
+}
+

@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Collectibles",
+  "idBase": "ACT_ClearPlayerCollectibles",
+  "type": "ClearPlayerCollectibles",
+  "apiType": "VRS.PlayerState",
+  "label": "Clear Player Collectibles",
+  "value": "player=",
+  "description": "Clears the player's temporary collectible memory.",
+  "status": "Ready",
+  "previewTemplate": "Clear player's collectibles",
+  "searchKeywords": ["do", "obby", "parcours", "collectibles", "coin", "reset", "clear", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player whose collectibles are cleared. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Do clear collected pickup memory for this player.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Collectibles"]
+}

@@ -1,0 +1,65 @@
+{
+  "moduleId": "polytoria.seat",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Seats",
+  "idBase": "EV_OnSeatSat",
+  "type": "OnSeatSat",
+  "apiType": "Seat",
+  "label": "On Seat Sat",
+  "value": "target=Self",
+  "description": "Starts when someone sits on a seat.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} gets occupied",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "seat",
+    "sit",
+    "sitting",
+    "occupied",
+    "occupant"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Seat",
+  "utilityLayer": "Scene",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Watched Seat",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Watched Seat",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Seat object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SeatObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "When someone sits on a seat.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Seats"
+  ]
+}

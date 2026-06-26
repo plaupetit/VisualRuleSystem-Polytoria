@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.obby.conditions",
+  "kind": "Condition",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player State",
+  "idBase": "COND_PlayerNumberAtLeast",
+  "type": "PlayerNumberAtLeast",
+  "apiType": "VRS.PlayerState",
+  "label": "Player Number At Least",
+  "value": "player=;key=Score;minimum=1",
+  "description": "Checks whether a named temporary player number is at least a minimum value.",
+  "status": "Ready",
+  "previewTemplate": "Player ${key} at least ${minimum}",
+  "searchKeywords": ["check", "obby", "parcours", "player", "number", "score", "minimum", "at least"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to check. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Score", "description": "Temporary number name.", "valueSource": "Suggested Value" },
+    { "key": "minimum", "label": "Minimum", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Minimum accepted value.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a player's temporary number is high enough.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

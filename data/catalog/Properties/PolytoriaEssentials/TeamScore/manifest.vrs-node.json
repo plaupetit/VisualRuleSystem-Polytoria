@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Game Rules",
+  "idBase": "PROP_TeamScore",
+  "type": "TeamScore",
+  "apiType": "Number",
+  "label": "Team Score",
+  "value": "teamName=Players",
+  "description": "Outputs a named temporary team score.",
+  "status": "Ready",
+  "previewTemplate": "${teamName} score",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "team",
+    "score",
+    "points",
+    "value",
+    "arena"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "teamName",
+      "label": "Team Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Players",
+      "description": "Temporary team label.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Value: current score for a temporary team.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Team Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Game Rules"
+    ]
+  ]
+}
+

@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_LookAtPosition",
+  "type": "LookAtPosition",
+  "apiType": "Vector3",
+  "label": "Look At Position",
+  "value": "target=Self;lookPosition=0,0,0",
+  "description": "Rotates an object to face a world position.",
+  "status": "Ready",
+  "previewTemplate": "Look ${target} at ${lookPosition}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "look",
+    "look at",
+    "face",
+    "turn",
+    "rotate",
+    "position",
+    "vector"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should rotate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "lookPosition",
+      "label": "Look Position",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "0,0,0",
+      "description": "World position the object should face.",
+      "valueSource": "Manual 3D Vector"
+    }
+  ],
+  "beginnerSummary": "Do rotate an object to face a position.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Look At"
+  ]
+}
+

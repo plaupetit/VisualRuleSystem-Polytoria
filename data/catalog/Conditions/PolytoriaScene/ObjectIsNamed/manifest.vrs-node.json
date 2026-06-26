@@ -1,0 +1,54 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsNamed",
+  "type": "ObjectIsNamed",
+  "apiType": "Instance",
+  "label": "Object Is Named",
+  "value": "target=Self;name=Part",
+  "description": "Checks whether an object's name matches text.",
+  "status": "Ready",
+  "previewTemplate": "${target} named ${name}",
+  "searchKeywords": [
+    "check",
+    "object",
+    "part",
+    "name",
+    "named",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "name",
+      "label": "Expected Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Part",
+      "description": "Name to compare against.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if an object has a specific name.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Identity"]
+}
+

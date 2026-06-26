@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player State",
+  "idBase": "ACT_SetPlayerNumber",
+  "type": "SetPlayerNumber",
+  "apiType": "VRS.PlayerState",
+  "label": "Set Player Number",
+  "value": "player=;key=Score;value=0",
+  "description": "Stores a temporary number for one player, such as score, gems, or stage index.",
+  "status": "Ready",
+  "previewTemplate": "Set player number ${key} to ${value}",
+  "searchKeywords": ["do", "obby", "parcours", "player", "state", "number", "score", "stage"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player whose number changes. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Score", "description": "Name of the temporary number.", "valueSource": "Suggested Value" },
+    { "key": "value", "label": "Value", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Number to store.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do set a temporary number for this player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

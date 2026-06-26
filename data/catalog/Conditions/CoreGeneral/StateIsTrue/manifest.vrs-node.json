@@ -1,0 +1,52 @@
+{
+  "moduleId": "core.general.state",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "State",
+  "idBase": "COND_StateIsTrue",
+  "type": "StateIsTrue",
+  "apiType": "BoolValue",
+  "label": "State Is True",
+  "value": "state=DoorOpen",
+  "description": "Checks whether a named boolean state is true.",
+  "status": "Ready",
+  "previewTemplate": "State ${state} is true",
+  "searchKeywords": [
+    "check",
+    "state",
+    "true",
+    "boolean",
+    "flag",
+    "door"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "state",
+      "label": "State Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "DoorOpen",
+      "description": "State to check.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if a named state is currently true.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "State"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

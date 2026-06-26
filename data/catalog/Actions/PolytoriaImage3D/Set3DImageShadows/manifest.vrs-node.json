@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Image Display",
+  "idBase": "ACT_Set3DImageShadows",
+  "type": "Set3DImageShadows",
+  "apiType": "Image3D",
+  "label": "Set 3D Image Shadows",
+  "value": "target=Self;enabled=true",
+  "description": "Turns shadow casting on or off for a 3D image.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} shadows ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d image",
+    "image",
+    "shadow",
+    "shadows",
+    "cast"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Image",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D image object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Image3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Cast Shadows",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Checked means this image can cast shadows.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do choose whether a 3D image casts shadows.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Image Display"
+  ]
+}

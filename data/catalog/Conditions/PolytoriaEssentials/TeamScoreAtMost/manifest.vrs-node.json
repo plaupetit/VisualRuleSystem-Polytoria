@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Game Rules",
+  "idBase": "COND_TeamScoreAtMost",
+  "type": "TeamScoreAtMost",
+  "apiType": "RuntimeState",
+  "label": "Team Score Is At Most",
+  "value": "teamName=Players;maximum=10",
+  "description": "Checks whether a named temporary team score is low enough.",
+  "status": "Ready",
+  "previewTemplate": "${teamName} score <= ${maximum}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "team",
+    "score",
+    "points",
+    "maximum",
+    "arena"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "teamName",
+      "label": "Team Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Players",
+      "description": "Temporary team label.",
+      "valueSource": "Temporary Name"
+    },
+    {
+      "key": "maximum",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Biggest accepted team score.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a temporary team score is not too high.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Team Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Game Rules"
+    ]
+  ]
+}

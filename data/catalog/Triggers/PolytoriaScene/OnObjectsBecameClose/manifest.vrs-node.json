@@ -1,0 +1,111 @@
+{
+  "moduleId": "polytoria.scene.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectsBecameClose",
+  "type": "OnObjectsBecameClose",
+  "apiType": "Part",
+  "label": "On Objects Became Close",
+  "value": "target=Self;first=Self;second=Target;distance=10;interval=0.25",
+  "description": "Runs when two scene objects become close enough.",
+  "status": "Ready",
+  "previewTemplate": "When ${first} and ${second} become close",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "close",
+    "near",
+    "distance",
+    "proximity"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    },
+    {
+      "key": "first",
+      "label": "First Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "First object to compare.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "second",
+      "label": "Second Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Second object to compare.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "distance",
+      "label": "Distance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Distance that counts as close.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "interval",
+      "label": "Check Every Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.25",
+      "description": "How often the script checks distance.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "When two scene objects become close enough, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Proximity"
+  ]
+}

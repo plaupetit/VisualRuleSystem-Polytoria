@@ -1,0 +1,23 @@
+{
+  "moduleId": "polytoria.chat.values",
+  "kind": "Property",
+  "apiGroup": "Chat",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Chat",
+  "idBase": "PROP_TriggeringChatMessage",
+  "type": "TriggeringChatMessage",
+  "apiType": "String",
+  "label": "Triggering Chat Message",
+  "value": "",
+  "description": "Outputs the chat message from the current chat trigger.",
+  "status": "Ready",
+  "previewTemplate": "Triggering chat message",
+  "searchKeywords": ["value", "chat", "message", "trigger", "text"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: use the text that the player just sent.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Chat"]
+}

@@ -1,0 +1,81 @@
+using System.Text.Json;
+using Vrs.Core.Persistence;
+
+namespace Vrs.Core.Bridge;
+
+public sealed partial class BridgeFileService
+{
+    /// <summary>
+    /// Publishes editor liveness for the Creator addon. The heartbeat is
+    /// short-lived and safe to overwrite every few seconds.
+    /// </summary>
+    public async Task WriteHeartbeatAsync(string bridgeDirectory, bool active, bool focused, TimeSpan? timeToLive = null, CancellationToken cancellationToken = default)
+    {
+        var now = DateTimeOffset.UtcNow;
+        var expiresAt = now.Add(timeToLive ?? TimeSpan.FromSeconds(10));
+        var heartbeat = new AppHeartbeat
+        {
+            SessionId = sessionId,
+            Active = active,
+            Focused = focused,
+            ProcessId = Environment.ProcessId,
+            UpdatedAtUtc = now.ToString("O"),
+            UpdatedAtUnixSeconds = now.ToUnixTimeSeconds(),
+            ExpiresAtUnixSeconds = expiresAt.ToUnixTimeSeconds()
+        };
+
+        var json = JsonSerializer.Serialize(heartbeat, VrsJsonContext.Default.AppHeartbeat);
+        await WriteTextFileByReplaceAsync(Path.Combine(bridgeDirectory, "app-heartbeat.json"), json, cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<CommandResults?> ReadCommandResultsAsync(string bridgeDirectory, CancellationToken cancellationToken = default)
+    {
+        var path = Path.Combine(bridgeDirectory, "command-results.json");
+        if (!File.Exists(path))
+        {
+            return null;
+        }
+
+        var json = await File.ReadAllTextAsync(path, cancellationToken).ConfigureAwait(false);
+        return JsonSerializer.Deserialize(json, VrsJsonContext.Default.CommandResults);
+    }
+
+    public async Task<SceneSnapshot?> ReadSceneSnapshotAsync(string bridgeDirectory, CancellationToken cancellationToken = default)
+    {
+        var result = await ReadSceneSnapshotObjectsAsync(bridgeDirectory, cancellationToken: cancellationToken).ConfigureAwait(false);
+        if (result is null)
+        {
+            return null;
+        }
+
+        return new SceneSnapshot
+        {
+            Format = string.IsNullOrWhiteSpace(result.Format) ? "visual-programming-bridge-scene-snapshot" : result.Format,
+            Version = result.Version == 0 ? 1 : result.Version,
+            CreatedAtUtc = result.CreatedAtUtc,
+            Objects = result.Objects
+        };
+    }
+
+    public Task<SceneSnapshotReadResult?> ReadSceneSnapshotObjectsAsync(
+        string bridgeDirectory,
+        SceneSnapshotReadOptions? options = null,
+        CancellationToken cancellationToken = default)
+    {
+        var path = Path.Combine(bridgeDirectory, "scene-snapshot.json");
+        return SceneSnapshotReader.ReadAsync(path, options, cancellationToken);
+    }
+
+    public async Task WriteStatusAsync(string bridgeDirectory, string state, string message, CancellationToken cancellationToken = default)
+    {
+        var status = new BridgeStatus
+        {
+            State = state,
+            Message = message,
+            UpdatedAtUtc = DateTimeOffset.UtcNow.ToString("O")
+        };
+
+        var json = JsonSerializer.Serialize(status, VrsJsonContext.Default.BridgeStatus);
+        await WriteTextFileByReplaceAsync(Path.Combine(bridgeDirectory, "status.json"), json, cancellationToken).ConfigureAwait(false);
+    }
+}

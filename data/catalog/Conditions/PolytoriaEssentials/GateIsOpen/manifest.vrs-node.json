@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Flow & Timing",
+  "idBase": "COND_GateIsOpen",
+  "type": "GateIsOpen",
+  "apiType": "RuntimeState",
+  "label": "Gate Is Open",
+  "value": "gateName=Main Gate",
+  "description": "Checks whether a named temporary gate is open.",
+  "status": "Ready",
+  "previewTemplate": "Gate ${gateName} is open",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "gate",
+    "open",
+    "state",
+    "allow",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "gateName",
+      "label": "Gate Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Main Gate",
+      "description": "Temporary gate name.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Check if a named logic gate is open.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Gate"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

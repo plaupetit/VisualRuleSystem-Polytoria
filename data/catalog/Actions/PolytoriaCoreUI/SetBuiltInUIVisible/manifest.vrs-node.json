@@ -1,0 +1,67 @@
+{
+  "moduleId": "polytoria.coreui",
+  "kind": "Action",
+  "apiGroup": "CoreUI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Built-In UI",
+  "idBase": "ACT_SetBuiltInUIVisible",
+  "type": "SetBuiltInUIVisible",
+  "apiType": "CoreUI",
+  "label": "Set Built-In UI Visible",
+  "value": "feature=Chat;enabled=true",
+  "description": "Shows or hides one of Polytoria's built-in player interface parts.",
+  "status": "Ready",
+  "previewTemplate": "Set ${feature} visible ${enabled}",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "chat",
+    "leaderboard",
+    "hotbar",
+    "respawn"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Core UI",
+  "utilityLayer": "CoreUI",
+  "parameters": [
+    {
+      "key": "feature",
+      "label": "UI Part",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Chat",
+      "description": "Built-in player interface part to change.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "Chat",
+        "Leaderboard",
+        "Health Bar",
+        "Hotbar",
+        "Backpack",
+        "Menu Button",
+        "Emote Wheel",
+        "User Card",
+        "Respawn"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Visible",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Checked means this part is shown or allowed.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do show or hide a built-in player interface part.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Built-In UI"
+  ]
+}

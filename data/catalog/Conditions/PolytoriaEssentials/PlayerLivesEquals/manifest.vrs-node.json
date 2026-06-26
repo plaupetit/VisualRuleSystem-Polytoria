@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player",
+  "idBase": "COND_PlayerLivesEquals",
+  "type": "PlayerLivesEquals",
+  "apiType": "RuntimeState",
+  "label": "Player Lives Equals",
+  "value": "lives=3",
+  "description": "Checks whether the triggering player's temporary life count matches a number.",
+  "status": "Ready",
+  "previewTemplate": "Player lives equals ${lives}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "equals",
+    "life count",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "lives",
+      "label": "Lives",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "3",
+      "description": "Life count to match.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if the triggering player lives match the chosen number.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ]
+}

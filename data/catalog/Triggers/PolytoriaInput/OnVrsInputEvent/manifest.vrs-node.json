@@ -1,0 +1,71 @@
+{
+  "moduleId": "polytoria.input.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Input",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Input",
+  "idBase": "EV_OnVrsInputEvent",
+  "type": "OnVrsInputEvent",
+  "apiType": "NetworkEvent",
+  "label": "On VRS Input Event",
+  "value": "target=Self;inputAction=Jump",
+  "description": "Starts the rule when a VRS input NetworkEvent is invoked by a client.",
+  "status": "Ready",
+  "previewTemplate": "When VRS input ${inputAction} arrives on ${target}",
+  "searchKeywords": [
+    "when",
+    "input",
+    "networkevent",
+    "network event",
+    "client",
+    "server",
+    "trigger"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "inputAction",
+      "label": "Input Action",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Jump",
+      "description": "Button input action whose VRS NetworkEvent is listened to on the server.",
+      "valueSource": "String / Choice"
+    }
+  ],
+  "beginnerSummary": "Server trigger: react to a client input event sent through VRS Hidden events.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

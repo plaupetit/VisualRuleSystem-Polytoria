@@ -1,0 +1,39 @@
+{
+  "moduleId": "polytoria.players.values",
+  "kind": "Property",
+  "apiGroup": "Players",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Players",
+  "idBase": "PROP_PlayerCount",
+  "type": "PlayerCount",
+  "apiType": "Number",
+  "label": "Player Count",
+  "value": "",
+  "description": "Outputs how many players are currently connected.",
+  "status": "Ready",
+  "previewTemplate": "Player count",
+  "searchKeywords": [
+    "value",
+    "players",
+    "count",
+    "online",
+    "connected"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: use the number of connected players.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Count"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

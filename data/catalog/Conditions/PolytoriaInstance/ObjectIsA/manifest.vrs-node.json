@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.instance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Instance",
+  "idBase": "COND_ObjectIsA",
+  "type": "ObjectIsA",
+  "apiType": "Instance",
+  "label": "Object Is Type",
+  "value": "target=Self;className=Part",
+  "description": "Checks whether an object is a given Polytoria object type.",
+  "status": "Ready",
+  "previewTemplate": "${target} is type ${className}",
+  "searchKeywords": [
+    "check",
+    "object",
+    "isa",
+    "class",
+    "type",
+    "instance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "className",
+      "label": "Object Type",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Part",
+      "description": "Polytoria object type, such as Part or Folder.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if an object is a specific object type.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Type Checks"
+  ]
+}
+

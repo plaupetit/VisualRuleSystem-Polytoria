@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player",
+  "idBase": "COND_PlayerLivesAtMost",
+  "type": "PlayerLivesAtMost",
+  "apiType": "RuntimeState",
+  "label": "Player Lives At Most",
+  "value": "maximum=1",
+  "description": "Checks whether the triggering player has a low enough life count.",
+  "status": "Ready",
+  "previewTemplate": "Player lives <= ${maximum}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "maximum",
+    "low",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "maximum",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Biggest accepted lives value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if the triggering player has no more than this many lives.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ]
+}

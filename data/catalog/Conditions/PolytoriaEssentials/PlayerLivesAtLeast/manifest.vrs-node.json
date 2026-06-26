@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player",
+  "idBase": "COND_PlayerLivesAtLeast",
+  "type": "PlayerLivesAtLeast",
+  "apiType": "RuntimeState",
+  "label": "Player Lives At Least",
+  "value": "minimum=1",
+  "description": "Checks whether the triggering player has enough lives.",
+  "status": "Ready",
+  "previewTemplate": "Player lives >= ${minimum}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "health",
+    "minimum",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "minimum",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Smallest accepted lives value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if the triggering player has enough lives.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

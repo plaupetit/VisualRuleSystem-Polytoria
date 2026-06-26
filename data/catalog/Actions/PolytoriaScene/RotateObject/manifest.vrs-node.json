@@ -1,0 +1,299 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_RotateObject",
+  "type": "RotateObject",
+  "apiType": "Vector3",
+  "label": "Rotate Object",
+  "value": "target=Self;rotationMode=Add;motionMode=Instant;vector=0,45,0;x=0;y=45;z=0;duration=1;smoothing=Sine;direction=InOut;waitToComplete=true;stepSeconds=0.05",
+  "description": "Turns an object by setting rotation, adding rotation, or spinning continuously.",
+  "status": "Ready",
+  "previewTemplate": "Rotate ${target}: ${rotationMode} ${vector} (${motionMode})",
+  "searchKeywords": [
+    "object",
+    "part",
+    "rotate",
+    "rotation",
+    "vector",
+    "turn",
+    "spin",
+    "set",
+    "add",
+    "smooth",
+    "continuous",
+    "loop",
+    "x",
+    "y",
+    "z"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to rotate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "rotationMode",
+      "label": "Rotation Mode",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Add",
+      "description": "Choose whether this action sets rotation, adds rotation, or keeps spinning.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Set",
+        "Add",
+        "Spin"
+      ],
+      "optionDetails": [
+        {
+          "value": "Set",
+          "label": "Set exact rotation",
+          "category": "Rotation Mode",
+          "description": "Set the object to these exact X, Y, Z rotation values.",
+          "searchKeywords": [
+            "set",
+            "exact",
+            "rotation"
+          ]
+        },
+        {
+          "value": "Add",
+          "label": "Add rotation",
+          "category": "Rotation Mode",
+          "description": "Add these X, Y, Z rotation values once.",
+          "searchKeywords": [
+            "add",
+            "turn",
+            "relative"
+          ]
+        },
+        {
+          "value": "Spin",
+          "label": "Spin continuously",
+          "category": "Rotation Mode",
+          "description": "Keep adding this rotation every step until the script stops.",
+          "searchKeywords": [
+            "spin",
+            "continuous",
+            "loop",
+            "constant"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "motionMode",
+      "label": "Motion Mode",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Instant",
+      "description": "Choose whether set/add rotation happens immediately or smoothly over time.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Instant",
+        "Smooth"
+      ],
+      "optionDetails": [
+        {
+          "value": "Instant",
+          "label": "Instant",
+          "category": "Motion Mode",
+          "description": "Apply the rotation immediately in one step.",
+          "searchKeywords": [
+            "instant",
+            "now",
+            "immediate"
+          ]
+        },
+        {
+          "value": "Smooth",
+          "label": "Smooth over time",
+          "category": "Motion Mode",
+          "description": "Animate the rotation over a duration.",
+          "searchKeywords": [
+            "smooth",
+            "duration",
+            "animate",
+            "tween"
+          ]
+        }
+      ],
+      "visibleWhen": [
+        {
+          "parameterKey": "rotationMode",
+          "notEquals": "Spin"
+        }
+      ]
+    },
+    {
+      "key": "vector",
+      "label": "Rotation Vector",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "0,45,0",
+      "description": "Rotation in degrees. In Spin mode this is the rotation added each step.",
+      "valueSource": "Manual 3D Vector"
+    },
+    {
+      "key": "x",
+      "label": "X Degrees",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Rotation on X, or rotation added each step for spin.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y Degrees",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "45",
+      "description": "Rotation on Y, or rotation added each step for spin.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z Degrees",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Rotation on Z, or rotation added each step for spin.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "How long the smooth rotation should take.",
+      "valueSource": "Suggested Value",
+      "visibleWhen": [
+        {
+          "parameterKey": "rotationMode",
+          "notEquals": "Spin"
+        },
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "smoothing",
+      "label": "Smoothing",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Sine",
+      "description": "Shape of the smooth rotation.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic"
+      ],
+      "visibleWhen": [
+        {
+          "parameterKey": "rotationMode",
+          "notEquals": "Spin"
+        },
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "direction",
+      "label": "Smoothing Direction",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "InOut",
+      "description": "Where the smoothing is strongest.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "InOut",
+        "In",
+        "Out"
+      ],
+      "visibleWhen": [
+        {
+          "parameterKey": "rotationMode",
+          "notEquals": "Spin"
+        },
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "When true, the next connected action waits until the smooth rotation ends.",
+      "valueSource": "Suggested Value",
+      "visibleWhen": [
+        {
+          "parameterKey": "rotationMode",
+          "notEquals": "Spin"
+        },
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "stepSeconds",
+      "label": "Step Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.05",
+      "description": "Delay between spin steps.",
+      "valueSource": "Suggested Value",
+      "visibleWhen": [
+        {
+          "parameterKey": "rotationMode",
+          "equals": "Spin"
+        }
+      ]
+    }
+  ],
+  "beginnerSummary": "Do turn an object once, smoothly, or continuously.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Rotation"
+  ]
+}
+

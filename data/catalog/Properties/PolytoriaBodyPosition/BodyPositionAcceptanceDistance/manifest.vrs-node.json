@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.bodyposition",
+  "kind": "Property",
+  "apiGroup": "Physics",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Body Position",
+  "idBase": "PROP_BodyPositionAcceptanceDistance",
+  "type": "BodyPositionAcceptanceDistance",
+  "apiType": "BodyPosition",
+  "label": "Body Position Stop Distance",
+  "value": "target=Self",
+  "description": "Reads how close the parent must get before the target counts as reached.",
+  "status": "Ready",
+  "previewTemplate": "Stop distance of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "body",
+    "position",
+    "distance",
+    "target",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Body Position",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Body Position",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Body Position object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "BodyPositionObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads how close the parent must get before the target counts as reached.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Body Position"
+  ]
+}

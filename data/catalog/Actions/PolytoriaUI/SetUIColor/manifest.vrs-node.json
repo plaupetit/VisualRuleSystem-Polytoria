@@ -1,0 +1,83 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Action",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Custom UI",
+  "idBase": "ACT_SetUIColor",
+  "type": "SetUIColor",
+  "apiType": "UIView",
+  "label": "Set UI Color",
+  "value": "target=Self;r=1;g=1;b=1",
+  "description": "Changes the background color of a UI object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} UI color to RGB(${r}, ${g}, ${b})",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "color",
+    "background",
+    "frame",
+    "button"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI object to recolor.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UIObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    },
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Red amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Green amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Blue amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change a UI object's background color.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

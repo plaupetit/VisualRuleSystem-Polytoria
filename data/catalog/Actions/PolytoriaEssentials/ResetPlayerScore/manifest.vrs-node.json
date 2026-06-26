@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player",
+  "idBase": "ACT_ResetPlayerScore",
+  "type": "ResetPlayerScore",
+  "apiType": "RuntimeState",
+  "label": "Reset Player Score",
+  "value": "",
+  "description": "Sets the triggering player's temporary score back to zero.",
+  "status": "Ready",
+  "previewTemplate": "Reset player score",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "score",
+    "reset",
+    "zero",
+    "points"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Do reset the triggering player score to zero.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}

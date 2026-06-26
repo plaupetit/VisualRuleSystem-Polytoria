@@ -1,0 +1,63 @@
+{
+  "moduleId": "polytoria.obby.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Obby",
+  "idBase": "EV_OnPlayerTouchedObject",
+  "type": "OnPlayerTouchedObject",
+  "apiType": "Physical.Touched",
+  "label": "On Player Touched Object",
+  "value": "target=Self",
+  "description": "Starts the rule when a player touches the selected object.",
+  "status": "Ready",
+  "previewTemplate": "When player touches ${target}",
+  "searchKeywords": [
+    "when",
+    "obby",
+    "parcours",
+    "touch",
+    "touched",
+    "player",
+    "object",
+    "collision"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Touched Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Touched Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that listens for player touches.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Touchable" ]
+    }
+  ],
+  "beginnerSummary": "When a player touches an object in the course.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Player Events"]
+}
+

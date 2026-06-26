@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.coreui.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Built-In UI",
+  "idBase": "PROP_BuiltInLeaderboardVisible",
+  "type": "BuiltInLeaderboardVisible",
+  "apiType": "Boolean",
+  "label": "Leaderboard Is Visible",
+  "value": "",
+  "description": "Outputs true when the built-in player list is visible.",
+  "status": "Ready",
+  "previewTemplate": "Leaderboard is visible",
+  "searchKeywords": [
+    "ui",
+    "leaderboard",
+    "players",
+    "visible"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Core UI",
+  "utilityLayer": "CoreUI",
+  "parameters": [],
+  "beginnerSummary": "Value: check if the built-in player list is visible.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Built-In UI"
+  ]
+}

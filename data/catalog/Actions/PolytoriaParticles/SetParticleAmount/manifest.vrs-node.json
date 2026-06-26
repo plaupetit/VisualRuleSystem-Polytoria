@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.effects.particles",
+  "kind": "Action",
+  "apiGroup": "Effects",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Particles",
+  "idBase": "ACT_SetParticleAmount",
+  "type": "SetParticleAmount",
+  "apiType": "Particles",
+  "label": "Set Particle Amount",
+  "value": "target=Self;amount=20",
+  "description": "Changes how many particles the effect uses.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} particle amount ${amount}",
+  "searchKeywords": [
+    "effects",
+    "particles",
+    "amount",
+    "count",
+    "spark"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Effects",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Particles",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Particle effect to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ParticleObject"
+      ]
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "20",
+      "description": "New particle amount.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how many particles an effect uses.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Effects",
+    "Particles"
+  ]
+}

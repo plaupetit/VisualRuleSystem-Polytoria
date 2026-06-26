@@ -1,0 +1,236 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Vrs.App.ViewModels"
+             x:Class="Vrs.App.Controls.PropertyRecipePickerControl"
+             x:DataType="vm:NodeParameterEditorViewModel"
+             x:Name="Root">
+    <UserControl.Styles>
+        <Style Selector="Button.recipe-picker-trigger">
+            <Setter Property="Foreground" Value="#d8dde4"/>
+            <Setter Property="Background" Value="#2b2b2b"/>
+            <Setter Property="BorderBrush" Value="#515151"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+        <Style Selector="Button.recipe-picker-row">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+        <Style Selector="Button.recipe-picker-back">
+            <Setter Property="Foreground" Value="#aab4c0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBox.recipe-picker-search">
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="Background" Value="#171717"/>
+            <Setter Property="BorderBrush" Value="#454545"/>
+            <Setter Property="CaretBrush" Value="#ffffff"/>
+            <Setter Property="MinHeight" Value="28"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid>
+        <Button x:Name="PickerButton"
+                Classes="recipe-picker-trigger"
+                HorizontalAlignment="Stretch"
+                Click="PickerButtonClick"
+                ToolTip.Tip="{Binding RecipePickerTooltip}">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="7">
+                <Border Grid.Column="0"
+                        Width="22"
+                        Height="20"
+                        CornerRadius="3"
+                        BorderBrush="{Binding RecipePickerButtonIconAccentHex}"
+                        Background="{Binding RecipePickerButtonIconBackgroundHex}"
+                        BorderThickness="1">
+                    <TextBlock Text="{Binding RecipePickerButtonIconGlyph}"
+                               Foreground="{Binding RecipePickerButtonIconAccentHex}"
+                               FontSize="8.5"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="{Binding RecipePickerButtonText}"
+                               FontSize="12.5"
+                               FontWeight="SemiBold"
+                               TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="{Binding RecipePickerButtonSubText}"
+                               Foreground="#aeb8c4"
+                               FontSize="10"
+                               TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+                <TextBlock Grid.Column="2"
+                           Text="v"
+                           VerticalAlignment="Center"
+                           Foreground="#9aa8b5"/>
+            </Grid>
+        </Button>
+
+        <Popup x:Name="RecipePopup"
+               PlacementTarget="{Binding #PickerButton}"
+               Placement="Bottom"
+               IsLightDismissEnabled="True">
+            <Border Width="420"
+                    MinWidth="320"
+                    MaxWidth="460"
+                    MaxHeight="400"
+                    Background="#2b2b2b"
+                    BorderBrush="#515151"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+                    <Grid Grid.Row="0"
+                          ColumnDefinitions="*,Auto"
+                          Margin="10,8,10,6">
+                        <TextBlock Grid.Column="0"
+                                   Text="Add Property Value"
+                                   Foreground="#b9c3cf"
+                                   FontWeight="SemiBold"
+                                   FontSize="12.5"
+                                   VerticalAlignment="Center"
+                                   TextTrimming="CharacterEllipsis"/>
+                        <Border Grid.Column="1"
+                                BorderBrush="#b58cff"
+                                Background="#1d2a38"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="8,3">
+                            <TextBlock Text="{Binding RecipeBrowserExpectedType}"
+                                       Foreground="#b58cff"
+                                       FontSize="10.5"
+                                       FontWeight="SemiBold"/>
+                        </Border>
+                    </Grid>
+
+                    <TextBox x:Name="SearchBox"
+                             Classes="recipe-picker-search"
+                             Grid.Row="1"
+                             Margin="10,0,10,7"
+                             Text="{Binding RecipeBrowserSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             PlaceholderText="Search property nodes..."
+                             KeyDown="SearchBoxKeyDown"
+                             ToolTip.Tip="Search compatible value properties by label, category, type, or keyword."/>
+
+                    <Border Grid.Row="2"
+                            Height="28"
+                            Background="#383838"
+                            BorderBrush="#242424"
+                            BorderThickness="0,1,0,1">
+                        <Grid ColumnDefinitions="36,*">
+                            <Button Grid.Column="0"
+                                    Classes="recipe-picker-back"
+                                    Content="&lt;"
+                                    Click="BackButtonClick"
+                                    IsEnabled="{Binding CanGoBackRecipeBrowser}"
+                                    ToolTip.Tip="Return to the previous property folder, or clear search."/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding RecipeBrowserBreadcrumb}"
+                                       Foreground="#d0d0d0"
+                                       FontWeight="SemiBold"
+                                       FontSize="12"
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"/>
+                        </Grid>
+                    </Border>
+
+                    <ScrollViewer Grid.Row="3"
+                                  MaxHeight="250"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled">
+                        <Grid>
+                            <ItemsControl ItemsSource="{Binding RecipeBrowserRows}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:PropertyRecipeBrowserRowViewModel">
+                                        <Button Classes="recipe-picker-row"
+                                                Tag="{Binding}"
+                                                Click="RowButtonClick"
+                                                PointerEntered="RowPointerEntered"
+                                                ToolTip.Tip="{Binding Tooltip}">
+                                            <Border MinHeight="31"
+                                                    Background="{Binding RowBackgroundHex}">
+                                                <Grid ColumnDefinitions="Auto,*,Auto"
+                                                      ColumnSpacing="9"
+                                                      Margin="10,0,12,0">
+                                                    <Border Grid.Column="0"
+                                                            Width="22"
+                                                            Height="18"
+                                                            CornerRadius="3"
+                                                            BorderBrush="{Binding IconAccentHex}"
+                                                            Background="{Binding IconBackgroundHex}"
+                                                            BorderThickness="1"
+                                                            VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding IconGlyph}"
+                                                                   Foreground="{Binding IconAccentHex}"
+                                                                   FontSize="8.5"
+                                                                   FontWeight="SemiBold"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <StackPanel Grid.Column="1"
+                                                                VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Label}"
+                                                                   Foreground="{Binding PrimaryForegroundHex}"
+                                                                   FontSize="12.5"
+                                                                   FontWeight="SemiBold"
+                                                                   TextTrimming="CharacterEllipsis"/>
+                                                        <TextBlock Text="{Binding SubText}"
+                                                                   Foreground="{Binding SecondaryForegroundHex}"
+                                                                   FontSize="10"
+                                                                   TextTrimming="CharacterEllipsis"
+                                                                   IsVisible="{Binding HasSubText}"/>
+                                                    </StackPanel>
+                                                    <TextBlock Grid.Column="2"
+                                                               Text="{Binding RightLabel}"
+                                                               Foreground="{Binding IconAccentHex}"
+                                                               FontSize="9.5"
+                                                               FontWeight="SemiBold"
+                                                               VerticalAlignment="Center"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               MaxWidth="64"/>
+                                                </Grid>
+                                            </Border>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <TextBlock Text="No compatible property node matches this folder or search."
+                                       Foreground="#c7d7e8"
+                                       FontSize="12"
+                                       TextWrapping="Wrap"
+                                       Margin="12"
+                                       IsVisible="{Binding HasNoRecipeBrowserRows}"/>
+                        </Grid>
+                    </ScrollViewer>
+
+                    <Border Grid.Row="4"
+                            MinHeight="58"
+                            Background="#3a3a3a"
+                            BorderBrush="#242424"
+                            BorderThickness="0,1,0,0"
+                            Padding="10,6">
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="{Binding RecipeBrowserFooterTitle}"
+                                       Foreground="#d8dde4"
+                                       FontSize="11.5"
+                                       FontWeight="SemiBold"
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="{Binding RecipeBrowserFooterDescription}"
+                                       Foreground="#aeb8c4"
+                                       FontSize="10.5"
+                                       TextWrapping="Wrap"
+                                       MaxHeight="38"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

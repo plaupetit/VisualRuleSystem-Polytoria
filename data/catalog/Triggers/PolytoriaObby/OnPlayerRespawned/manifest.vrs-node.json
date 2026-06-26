@@ -1,0 +1,65 @@
+{
+  "moduleId": "polytoria.obby.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Player State",
+  "idBase": "EV_OnPlayerRespawned",
+  "type": "OnPlayerRespawned",
+  "apiType": "Player.Respawned",
+  "label": "On Player Respawned",
+  "value": "target=Self",
+  "description": "Starts the rule when a player respawns during the course.",
+  "status": "Ready",
+  "previewTemplate": "When a player respawns on ${target}",
+  "searchKeywords": [
+    "when",
+    "obby",
+    "parcours",
+    "player",
+    "respawn",
+    "death",
+    "checkpoint"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "When a player respawns.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Player Events"
+  ]
+}
+

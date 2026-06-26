@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_ToggleObjectAnchored",
+  "type": "ToggleObjectAnchored",
+  "apiType": "Part",
+  "label": "Toggle Object Anchored",
+  "value": "target=Self",
+  "description": "Switches a scene object between locked in place and free to move.",
+  "status": "Ready",
+  "previewTemplate": "Toggle ${target} anchored",
+  "searchKeywords": [
+    "object",
+    "toggle",
+    "anchored",
+    "locked",
+    "physics",
+    "free"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to lock or free.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do switch a scene object between locked in place and free to move.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics"
+  ]
+}

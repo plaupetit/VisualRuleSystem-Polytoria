@@ -1,0 +1,45 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberIsZero",
+  "type": "NumberIsZero",
+  "apiType": "Number",
+  "label": "Number Is Zero",
+  "value": "value=0",
+  "description": "Checks whether a number is exactly zero.",
+  "status": "Ready",
+  "previewTemplate": "${value} is zero",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "number",
+    "zero",
+    "empty",
+    "compare",
+    "math"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to check.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a number is zero.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Comparison"
+  ]
+}

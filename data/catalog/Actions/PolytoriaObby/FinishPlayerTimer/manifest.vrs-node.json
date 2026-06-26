@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Finish",
+  "idBase": "ACT_FinishPlayerTimer",
+  "type": "FinishPlayerTimer",
+  "apiType": "VRS.PlayerState",
+  "label": "Finish Player Timer",
+  "value": "player=",
+  "description": "Stops the player's temporary timer and marks the run as finished.",
+  "status": "Ready",
+  "previewTemplate": "Finish player's run timer",
+  "searchKeywords": ["do", "obby", "parcours", "timer", "finish", "complete", "win", "run"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player whose timer finishes. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Do finish the player's run timer.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Finish"]
+}

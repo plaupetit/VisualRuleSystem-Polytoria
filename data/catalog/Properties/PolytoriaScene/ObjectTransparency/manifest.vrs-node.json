@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.scene.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectTransparency",
+  "type": "ObjectTransparency",
+  "apiType": "Number",
+  "label": "Object Transparency",
+  "value": "target=Self",
+  "description": "Outputs how transparent a scene object is.",
+  "status": "Ready",
+  "previewTemplate": "Transparency of ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "transparent",
+    "transparency",
+    "fade",
+    "invisible",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose transparency will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how transparent an object is.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Transparency"]
+}

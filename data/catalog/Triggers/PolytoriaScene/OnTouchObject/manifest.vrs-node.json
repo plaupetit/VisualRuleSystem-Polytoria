@@ -1,0 +1,71 @@
+{
+  "moduleId": "polytoria.scene.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnTouchObject",
+  "type": "OnTouchObject",
+  "apiType": "Physical.Touched",
+  "label": "On Touch Object",
+  "value": "target=Self",
+  "description": "Runs when a physics object touches another object.",
+  "status": "Ready",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "when",
+    "touch",
+    "part",
+    "object",
+    "hit",
+    "collide",
+    "contact"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Touched Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Touched Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should listen for touches.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PhysicsBody" ]
+    }
+  ],
+  "beginnerSummary": "When this object touches another object, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Touch"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}
+

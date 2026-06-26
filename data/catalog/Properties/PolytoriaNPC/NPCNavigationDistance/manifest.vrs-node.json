@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "NPC Movement",
+  "idBase": "PROP_NPCNavigationDistance",
+  "type": "NPCNavigationDistance",
+  "apiType": "NPC",
+  "label": "NPC Navigation Distance",
+  "value": "target=Self",
+  "description": "Reads how far an NPC is from its navigation target.",
+  "status": "Ready",
+  "previewTemplate": "Navigation distance of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "navigation",
+    "distance",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads how far an NPC is from its navigation target.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

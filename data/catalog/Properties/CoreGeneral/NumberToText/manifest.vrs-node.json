@@ -1,0 +1,35 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_NumberToText",
+  "type": "NumberToText",
+  "apiType": "String",
+  "label": "Number To Text",
+  "value": "value=0",
+  "description": "Turns a number into text so it can be shown or joined.",
+  "status": "Ready",
+  "previewTemplate": "text(${value})",
+  "searchKeywords": ["text", "string", "number", "convert", "score"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to convert into text.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: turn a number into text, useful for scores.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Convert"]
+}

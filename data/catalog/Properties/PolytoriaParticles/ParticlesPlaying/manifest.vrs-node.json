@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.effects.particle.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Particles",
+  "idBase": "PROP_ParticlesPlaying",
+  "type": "ParticlesPlaying",
+  "apiType": "Boolean",
+  "label": "Particles Playing",
+  "value": "target=Self",
+  "description": "Outputs whether a particle effect is playing.",
+  "status": "Ready",
+  "previewTemplate": "Particles playing on ${target}",
+  "searchKeywords": [
+    "effects",
+    "particles",
+    "playing",
+    "spark"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Effects",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Particles",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Particle effect to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ParticleObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: check if a particle effect is playing.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Effects",
+    "Particles"
+  ]
+}

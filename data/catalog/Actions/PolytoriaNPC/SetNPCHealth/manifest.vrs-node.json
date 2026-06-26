@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "NPC Health",
+  "idBase": "ACT_SetNPCHealth",
+  "type": "SetNPCHealth",
+  "apiType": "NPC",
+  "label": "Set NPC Health",
+  "value": "target=Self;amount=100",
+  "description": "Sets the current health of an NPC.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} health to ${amount}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "health",
+    "life",
+    "character"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "amount",
+      "label": "Health",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "100",
+      "description": "New health amount.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do set an NPC's current health.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Health"
+  ]
+}

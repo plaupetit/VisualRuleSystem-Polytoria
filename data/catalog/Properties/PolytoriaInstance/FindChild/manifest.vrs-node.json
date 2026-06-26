@@ -1,0 +1,54 @@
+{
+  "moduleId": "polytoria.instance.values",
+  "kind": "Property",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Instance",
+  "idBase": "PROP_FindChild",
+  "type": "FindChild",
+  "apiType": "Any",
+  "label": "Find Child",
+  "value": "target=Self;childName=",
+  "description": "Outputs a direct child with a given name, or nil when it is missing.",
+  "status": "Ready",
+  "previewTemplate": "Find child ${childName} under ${target}",
+  "searchKeywords": [
+    "value",
+    "object",
+    "child",
+    "find",
+    "name",
+    "instance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Parent object to search.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "childName",
+      "label": "Child Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "",
+      "description": "Direct child name to find.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: find a named child object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Lookup"]
+}
+

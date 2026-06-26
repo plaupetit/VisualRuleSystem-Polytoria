@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_ToggleObjectCollision",
+  "type": "ToggleObjectCollision",
+  "apiType": "Part",
+  "label": "Toggle Object Collision",
+  "value": "target=Self",
+  "description": "Switches a scene object between solid and pass-through.",
+  "status": "Ready",
+  "previewTemplate": "Toggle ${target} collision",
+  "searchKeywords": [
+    "object",
+    "toggle",
+    "collision",
+    "solid",
+    "pass through",
+    "physics"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to make solid or pass-through.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do switch a scene object between solid and pass-through.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Collision"
+  ]
+}

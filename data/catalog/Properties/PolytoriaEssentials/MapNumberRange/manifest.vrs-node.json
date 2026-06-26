@@ -1,0 +1,93 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Values",
+  "idBase": "PROP_MapNumberRange",
+  "type": "MapNumberRange",
+  "apiType": "Number",
+  "label": "Map Number Range",
+  "value": "value=0;inMin=0;inMax=1;outMin=0;outMax=100",
+  "description": "Maps a number from one range into another range.",
+  "status": "Ready",
+  "previewTemplate": "Map ${value} from ${inMin}-${inMax} to ${outMin}-${outMax}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "map",
+    "range",
+    "remap",
+    "math",
+    "number",
+    "scale"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Value",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Value to map.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "inMin",
+      "label": "Input Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Input range minimum.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "inMax",
+      "label": "Input Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Input range maximum.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "outMin",
+      "label": "Output Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Output range minimum.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "outMax",
+      "label": "Output Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "100",
+      "description": "Output range maximum.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: remap a number from one range into another.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Range"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

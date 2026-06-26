@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.scene.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectVisibleValue",
+  "type": "ObjectVisibleValue",
+  "apiType": "Boolean",
+  "label": "Object Visible Value",
+  "value": "target=Self",
+  "description": "Outputs true when a scene object is currently visible.",
+  "status": "Ready",
+  "previewTemplate": "Visible value of ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "visible",
+    "hidden",
+    "shown",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose visibility will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use whether an object is visible.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Visibility"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "moduleId": "polytoria.bodyposition",
+  "kind": "Action",
+  "apiGroup": "Physics",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Body Position",
+  "idBase": "ACT_SetBodyPositionTarget",
+  "type": "SetBodyPositionTarget",
+  "apiType": "BodyPosition",
+  "label": "Set Body Position Target",
+  "value": "target=Self;x=0;y=0;z=0",
+  "description": "Sets where a Body Position object tries to move its parent.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} target to (${x}, ${y}, ${z})",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "body",
+    "position",
+    "target",
+    "physics",
+    "move"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Body Position",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Body Position",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Body Position object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "BodyPositionObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "x",
+      "label": "X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Left-right target position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Up-down target position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Forward-back target position.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do set where a Body Position object tries to move its parent.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Body Position"
+  ]
+}

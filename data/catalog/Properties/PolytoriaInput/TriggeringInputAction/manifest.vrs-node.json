@@ -1,0 +1,23 @@
+{
+  "moduleId": "polytoria.input.values",
+  "kind": "Property",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Input",
+  "idBase": "PROP_TriggeringInputAction",
+  "type": "TriggeringInputAction",
+  "apiType": "String",
+  "label": "Triggering Input Action",
+  "value": "",
+  "description": "Outputs the input action name from the current input trigger.",
+  "status": "Ready",
+  "previewTemplate": "Triggering input action",
+  "searchKeywords": ["value", "input", "trigger", "action", "button", "client"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: use the input action that was pressed.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

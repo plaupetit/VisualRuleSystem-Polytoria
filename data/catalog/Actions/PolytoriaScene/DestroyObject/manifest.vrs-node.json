@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_DestroyObject",
+  "type": "DestroyObject",
+  "apiType": "Instance",
+  "label": "Destroy Object",
+  "value": "target=Self",
+  "description": "Destroys or removes a scene object when the object supports it.",
+  "status": "Ready",
+  "previewTemplate": "Destroy ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "destroy",
+    "delete",
+    "remove",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to destroy.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "Do remove an object from the scene.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Lifecycle"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}
+

@@ -1,0 +1,105 @@
+{
+  "moduleId": "polytoria.scene.checks",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectSizeAtMost",
+  "type": "ObjectSizeAtMost",
+  "apiType": "Boolean",
+  "label": "Object Size At Most",
+  "value": "target=Self;direction=Width;size=2",
+  "description": "Checks if one size direction of an object is small enough.",
+  "status": "Ready",
+  "previewTemplate": "${target} ${direction} size at most ${size}",
+  "searchKeywords": [
+    "object",
+    "size",
+    "scale",
+    "width",
+    "height",
+    "depth",
+    "maximum",
+    "at most"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "direction",
+      "label": "Size Direction",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Width",
+      "description": "Choose which size direction to check.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Width",
+        "Height",
+        "Depth"
+      ],
+      "optionDetails": [
+        {
+          "value": "Width",
+          "label": "Width",
+          "category": "Size Direction",
+          "description": "Check the side-to-side size.",
+          "searchKeywords": [
+            "width",
+            "wide"
+          ]
+        },
+        {
+          "value": "Height",
+          "label": "Height",
+          "category": "Size Direction",
+          "description": "Check the up-down size.",
+          "searchKeywords": [
+            "height",
+            "tall"
+          ]
+        },
+        {
+          "value": "Depth",
+          "label": "Depth",
+          "category": "Size Direction",
+          "description": "Check the front-back size.",
+          "searchKeywords": [
+            "depth",
+            "front",
+            "back"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "size",
+      "label": "Size",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "2",
+      "description": "Largest size that passes the check.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if an object is small enough in one direction.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Dimensions"]
+}

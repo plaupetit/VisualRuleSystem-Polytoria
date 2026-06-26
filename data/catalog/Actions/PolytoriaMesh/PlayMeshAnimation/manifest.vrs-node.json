@@ -1,0 +1,76 @@
+{
+  "moduleId": "polytoria.mesh.actions",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Mesh Animation",
+  "idBase": "ACT_PlayMeshAnimation",
+  "type": "PlayMeshAnimation",
+  "apiType": "Mesh",
+  "label": "Play Mesh Animation",
+  "value": "target=Self;animationName=Idle;speed=1;loop=true",
+  "description": "Plays an animation on a mesh object.",
+  "status": "Ready",
+  "previewTemplate": "Play ${animationName} on ${target}",
+  "searchKeywords": [
+    "mesh",
+    "animation",
+    "play",
+    "loop"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Mesh",
+  "utilityLayer": "World",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Mesh",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Mesh object that should play the animation.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "MeshObject"
+      ]
+    },
+    {
+      "key": "animationName",
+      "label": "Animation Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Idle",
+      "description": "Name of the animation to play.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Playback speed.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "loop",
+      "label": "Loop",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "true",
+      "description": "Keep repeating the animation.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do play a named animation on a mesh.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Mesh Animation"
+  ]
+}

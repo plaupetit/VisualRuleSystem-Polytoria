@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player",
+  "idBase": "PROP_PlayerLives",
+  "type": "PlayerLives",
+  "apiType": "Number",
+  "label": "Player Lives",
+  "value": "",
+  "description": "Outputs the triggering player's temporary lives.",
+  "status": "Ready",
+  "previewTemplate": "Triggering player lives",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "health",
+    "value",
+    "stat"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value: current lives for the triggering player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

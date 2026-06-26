@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Vrs.App/Vrs.App.csproj" />
+    <Project Path="src/Vrs.Core/Vrs.Core.csproj" />
+    <Project Path="src/Vrs.Graph/Vrs.Graph.csproj" />
+    <Project Path="src/Vrs.Launcher/Vrs.Launcher.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Vrs.Tests/Vrs.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "NPC Movement",
+  "idBase": "ACT_SetNPCWalkSpeed",
+  "type": "SetNPCWalkSpeed",
+  "apiType": "NPC",
+  "label": "Set NPC Walk Speed",
+  "value": "target=Self;speed=16",
+  "description": "Changes how fast an NPC walks.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} walk speed to ${speed}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "walk",
+    "speed",
+    "movement"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "speed",
+      "label": "Walk Speed",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "16",
+      "description": "How fast the NPC should walk.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how fast an NPC walks.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.bodyposition",
+  "kind": "Action",
+  "apiGroup": "Physics",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Body Position",
+  "idBase": "ACT_SetBodyPositionForce",
+  "type": "SetBodyPositionForce",
+  "apiType": "BodyPosition",
+  "label": "Set Body Position Force",
+  "value": "target=Self;amount=100",
+  "description": "Sets how strongly a Body Position object pulls its parent.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} force to ${amount}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "body",
+    "position",
+    "force",
+    "physics",
+    "pull"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Body Position",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Body Position",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Body Position object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "BodyPositionObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "amount",
+      "label": "Force",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "100",
+      "description": "How strongly it pulls.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do set how strongly a Body Position object pulls its parent.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Body Position"
+  ]
+}

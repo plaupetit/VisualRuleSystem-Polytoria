@@ -1,0 +1,27 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_ModuloNumbers",
+  "type": "ModuloNumbers",
+  "apiType": "Number",
+  "label": "Modulo Numbers",
+  "value": "value=10;divisor=3",
+  "description": "Outputs the remainder after division.",
+  "status": "Ready",
+  "previewTemplate": "${value} % ${divisor}",
+  "searchKeywords": ["math", "modulo", "remainder", "divide", "number"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "value", "label": "Number", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Number to divide.", "valueSource": "Suggested Value" },
+    { "key": "divisor", "label": "Divisor", "type": "Number", "control": "Number", "required": true, "default": "3", "description": "Number used as the divisor.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: get the remainder after division.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Arithmetic"]
+}

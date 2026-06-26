@@ -1,0 +1,85 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Trigger",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Variables",
+  "idBase": "EV_OnScriptVariableChanged",
+  "type": "OnScriptVariableChanged",
+  "apiType": "ValueBase",
+  "label": "On Script Variable Changed",
+  "value": "target=Self;name=Score;interval=0.25",
+  "description": "Runs when a generated script variable changes.",
+  "status": "Draft",
+  "fallbackMode": "Log And Skip",
+  "previewTemplate": "When script variable ${name} changes on ${target}",
+  "searchKeywords": [
+    "when",
+    "variable",
+    "changed",
+    "score",
+    "state",
+    "watch"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Script variable to watch.",
+      "valueSource": "Script Variable"
+    },
+    {
+      "key": "interval",
+      "label": "Check Every Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.25",
+      "description": "How often the generated script checks for a change.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "When a stored script variable changes, run the connected nodes.",
+  "surface": "Support",
+  "palettePath": [
+    "Variables",
+    "Script"
+  ]
+}
+

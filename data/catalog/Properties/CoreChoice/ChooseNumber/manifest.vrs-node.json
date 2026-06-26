@@ -1,0 +1,45 @@
+{
+  "moduleId": "core.choice",
+  "kind": "Property",
+  "apiGroup": "Core",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Choice",
+  "idBase": "PROP_ChooseNumber",
+  "type": "ChooseNumber",
+  "apiType": "Number",
+  "label": "Choose Number",
+  "value": "value=0",
+  "description": "Uses a number chosen directly in the graph.",
+  "status": "Ready",
+  "previewTemplate": "Number ${value}",
+  "searchKeywords": [
+    "number",
+    "choose",
+    "value",
+    "score",
+    "amount",
+    "count"
+  ],
+  "corePack": true,
+  "familyFolder": "Core Choice",
+  "utilityLayer": "Core",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to pass into another node.",
+      "valueSource": "Chosen Value"
+    }
+  ],
+  "beginnerSummary": "Value: choose a number and pass it into another node.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Choice"
+  ]
+}

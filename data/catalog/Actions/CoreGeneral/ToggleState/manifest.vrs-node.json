@@ -1,0 +1,52 @@
+{
+  "moduleId": "core.general.state",
+  "kind": "Action",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "State",
+  "idBase": "ACT_ToggleState",
+  "type": "ToggleState",
+  "apiType": "BoolValue",
+  "label": "Toggle State",
+  "value": "state=DoorOpen",
+  "description": "Flips a named true or false state.",
+  "status": "Ready",
+  "previewTemplate": "Toggle ${state}",
+  "searchKeywords": [
+    "state",
+    "toggle",
+    "boolean",
+    "switch",
+    "true",
+    "false"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "state",
+      "label": "State Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "DoorOpen",
+      "description": "State to flip.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do flip a named true or false state.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "State"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

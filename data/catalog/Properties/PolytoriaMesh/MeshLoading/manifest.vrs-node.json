@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.mesh.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Mesh Animation",
+  "idBase": "PROP_MeshLoading",
+  "type": "MeshLoading",
+  "apiType": "Boolean",
+  "label": "Mesh Loading",
+  "value": "target=Self",
+  "description": "Outputs true while a mesh is still loading.",
+  "status": "Ready",
+  "previewTemplate": "Mesh loading on ${target}",
+  "searchKeywords": [
+    "mesh",
+    "loading",
+    "ready"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Mesh",
+  "utilityLayer": "World",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Mesh",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Mesh object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "MeshObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: check if a mesh is still loading.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Mesh Animation"
+  ]
+}

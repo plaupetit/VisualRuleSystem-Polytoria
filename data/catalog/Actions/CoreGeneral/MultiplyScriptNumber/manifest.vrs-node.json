@@ -1,0 +1,45 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Action",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Variables",
+  "idBase": "ACT_MultiplyScriptNumber",
+  "type": "MultiplyScriptNumber",
+  "apiType": "Number",
+  "label": "Multiply Script Number",
+  "value": "name=Score;factor=2",
+  "description": "Multiplies a script variable by a factor.",
+  "status": "Ready",
+  "previewTemplate": "Multiply ${name} by ${factor}",
+  "searchKeywords": ["variable", "number", "multiply", "factor", "scale", "score"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Variable to update.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "factor",
+      "label": "Factor",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "2",
+      "description": "Number used to multiply the current value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do multiply a saved script number by another number.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Script Numbers"]
+}

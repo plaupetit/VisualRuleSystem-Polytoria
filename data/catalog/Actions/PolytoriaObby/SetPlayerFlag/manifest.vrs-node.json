@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player State",
+  "idBase": "ACT_SetPlayerFlag",
+  "type": "SetPlayerFlag",
+  "apiType": "VRS.PlayerState",
+  "label": "Set Player Flag",
+  "value": "player=;key=Flag;value=true",
+  "description": "Stores a true or false temporary flag for one player.",
+  "status": "Ready",
+  "previewTemplate": "Set player flag ${key}",
+  "searchKeywords": ["do", "obby", "parcours", "player", "state", "flag", "boolean", "true"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player whose flag changes. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Flag", "description": "Name of the temporary flag.", "valueSource": "Suggested Value" },
+    { "key": "value", "label": "Value", "type": "Boolean", "control": "Boolean", "required": true, "default": "true", "description": "Flag value.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do set a temporary true/false flag for this player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

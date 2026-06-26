@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.audio.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Audio",
+  "idBase": "PROP_SoundTime",
+  "type": "SoundTime",
+  "apiType": "Number",
+  "label": "Sound Time",
+  "value": "target=Self",
+  "description": "Outputs the current playback time of a sound.",
+  "status": "Ready",
+  "previewTemplate": "Playback time of ${target}",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "time",
+    "playback"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use where a sound currently is in its playback.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Status"
+  ]
+}

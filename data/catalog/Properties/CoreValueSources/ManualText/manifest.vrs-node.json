@@ -1,0 +1,71 @@
+{
+  "moduleId": "core.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Value Source",
+  "idBase": "PROP_ManualText",
+  "type": "ManualText",
+  "apiType": "String",
+  "label": "Manual Text",
+  "value": "",
+  "description": "Represents a text value typed directly by the graph author.",
+  "comment": "[VSR] Catalog-only value source for manifest-driven parameters.",
+  "status": "Value Source",
+  "previewTemplate": "Property Text: ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "property",
+    "value",
+    "text",
+    "string",
+    "constant"
+  ],
+  "selectorHints": [
+    {
+      "key": "value",
+      "label": "Text value",
+      "dataType": "String",
+      "allowedSources": [
+        "Constant",
+        "LocalVariable",
+        "GlobalVariable"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph",
+        "Global"
+      ]
+    }
+  ],
+  "debugHints": [
+    "Shows the authored text value when inspected."
+  ],
+  "corePack": false,
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: use text you type directly in the graph.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Values",
+    "Manual"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

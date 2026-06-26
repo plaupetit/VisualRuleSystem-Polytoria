@@ -1,0 +1,62 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Game Rules",
+  "idBase": "ACT_AddTeamScore",
+  "type": "AddTeamScore",
+  "apiType": "RuntimeState",
+  "label": "Add Team Score",
+  "value": "teamName=Players;amount=1",
+  "description": "Adds to a named temporary team score.",
+  "status": "Ready",
+  "previewTemplate": "Add ${amount} to ${teamName} score",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "team",
+    "score",
+    "points",
+    "add",
+    "arena"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "teamName",
+      "label": "Team Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Players",
+      "description": "Temporary team label.",
+      "valueSource": "Temporary Name"
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Team score amount to add.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do add points to a temporary team.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Team Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Game Rules"
+    ]
+  ]
+}
+

@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_ToggleObjectVisibility",
+  "type": "ToggleObjectVisibility",
+  "apiType": "Part",
+  "label": "Toggle Object Visibility",
+  "value": "target=Self",
+  "description": "Switches a scene object between visible and hidden.",
+  "status": "Ready",
+  "previewTemplate": "Toggle ${target} visibility",
+  "searchKeywords": [
+    "object",
+    "toggle",
+    "visible",
+    "hidden",
+    "show",
+    "hide"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to show or hide.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do switch a scene object between visible and hidden.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Visibility"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectTurnAngle",
+  "type": "SetObjectTurnAngle",
+  "apiType": "Part",
+  "label": "Set Object Turn Angle",
+  "value": "target=Self;angle=90",
+  "description": "Turns an object to a chosen left-right facing angle.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} turn angle to ${angle}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "turn",
+    "angle",
+    "rotate",
+    "rotation",
+    "facing",
+    "left",
+    "right"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to turn.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "angle",
+      "label": "Turn Angle",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "90",
+      "description": "New left-right facing angle in degrees.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn an object to a chosen facing angle.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Rotation"
+  ]
+}

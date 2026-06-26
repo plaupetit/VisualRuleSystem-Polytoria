@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Text Content",
+  "idBase": "COND_3DTextUsesRichText",
+  "type": "Text3DUsesRichText",
+  "apiType": "Text3D",
+  "label": "3D Text Uses Rich Text",
+  "value": "target=Self",
+  "description": "Checks if rich text formatting is turned on for 3D text.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} uses rich text",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "rich text",
+    "format",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if rich text formatting is turned on for 3D text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Content"
+  ]
+}

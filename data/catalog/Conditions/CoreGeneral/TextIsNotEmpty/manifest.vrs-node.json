@@ -1,0 +1,52 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Text",
+  "idBase": "COND_TextIsNotEmpty",
+  "type": "TextIsNotEmpty",
+  "apiType": "String",
+  "label": "Text Is Not Empty",
+  "value": "text=Hello;ignoreSpaces=true",
+  "description": "Checks whether text has something useful inside.",
+  "status": "Ready",
+  "previewTemplate": "${text} is not empty",
+  "searchKeywords": [
+    "text",
+    "not empty",
+    "blank",
+    "chat",
+    "message",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text to check.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "ignoreSpaces",
+      "label": "Ignore Spaces",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "Checked means spaces alone count as empty.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if text contains more than spaces.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Empty"]
+}

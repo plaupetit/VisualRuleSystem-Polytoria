@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsUnanchored",
+  "type": "ObjectIsUnanchored",
+  "apiType": "Part",
+  "label": "Object Is Unanchored",
+  "value": "target=Self",
+  "description": "Checks whether a scene object is free to move.",
+  "status": "Ready",
+  "previewTemplate": "${target} is unanchored",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "unanchored",
+    "unlocked",
+    "physics",
+    "move"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a scene object is free to move.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics"
+  ]
+}

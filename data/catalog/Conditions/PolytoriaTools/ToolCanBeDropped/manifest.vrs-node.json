@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.tools.conditions",
+  "kind": "Condition",
+  "apiGroup": "Tools",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Tools",
+  "idBase": "COND_ToolCanBeDropped",
+  "type": "ToolCanBeDropped",
+  "apiType": "Boolean",
+  "label": "Tool Can Be Dropped",
+  "value": "target=Target",
+  "description": "Checks whether players may drop the chosen tool.",
+  "status": "Ready",
+  "previewTemplate": "Tool can be dropped: ${target}",
+  "searchKeywords": [
+    "tool",
+    "drop",
+    "droppable",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a chosen tool can be dropped.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

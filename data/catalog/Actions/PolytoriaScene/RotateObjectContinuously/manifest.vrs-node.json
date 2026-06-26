@@ -1,0 +1,89 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_RotateObjectContinuously",
+  "type": "RotateObjectContinuously",
+  "apiType": "Vector3",
+  "label": "Rotate Object Continuously",
+  "value": "target=Self;x=0;y=5;z=0;interval=0.05",
+  "description": "Keeps adding rotation to an object in a loop.",
+  "status": "Ready",
+  "previewTemplate": "Spin ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "rotate",
+    "rotation",
+    "turn",
+    "spin",
+    "continuous",
+    "loop"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to spin.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "x",
+      "label": "X Degrees Per Step",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Rotation added on X each step.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y Degrees Per Step",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "5",
+      "description": "Rotation added on Y each step.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z Degrees Per Step",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Rotation added on Z each step.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "interval",
+      "label": "Step Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.05",
+      "description": "Delay between rotation steps.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do keep spinning an object until the script stops.",
+  "surface": "Support",
+  "palettePath": [
+    "Scene Object",
+    "Rotation"
+  ]
+}
+

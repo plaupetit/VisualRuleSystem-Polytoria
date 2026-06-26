@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.obby.values",
+  "kind": "Property",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player State",
+  "idBase": "PROP_PlayerRuntimeNumber",
+  "type": "PlayerRuntimeNumber",
+  "apiType": "Number",
+  "label": "Player Temporary Number",
+  "value": "player=;key=Score",
+  "description": "Outputs a named temporary number stored for one player.",
+  "status": "Ready",
+  "previewTemplate": "Player number ${key}",
+  "searchKeywords": ["value", "obby", "parcours", "player", "runtime", "number", "score", "state"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to read. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Score", "description": "Temporary number name.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: a temporary number stored for this player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

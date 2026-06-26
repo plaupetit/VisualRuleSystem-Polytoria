@@ -1,0 +1,44 @@
+{
+  "moduleId": "core.choice",
+  "kind": "Property",
+  "apiGroup": "Core",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Choice",
+  "idBase": "PROP_ChooseText",
+  "type": "ChooseText",
+  "apiType": "String",
+  "label": "Choose Text",
+  "value": "value=Hello",
+  "description": "Uses text chosen directly in the graph.",
+  "status": "Ready",
+  "previewTemplate": "Text ${value}",
+  "searchKeywords": [
+    "text",
+    "choose",
+    "message",
+    "word",
+    "label"
+  ],
+  "corePack": true,
+  "familyFolder": "Core Choice",
+  "utilityLayer": "Core",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text to pass into another node.",
+      "valueSource": "Chosen Value"
+    }
+  ],
+  "beginnerSummary": "Value: choose text and pass it into another node.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Text",
+    "Convert"
+  ]
+}

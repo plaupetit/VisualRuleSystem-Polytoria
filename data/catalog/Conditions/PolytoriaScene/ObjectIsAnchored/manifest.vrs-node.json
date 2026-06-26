@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsAnchored",
+  "type": "ObjectIsAnchored",
+  "apiType": "Part",
+  "label": "Object Is Anchored",
+  "value": "target=Self",
+  "description": "Checks whether a scene object is locked in place.",
+  "status": "Ready",
+  "previewTemplate": "${target} is anchored",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "anchored",
+    "locked",
+    "physics",
+    "freeze"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a scene object is locked in place.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics"
+  ]
+}

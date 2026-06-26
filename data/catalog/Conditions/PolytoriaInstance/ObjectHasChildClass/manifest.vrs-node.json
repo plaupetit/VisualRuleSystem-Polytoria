@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.instance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Instance",
+  "idBase": "COND_ObjectHasChildClass",
+  "type": "ObjectHasChildClass",
+  "apiType": "Instance",
+  "label": "Object Has Child Type",
+  "value": "target=Self;className=Part",
+  "description": "Checks whether an object has a direct child of a given object type.",
+  "status": "Ready",
+  "previewTemplate": "${target} has child type ${className}",
+  "searchKeywords": [
+    "check",
+    "object",
+    "child",
+    "class",
+    "find child",
+    "instance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Parent object to search.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "className",
+      "label": "Object Type",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Part",
+      "description": "Child object type to find, such as Part or Folder.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if an object has a child of a specific object type.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Children"
+  ]
+}
+

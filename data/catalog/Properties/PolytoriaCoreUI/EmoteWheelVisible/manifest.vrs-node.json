@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.coreui.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Built-In UI",
+  "idBase": "PROP_BuiltInEmoteWheelVisible",
+  "type": "BuiltInEmoteWheelVisible",
+  "apiType": "Boolean",
+  "label": "Emote Wheel Is Visible",
+  "value": "",
+  "description": "Outputs true when the built-in emote wheel is visible.",
+  "status": "Ready",
+  "previewTemplate": "Emote wheel is visible",
+  "searchKeywords": [
+    "ui",
+    "emote",
+    "wheel",
+    "visible"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Core UI",
+  "utilityLayer": "CoreUI",
+  "parameters": [],
+  "beginnerSummary": "Value: check if the built-in emote wheel is visible.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Built-In UI"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Text",
+  "idBase": "COND_TextEquals",
+  "type": "TextEquals",
+  "apiType": "String",
+  "label": "Text Equals",
+  "value": "left=Hello;right=Hello;caseSensitive=false",
+  "description": "Checks whether two text values are equal.",
+  "status": "Ready",
+  "previewTemplate": "Does ${left} equal ${right}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["text", "string", "equals", "same", "compare", "match"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "left",
+      "label": "Left Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "First text value.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "right",
+      "label": "Right Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Second text value.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "caseSensitive",
+      "label": "Case Sensitive",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "false",
+      "description": "When enabled, uppercase and lowercase letters must match exactly.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if two pieces of text are the same.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Match"]
+}

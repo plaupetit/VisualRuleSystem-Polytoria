@@ -1,0 +1,58 @@
+{
+  "moduleId": "polytoria.instance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectChildCountAtLeast",
+  "type": "ObjectChildCountAtLeast",
+  "apiType": "Instance",
+  "label": "Object Child Count At Least",
+  "value": "target=Self;minimum=1",
+  "description": "Checks whether an object has enough direct children.",
+  "status": "Ready",
+  "previewTemplate": "${target} has at least ${minimum} children",
+  "searchKeywords": [
+    "check",
+    "object",
+    "children",
+    "child count",
+    "minimum",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose direct children will be counted.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    },
+    {
+      "key": "minimum",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Smallest accepted child count.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if an object has at least a certain number of children.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Children"
+  ]
+}

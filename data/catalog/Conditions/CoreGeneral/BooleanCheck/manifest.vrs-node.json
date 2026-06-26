@@ -1,0 +1,53 @@
+{
+  "moduleId": "core.general.logic",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Logic",
+  "idBase": "COND_BooleanCheck",
+  "type": "BooleanCheck",
+  "apiType": "Boolean",
+  "label": "Boolean Check",
+  "value": "value=true;expected=true",
+  "description": "Checks whether a boolean value matches true or false.",
+  "status": "Ready",
+  "previewTemplate": "Is ${value} ${expected}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "boolean",
+    "bool",
+    "true",
+    "false",
+    "logic",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Value",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "true",
+      "description": "Boolean value to check.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "expected",
+      "label": "Expected",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "true",
+      "description": "Expected boolean result.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a true or false value matches what you expect.",
+  "surface": "UserFacing",
+  "palettePath": ["Logic", "Boolean"]
+}

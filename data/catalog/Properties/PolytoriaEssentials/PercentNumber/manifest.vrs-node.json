@@ -1,0 +1,62 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Values",
+  "idBase": "PROP_PercentNumber",
+  "type": "PercentNumber",
+  "apiType": "Number",
+  "label": "Percent Number",
+  "value": "part=0;whole=100",
+  "description": "Outputs part divided by whole as a percent.",
+  "status": "Ready",
+  "previewTemplate": "${part} of ${whole} percent",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "percent",
+    "percentage",
+    "ratio",
+    "math",
+    "number"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "part",
+      "label": "Part",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Current part value.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "whole",
+      "label": "Whole",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "100",
+      "description": "Whole value used as 100 percent.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: convert a part and whole into a percent.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Range"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

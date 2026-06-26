@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.lighting.objects",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetLightShadows",
+  "type": "SetLightShadows",
+  "apiType": "Light",
+  "label": "Set Light Shadows",
+  "value": "target=Self;shadows=true",
+  "description": "Turns shadows from a light object on or off.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} shadows ${shadows}",
+  "searchKeywords": [
+    "lighting",
+    "light",
+    "shadow",
+    "shadows"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "LightObject"
+      ]
+    },
+    {
+      "key": "shadows",
+      "label": "Shadows",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Checked means the light casts shadows.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn shadows from a light on or off.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Settings"
+  ]
+}

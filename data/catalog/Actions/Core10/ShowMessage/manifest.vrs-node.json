@@ -1,0 +1,84 @@
+{
+  "moduleId": "core.debug",
+  "kind": "Action",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Debug",
+  "idBase": "ACT_ShowMessage",
+  "type": "ShowMessage",
+  "apiType": "Script",
+  "label": "Show Message",
+  "value": "message=Hello from VisualRuleSystem.",
+  "description": "Prints a message. Example: On Timer Tick -> Show Message.",
+  "comment": "[VSR] Console feedback action for quick testing.",
+  "status": "Ready",
+  "previewTemplate": "Do Show Message: ${message}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "do",
+    "print",
+    "log",
+    "message",
+    "debug",
+    "console"
+  ],
+  "selectorHints": [
+    {
+      "key": "message",
+      "label": "Message text",
+      "dataType": "String",
+      "allowedSources": [
+        "Constant",
+        "LocalVariable",
+        "GlobalVariable",
+        "ConnectedPort"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph",
+        "Global"
+      ]
+    }
+  ],
+  "debugHints": [
+    "The exported script prints with the [VRS] prefix.",
+    "Use this action first when testing a new trigger."
+  ],
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "templates": {
+    "server": "export.server.luau.tpl"
+  },
+  "parameters": [
+    {
+      "key": "message",
+      "label": "Message",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello from VisualRuleSystem.",
+      "valueSource": "String / Manual Text Input",
+      "searchKeywords": [
+        "text",
+        "string",
+        "print"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do print text to the Polytoria output console.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Message"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "UI & Feedback"
+    ]
+  ]
+}
+

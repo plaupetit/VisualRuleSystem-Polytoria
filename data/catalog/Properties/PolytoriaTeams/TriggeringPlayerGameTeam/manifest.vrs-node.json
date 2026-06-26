@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_TriggeringPlayerGameTeam",
+  "type": "TriggeringPlayerGameTeam",
+  "apiType": "SceneObject",
+  "label": "Triggering Player Game Team",
+  "value": "",
+  "description": "Outputs the game team assigned to the triggering player.",
+  "status": "Ready",
+  "previewTemplate": "Triggering player game team",
+  "searchKeywords": [
+    "team",
+    "player",
+    "assigned",
+    "object"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [],
+  "beginnerSummary": "Value: use the triggering player's game team object.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Game Team"
+  ]
+}

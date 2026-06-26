@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberEquals",
+  "type": "NumberEquals",
+  "apiType": "Number",
+  "label": "Number Equals",
+  "value": "left=10;right=10",
+  "description": "Checks whether two numbers match.",
+  "status": "Ready",
+  "previewTemplate": "${left} equals ${right}",
+  "searchKeywords": [
+    "number",
+    "equals",
+    "same",
+    "match",
+    "compare",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "left",
+      "label": "First Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "First number to compare.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "right",
+      "label": "Second Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Second number to compare.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if two numbers are the same.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Comparison"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.players.values",
+  "kind": "Property",
+  "apiGroup": "Players",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Players",
+  "idBase": "PROP_FindPlayerByID",
+  "type": "FindPlayerByID",
+  "apiType": "Any",
+  "label": "Find Player By User ID",
+  "value": "userId=0",
+  "description": "Outputs a player found by numeric User ID, or nil when no player matches.",
+  "status": "Ready",
+  "previewTemplate": "Find player User ID ${userId}",
+  "searchKeywords": ["value", "player", "find", "id", "user id", "lookup"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "userId", "label": "User ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Polytoria account/user number to look up.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: find a player by User ID.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Lookup"]
+}

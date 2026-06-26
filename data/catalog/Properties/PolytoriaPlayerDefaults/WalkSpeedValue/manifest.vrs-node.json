@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.playerdefaults.values",
+  "kind": "Property",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player Defaults",
+  "idBase": "PROP_WalkSpeedValue",
+  "type": "PlayerDefaultValue",
+  "apiType": "Number",
+  "label": "WalkSpeed Value",
+  "value": "propertyName=WalkSpeed",
+  "description": "Outputs the current default WalkSpeed value.",
+  "status": "Ready",
+  "previewTemplate": "WalkSpeed",
+  "searchKeywords": ["value", "player", "defaults", "walk", "speed"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "WalkSpeed", "description": "PlayerDefaults property to read.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] }
+  ],
+  "beginnerSummary": "Value: use the current default WalkSpeed.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Movement"]
+}

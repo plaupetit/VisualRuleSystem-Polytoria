@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player State",
+  "idBase": "ACT_MakePlayerJump",
+  "type": "MakePlayerJump",
+  "apiType": "Player",
+  "label": "Make Player Jump",
+  "value": "player=",
+  "description": "Calls the Polytoria Player Jump method when available.",
+  "status": "Ready",
+  "previewTemplate": "Make player jump",
+  "searchKeywords": ["do", "obby", "parcours", "player", "jump", "bounce", "launch"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to jump. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Do make the player jump.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Player Control"
+  ]
+}

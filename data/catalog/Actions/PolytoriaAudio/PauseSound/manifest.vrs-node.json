@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.audio",
+  "kind": "Action",
+  "apiGroup": "Audio",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_PauseSound",
+  "type": "PauseSound",
+  "apiType": "Sound",
+  "label": "Pause Sound",
+  "value": "target=Self",
+  "description": "Pauses a sound so it can continue later.",
+  "status": "Ready",
+  "previewTemplate": "Pause ${target}",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "music",
+    "pause"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to pause.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do pause a sound without resetting it.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Playback"
+  ]
+}

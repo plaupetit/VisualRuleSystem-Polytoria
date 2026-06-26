@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.teams",
+  "kind": "Condition",
+  "apiGroup": "Teams",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Game Team",
+  "idBase": "COND_PlayerIsInGameTeam",
+  "type": "PlayerIsInGameTeam",
+  "apiType": "Boolean",
+  "label": "Player Is In Game Team",
+  "value": "target=Target",
+  "description": "Checks whether the triggering player is assigned to a chosen game team.",
+  "status": "Ready",
+  "previewTemplate": "Player is in ${target}",
+  "searchKeywords": [
+    "team",
+    "player",
+    "assigned",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Game Team",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Team object to compare with.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "TeamObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if the triggering player is in a chosen game team.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Game Team"
+  ]
+}

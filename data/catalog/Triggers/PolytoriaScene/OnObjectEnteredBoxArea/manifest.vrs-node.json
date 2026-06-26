@@ -1,0 +1,36 @@
+{
+  "moduleId": "polytoria.scene.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectEnteredBoxArea",
+  "type": "OnObjectEnteredBoxArea",
+  "apiType": "Part",
+  "label": "On Object Entered Box Area",
+  "value": "target=Self;center=Target;width=10;height=10;depth=10;interval=0.25",
+  "description": "Runs when an object enters a box-shaped area.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} enters box area",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["object", "area", "zone", "box", "entered", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] },
+    { "key": "center", "label": "Area Center", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "Watched Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "center", "label": "Area Center", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Target", "description": "Object at the center of the box area.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "width", "label": "Width", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Left-right size of the area.", "valueSource": "Suggested Value" },
+    { "key": "height", "label": "Height", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Up-down size of the area.", "valueSource": "Suggested Value" },
+    { "key": "depth", "label": "Depth", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Forward-back size of the area.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the area.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When an object enters a box-shaped area after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Zones"]
+}

@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Rules",
+  "idBase": "PROP_RoundTimeRemaining",
+  "type": "RoundTimeRemaining",
+  "apiType": "Number",
+  "label": "Round Time Remaining",
+  "value": "roundName=Main Round",
+  "description": "Outputs remaining seconds for a named temporary round.",
+  "status": "Ready",
+  "previewTemplate": "Remaining time for ${roundName}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "round",
+    "timer",
+    "remaining",
+    "seconds",
+    "countdown"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "roundName",
+      "label": "Round Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Main Round",
+      "description": "Temporary round name.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Value: seconds left in a named round.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Round"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Game Rules"
+    ]
+  ]
+}
+

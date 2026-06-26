@@ -1,0 +1,62 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Flow & Timing",
+  "idBase": "ACT_StartCooldown",
+  "type": "StartCooldown",
+  "apiType": "RuntimeState",
+  "label": "Start Cooldown",
+  "value": "cooldownName=Default;duration=1",
+  "description": "Starts or restarts a named temporary cooldown.",
+  "status": "Ready",
+  "previewTemplate": "Start ${cooldownName} cooldown for ${duration}s",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "cooldown",
+    "timer",
+    "delay",
+    "debounce",
+    "ready"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "cooldownName",
+      "label": "Cooldown Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Default",
+      "description": "Temporary cooldown name.",
+      "valueSource": "Temporary Name"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Seconds before the cooldown is ready again.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do start a named cooldown timer.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Cooldown"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

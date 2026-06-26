@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player",
+  "idBase": "ACT_AddPlayerLives",
+  "type": "AddPlayerLives",
+  "apiType": "RuntimeState",
+  "label": "Add Player Lives",
+  "value": "amount=1",
+  "description": "Adds to the triggering player's temporary lives.",
+  "status": "Ready",
+  "previewTemplate": "Add ${amount} player lives",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "health",
+    "add",
+    "stat"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Lives amount to add.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do add lives to the triggering player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

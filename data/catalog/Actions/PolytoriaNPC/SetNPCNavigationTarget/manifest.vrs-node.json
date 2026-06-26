@@ -1,0 +1,81 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "NPC Movement",
+  "idBase": "ACT_SetNPCNavigationTarget",
+  "type": "SetNPCNavigationTarget",
+  "apiType": "NPC",
+  "label": "Set NPC Navigation Target",
+  "value": "target=Self;x=0;y=0;z=0",
+  "description": "Tells an NPC where it should try to walk.",
+  "status": "Ready",
+  "previewTemplate": "Send ${target} toward (${x}, ${y}, ${z})",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "navigation",
+    "move",
+    "walk",
+    "target"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to send toward a position.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "x",
+      "label": "X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Left-right position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Up-down position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Forward-back position.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do tell an NPC where it should try to walk.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

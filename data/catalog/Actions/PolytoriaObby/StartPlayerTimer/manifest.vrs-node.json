@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player State",
+  "idBase": "ACT_StartPlayerTimer",
+  "type": "StartPlayerTimer",
+  "apiType": "VRS.PlayerState",
+  "label": "Start Player Timer",
+  "value": "player=",
+  "description": "Starts or restarts the temporary timer for the current player run.",
+  "status": "Ready",
+  "previewTemplate": "Start player's run timer",
+  "searchKeywords": ["do", "obby", "parcours", "timer", "run", "start", "speedrun", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player whose timer starts. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Do start the player's run timer.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Run State"
+  ]
+}

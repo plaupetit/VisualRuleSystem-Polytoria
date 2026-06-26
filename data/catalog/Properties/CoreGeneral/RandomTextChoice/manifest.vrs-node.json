@@ -1,0 +1,65 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_RandomTextChoice",
+  "type": "RandomTextChoice",
+  "apiType": "String",
+  "label": "Random Text Choice",
+  "value": "first=Heads;second=Tails;firstChance=50",
+  "description": "Randomly picks one of two text values.",
+  "status": "Ready",
+  "previewTemplate": "Randomly choose ${first} or ${second}",
+  "searchKeywords": [
+    "text",
+    "random",
+    "choice",
+    "message",
+    "chat",
+    "pick"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "first",
+      "label": "First Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Heads",
+      "description": "First possible text.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "second",
+      "label": "Second Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Tails",
+      "description": "Second possible text.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "firstChance",
+      "label": "First Chance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "50",
+      "description": "Percent chance to pick the first text.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: randomly choose between two text values.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Text",
+    "Choice"
+  ]
+}

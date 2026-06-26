@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Checkpoint",
+  "idBase": "ACT_SendPlayerToCheckpoint",
+  "type": "SendPlayerToCheckpoint",
+  "apiType": "VRS.PlayerState",
+  "label": "Send Player To Checkpoint",
+  "value": "player=;countDeath=true",
+  "description": "Moves the player back to their saved checkpoint when possible, otherwise respawns them.",
+  "status": "Ready",
+  "previewTemplate": "Send player to checkpoint",
+  "searchKeywords": ["do", "obby", "parcours", "checkpoint", "respawn", "death", "hazard", "reset"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to move. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "countDeath", "label": "Count Death", "type": "Boolean", "control": "Boolean", "required": true, "default": "true", "description": "When true, increases the player's temporary death count.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do return the player to their saved checkpoint.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Checkpoint"]
+}

@@ -1,0 +1,146 @@
+{
+  "moduleId": "polytoria.tween.actions",
+  "kind": "Action",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Tween",
+  "idBase": "ACT_TweenObjectScale",
+  "type": "TweenObjectScale",
+  "apiType": "TweenService",
+  "label": "Animate Object Scale",
+  "value": "target=Self;vector=1,1,1;x=1;y=1;z=1;duration=1;transition=Sine;direction=InOut;waitToComplete=true",
+  "description": "Animates an object to a target scale with a smooth animation.",
+  "status": "Ready",
+  "previewTemplate": "Animate ${target} scale to ${vector}",
+  "searchKeywords": [
+    "do",
+    "tween",
+    "animate",
+    "scale",
+    "vector",
+    "size",
+    "object",
+    "smooth"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to animate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "vector",
+      "label": "Target Scale",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "1,1,1",
+      "description": "Scale values to tween toward.",
+      "valueSource": "Manual 3D Vector"
+    },
+    {
+      "key": "x",
+      "label": "X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Target X scale.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Target Y scale.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Target Z scale.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Animation duration in seconds.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "transition",
+      "label": "Transition",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Sine",
+      "description": "Animation transition curve.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic",
+        "Quart",
+        "Quint",
+        "Expo",
+        "Circ",
+        "Back",
+        "Elastic",
+        "Bounce"
+      ]
+    },
+    {
+      "key": "direction",
+      "label": "Direction",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "InOut",
+      "description": "Animation easing direction.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "In",
+        "Out",
+        "InOut"
+      ]
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "When true, the next action waits for the animation to finish.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do smoothly resize an object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}
+

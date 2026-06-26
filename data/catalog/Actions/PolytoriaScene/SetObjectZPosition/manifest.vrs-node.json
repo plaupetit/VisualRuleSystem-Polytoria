@@ -1,0 +1,59 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectZPosition",
+  "type": "SetObjectZPosition",
+  "apiType": "Part",
+  "label": "Set Object Z Position",
+  "value": "target=Self;z=0",
+  "description": "Moves an object forward or backward without changing its left-right position or height.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} Z position to ${z}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "position",
+    "z",
+    "front",
+    "back",
+    "move"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "z",
+      "label": "Z Position",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "New front-back position.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move an object forward or backward while keeping the other position values.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Position"
+  ]
+}

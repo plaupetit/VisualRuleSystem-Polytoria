@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.playerdefaults.values",
+  "kind": "Property",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player Defaults",
+  "idBase": "PROP_StaminaValue",
+  "type": "PlayerDefaultValue",
+  "apiType": "Number",
+  "label": "Stamina Value",
+  "value": "propertyName=Stamina",
+  "description": "Outputs the current default Stamina value.",
+  "status": "Ready",
+  "previewTemplate": "Stamina",
+  "searchKeywords": ["value", "player", "defaults", "stamina", "energy"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "Stamina", "description": "PlayerDefaults property to read.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] }
+  ],
+  "beginnerSummary": "Value: use the current default Stamina.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Movement"]
+}

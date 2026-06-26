@@ -1,0 +1,62 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Game Rules",
+  "idBase": "ACT_SetTeamScore",
+  "type": "SetTeamScore",
+  "apiType": "RuntimeState",
+  "label": "Set Team Score",
+  "value": "teamName=Players;score=0",
+  "description": "Sets a named temporary team score.",
+  "status": "Ready",
+  "previewTemplate": "Set ${teamName} score to ${score}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "team",
+    "score",
+    "points",
+    "runtime",
+    "arena"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "teamName",
+      "label": "Team Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Players",
+      "description": "Temporary team label.",
+      "valueSource": "Temporary Name"
+    },
+    {
+      "key": "score",
+      "label": "Score",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "New team score.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do set a temporary team score.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Team Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Game Rules"
+    ]
+  ]
+}
+

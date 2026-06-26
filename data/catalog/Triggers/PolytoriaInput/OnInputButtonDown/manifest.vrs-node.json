@@ -1,0 +1,72 @@
+{
+  "moduleId": "polytoria.input.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "Input",
+  "idBase": "EV_OnInputButtonDown",
+  "type": "OnInputButtonDown",
+  "apiType": "InputService",
+  "label": "On Input Button Down",
+  "value": "target=Self;actionName=Interact",
+  "description": "Starts the rule when a named client input button action is pressed.",
+  "status": "Ready",
+  "previewTemplate": "When input ${actionName} is pressed on ${target}",
+  "searchKeywords": [
+    "when",
+    "input",
+    "button",
+    "pressed",
+    "down",
+    "client",
+    "key"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "actionName",
+      "label": "Input Action",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Interact",
+      "description": "Name of the Input action configured in Creator.",
+      "valueSource": "String / Choice"
+    }
+  ],
+  "beginnerSummary": "When a client input action is pressed.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}
+

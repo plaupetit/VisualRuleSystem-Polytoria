@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Variables",
+  "idBase": "COND_ScriptNumberIsAtMost",
+  "type": "ScriptNumberIsAtMost",
+  "apiType": "Number",
+  "label": "Script Number Is At Most",
+  "value": "name=Score;maximum=10",
+  "description": "Checks whether a script variable number is low enough.",
+  "status": "Ready",
+  "previewTemplate": "${name} <= ${maximum}",
+  "searchKeywords": [
+    "check",
+    "variable",
+    "number",
+    "score",
+    "maximum",
+    "at most"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Variable to read as a number.",
+      "valueSource": "Script Variable"
+    },
+    {
+      "key": "maximum",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Largest accepted number.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a stored script number is at most a maximum.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Script Numbers"
+  ]
+}

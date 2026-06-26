@@ -1,0 +1,42 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Text",
+  "idBase": "COND_TextIsANumber",
+  "type": "TextIsANumber",
+  "apiType": "String",
+  "label": "Text Is A Number",
+  "value": "text=42",
+  "description": "Checks whether text can be read as a number.",
+  "status": "Ready",
+  "previewTemplate": "${text} is a number",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "text",
+    "number",
+    "convert",
+    "parse",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "42",
+      "description": "Text to check.",
+      "valueSource": "Manual Text"
+    }
+  ],
+  "beginnerSummary": "Check if text can be used as a number.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Convert"]
+}

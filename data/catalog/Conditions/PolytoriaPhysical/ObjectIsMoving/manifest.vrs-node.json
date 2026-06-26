@@ -1,0 +1,58 @@
+{
+  "moduleId": "polytoria.physical.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsMoving",
+  "type": "ObjectIsMoving",
+  "apiType": "Physical.Velocity",
+  "label": "Object Is Moving",
+  "value": "target=Self;minimumSpeed=0.1",
+  "description": "Checks if a physics object is moving fast enough to count as moving.",
+  "status": "Ready",
+  "previewTemplate": "${target} is moving",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "physics",
+    "moving",
+    "velocity",
+    "speed"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    },
+    {
+      "key": "minimumSpeed",
+      "label": "Minimum Speed",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.1",
+      "description": "Smallest speed that counts as moving.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a physics object is moving.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics Motion"
+  ]
+}

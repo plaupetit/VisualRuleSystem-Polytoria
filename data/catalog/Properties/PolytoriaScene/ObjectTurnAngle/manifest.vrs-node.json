@@ -1,0 +1,49 @@
+{
+  "moduleId": "polytoria.scene.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectTurnAngle",
+  "type": "ObjectTurnAngle",
+  "apiType": "Number",
+  "label": "Object Turn Angle",
+  "value": "target=Self",
+  "description": "Outputs an object's left-right facing angle.",
+  "status": "Ready",
+  "previewTemplate": "Turn angle of ${target}",
+  "searchKeywords": [
+    "object",
+    "turn",
+    "angle",
+    "rotate",
+    "rotation",
+    "facing",
+    "number"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose turn angle will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: read which way an object is facing left-right.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Rotation"
+  ]
+}

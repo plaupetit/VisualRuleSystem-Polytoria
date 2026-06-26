@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.playerdefaults.values",
+  "kind": "Property",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player Defaults",
+  "idBase": "PROP_SprintSpeedValue",
+  "type": "PlayerDefaultValue",
+  "apiType": "Number",
+  "label": "SprintSpeed Value",
+  "value": "propertyName=SprintSpeed",
+  "description": "Outputs the current default SprintSpeed value.",
+  "status": "Ready",
+  "previewTemplate": "SprintSpeed",
+  "searchKeywords": ["value", "player", "defaults", "sprint", "speed"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "SprintSpeed", "description": "PlayerDefaults property to read.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] }
+  ],
+  "beginnerSummary": "Value: use the current default SprintSpeed.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Movement"]
+}

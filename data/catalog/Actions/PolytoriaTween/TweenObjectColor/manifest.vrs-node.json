@@ -1,0 +1,135 @@
+{
+  "moduleId": "polytoria.tween.actions",
+  "kind": "Action",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Tween",
+  "idBase": "ACT_TweenObjectColor",
+  "type": "TweenObjectColor",
+  "apiType": "TweenService",
+  "label": "Animate Object Color",
+  "value": "target=Self;r=1;g=1;b=1;duration=1;transition=Sine;direction=InOut;waitToComplete=true",
+  "description": "Animates an object's Color value with a smooth animation.",
+  "status": "Ready",
+  "previewTemplate": "Animate ${target} color to RGB(${r}, ${g}, ${b})",
+  "searchKeywords": [
+    "do",
+    "tween",
+    "animate",
+    "color",
+    "rgb",
+    "object",
+    "smooth"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to animate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Target red channel from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Target green channel from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Target blue channel from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Animation duration in seconds.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "transition",
+      "label": "Transition",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Sine",
+      "description": "Animation transition curve.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic",
+        "Quart",
+        "Quint",
+        "Expo",
+        "Circ",
+        "Back",
+        "Elastic",
+        "Bounce"
+      ]
+    },
+    {
+      "key": "direction",
+      "label": "Direction",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "InOut",
+      "description": "Animation easing direction.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "In",
+        "Out",
+        "InOut"
+      ]
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "When true, the next action waits for the animation to finish.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do smoothly change an object's color.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}
+

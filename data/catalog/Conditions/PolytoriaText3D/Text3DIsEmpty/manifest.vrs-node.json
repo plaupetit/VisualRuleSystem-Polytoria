@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Text Content",
+  "idBase": "COND_3DTextIsEmpty",
+  "type": "Text3DIsEmpty",
+  "apiType": "Text3D",
+  "label": "3D Text Is Empty",
+  "value": "target=Self",
+  "description": "Checks if 3D text has no words.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} text is empty",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "empty",
+    "blank",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if 3D text has no words.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Content"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.bodyposition",
+  "kind": "Condition",
+  "apiGroup": "Physics",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Body Position",
+  "idBase": "COND_BodyPositionReachedTarget",
+  "type": "BodyPositionReachedTarget",
+  "apiType": "BodyPosition",
+  "label": "Body Position Reached Target",
+  "value": "target=Self",
+  "description": "Checks if the parent is close enough to the Body Position target.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} reached its target",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "body",
+    "position",
+    "target",
+    "reached",
+    "close"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Body Position",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Body Position",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Body Position object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "BodyPositionObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if the parent is close enough to the Body Position target.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Body Position"
+  ]
+}

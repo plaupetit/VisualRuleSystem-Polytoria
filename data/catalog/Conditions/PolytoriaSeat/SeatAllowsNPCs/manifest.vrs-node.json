@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.seat",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Seats",
+  "idBase": "COND_SeatAllowsNPCs",
+  "type": "SeatAllowsNPCs",
+  "apiType": "Seat",
+  "label": "Seat Allows NPCs",
+  "value": "target=Self",
+  "description": "Checks whether non-player characters can sit on a seat.",
+  "status": "Ready",
+  "previewTemplate": "Check ${target} allows NPCs",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "seat",
+    "npc",
+    "allow",
+    "sit",
+    "sitting"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Seat",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Seat",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Seat object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SeatObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Checks if non-player characters can sit on a seat.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Seats"
+  ]
+}

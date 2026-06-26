@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.lighting.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_AmbientColor",
+  "type": "AmbientColor",
+  "apiType": "Color",
+  "label": "Ambient Color",
+  "value": "",
+  "description": "Outputs the general light color of the world.",
+  "status": "Ready",
+  "previewTemplate": "Ambient color",
+  "searchKeywords": [
+    "lighting",
+    "ambient",
+    "color",
+    "world"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [],
+  "beginnerSummary": "Value: use the world ambient color.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Ambient"
+  ]
+}

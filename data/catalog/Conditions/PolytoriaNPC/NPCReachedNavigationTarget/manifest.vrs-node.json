@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "NPC Movement",
+  "idBase": "COND_NPCReachedNavigationTarget",
+  "type": "NPCReachedNavigationTarget",
+  "apiType": "NPC",
+  "label": "NPC Reached Navigation Target",
+  "value": "target=Self",
+  "description": "Checks if an NPC has reached its navigation target.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} reached its navigation target",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "navigation",
+    "destination",
+    "reached",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if an NPC has reached its navigation target.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

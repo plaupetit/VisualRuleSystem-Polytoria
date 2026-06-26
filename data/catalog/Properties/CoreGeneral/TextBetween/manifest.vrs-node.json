@@ -1,0 +1,65 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_TextBetween",
+  "type": "TextBetween",
+  "apiType": "String",
+  "label": "Text Between",
+  "value": "text=[red];startMarker=[;endMarker=]",
+  "description": "Outputs the text found between two search texts.",
+  "status": "Ready",
+  "previewTemplate": "Text between ${startMarker} and ${endMarker}",
+  "searchKeywords": [
+    "text",
+    "between",
+    "extract",
+    "middle",
+    "chat",
+    "command"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "[red]",
+      "description": "Text to read from.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "startMarker",
+      "label": "Start Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "[",
+      "description": "Text that marks where to start.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "endMarker",
+      "label": "End Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "]",
+      "description": "Text that marks where to stop.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: get text found between two chosen search texts.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Text",
+    "Extract"
+  ]
+}

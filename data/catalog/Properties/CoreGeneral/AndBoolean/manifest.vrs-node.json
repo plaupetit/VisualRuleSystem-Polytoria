@@ -1,0 +1,27 @@
+{
+  "moduleId": "core.general.logic",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Logic",
+  "idBase": "PROP_AndBoolean",
+  "type": "AndBoolean",
+  "apiType": "Boolean",
+  "label": "And Boolean",
+  "value": "left=true;right=true",
+  "description": "Outputs true only when both inputs are true.",
+  "status": "Ready",
+  "previewTemplate": "${left} AND ${right}",
+  "searchKeywords": ["logic", "boolean", "and", "both", "true"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "left", "label": "Left Boolean", "type": "Boolean", "control": "Toggle", "required": true, "default": "true", "description": "First boolean.", "valueSource": "Suggested Value" },
+    { "key": "right", "label": "Right Boolean", "type": "Boolean", "control": "Toggle", "required": true, "default": "true", "description": "Second boolean.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: true only when both booleans are true.",
+  "surface": "UserFacing",
+  "palettePath": ["Logic", "Boolean"]
+}

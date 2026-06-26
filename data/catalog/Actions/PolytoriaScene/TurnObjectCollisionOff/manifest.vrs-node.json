@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_TurnObjectCollisionOff",
+  "type": "TurnObjectCollisionOff",
+  "apiType": "Part",
+  "label": "Turn Object Collision Off",
+  "value": "target=Self",
+  "description": "Lets players or objects pass through a scene object when the object supports collision.",
+  "status": "Ready",
+  "previewTemplate": "Turn ${target} collision off",
+  "searchKeywords": [
+    "object",
+    "collision",
+    "pass through",
+    "walk through",
+    "part"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should stop blocking movement.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do turn object collision off.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Collision"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

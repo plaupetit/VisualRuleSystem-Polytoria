@@ -1,0 +1,71 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_ClampNumber",
+  "type": "ClampNumber",
+  "apiType": "Number",
+  "label": "Clamp Number",
+  "value": "value=0;min=0;max=1",
+  "description": "Keeps a number between a minimum and maximum value.",
+  "status": "Ready",
+  "previewTemplate": "Clamp ${value} between ${min} and ${max}",
+  "searchKeywords": [
+    "math",
+    "clamp",
+    "limit",
+    "range",
+    "number"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number that will be limited.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "min",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Lowest allowed value.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "max",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Highest allowed value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: keep a number between a minimum and maximum.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Range"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

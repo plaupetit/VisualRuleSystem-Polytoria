@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_TurnObjectByAngle",
+  "type": "TurnObjectByAngle",
+  "apiType": "Part",
+  "label": "Turn Object By Angle",
+  "value": "target=Self;angle=45",
+  "description": "Adds a left-right turn to an object.",
+  "status": "Ready",
+  "previewTemplate": "Turn ${target} by ${angle}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "turn",
+    "angle",
+    "rotate",
+    "rotation",
+    "add",
+    "left",
+    "right"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to turn.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "angle",
+      "label": "Turn Amount",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "45",
+      "description": "How many degrees to add to the current turn.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn an object by adding an angle.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Rotation"
+  ]
+}

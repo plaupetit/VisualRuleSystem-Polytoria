@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Property",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Custom UI",
+  "idBase": "PROP_UITextWrapped",
+  "type": "UITextWrappedValue",
+  "apiType": "UILabel",
+  "label": "UI Text Wraps",
+  "value": "target=Self",
+  "description": "Reads whether long UI text can move onto another line.",
+  "status": "Ready",
+  "previewTemplate": "Text wrapping of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "text",
+    "wrap",
+    "wrapping",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Text Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI label or button to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UILabelObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads whether UI text wraps onto another line.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

@@ -1,0 +1,78 @@
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+publish/
+*.exe
+*.dll
+*.pdb
+*.nupkg
+*.snupkg
+*.msi
+*.zip
+*.ptaddon
+
+# Keep the required Creator bridge addon package in source control. Generic
+# archives stay ignored; only packages deliberately placed under addons/ are
+# distributable project files.
+!addons/
+!addons/**/
+!addons/**/package/
+!addons/**/package/*.ptaddon
+!addons/**/package/*.zip
+
+# IDE and local machine files
+.vs/
+.idea/
+.ignore
+.rgignore
+*.user
+*.suo
+*.lnk
+AGENTS.md
+.codex-temp/
+artifacts/
+.env
+.env.*
+*.tmp
+*.temp
+*.bak
+*.orig
+*.cache
+
+# Runtime/generated output
+logs/
+*.log
+exports/
+/bridge/
+addons/**/bridge/
+**/addons/visual-programming-bridge/bridge/
+projects/*.graph.json
+projects/*.autosave.json
+TestResults/
+coverage/
+*.trx
+*.coverage
+*.coveragexml
+
+# Local Polytoria binding. Keep the example tracked instead.
+active-polytoria-project*.json
+!active-polytoria-project.example.json
+
+# Personal notes, audits, references, and inspiration material stay local. Keep
+# public-facing project context in README/BUILD/THIRD_PARTY_NOTICES instead.
+Notes/
+References/
+Reference/
+Refs/
+Inspirations/
+Inspiration/
+Research/
+Scratch/
+Personal/
+
+# Full third-party source snapshots used during icon selection. The app keeps
+# only the selected SVG assets plus their notices under src/Vrs.App/Assets.
+phosphor-icons/
+tabler-icons-main/

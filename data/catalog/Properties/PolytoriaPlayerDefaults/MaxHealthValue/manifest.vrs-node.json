@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.playerdefaults.values",
+  "kind": "Property",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player Defaults",
+  "idBase": "PROP_MaxHealthValue",
+  "type": "PlayerDefaultValue",
+  "apiType": "Number",
+  "label": "MaxHealth Value",
+  "value": "propertyName=MaxHealth",
+  "description": "Outputs the current default MaxHealth value.",
+  "status": "Ready",
+  "previewTemplate": "MaxHealth",
+  "searchKeywords": ["value", "player", "defaults", "max health", "health", "hp"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "MaxHealth", "description": "PlayerDefaults property to read.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] }
+  ],
+  "beginnerSummary": "Value: use the current default MaxHealth.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Health"]
+}

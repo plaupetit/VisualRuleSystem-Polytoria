@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Property",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Custom UI",
+  "idBase": "PROP_UIFontSize",
+  "type": "UIFontSizeValue",
+  "apiType": "UILabel",
+  "label": "UI Font Size",
+  "value": "target=Self",
+  "description": "Reads the text size of a UI label or button.",
+  "status": "Ready",
+  "previewTemplate": "Font size of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "font",
+    "text",
+    "size",
+    "label"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Text Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI label or button to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UILabelObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads the text size of a UI label or button.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

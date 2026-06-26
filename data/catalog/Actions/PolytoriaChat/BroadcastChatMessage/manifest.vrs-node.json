@@ -1,0 +1,49 @@
+{
+  "moduleId": "polytoria.chat.actions",
+  "kind": "Action",
+  "apiGroup": "Chat",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Chat",
+  "idBase": "ACT_BroadcastChatMessage",
+  "type": "BroadcastChatMessage",
+  "apiType": "ChatService",
+  "label": "Broadcast Chat Message",
+  "value": "message=Hello from VisualRuleSystem.",
+  "description": "Sends a chat message to every player through ChatService.",
+  "status": "Ready",
+  "previewTemplate": "Broadcast chat: ${message}",
+  "searchKeywords": [
+    "do",
+    "chat",
+    "broadcast",
+    "message",
+    "send",
+    "all players"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "message",
+      "label": "Message",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello from VisualRuleSystem.",
+      "description": "Chat text to broadcast.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do send a chat message to everyone.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Chat"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "UI & Feedback"
+    ]
+  ]
+}
+

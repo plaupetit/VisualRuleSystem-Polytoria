@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.lighting.objects",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetPointLightRange",
+  "type": "SetPointLightRange",
+  "apiType": "PointLight",
+  "label": "Set Point Light Range",
+  "value": "target=Self;range=20",
+  "description": "Changes how far a point light reaches.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} range ${range}",
+  "searchKeywords": [
+    "lighting",
+    "point light",
+    "range",
+    "lamp"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Point Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Point light to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PointLightObject"
+      ]
+    },
+    {
+      "key": "range",
+      "label": "Range",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "20",
+      "description": "How far the point light reaches.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how far a point light reaches.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Reach"
+  ]
+}

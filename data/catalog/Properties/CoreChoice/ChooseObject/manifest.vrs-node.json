@@ -1,0 +1,44 @@
+{
+  "moduleId": "core.choice",
+  "kind": "Property",
+  "apiGroup": "Core",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Choice",
+  "idBase": "PROP_ChooseObject",
+  "type": "ChooseObject",
+  "apiType": "Object Path",
+  "label": "Choose Object",
+  "value": "target=Self",
+  "description": "Uses an object chosen from the scene or from the current context.",
+  "status": "Ready",
+  "previewTemplate": "Object ${target}",
+  "searchKeywords": [
+    "object",
+    "choose",
+    "target",
+    "scene",
+    "self"
+  ],
+  "corePack": true,
+  "familyFolder": "Core Choice",
+  "utilityLayer": "Core",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to pass into another node.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: choose an object and pass it into another node.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Lookup"]
+}

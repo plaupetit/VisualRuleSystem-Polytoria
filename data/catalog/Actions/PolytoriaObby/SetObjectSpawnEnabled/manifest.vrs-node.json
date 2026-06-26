@@ -1,0 +1,59 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Hazard",
+  "idBase": "ACT_SetObjectSpawnEnabled",
+  "type": "SetObjectSpawnEnabled",
+  "apiType": "Instance",
+  "label": "Set Object Spawn Enabled",
+  "value": "target=Self;enabled=true",
+  "description": "Enables or disables a target object's spawn-like enabled state when the property exists.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} enabled to ${enabled}",
+  "searchKeywords": [
+    "do",
+    "obby",
+    "parcours",
+    "spawn",
+    "enabled",
+    "disable",
+    "hazard",
+    "object"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose enabled/spawn state changes.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "enabled",
+      "label": "Enabled",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "New enabled state.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do enable or disable an object if it supports that property.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Hazard"
+  ]
+}
+

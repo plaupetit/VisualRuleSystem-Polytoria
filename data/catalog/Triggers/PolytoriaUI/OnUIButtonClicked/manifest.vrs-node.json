@@ -1,0 +1,70 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Trigger",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "Custom UI",
+  "idBase": "EV_OnUIButtonClicked",
+  "type": "OnUIButtonClicked",
+  "apiType": "UIButton",
+  "label": "On UI Button Clicked",
+  "value": "target=Self",
+  "description": "Starts when a player clicks a button in the player interface.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} is clicked",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "button",
+    "click",
+    "clicked",
+    "player gui"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "UI Button",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Button",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Button UI object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UIButton2D"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    }
+  ],
+  "beginnerSummary": "When a player clicks a UI button.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

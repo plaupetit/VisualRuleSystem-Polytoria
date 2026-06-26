@@ -1,0 +1,23 @@
+{
+  "moduleId": "polytoria.obby.values",
+  "kind": "Property",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Obby",
+  "idBase": "PROP_TriggeringTouchObject",
+  "type": "TriggeringTouchObject",
+  "apiType": "Any",
+  "label": "Triggering Touch Object",
+  "value": "",
+  "description": "Outputs the object supplied by the current touch trigger.",
+  "status": "Ready",
+  "previewTemplate": "Triggering touch object",
+  "searchKeywords": ["value", "obby", "parcours", "touch", "hit", "object", "trigger"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: the object that touched the trigger object.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Player Events"]
+}

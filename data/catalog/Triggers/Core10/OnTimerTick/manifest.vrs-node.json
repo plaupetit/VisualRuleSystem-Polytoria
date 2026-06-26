@@ -1,0 +1,88 @@
+{
+  "moduleId": "core.timing",
+  "kind": "Trigger",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Timing",
+  "idBase": "EV_OnTimerTick",
+  "type": "OnTimerTick",
+  "apiType": "Script",
+  "label": "On Timer Tick",
+  "value": "target=Self;interval=1",
+  "description": "Repeats every N seconds. Example: print a debug message every second.",
+  "comment": "[VSR] Timer loop keeps the first prototype easy to test.",
+  "status": "Ready",
+  "previewTemplate": "On Timer Tick every ${interval}s on ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "on",
+    "timer",
+    "tick",
+    "loop",
+    "repeat",
+    "every second"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "debugHints": [
+    "Shows the last tick time in runtime debug.",
+    "Use a larger interval if the script prints too often."
+  ],
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "templates": {
+    "server": "export.server.luau.tpl"
+  },
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "interval",
+      "label": "Interval Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "When a timer repeats, run the connected nodes again.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Timing"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

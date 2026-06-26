@@ -1,0 +1,68 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "NPC Movement",
+  "idBase": "EV_OnNPCNavigationFinished",
+  "type": "OnNPCNavigationFinished",
+  "apiType": "NPC",
+  "label": "On NPC Navigation Finished",
+  "value": "target=Self",
+  "description": "Starts when an NPC finishes trying to reach its navigation target.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} finishes navigation",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "navigation",
+    "destination",
+    "finished",
+    "event"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned NPC",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Starts when an NPC finishes trying to reach its navigation target.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

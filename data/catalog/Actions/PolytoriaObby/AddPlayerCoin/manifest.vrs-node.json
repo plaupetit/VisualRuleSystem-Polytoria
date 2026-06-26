@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Collectibles",
+  "idBase": "ACT_AddPlayerCoin",
+  "type": "AddPlayerCoin",
+  "apiType": "VRS.PlayerState",
+  "label": "Add Player Coin",
+  "value": "player=;amount=1",
+  "description": "Adds to the player's temporary coin count.",
+  "status": "Ready",
+  "previewTemplate": "Add ${amount} coin(s) to player",
+  "searchKeywords": ["do", "obby", "parcours", "coin", "coins", "collectible", "score", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player receiving coins. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "amount", "label": "Amount", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Coin amount to add.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do add coins to this player's run.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Collectibles"]
+}

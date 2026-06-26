@@ -1,0 +1,61 @@
+{
+  "kind": "Action",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Variables",
+  "idBase": "ACT_SetScriptVariable",
+  "type": "SetScriptVariable",
+  "apiType": "ValueBase",
+  "label": "Set Script Variable",
+  "value": "name=MoveDistance;value=10",
+  "description": "Stores a value inside this generated script.",
+  "comment": "[VSR] Keeps generated-script values local to the deployed script.",
+  "status": "Ready",
+  "previewTemplate": "Set ${name} to ${value}",
+  "searchKeywords": [
+    "variable",
+    "set",
+    "write",
+    "store",
+    "script",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "sketcher": "sketcher.vrs-test.json",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "required": true,
+      "default": "MoveDistance",
+      "valueSource": "Script Variable"
+    },
+    {
+      "key": "value",
+      "label": "Value",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "10",
+      "description": "Value saved in the script variable.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do store a value that this generated script can reuse later.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Script"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

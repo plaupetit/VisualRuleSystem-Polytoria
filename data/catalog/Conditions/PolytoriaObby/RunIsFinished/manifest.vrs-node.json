@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.obby.conditions",
+  "kind": "Condition",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Finish",
+  "idBase": "COND_RunIsFinished",
+  "type": "RunIsFinished",
+  "apiType": "VRS.PlayerState",
+  "label": "Run Is Finished",
+  "value": "player=",
+  "description": "Checks whether the player's run has been marked finished.",
+  "status": "Ready",
+  "previewTemplate": "Run is finished",
+  "searchKeywords": ["check", "obby", "parcours", "run", "timer", "finish", "complete", "finished"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to check. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Check whether the player already finished the run.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Finish"]
+}

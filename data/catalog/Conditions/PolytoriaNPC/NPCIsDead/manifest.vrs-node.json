@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "NPC Health",
+  "idBase": "COND_NPCIsDead",
+  "type": "NPCIsDead",
+  "apiType": "NPC",
+  "label": "NPC Is Dead",
+  "value": "target=Self",
+  "description": "Checks if an NPC is dead.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} is dead",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "dead",
+    "health",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if an NPC is dead.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Health"
+  ]
+}

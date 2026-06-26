@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.tools.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Tools",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Tools",
+  "idBase": "EV_OnToolDeactivated",
+  "type": "OnToolDeactivated",
+  "apiType": "Tool",
+  "label": "On Tool Deactivated",
+  "value": "target=Self",
+  "description": "Runs when the chosen tool stops being activated.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} is deactivated",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "tool",
+    "deactivate",
+    "release",
+    "use"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Watched Tool",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Watched Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Tool object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "When this tool stops being used, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

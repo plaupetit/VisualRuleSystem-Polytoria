@@ -1,0 +1,42 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberIsNegative",
+  "type": "NumberIsNegative",
+  "apiType": "Number",
+  "label": "Number Is Negative",
+  "value": "value=-1",
+  "description": "Checks whether a number is below zero.",
+  "status": "Ready",
+  "previewTemplate": "Is ${value} negative",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "number",
+    "math",
+    "negative",
+    "below",
+    "zero"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "-1",
+      "description": "Number to test.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a number is below zero.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Comparison"]
+}

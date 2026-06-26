@@ -1,0 +1,47 @@
+{
+  "moduleId": "polytoria.physical.properties",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectSpeed",
+  "type": "ObjectSpeed",
+  "apiType": "Number",
+  "label": "Object Speed",
+  "value": "target=Self",
+  "description": "Outputs the movement speed of a physics object.",
+  "status": "Ready",
+  "previewTemplate": "Speed of ${target}",
+  "searchKeywords": [
+    "object",
+    "physics",
+    "speed",
+    "velocity",
+    "movement"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object whose speed will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how fast a physics object is moving.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics Motion"
+  ]
+}

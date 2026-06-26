@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectVisible",
+  "type": "SetObjectVisible",
+  "apiType": "Part",
+  "label": "Set Object Visible",
+  "value": "target=Self;visible=true",
+  "description": "Shows or hides a scene object when the object supports it.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} visible ${visible}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "visible",
+    "hide",
+    "show",
+    "invisible",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to show or hide.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "visible",
+      "label": "Visible",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "Checked means visible; unchecked means hidden.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do show or hide an object in the scene.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Visibility"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}
+

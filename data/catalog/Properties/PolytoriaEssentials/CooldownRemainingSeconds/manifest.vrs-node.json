@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Flow & Timing",
+  "idBase": "PROP_CooldownRemainingSeconds",
+  "type": "CooldownRemainingSeconds",
+  "apiType": "Number",
+  "label": "Cooldown Remaining Seconds",
+  "value": "cooldownName=Default",
+  "description": "Outputs how many seconds remain on a named cooldown.",
+  "status": "Ready",
+  "previewTemplate": "Remaining seconds for ${cooldownName}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "cooldown",
+    "remaining",
+    "seconds",
+    "timer"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "cooldownName",
+      "label": "Cooldown Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Default",
+      "description": "Temporary cooldown name.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Value: seconds left before a cooldown is ready.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Cooldown"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "NPC Movement",
+  "idBase": "PROP_NPCJumpPower",
+  "type": "NPCJumpPower",
+  "apiType": "NPC",
+  "label": "NPC Jump Power",
+  "value": "target=Self",
+  "description": "Reads how strongly an NPC jumps.",
+  "status": "Ready",
+  "previewTemplate": "Jump power of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "jump",
+    "power",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads how strongly an NPC jumps.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

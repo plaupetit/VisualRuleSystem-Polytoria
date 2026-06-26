@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Text Content",
+  "idBase": "ACT_Set3DTextRichText",
+  "type": "Set3DTextRichText",
+  "apiType": "Text3D",
+  "label": "Set 3D Text Rich Text",
+  "value": "target=Self;enabled=true",
+  "description": "Turns rich text formatting on or off for 3D text.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} rich text to ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "rich text",
+    "format",
+    "world"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Rich Text",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Whether formatting tags should be used.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn rich text formatting on or off for 3D text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Content"
+  ]
+}

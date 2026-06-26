@@ -1,0 +1,47 @@
+{
+  "moduleId": "polytoria.effects.particle.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Particles",
+  "idBase": "PROP_ParticleAmount",
+  "type": "ParticleAmount",
+  "apiType": "Number",
+  "label": "Particle Amount",
+  "value": "target=Self",
+  "description": "Outputs how many particles the effect uses.",
+  "status": "Ready",
+  "previewTemplate": "Amount of ${target}",
+  "searchKeywords": [
+    "effects",
+    "particles",
+    "amount",
+    "count",
+    "spark"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Effects",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Particles",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Particle effect to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ParticleObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how many particles an effect uses.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Effects",
+    "Particles"
+  ]
+}

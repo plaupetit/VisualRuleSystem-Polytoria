@@ -1,0 +1,68 @@
+{
+  "moduleId": "core.general.logic",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberOutsideRange",
+  "type": "NumberOutsideRange",
+  "apiType": "Number",
+  "label": "Number Outside Range",
+  "value": "value=0;min=0;max=1",
+  "description": "Checks whether a number is below the minimum or above the maximum.",
+  "status": "Ready",
+  "previewTemplate": "Is ${value} outside ${min} to ${max}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "number",
+    "range",
+    "outside",
+    "below",
+    "above",
+    "min",
+    "max",
+    "math"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to test.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "min",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Lowest allowed value.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "max",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Highest allowed value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a number is lower or higher than an allowed range.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Range"
+  ]
+}

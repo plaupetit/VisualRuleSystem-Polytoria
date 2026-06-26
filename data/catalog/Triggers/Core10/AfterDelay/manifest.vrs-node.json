@@ -1,0 +1,75 @@
+{
+  "moduleId": "core.timing",
+  "kind": "Trigger",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Timing",
+  "idBase": "EV_AfterDelay",
+  "type": "AfterDelay",
+  "apiType": "Script",
+  "label": "After Delay",
+  "value": "target=Self;duration=1",
+  "description": "Runs once after waiting a chosen number of seconds.",
+  "status": "Ready",
+  "previewTemplate": "After ${duration}s on ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "after",
+    "delay",
+    "wait",
+    "timer",
+    "once"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    },
+    {
+      "key": "duration",
+      "label": "Delay Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "How long to wait before running the connected nodes.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "When a short delay finishes, run the connected nodes once.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Timing"
+  ]
+}

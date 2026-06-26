@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_CloneObject",
+  "type": "CloneObject",
+  "apiType": "Instance",
+  "label": "Clone Object",
+  "value": "target=Self;parent=Self",
+  "description": "Clones a scene object into another parent.",
+  "status": "Draft",
+  "previewTemplate": "Clone ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "clone",
+    "copy",
+    "duplicate",
+    "spawn"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Object To Clone",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object copied by this action.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "parent",
+      "label": "New Parent",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Where the clone should be placed.",
+      "valueSource": "Scene Object Picker",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "Do copy an object in the scene.",
+  "surface": "Support",
+  "palettePath": ["Scene Object", "Lifecycle"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}
+

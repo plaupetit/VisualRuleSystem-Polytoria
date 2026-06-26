@@ -1,0 +1,27 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_PowerNumbers",
+  "type": "PowerNumbers",
+  "apiType": "Number",
+  "label": "Power Numbers",
+  "value": "base=2;exponent=3",
+  "description": "Raises one number to a power.",
+  "status": "Ready",
+  "previewTemplate": "${base} ^ ${exponent}",
+  "searchKeywords": ["math", "power", "exponent", "square", "number"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "base", "label": "Base", "type": "Number", "control": "Number", "required": true, "default": "2", "description": "Number to raise.", "valueSource": "Suggested Value" },
+    { "key": "exponent", "label": "Exponent", "type": "Number", "control": "Number", "required": true, "default": "3", "description": "Power to use.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: raise a number to a power.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Arithmetic"]
+}

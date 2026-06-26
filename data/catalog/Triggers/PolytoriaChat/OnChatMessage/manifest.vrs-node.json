@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.chat.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Chat",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Chat",
+  "idBase": "EV_OnChatMessage",
+  "type": "OnChatMessage",
+  "apiType": "ChatService",
+  "label": "On Chat Message",
+  "value": "target=Self",
+  "description": "Starts the rule when a player sends a chat message.",
+  "status": "Ready",
+  "previewTemplate": "When a chat message is sent on ${target}",
+  "searchKeywords": [
+    "when",
+    "chat",
+    "message",
+    "player",
+    "say",
+    "text"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "When a player sends a chat message.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Chat"]
+}
+

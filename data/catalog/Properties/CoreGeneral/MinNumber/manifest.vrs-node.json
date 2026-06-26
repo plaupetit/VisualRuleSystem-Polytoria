@@ -1,0 +1,30 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_MinNumber",
+  "type": "MinNumber",
+  "apiType": "Number",
+  "label": "Minimum Number",
+  "value": "left=0;right=1",
+  "description": "Outputs the smaller of two numbers.",
+  "status": "Ready",
+  "previewTemplate": "Min ${left}, ${right}",
+  "searchKeywords": ["math", "minimum", "min", "smaller", "number"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "left", "label": "Left Number", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "First number.", "valueSource": "Suggested Value" },
+    { "key": "right", "label": "Right Number", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Second number.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: use the smaller of two numbers.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Range"
+  ]
+}

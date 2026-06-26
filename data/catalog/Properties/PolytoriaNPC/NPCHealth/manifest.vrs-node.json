@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "NPC Health",
+  "idBase": "PROP_NPCHealth",
+  "type": "NPCHealth",
+  "apiType": "NPC",
+  "label": "NPC Health",
+  "value": "target=Self",
+  "description": "Reads the current health of an NPC.",
+  "status": "Ready",
+  "previewTemplate": "Health of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "health",
+    "life",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads the current health of an NPC.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Health"
+  ]
+}

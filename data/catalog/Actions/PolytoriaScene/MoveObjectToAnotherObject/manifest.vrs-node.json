@@ -1,0 +1,67 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_MoveObjectToAnotherObject",
+  "type": "MoveObjectToAnotherObject",
+  "apiType": "Part",
+  "label": "Move Object To Another Object",
+  "value": "target=Self;destination=Target",
+  "description": "Moves one scene object to the position of another scene object.",
+  "status": "Ready",
+  "previewTemplate": "Move ${target} to ${destination}",
+  "searchKeywords": [
+    "object",
+    "move",
+    "teleport",
+    "position",
+    "target",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Object To Move",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "destination",
+      "label": "Move To Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Object whose position should be used.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do move one object to another object's position.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Movement"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

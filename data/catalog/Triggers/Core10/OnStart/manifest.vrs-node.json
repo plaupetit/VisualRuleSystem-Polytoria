@@ -1,0 +1,80 @@
+{
+  "moduleId": "core.lifecycle",
+  "kind": "Trigger",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Lifecycle",
+  "idBase": "EV_OnStart",
+  "type": "OnStart",
+  "apiType": "Script",
+  "label": "On Start",
+  "value": "target=Self",
+  "description": "Runs once when the generated rule script starts.",
+  "comment": "[VSR] Startup trigger for simple one-shot rules.",
+  "status": "Ready",
+  "previewTemplate": "On Start on ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "on",
+    "start",
+    "startup",
+    "begin",
+    "ready",
+    "init",
+    "once"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "debugHints": [
+    "Use this for setup that should happen once when the script is run.",
+    "Prefer On Timer Tick when the behavior must repeat."
+  ],
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "templates": {
+    "server": "export.server.luau.tpl"
+  },
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "When this script starts, run the connected nodes once.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Lifecycle"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

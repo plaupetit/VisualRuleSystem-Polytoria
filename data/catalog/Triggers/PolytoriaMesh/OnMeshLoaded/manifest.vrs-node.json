@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.mesh.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Mesh Animation",
+  "idBase": "EV_OnMeshLoaded",
+  "type": "OnMeshLoaded",
+  "apiType": "Mesh",
+  "label": "On Mesh Loaded",
+  "value": "target=Self",
+  "description": "Runs when a mesh finishes loading and is ready to use.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} mesh is loaded",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "mesh",
+    "loaded",
+    "animation",
+    "ready"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Watched Mesh",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Mesh",
+  "utilityLayer": "World",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Watched Mesh",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Mesh object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "MeshObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "When a mesh finishes loading, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Mesh Animation"
+  ]
+}

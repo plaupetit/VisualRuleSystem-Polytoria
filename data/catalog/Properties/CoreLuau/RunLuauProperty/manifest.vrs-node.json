@@ -1,0 +1,125 @@
+{
+  "moduleId": "core.scripting.raw",
+  "kind": "Property",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Script",
+  "idBase": "PROP_RunLuauProperty",
+  "type": "RunLuauProperty",
+  "apiType": "Any",
+  "label": "Code Value",
+  "value": "code=return nil;resultType=Any",
+  "description": "Runs authored code that returns a value for value wires.",
+  "comment": "[VSR] Advanced raw Luau property emitted as an inline protected expression.",
+  "status": "Ready",
+  "previewTemplate": "Code returns ${resultType}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "run",
+    "luau",
+    "lua",
+    "code",
+    "script",
+    "raw",
+    "custom",
+    "advanced",
+    "property",
+    "value"
+  ],
+  "debugHints": [
+    "The code can use triggerObject, triggerContext, VRS, resolveTarget, and makeVector3.",
+    "Return the value that should travel through the value output."
+  ],
+  "corePack": true,
+  "familyFolder": "Advanced Scripting",
+  "utilityLayer": "Advanced",
+  "parameters": [
+    {
+      "key": "code",
+      "label": "Script Code",
+      "type": "Code",
+      "control": "Code",
+      "required": true,
+      "default": "return nil",
+      "valueSource": "Manual Script Input",
+      "description": "Runs when the connected value is needed."
+    },
+    {
+      "key": "resultType",
+      "label": "Result Type",
+      "type": "Value Kind",
+      "control": "Choice",
+      "required": true,
+      "default": "Any",
+      "valueSource": "Suggested Value",
+      "description": "Expected value family for error fallback behavior.",
+      "allowCustom": false,
+      "options": [
+        "Any",
+        "String",
+        "Number",
+        "Boolean",
+        "Position",
+        "Color",
+        "SceneObject"
+      ],
+      "optionDetails": [
+        {
+          "value": "Any",
+          "label": "Any",
+          "category": "General",
+          "description": "Use any returned value."
+        },
+        {
+          "value": "String",
+          "label": "Text",
+          "category": "General",
+          "description": "Use a text result."
+        },
+        {
+          "value": "Number",
+          "label": "Number",
+          "category": "General",
+          "description": "Use a numeric result."
+        },
+        {
+          "value": "Boolean",
+          "label": "True / False",
+          "category": "General",
+          "description": "Use a true or false result."
+        },
+        {
+          "value": "Position",
+          "label": "Position",
+          "category": "General",
+          "description": "Use a position-like result."
+        },
+        {
+          "value": "Color",
+          "label": "Color",
+          "category": "General",
+          "description": "Use a color result."
+        },
+        {
+          "value": "SceneObject",
+          "label": "Scene Object",
+          "category": "General",
+          "description": "Use an object result."
+        }
+      ]
+    }
+  ],
+  "beginnerSummary": "Run authored script code and use its returned value.",
+  "surface": "Advanced",
+  "palettePath": [
+    "Variables",
+    "Script"
+  ],
+  "paletteAliases": [
+    [
+      "Logic",
+      "Values"
+    ]
+  ]
+}

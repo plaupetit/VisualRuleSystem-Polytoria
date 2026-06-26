@@ -1,0 +1,81 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Text Display",
+  "idBase": "ACT_Set3DTextColor",
+  "type": "Set3DTextColor",
+  "apiType": "Text3D",
+  "label": "Set 3D Text Color",
+  "value": "target=Self;r=1;g=1;b=1",
+  "description": "Changes the color of 3D text in the world.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} text color to RGB(${r}, ${g}, ${b})",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "color",
+    "tint",
+    "world"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to recolor.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Red amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Green amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Blue amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change the color of 3D text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Display"
+  ]
+}

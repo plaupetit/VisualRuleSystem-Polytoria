@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_PlayerGameTeamName",
+  "type": "PlayerGameTeamName",
+  "apiType": "String",
+  "label": "Player Game Team Name",
+  "value": "",
+  "description": "Outputs the name shown for the triggering player's game team.",
+  "status": "Ready",
+  "previewTemplate": "Triggering player game team name",
+  "searchKeywords": [
+    "team",
+    "player",
+    "name",
+    "display"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [],
+  "beginnerSummary": "Value: use the triggering player's game team name.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Game Team"
+  ]
+}

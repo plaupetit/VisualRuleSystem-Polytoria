@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Image Display",
+  "idBase": "ACT_Set3DImageFaceCamera",
+  "type": "Set3DImageFaceCamera",
+  "apiType": "Image3D",
+  "label": "Set 3D Image Face Camera",
+  "value": "target=Self;enabled=true",
+  "description": "Chooses whether a 3D image always turns toward the camera.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} face camera ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d image",
+    "image",
+    "camera",
+    "face",
+    "billboard"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Image",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D image object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Image3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Face Camera",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Checked means this image always looks toward the camera.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do make a 3D image face the camera or stay fixed.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Image Display"
+  ]
+}

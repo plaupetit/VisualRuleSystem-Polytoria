@@ -1,0 +1,59 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectXPosition",
+  "type": "SetObjectXPosition",
+  "apiType": "Part",
+  "label": "Set Object X Position",
+  "value": "target=Self;x=0",
+  "description": "Moves an object left or right without changing its height or front-back position.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} X position to ${x}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "position",
+    "x",
+    "left",
+    "right",
+    "move"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "x",
+      "label": "X Position",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "New left-right position.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move an object left or right while keeping the other position values.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Position"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.players.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Players",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Players",
+  "idBase": "EV_OnEnoughPlayers",
+  "type": "OnEnoughPlayers",
+  "apiType": "Players",
+  "label": "On Enough Players",
+  "value": "target=Self;minimum=2;interval=0.25",
+  "description": "Runs when there are enough players for the rule.",
+  "status": "Ready",
+  "previewTemplate": "When at least ${minimum} players are here",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["players", "enough", "minimum", "round", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Concerned Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Players",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Concerned Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Who this trigger is about.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "minimum", "label": "Minimum Players", "type": "Number", "control": "Number", "required": true, "default": "2", "description": "Fewest players needed.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks players.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When enough players are present after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Count"]
+}

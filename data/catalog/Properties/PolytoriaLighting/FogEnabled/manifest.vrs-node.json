@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.lighting.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_FogEnabled",
+  "type": "FogEnabled",
+  "apiType": "Boolean",
+  "label": "Fog Enabled",
+  "value": "",
+  "description": "Outputs true when world fog is turned on.",
+  "status": "Ready",
+  "previewTemplate": "Fog enabled",
+  "searchKeywords": [
+    "lighting",
+    "fog",
+    "enabled",
+    "world"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [],
+  "beginnerSummary": "Value: check if world fog is on.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Fog"
+  ]
+}

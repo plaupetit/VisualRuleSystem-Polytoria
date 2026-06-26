@@ -1,0 +1,58 @@
+{
+  "moduleId": "polytoria.physical.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectSpeedAtLeast",
+  "type": "ObjectSpeedAtLeast",
+  "apiType": "Physical.Velocity",
+  "label": "Object Speed Is At Least",
+  "value": "target=Self;speed=10",
+  "description": "Checks if a physics object is moving at least this fast.",
+  "status": "Ready",
+  "previewTemplate": "${target} speed is at least ${speed}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "physics",
+    "speed",
+    "velocity",
+    "fast"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Speed to compare against.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a physics object is moving at least this fast.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics Motion"
+  ]
+}

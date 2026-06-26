@@ -1,0 +1,55 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectTransparencyAtLeast",
+  "type": "ObjectTransparencyAtLeast",
+  "apiType": "Part",
+  "label": "Object Transparency At Least",
+  "value": "target=Self;minimum=0.5",
+  "description": "Checks whether an object's Transparency is at least a value.",
+  "status": "Ready",
+  "previewTemplate": "Is ${target} transparency >= ${minimum}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "part",
+    "transparent",
+    "transparency",
+    "visible",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to inspect.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "minimum",
+      "label": "Minimum Transparency",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.5",
+      "description": "Transparency threshold.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if an object is transparent enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Transparency"]
+}
+

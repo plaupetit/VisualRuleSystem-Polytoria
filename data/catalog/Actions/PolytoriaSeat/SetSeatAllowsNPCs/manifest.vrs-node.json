@@ -1,0 +1,58 @@
+{
+  "moduleId": "polytoria.seat",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Seats",
+  "idBase": "ACT_SetSeatAllowsNPCs",
+  "type": "SetSeatAllowsNPCs",
+  "apiType": "Seat",
+  "label": "Set Seat Allows NPCs",
+  "value": "target=Self;enabled=true",
+  "description": "Chooses whether non-player characters can sit on a seat.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} allows NPCs to ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "seat",
+    "npc",
+    "sit",
+    "allow",
+    "occupant"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Seat",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Seat",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Seat object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SeatObject"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Allow NPCs",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "true",
+      "description": "Turn on to let non-player characters sit here.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do choose whether non-player characters can sit on a seat.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Seats"
+  ]
+}

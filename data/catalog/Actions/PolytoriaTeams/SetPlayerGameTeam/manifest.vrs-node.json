@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.teams",
+  "kind": "Action",
+  "apiGroup": "Teams",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Game Team",
+  "idBase": "ACT_SetPlayerGameTeam",
+  "type": "SetPlayerGameTeam",
+  "apiType": "Player",
+  "label": "Set Player Game Team",
+  "value": "target=Target",
+  "description": "Assigns the triggering player to a Polytoria team object.",
+  "status": "Ready",
+  "previewTemplate": "Set player game team to ${target}",
+  "searchKeywords": [
+    "team",
+    "player",
+    "assign",
+    "group"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Game Team",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Team object to assign.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "TeamObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do put the triggering player into a game team.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Game Team"
+  ]
+}

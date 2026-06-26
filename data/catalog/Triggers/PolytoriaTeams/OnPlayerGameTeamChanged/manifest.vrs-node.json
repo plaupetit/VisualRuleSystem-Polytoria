@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.teams.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Teams",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Game Team",
+  "idBase": "EV_OnPlayerGameTeamChanged",
+  "type": "OnPlayerGameTeamChanged",
+  "apiType": "Player",
+  "label": "On Player Game Team Changed",
+  "value": "target=Self",
+  "description": "Runs when a player is assigned a different game team.",
+  "status": "Ready",
+  "previewTemplate": "When a player game team changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "team",
+    "player",
+    "changed",
+    "assigned"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Who this trigger is about.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    }
+  ],
+  "beginnerSummary": "When a player's game team changes, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Game Team"
+  ]
+}

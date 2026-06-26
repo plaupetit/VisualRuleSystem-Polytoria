@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Text Display",
+  "idBase": "ACT_Set3DTextLighting",
+  "type": "Set3DTextLighting",
+  "apiType": "Text3D",
+  "label": "Set 3D Text Lighting",
+  "value": "target=Self;enabled=true",
+  "description": "Controls whether world lighting affects 3D text.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} lighting to ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "lighting",
+    "shaded",
+    "world"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Affected By Lighting",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Whether world lighting should affect the text.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do choose whether world lighting affects 3D text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Display"
+  ]
+}

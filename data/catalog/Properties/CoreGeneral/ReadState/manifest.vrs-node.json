@@ -1,0 +1,52 @@
+{
+  "moduleId": "core.general.state",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "State",
+  "idBase": "PROP_ReadState",
+  "type": "ReadState",
+  "apiType": "Boolean",
+  "label": "Read State",
+  "value": "state=IsActive",
+  "description": "Reads a named true or false state stored by this script.",
+  "status": "Ready",
+  "previewTemplate": "Read state ${state}",
+  "searchKeywords": [
+    "state",
+    "boolean",
+    "true",
+    "false",
+    "read",
+    "flag"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "state",
+      "label": "State Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "IsActive",
+      "description": "Name of the state to read.",
+      "valueSource": "Script Variable"
+    }
+  ],
+  "beginnerSummary": "Value: read a true or false state.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "State"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

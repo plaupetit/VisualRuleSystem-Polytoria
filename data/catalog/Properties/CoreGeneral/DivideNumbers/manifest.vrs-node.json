@@ -1,0 +1,61 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_DivideNumbers",
+  "type": "DivideNumbers",
+  "apiType": "Number",
+  "label": "Divide Numbers",
+  "value": "numerator=0;divisor=1",
+  "description": "Outputs one number divided by another.",
+  "status": "Ready",
+  "previewTemplate": "${numerator} / ${divisor}",
+  "searchKeywords": [
+    "math",
+    "divide",
+    "division",
+    "number",
+    "ratio"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "numerator",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number that will be divided.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "divisor",
+      "label": "Divide By",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Number used to divide. Zero is protected at export time.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: divide one number by another.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Arithmetic"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

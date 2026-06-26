@@ -1,0 +1,62 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Values",
+  "idBase": "PROP_DistanceBetweenPositions",
+  "type": "DistanceBetweenPositions",
+  "apiType": "Number",
+  "label": "Distance Between Positions",
+  "value": "first=0,0,0;second=0,0,0",
+  "description": "Outputs the distance between two 3D vector positions.",
+  "status": "Ready",
+  "previewTemplate": "Distance between ${first} and ${second}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "distance",
+    "position",
+    "vector",
+    "range",
+    "math"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "first",
+      "label": "First Position",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "0,0,0",
+      "description": "First position.",
+      "valueSource": "Manual 3D Vector"
+    },
+    {
+      "key": "second",
+      "label": "Second Position",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "0,0,0",
+      "description": "Second position.",
+      "valueSource": "Manual 3D Vector"
+    }
+  ],
+  "beginnerSummary": "Value: distance between two positions.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Geometry"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

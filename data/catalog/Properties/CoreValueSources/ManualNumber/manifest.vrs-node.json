@@ -1,0 +1,40 @@
+{
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Value Source",
+  "idBase": "PROP_ManualNumber",
+  "type": "ManualNumber",
+  "apiType": "Number",
+  "label": "Manual Number",
+  "value": "0",
+  "description": "Represents a numeric value typed directly by the graph author.",
+  "comment": "[VSR] Catalog-only numeric value source for future property pins.",
+  "status": "Value Source",
+  "corePack": false,
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: use a number you type directly in the graph.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Values",
+    "Manual"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player",
+  "idBase": "ACT_ResetPlayerLives",
+  "type": "ResetPlayerLives",
+  "apiType": "RuntimeState",
+  "label": "Reset Player Lives",
+  "value": "lives=3",
+  "description": "Sets the triggering player's temporary lives back to a chosen starting value.",
+  "status": "Ready",
+  "previewTemplate": "Reset player lives to ${lives}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "health",
+    "reset",
+    "start"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "lives",
+      "label": "Lives",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "3",
+      "description": "Lives value to restore.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do restore the triggering player lives.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ]
+}

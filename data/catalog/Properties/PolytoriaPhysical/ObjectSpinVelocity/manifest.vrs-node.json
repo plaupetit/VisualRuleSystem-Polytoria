@@ -1,0 +1,47 @@
+{
+  "moduleId": "polytoria.physical.properties",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectSpinVelocity",
+  "type": "ObjectSpinVelocity",
+  "apiType": "Vector3",
+  "label": "Object Spin Velocity",
+  "value": "target=Self",
+  "description": "Outputs how fast a physics object spins in each direction.",
+  "status": "Ready",
+  "previewTemplate": "Spin velocity of ${target}",
+  "searchKeywords": [
+    "object",
+    "physics",
+    "spin",
+    "velocity",
+    "rotation"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object whose spin speed will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how fast a physics object spins.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics Motion"
+  ]
+}

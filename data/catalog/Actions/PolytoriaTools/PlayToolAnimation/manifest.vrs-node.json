@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.tools",
+  "kind": "Action",
+  "apiGroup": "Tools",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Tools",
+  "idBase": "ACT_PlayToolAnimation",
+  "type": "PlayToolAnimation",
+  "apiType": "Tool",
+  "label": "Play Tool Animation",
+  "value": "target=Target;animationName=Swing",
+  "description": "Plays an animation on whoever is holding the chosen tool.",
+  "status": "Ready",
+  "previewTemplate": "Play ${animationName} on ${target}",
+  "searchKeywords": [
+    "tool",
+    "animation",
+    "play",
+    "holder"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object that owns the animation.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    },
+    {
+      "key": "animationName",
+      "label": "Animation Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Swing",
+      "description": "Animation to play.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do play a named animation from a chosen tool.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

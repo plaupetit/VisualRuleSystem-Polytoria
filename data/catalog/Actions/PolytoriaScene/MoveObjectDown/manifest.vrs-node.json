@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_MoveObjectDown",
+  "type": "MoveObjectDown",
+  "apiType": "Part",
+  "label": "Move Object Down",
+  "value": "target=Self;distance=1",
+  "description": "Moves a scene object downward by a simple distance.",
+  "status": "Ready",
+  "previewTemplate": "Move ${target} down by ${distance}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "move",
+    "down",
+    "position",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "distance",
+      "label": "Distance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "How far to move downward.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move a scene object downward.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Movement"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Action",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Variables",
+  "idBase": "ACT_ClearScriptVariable",
+  "type": "ClearScriptVariable",
+  "apiType": "ValueBase",
+  "label": "Clear Script Variable",
+  "value": "name=Score",
+  "description": "Removes a variable stored inside this generated script.",
+  "status": "Ready",
+  "previewTemplate": "Clear ${name}",
+  "searchKeywords": [
+    "variable",
+    "clear",
+    "remove",
+    "delete",
+    "nil",
+    "script",
+    "score"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Variable to remove from this generated script.",
+      "valueSource": "Script Variable"
+    }
+  ],
+  "beginnerSummary": "Do forget a stored script variable.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Script"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

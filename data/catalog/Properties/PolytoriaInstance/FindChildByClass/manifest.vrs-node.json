@@ -1,0 +1,54 @@
+{
+  "moduleId": "polytoria.instance.values",
+  "kind": "Property",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Instance",
+  "idBase": "PROP_FindChildByClass",
+  "type": "FindChildByClass",
+  "apiType": "Any",
+  "label": "Find Child By Type",
+  "value": "target=Self;className=Part",
+  "description": "Outputs a direct child with a given object type, or nil when it is missing.",
+  "status": "Ready",
+  "previewTemplate": "Find ${className} child type under ${target}",
+  "searchKeywords": [
+    "value",
+    "object",
+    "child",
+    "find",
+    "class",
+    "instance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Parent object to search.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "className",
+      "label": "Object Type",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Part",
+      "description": "Child object type to find, such as Part or Folder.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: find a child object by object type.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Lookup"]
+}
+

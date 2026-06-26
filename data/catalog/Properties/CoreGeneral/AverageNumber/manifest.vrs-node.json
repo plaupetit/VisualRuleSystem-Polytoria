@@ -1,0 +1,54 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_AverageNumber",
+  "type": "AverageNumber",
+  "apiType": "Number",
+  "label": "Average Number",
+  "value": "first=0;second=0",
+  "description": "Outputs the middle value between two numbers.",
+  "status": "Ready",
+  "previewTemplate": "Average of ${first} and ${second}",
+  "searchKeywords": [
+    "math",
+    "average",
+    "middle",
+    "mean",
+    "number"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "first",
+      "label": "First Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "First number used by the average.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "second",
+      "label": "Second Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Second number used by the average.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: find the middle value between two numbers.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Arithmetic"
+  ]
+}

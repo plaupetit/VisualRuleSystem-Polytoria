@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player",
+  "idBase": "ACT_SetPlayerLives",
+  "type": "SetPlayerLives",
+  "apiType": "RuntimeState",
+  "label": "Set Player Lives",
+  "value": "lives=3",
+  "description": "Sets the triggering player's temporary lives.",
+  "status": "Ready",
+  "previewTemplate": "Set player lives to ${lives}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "health",
+    "runtime",
+    "stat"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "lives",
+      "label": "Lives",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "3",
+      "description": "New lives value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do set the triggering player lives.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

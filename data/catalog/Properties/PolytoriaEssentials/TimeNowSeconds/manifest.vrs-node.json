@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Flow & Timing",
+  "idBase": "PROP_TimeNowSeconds",
+  "type": "TimeNowSeconds",
+  "apiType": "Number",
+  "label": "Time Now Seconds",
+  "value": "",
+  "description": "Outputs the current play time in seconds for simple timers.",
+  "status": "Ready",
+  "previewTemplate": "Current time seconds",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "time",
+    "now",
+    "seconds",
+    "timer",
+    "clock"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value: current play time in seconds.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Time"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

@@ -1,0 +1,67 @@
+{
+  "moduleId": "polytoria.obby.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Hazard",
+  "idBase": "EV_OnHazardTouched",
+  "type": "OnHazardTouched",
+  "apiType": "Physical.Touched",
+  "label": "On Hazard Touched",
+  "value": "target=Self",
+  "description": "Starts the rule when a player touches a hazard, reset zone, or kill brick.",
+  "status": "Ready",
+  "previewTemplate": "When hazard ${target} is touched",
+  "searchKeywords": [
+    "when",
+    "obby",
+    "parcours",
+    "hazard",
+    "kill",
+    "death",
+    "reset",
+    "lava",
+    "touch"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Hazard Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Hazard Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Hazard object that listens for touches.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Touchable" ]
+    }
+  ],
+  "beginnerSummary": "When a player touches a dangerous object.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Hazard"
+  ]
+}
+

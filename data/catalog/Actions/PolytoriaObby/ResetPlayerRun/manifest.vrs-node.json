@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player State",
+  "idBase": "ACT_ResetPlayerRun",
+  "type": "ResetPlayerRun",
+  "apiType": "VRS.PlayerState",
+  "label": "Reset Player Run",
+  "value": "player=",
+  "description": "Clears temporary checkpoint, timer, death, coin, and collectible state for one player.",
+  "status": "Ready",
+  "previewTemplate": "Reset player's run",
+  "searchKeywords": ["do", "obby", "parcours", "reset", "run", "checkpoint", "coins", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to reset. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Do clear this player's current run progress.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Run State"
+  ]
+}

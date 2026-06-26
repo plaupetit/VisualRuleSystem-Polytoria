@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "3D Text Display",
+  "idBase": "PROP_3DTextOutlineWidth",
+  "type": "Text3DOutlineWidthValue",
+  "apiType": "Text3D",
+  "label": "3D Text Outline Width",
+  "value": "target=Self",
+  "description": "Reads how thick the outline around 3D text is.",
+  "status": "Ready",
+  "previewTemplate": "Outline width of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "outline",
+    "width",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads how thick a 3D text outline is.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Display"
+  ]
+}

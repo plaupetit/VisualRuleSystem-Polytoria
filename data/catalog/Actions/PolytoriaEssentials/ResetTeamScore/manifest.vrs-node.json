@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Game Rules",
+  "idBase": "ACT_ResetTeamScore",
+  "type": "ResetTeamScore",
+  "apiType": "RuntimeState",
+  "label": "Reset Team Score",
+  "value": "teamName=Players",
+  "description": "Sets a named temporary team score back to zero.",
+  "status": "Ready",
+  "previewTemplate": "Reset ${teamName} score",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "team",
+    "score",
+    "reset",
+    "zero",
+    "arena"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "teamName",
+      "label": "Team Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Players",
+      "description": "Temporary team label.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Do reset a temporary team score to zero.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Team Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Game Rules"
+    ]
+  ]
+}

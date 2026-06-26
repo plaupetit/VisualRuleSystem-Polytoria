@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectDepthSize",
+  "type": "SetObjectDepthSize",
+  "apiType": "Part",
+  "label": "Set Object Depth Size",
+  "value": "target=Self;size=2",
+  "description": "Changes how deep an object is without changing its width or height.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} depth size to ${size}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "size",
+    "scale",
+    "depth",
+    "front",
+    "back",
+    "z"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to resize.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "size",
+      "label": "Depth Size",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "2",
+      "description": "New front-back size.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change an object's depth while keeping the other size values.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Dimensions"]
+}

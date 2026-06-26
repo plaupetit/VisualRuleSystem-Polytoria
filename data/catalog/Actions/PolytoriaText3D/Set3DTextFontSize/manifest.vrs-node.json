@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Text Content",
+  "idBase": "ACT_Set3DTextFontSize",
+  "type": "Set3DTextFontSize",
+  "apiType": "Text3D",
+  "label": "Set 3D Text Size",
+  "value": "target=Self;size=24",
+  "description": "Changes how large 3D text appears in the world.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} text size to ${size}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "size",
+    "font",
+    "world"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to resize.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "size",
+      "label": "Size",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "24",
+      "description": "How large the text should appear.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how large 3D text looks.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Content"
+  ]
+}

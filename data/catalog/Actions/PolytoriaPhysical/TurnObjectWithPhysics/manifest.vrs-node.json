@@ -1,0 +1,78 @@
+{
+  "moduleId": "polytoria.physical.actions",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_TurnObjectWithPhysics",
+  "type": "TurnObjectWithPhysics",
+  "apiType": "Physical.MoveRotation",
+  "label": "Turn Object With Physics",
+  "value": "target=Self;x=0;y=0;z=0",
+  "description": "Turns a physics object while keeping physics in mind.",
+  "status": "Ready",
+  "previewTemplate": "Turn ${target} with physics to ${x}, ${y}, ${z}",
+  "searchKeywords": [
+    "object",
+    "physics",
+    "turn",
+    "rotate",
+    "rotation",
+    "rigidbody"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Object To Turn",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object to turn.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    },
+    {
+      "key": "x",
+      "label": "X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target X rotation.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target Y rotation.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target Z rotation.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn a physics object to a rotation.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics Motion"
+  ]
+}

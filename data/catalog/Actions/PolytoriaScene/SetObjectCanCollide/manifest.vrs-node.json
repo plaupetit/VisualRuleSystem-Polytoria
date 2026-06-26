@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectCanCollide",
+  "type": "SetObjectCanCollide",
+  "apiType": "Part",
+  "label": "Set Object Can Collide",
+  "value": "target=Self;canCollide=true",
+  "description": "Turns collision on or off when the object exposes CanCollide.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} collision ${canCollide}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "collide",
+    "collision",
+    "physics",
+    "solid",
+    "walk through"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose collision should change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "canCollide",
+      "label": "Can Collide",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "Checked means other objects should collide with it.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn object collision on or off.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}
+

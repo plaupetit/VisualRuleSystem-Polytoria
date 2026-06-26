@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.lighting.object.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_LightColor",
+  "type": "LightColor",
+  "apiType": "Color",
+  "label": "Light Color",
+  "value": "target=Self",
+  "description": "Outputs the color of a light object.",
+  "status": "Ready",
+  "previewTemplate": "Color of ${target}",
+  "searchKeywords": [
+    "lighting",
+    "light",
+    "color"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "LightObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use a light's color.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Settings"
+  ]
+}

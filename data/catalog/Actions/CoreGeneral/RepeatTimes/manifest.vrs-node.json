@@ -1,0 +1,38 @@
+{
+  "moduleId": "core.general.timing",
+  "kind": "Action",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Timing",
+  "idBase": "ACT_RepeatTimes",
+  "type": "RepeatTimes",
+  "apiType": "Flow",
+  "label": "Repeat Times",
+  "value": "count=3",
+  "description": "Repeats the following flow several times.",
+  "status": "Draft",
+  "previewTemplate": "Repeat ${count} times",
+  "searchKeywords": ["repeat", "loop", "times", "count", "flow"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "count",
+      "label": "Repeat Count",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "3",
+      "description": "How many times the next nodes should run.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do run the following nodes multiple times.",
+  "surface": "Support",
+  "palettePath": [
+    "Flow & Timing",
+    "Flow Control"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.obby.values",
+  "kind": "Property",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Collectibles",
+  "idBase": "PROP_PlayerCoinCount",
+  "type": "PlayerCoinCount",
+  "apiType": "Number",
+  "label": "Player Coin Count",
+  "value": "player=",
+  "description": "Outputs the player's temporary coin count tracked by the graph.",
+  "status": "Ready",
+  "previewTemplate": "Player coins",
+  "searchKeywords": ["value", "obby", "parcours", "coin", "coins", "collectible", "count", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to read. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Value: how many coins this player has collected.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Collectibles"]
+}

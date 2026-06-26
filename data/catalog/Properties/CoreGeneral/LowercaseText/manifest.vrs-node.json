@@ -1,0 +1,26 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_LowercaseText",
+  "type": "LowercaseText",
+  "apiType": "String",
+  "label": "Lowercase Text",
+  "value": "text=Hello",
+  "description": "Converts text to lowercase.",
+  "status": "Ready",
+  "previewTemplate": "Lower ${text}",
+  "searchKeywords": ["text", "string", "lower", "lowercase", "case"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "text", "label": "Text", "type": "String", "control": "Text", "required": true, "default": "Hello", "description": "Text to convert.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Value: convert text to lowercase.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Edit"]
+}

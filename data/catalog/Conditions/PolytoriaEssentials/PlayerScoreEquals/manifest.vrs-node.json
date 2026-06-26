@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player",
+  "idBase": "COND_PlayerScoreEquals",
+  "type": "PlayerScoreEquals",
+  "apiType": "RuntimeState",
+  "label": "Player Score Equals",
+  "value": "score=10",
+  "description": "Checks whether the triggering player's temporary score matches a number.",
+  "status": "Ready",
+  "previewTemplate": "Player score equals ${score}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "score",
+    "points",
+    "equals",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "score",
+      "label": "Score",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Score to match.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if the triggering player score matches the chosen number.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Score"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.audio",
+  "kind": "Action",
+  "apiGroup": "Audio",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_SetSoundLoop",
+  "type": "SetSoundLoop",
+  "apiType": "Sound",
+  "label": "Set Sound Loop",
+  "value": "target=Self;enabled=true",
+  "description": "Chooses whether a sound repeats after it ends.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} loop ${enabled}",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "loop",
+    "repeat"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Enabled",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Turn looping on or off.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do choose if a sound repeats.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Settings"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_TextLength",
+  "type": "TextLength",
+  "apiType": "Number",
+  "label": "Text Length",
+  "value": "text=",
+  "description": "Outputs how many characters are in a text value.",
+  "status": "Ready",
+  "previewTemplate": "length(${text})",
+  "searchKeywords": ["text", "string", "length", "count", "characters"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "",
+      "description": "Text to count.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: count how many characters are in text.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Length"]
+}

@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.playerdefaults.actions",
+  "kind": "Action",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player Defaults",
+  "idBase": "ACT_SetStamina",
+  "type": "SetPlayerDefaultValue",
+  "apiType": "PlayerDefaults",
+  "label": "Set Stamina",
+  "value": "propertyName=Stamina;value=100",
+  "description": "Sets the default stamina used by players.",
+  "status": "Ready",
+  "previewTemplate": "Set Stamina to ${value}",
+  "searchKeywords": ["do", "player", "defaults", "stamina", "energy", "sprint"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "Stamina", "description": "PlayerDefaults property to update.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] },
+    { "key": "value", "label": "Value", "type": "Number", "control": "Number", "required": true, "default": "100", "description": "New default value.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change the default player stamina.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Movement"]
+}

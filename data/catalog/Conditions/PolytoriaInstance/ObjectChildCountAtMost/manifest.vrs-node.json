@@ -1,0 +1,58 @@
+{
+  "moduleId": "polytoria.instance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectChildCountAtMost",
+  "type": "ObjectChildCountAtMost",
+  "apiType": "Instance",
+  "label": "Object Child Count At Most",
+  "value": "target=Self;maximum=5",
+  "description": "Checks whether an object has few enough direct children.",
+  "status": "Ready",
+  "previewTemplate": "${target} has at most ${maximum} children",
+  "searchKeywords": [
+    "check",
+    "object",
+    "children",
+    "child count",
+    "maximum",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose direct children will be counted.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    },
+    {
+      "key": "maximum",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "5",
+      "description": "Largest accepted child count.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if an object has at most a certain number of children.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Children"
+  ]
+}

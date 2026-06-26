@@ -1,0 +1,59 @@
+{
+  "moduleId": "polytoria.scene.checks",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectTurnAngleAtMost",
+  "type": "ObjectTurnAngleAtMost",
+  "apiType": "Boolean",
+  "label": "Object Turn Angle At Most",
+  "value": "target=Self;angle=90",
+  "description": "Checks if an object's left-right facing angle is low enough.",
+  "status": "Ready",
+  "previewTemplate": "${target} turn angle at most ${angle}",
+  "searchKeywords": [
+    "object",
+    "turn",
+    "angle",
+    "rotate",
+    "rotation",
+    "at most",
+    "maximum"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "angle",
+      "label": "Angle",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "90",
+      "description": "Largest angle that passes the check.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if an object is not turned past a chosen angle.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Rotation"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Flow & Timing",
+  "idBase": "COND_CooldownReady",
+  "type": "CooldownReady",
+  "apiType": "RuntimeState",
+  "label": "Cooldown Ready",
+  "value": "cooldownName=Default",
+  "description": "Checks whether a named temporary cooldown has finished.",
+  "status": "Ready",
+  "previewTemplate": "${cooldownName} cooldown is ready",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "cooldown",
+    "ready",
+    "debounce",
+    "timer",
+    "wait"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "cooldownName",
+      "label": "Cooldown Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Default",
+      "description": "Temporary cooldown name.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Check if a named cooldown is ready.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Cooldown"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

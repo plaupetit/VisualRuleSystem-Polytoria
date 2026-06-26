@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player",
+  "idBase": "PROP_PlayerTeam",
+  "type": "PlayerTeam",
+  "apiType": "String",
+  "label": "Player Team",
+  "value": "",
+  "description": "Outputs the triggering player's temporary team label.",
+  "status": "Ready",
+  "previewTemplate": "Triggering player team",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "team",
+    "value",
+    "runtime",
+    "group"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value: current team label for the triggering player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Team"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

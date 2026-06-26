@@ -1,0 +1,47 @@
+{
+  "moduleId": "polytoria.physical.properties",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectVelocity",
+  "type": "ObjectVelocity",
+  "apiType": "Vector3",
+  "label": "Object Velocity",
+  "value": "target=Self",
+  "description": "Outputs how fast a physics object moves in each direction.",
+  "status": "Ready",
+  "previewTemplate": "Velocity of ${target}",
+  "searchKeywords": [
+    "object",
+    "physics",
+    "velocity",
+    "speed",
+    "movement"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object whose velocity will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how fast a physics object moves in each direction.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics Motion"
+  ]
+}

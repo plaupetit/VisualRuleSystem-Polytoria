@@ -1,0 +1,66 @@
+{
+  "moduleId": "polytoria.obby.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Checkpoint",
+  "idBase": "EV_OnCheckpointTouched",
+  "type": "OnCheckpointTouched",
+  "apiType": "Physical.Touched",
+  "label": "On Checkpoint Touched",
+  "value": "target=Self",
+  "description": "Starts the rule when a player touches a checkpoint object.",
+  "status": "Ready",
+  "previewTemplate": "When checkpoint ${target} is touched",
+  "searchKeywords": [
+    "when",
+    "obby",
+    "parcours",
+    "checkpoint",
+    "stage",
+    "touch",
+    "save",
+    "spawn"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Checkpoint Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Checkpoint Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Checkpoint object that listens for touches.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Touchable" ]
+    }
+  ],
+  "beginnerSummary": "When a player reaches a checkpoint.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Checkpoint"
+  ]
+}
+

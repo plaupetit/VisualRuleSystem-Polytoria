@@ -1,0 +1,36 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Variables",
+  "idBase": "COND_ScriptBooleanIsTrue",
+  "type": "ScriptBooleanIsTrue",
+  "apiType": "Boolean",
+  "label": "Script Boolean Is True",
+  "value": "name=Enabled",
+  "description": "Checks whether a script variable is true.",
+  "status": "Ready",
+  "previewTemplate": "Is ${name} true",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["variable", "boolean", "true", "flag", "enabled", "check"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Enabled",
+      "description": "Boolean variable to read.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if a saved script flag is true.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Script"]
+}

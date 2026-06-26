@@ -1,0 +1,63 @@
+{
+  "moduleId": "polytoria.lighting",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetAmbientColor",
+  "type": "SetAmbientColor",
+  "apiType": "Lighting",
+  "label": "Set Ambient Color",
+  "value": "r=1;g=1;b=1",
+  "description": "Changes the general light color of the world.",
+  "status": "Ready",
+  "previewTemplate": "Set ambient color ${r}, ${g}, ${b}",
+  "searchKeywords": [
+    "lighting",
+    "ambient",
+    "color",
+    "world"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Red amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Green amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Blue amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change the overall light color of the world.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Ambient"
+  ]
+}

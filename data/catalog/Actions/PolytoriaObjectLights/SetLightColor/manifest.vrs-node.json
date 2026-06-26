@@ -1,0 +1,76 @@
+{
+  "moduleId": "polytoria.lighting.objects",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetLightColor",
+  "type": "SetLightColor",
+  "apiType": "Light",
+  "label": "Set Light Color",
+  "value": "target=Self;r=1;g=1;b=1",
+  "description": "Changes the color of a light object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} light color",
+  "searchKeywords": [
+    "lighting",
+    "light",
+    "color",
+    "lamp"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "LightObject"
+      ]
+    },
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Red amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Green amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Blue amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change the color of a light.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Settings"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.lighting.objects",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetSpotLightRange",
+  "type": "SetSpotLightRange",
+  "apiType": "SpotLight",
+  "label": "Set Spot Light Range",
+  "value": "target=Self;range=20",
+  "description": "Changes how far a spot light reaches.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} range ${range}",
+  "searchKeywords": [
+    "lighting",
+    "spot light",
+    "range",
+    "lamp"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Spot Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Spot light to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SpotLightObject"
+      ]
+    },
+    {
+      "key": "range",
+      "label": "Range",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "20",
+      "description": "How far the spot light reaches.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how far a spot light reaches.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Reach"
+  ]
+}

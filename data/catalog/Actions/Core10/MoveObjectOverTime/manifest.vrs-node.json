@@ -1,0 +1,104 @@
+{
+  "kind": "Action",
+  "apiGroup": "Services",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_MoveObjectOverTime",
+  "type": "MoveObjectOverTime",
+  "apiType": "TweenService",
+  "label": "Move Object Over Time",
+  "value": "target=Part;space=World;moveMode=Tween;axis=X;distance=10;duration=3;transition=Sine;direction=InOut;waitToComplete=true",
+  "description": "Animates or constantly moves a Part position over time. Example: move Part on X.",
+  "comment": "[VSR] Tween mode uses easing. Constant mode moves continuously at the configured units-per-second speed.",
+  "status": "Ready",
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "templates": {
+    "server": "export.server.luau.tpl"
+  },
+  "sketcher": "sketcher.vrs-test.json",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Part",
+      "valueSource": "Scene Object Picker",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "space",
+      "label": "Transform Space",
+      "type": "String",
+      "required": true,
+      "default": "World",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "moveMode",
+      "label": "Move Mode",
+      "type": "String",
+      "required": true,
+      "default": "Tween",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "axis",
+      "label": "Axis",
+      "type": "String",
+      "required": true,
+      "default": "X",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "distance",
+      "label": "Distance",
+      "type": "Number",
+      "required": true,
+      "default": "10",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "required": true,
+      "default": "3",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "transition",
+      "label": "Animation Transition",
+      "type": "String",
+      "required": true,
+      "default": "Sine",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "direction",
+      "label": "Animation Direction",
+      "type": "String",
+      "required": true,
+      "default": "InOut",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "required": true,
+      "default": "true",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move a Part from one place to another over time.",
+  "surface": "Support",
+  "palettePath": [
+    "Scene Object",
+    "Movement"
+  ]
+}

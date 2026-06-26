@@ -1,0 +1,52 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Text",
+  "idBase": "COND_TextHasAtLeastCharacters",
+  "type": "TextHasAtLeastCharacters",
+  "apiType": "String",
+  "label": "Text Has At Least Characters",
+  "value": "text=Hello;count=3",
+  "description": "Checks whether text is long enough.",
+  "status": "Ready",
+  "previewTemplate": "${text} has at least ${count} characters",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "text",
+    "length",
+    "characters",
+    "minimum",
+    "long"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text to check.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "count",
+      "label": "Minimum Characters",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "3",
+      "description": "Smallest number of characters allowed.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if text has enough characters.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Length"]
+}

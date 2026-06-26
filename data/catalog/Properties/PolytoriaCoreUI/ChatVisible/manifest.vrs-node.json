@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.coreui.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Built-In UI",
+  "idBase": "PROP_BuiltInChatVisible",
+  "type": "BuiltInChatVisible",
+  "apiType": "Boolean",
+  "label": "Chat Is Visible",
+  "value": "",
+  "description": "Outputs true when the built-in chat box is visible.",
+  "status": "Ready",
+  "previewTemplate": "Chat is visible",
+  "searchKeywords": [
+    "ui",
+    "chat",
+    "visible",
+    "interface"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Core UI",
+  "utilityLayer": "CoreUI",
+  "parameters": [],
+  "beginnerSummary": "Value: check if the built-in chat box is visible.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Built-In UI"
+  ]
+}

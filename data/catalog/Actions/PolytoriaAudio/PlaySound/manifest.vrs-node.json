@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.audio",
+  "kind": "Action",
+  "apiGroup": "Audio",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_PlaySound",
+  "type": "PlaySound",
+  "apiType": "Sound",
+  "label": "Play Sound",
+  "value": "target=Self",
+  "description": "Starts a sound object in the scene.",
+  "status": "Ready",
+  "previewTemplate": "Play ${target}",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "music",
+    "play"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to play.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do start a sound placed in the scene.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Playback"
+  ]
+}

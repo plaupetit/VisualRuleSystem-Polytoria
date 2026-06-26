@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_GameTeamPlayerCount",
+  "type": "GameTeamPlayerCount",
+  "apiType": "Number",
+  "label": "Game Team Player Count",
+  "value": "target=Target",
+  "description": "Outputs how many players are assigned to a chosen game team.",
+  "status": "Ready",
+  "previewTemplate": "Player count of ${target}",
+  "searchKeywords": [
+    "team",
+    "players",
+    "count"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Game Team",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Team object to count.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "TeamObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: count players in a chosen game team.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Game Teams"
+  ]
+}

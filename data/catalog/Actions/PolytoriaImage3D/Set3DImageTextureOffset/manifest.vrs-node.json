@@ -1,0 +1,71 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "3D Image Texture",
+  "idBase": "ACT_Set3DImageTextureOffset",
+  "type": "Set3DImageTextureOffset",
+  "apiType": "Image3D",
+  "label": "Set 3D Image Texture Offset",
+  "value": "target=Self;x=0;y=0",
+  "description": "Moves the texture across a 3D image.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} texture offset to ${x}, ${y}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d image",
+    "image",
+    "texture",
+    "offset",
+    "move"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Image",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D image object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Image3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "x",
+      "label": "X Offset",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Horizontal texture movement.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y Offset",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Vertical texture movement.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move a 3D image texture across its surface.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Image Texture"
+  ]
+}

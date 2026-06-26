@@ -1,0 +1,32 @@
+{
+  "moduleId": "core.watch.variables",
+  "kind": "Trigger",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Variables",
+  "idBase": "EV_OnVariableBooleanChanged",
+  "type": "OnVariableBooleanChanged",
+  "apiType": "Boolean",
+  "label": "On Variable Boolean Changed",
+  "value": "target=Self;name=DoorOpen;interval=0.25",
+  "description": "Runs when a temporary true or false variable changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${name} changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["variable", "boolean", "true", "false", "watch", "changed", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Concerned Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Core Watch",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "target", "label": "Concerned Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Who this trigger is about.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "name", "label": "Variable Name", "type": "String", "control": "Text", "required": true, "default": "DoorOpen", "description": "Temporary variable to read as true or false.", "valueSource": "Temporary Variable" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the variable.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When a temporary true or false variable changes after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Changes"]
+}

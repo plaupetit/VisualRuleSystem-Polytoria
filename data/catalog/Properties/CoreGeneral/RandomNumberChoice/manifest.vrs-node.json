@@ -1,0 +1,65 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_RandomNumberChoice",
+  "type": "RandomNumberChoice",
+  "apiType": "Number",
+  "label": "Random Number Choice",
+  "value": "first=1;second=10;firstChance=50",
+  "description": "Randomly picks one of two numbers.",
+  "status": "Ready",
+  "previewTemplate": "Randomly choose ${first} or ${second}",
+  "searchKeywords": [
+    "math",
+    "random",
+    "choice",
+    "number",
+    "chance",
+    "pick"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "first",
+      "label": "First Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "First possible number.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "second",
+      "label": "Second Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Second possible number.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "firstChance",
+      "label": "First Chance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "50",
+      "description": "Percent chance to pick the first number.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: randomly choose between two numbers.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Random"
+  ]
+}

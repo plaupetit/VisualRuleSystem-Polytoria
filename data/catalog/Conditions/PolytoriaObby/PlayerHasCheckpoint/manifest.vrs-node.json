@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.obby.conditions",
+  "kind": "Condition",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Checkpoint",
+  "idBase": "COND_PlayerHasCheckpoint",
+  "type": "PlayerHasCheckpoint",
+  "apiType": "VRS.PlayerState",
+  "label": "Player Has Checkpoint",
+  "value": "player=",
+  "description": "Checks whether the player has a saved checkpoint in temporary graph state.",
+  "status": "Ready",
+  "previewTemplate": "Player has checkpoint",
+  "searchKeywords": ["check", "obby", "parcours", "checkpoint", "has", "player", "saved"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to check. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Check whether the player already has a checkpoint.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Checkpoint"]
+}

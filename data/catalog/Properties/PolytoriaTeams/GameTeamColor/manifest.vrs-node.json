@@ -1,0 +1,44 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_GameTeamColor",
+  "type": "GameTeamColor",
+  "apiType": "Color",
+  "label": "Game Team Color",
+  "value": "target=Target",
+  "description": "Outputs the color of a chosen game team.",
+  "status": "Ready",
+  "previewTemplate": "Color of ${target}",
+  "searchKeywords": [
+    "team",
+    "color"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Game Team",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Team object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "TeamObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use a chosen game team's color.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Game Teams"
+  ]
+}

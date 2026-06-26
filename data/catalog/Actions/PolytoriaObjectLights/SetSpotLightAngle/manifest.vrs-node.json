@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.lighting.objects",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetSpotLightAngle",
+  "type": "SetSpotLightAngle",
+  "apiType": "SpotLight",
+  "label": "Set Spot Light Angle",
+  "value": "target=Self;angle=45",
+  "description": "Changes how wide a spot light cone is.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} angle ${angle}",
+  "searchKeywords": [
+    "lighting",
+    "spot light",
+    "angle",
+    "cone"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Spot Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Spot light to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SpotLightObject"
+      ]
+    },
+    {
+      "key": "angle",
+      "label": "Angle",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "45",
+      "description": "How wide the spot light cone is.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how wide a spot light cone is.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Reach"
+  ]
+}

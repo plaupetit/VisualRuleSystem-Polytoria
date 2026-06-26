@@ -1,0 +1,36 @@
+{
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectExists",
+  "type": "ObjectExists",
+  "apiType": "Instance",
+  "label": "Object Exists",
+  "value": "target=Self",
+  "description": "Checks that a scene object can be found. Example: only move if Part exists.",
+  "comment": "[VSR] Uses a safe object lookup before running dependent Actions.",
+  "status": "Ready",
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "sketcher": "sketcher.vrs-test.json",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "control": "SceneObject",
+      "description": "Who this trigger or condition is about. Self resolves to the deployed script parent.",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "Check if a scene object can be found before using it.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Lifecycle"]
+}
+

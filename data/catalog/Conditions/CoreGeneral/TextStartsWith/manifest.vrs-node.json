@@ -1,0 +1,28 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Text",
+  "idBase": "COND_TextStartsWith",
+  "type": "TextStartsWith",
+  "apiType": "String",
+  "label": "Text Starts With",
+  "value": "text=Hello World;prefix=Hello;caseSensitive=false",
+  "description": "Checks whether text begins with a word or phrase.",
+  "status": "Ready",
+  "previewTemplate": "${text} starts with ${prefix}",
+  "searchKeywords": ["check", "text", "string", "starts", "prefix", "begins"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "text", "label": "Text", "type": "String", "control": "Text", "required": true, "default": "Hello World", "description": "Text to inspect.", "valueSource": "String / Manual Text Input" },
+    { "key": "prefix", "label": "Starts With", "type": "String", "control": "Text", "required": true, "default": "Hello", "description": "Text expected at the beginning.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Case Sensitive", "type": "Boolean", "control": "Boolean", "required": true, "default": "false", "description": "Checked means uppercase and lowercase must match.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if text begins with specific text.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Match"]
+}

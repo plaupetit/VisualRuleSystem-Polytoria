@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.scene.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectStoppedMoving",
+  "type": "OnObjectStoppedMoving",
+  "apiType": "Part",
+  "label": "On Object Stopped Moving",
+  "value": "target=Self;movement=0.1;interval=0.25",
+  "description": "Runs when an object stops moving enough to count.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} stops moving",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["object", "stopped", "moving", "movement", "position", "watch", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "Watched Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "movement", "label": "Movement Amount", "type": "Number", "control": "Number", "required": true, "default": "0.1", "description": "Smallest movement that still counts as moving.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the object.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When an object stops moving after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Movement"]
+}

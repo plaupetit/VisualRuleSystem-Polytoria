@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_ShowObject",
+  "type": "ShowObject",
+  "apiType": "Part",
+  "label": "Show Object",
+  "value": "target=Self",
+  "description": "Makes a scene object visible when the object supports it.",
+  "status": "Ready",
+  "previewTemplate": "Show ${target}",
+  "searchKeywords": [
+    "object",
+    "show",
+    "visible",
+    "appear",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to show.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do show a scene object.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Visibility"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

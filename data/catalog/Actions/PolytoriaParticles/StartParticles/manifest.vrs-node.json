@@ -1,0 +1,47 @@
+{
+  "moduleId": "polytoria.effects.particles",
+  "kind": "Action",
+  "apiGroup": "Effects",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Particles",
+  "idBase": "ACT_StartParticles",
+  "type": "StartParticles",
+  "apiType": "Particles",
+  "label": "Start Particles",
+  "value": "target=Self",
+  "description": "Starts a particle effect.",
+  "status": "Ready",
+  "previewTemplate": "Start particles on ${target}",
+  "searchKeywords": [
+    "effects",
+    "particles",
+    "start",
+    "play",
+    "spark"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Effects",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Particles",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Particle effect to start.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ParticleObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do start a particle effect.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Effects",
+    "Particles"
+  ]
+}

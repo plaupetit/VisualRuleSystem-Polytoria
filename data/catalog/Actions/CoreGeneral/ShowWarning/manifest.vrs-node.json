@@ -1,0 +1,53 @@
+{
+  "moduleId": "core.general.debug",
+  "kind": "Action",
+  "apiGroup": "Debug",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Debug",
+  "idBase": "ACT_ShowWarning",
+  "type": "ShowWarning",
+  "apiType": "Debug",
+  "label": "Show Warning",
+  "value": "message=Warning from VisualRuleSystem.",
+  "description": "Prints a warning-style message to the Polytoria output console.",
+  "status": "Ready",
+  "previewTemplate": "Warn ${message}",
+  "searchKeywords": [
+    "warning",
+    "warn",
+    "print",
+    "debug",
+    "log",
+    "message",
+    "show"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "message",
+      "label": "Message",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Warning from VisualRuleSystem.",
+      "description": "Text printed with a warning prefix.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do print warning text to the Polytoria output console.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Message"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "UI & Feedback"
+    ]
+  ]
+}
+

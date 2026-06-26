@@ -1,0 +1,43 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_SquareRootNumber",
+  "type": "SquareRootNumber",
+  "apiType": "Number",
+  "label": "Square Root Number",
+  "value": "value=0",
+  "description": "Outputs the square root of a number.",
+  "status": "Ready",
+  "previewTemplate": "Square root of ${value}",
+  "searchKeywords": [
+    "math",
+    "square",
+    "root",
+    "number"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to use. Numbers below zero return zero.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: get the square root of a number.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Arithmetic"
+  ]
+}

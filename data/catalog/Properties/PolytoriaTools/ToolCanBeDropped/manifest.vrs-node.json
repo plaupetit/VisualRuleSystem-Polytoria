@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.tools.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Tools",
+  "idBase": "PROP_ToolCanBeDropped",
+  "type": "ToolCanBeDroppedValue",
+  "apiType": "Boolean",
+  "label": "Tool Can Be Dropped",
+  "value": "target=Target",
+  "description": "Outputs true when players may drop the chosen tool.",
+  "status": "Ready",
+  "previewTemplate": "Can drop ${target}",
+  "searchKeywords": [
+    "tool",
+    "drop",
+    "droppable",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: check if a chosen tool can be dropped.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

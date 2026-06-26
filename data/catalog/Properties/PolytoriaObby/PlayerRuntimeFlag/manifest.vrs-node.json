@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.obby.values",
+  "kind": "Property",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player State",
+  "idBase": "PROP_PlayerRuntimeFlag",
+  "type": "PlayerRuntimeFlag",
+  "apiType": "Boolean",
+  "label": "Player Temporary Flag",
+  "value": "player=;key=Flag",
+  "description": "Outputs a named temporary true/false flag stored for one player.",
+  "status": "Ready",
+  "previewTemplate": "Player flag ${key}",
+  "searchKeywords": ["value", "obby", "parcours", "player", "runtime", "flag", "boolean", "state"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to read. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Flag", "description": "Temporary flag name.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: a temporary true/false flag for this player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

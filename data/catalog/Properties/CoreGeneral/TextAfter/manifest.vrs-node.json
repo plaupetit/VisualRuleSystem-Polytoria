@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_TextAfter",
+  "type": "TextAfter",
+  "apiType": "String",
+  "label": "Text After",
+  "value": "text=hello:world;marker=:",
+  "description": "Outputs the part of the text after a search text.",
+  "status": "Ready",
+  "previewTemplate": "Text after ${marker}",
+  "searchKeywords": [
+    "text",
+    "after",
+    "extract",
+    "chat",
+    "message",
+    "command"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "hello:world",
+      "description": "Text to read from.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "marker",
+      "label": "Search Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": ":",
+      "description": "Text that marks where to start.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: get the text after a chosen search text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Text",
+    "Extract"
+  ]
+}

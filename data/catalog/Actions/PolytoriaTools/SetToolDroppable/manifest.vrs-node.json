@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.tools",
+  "kind": "Action",
+  "apiGroup": "Tools",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Tools",
+  "idBase": "ACT_SetToolDroppable",
+  "type": "SetToolDroppable",
+  "apiType": "Tool",
+  "label": "Set Tool Droppable",
+  "value": "target=Target;enabled=true",
+  "description": "Allows or prevents the chosen tool from being dropped.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} droppable ${enabled}",
+  "searchKeywords": [
+    "tool",
+    "drop",
+    "droppable",
+    "inventory"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Can Drop",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Checked means players may drop this tool.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do allow or block dropping a chosen tool.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

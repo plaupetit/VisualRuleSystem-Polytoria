@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.seat",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Seats",
+  "idBase": "COND_SeatIsOccupied",
+  "type": "SeatIsOccupied",
+  "apiType": "Seat",
+  "label": "Seat Is Occupied",
+  "value": "target=Self",
+  "description": "Checks whether someone is sitting on a seat.",
+  "status": "Ready",
+  "previewTemplate": "Check ${target} has someone sitting",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "seat",
+    "occupied",
+    "sit",
+    "sitting",
+    "occupant"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Seat",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Seat",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Seat object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SeatObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Checks if someone is sitting on a seat.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Seats"
+  ]
+}

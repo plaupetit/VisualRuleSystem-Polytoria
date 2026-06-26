@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.lighting.object.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_LightShadows",
+  "type": "LightShadows",
+  "apiType": "Boolean",
+  "label": "Light Shadows",
+  "value": "target=Self",
+  "description": "Outputs whether a light casts shadows.",
+  "status": "Ready",
+  "previewTemplate": "Shadows of ${target}",
+  "searchKeywords": [
+    "lighting",
+    "light",
+    "shadow",
+    "shadows"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "LightObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: check if a light casts shadows.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Settings"
+  ]
+}

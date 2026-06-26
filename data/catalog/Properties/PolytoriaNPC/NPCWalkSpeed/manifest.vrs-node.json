@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "NPC Movement",
+  "idBase": "PROP_NPCWalkSpeed",
+  "type": "NPCWalkSpeed",
+  "apiType": "NPC",
+  "label": "NPC Walk Speed",
+  "value": "target=Self",
+  "description": "Reads how fast an NPC walks.",
+  "status": "Ready",
+  "previewTemplate": "Walk speed of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "walk",
+    "speed",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads how fast an NPC walks.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

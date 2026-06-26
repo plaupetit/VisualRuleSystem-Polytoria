@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectParent",
+  "type": "SetObjectParent",
+  "apiType": "Instance",
+  "label": "Set Object Parent",
+  "value": "target=Self;newParent=Target",
+  "description": "Moves an object directly inside another object.",
+  "status": "Ready",
+  "previewTemplate": "Put ${target} inside ${newParent}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "parent",
+    "child",
+    "move",
+    "folder",
+    "hierarchy",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Object To Move",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that will be moved.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    },
+    {
+      "key": "newParent",
+      "label": "New Parent",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Object that will contain the moved object.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do move an object under another object in the scene hierarchy.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Parent"]
+}

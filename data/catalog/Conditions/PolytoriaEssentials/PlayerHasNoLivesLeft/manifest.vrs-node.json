@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player",
+  "idBase": "COND_PlayerHasNoLivesLeft",
+  "type": "PlayerHasNoLivesLeft",
+  "apiType": "RuntimeState",
+  "label": "Player Has No Lives Left",
+  "value": "",
+  "description": "Checks whether the triggering player has zero lives or less.",
+  "status": "Ready",
+  "previewTemplate": "Player has no lives left",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "zero",
+    "game over",
+    "out"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Check if the triggering player is out of lives.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Hazard",
+  "idBase": "ACT_KillPlayer",
+  "type": "KillPlayer",
+  "apiType": "Player",
+  "label": "Kill Player",
+  "value": "player=",
+  "description": "Makes the player die or respawn when the player API allows it.",
+  "status": "Ready",
+  "previewTemplate": "Kill player",
+  "searchKeywords": ["do", "obby", "parcours", "player", "kill", "death", "die", "hazard", "damage", "health", "respawn"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to kill. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Do make the player die.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Hazard"]
+}

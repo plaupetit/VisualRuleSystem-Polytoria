@@ -1,0 +1,78 @@
+{
+  "moduleId": "polytoria.bodyposition",
+  "kind": "Trigger",
+  "apiGroup": "Physics",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Body Position",
+  "idBase": "EV_OnBodyPositionReachedTarget",
+  "type": "OnBodyPositionReachedTarget",
+  "apiType": "BodyPosition",
+  "label": "On Body Position Reached Target",
+  "value": "target=Self;interval=0.25",
+  "description": "Runs when a Body Position parent becomes close enough to its target.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} reaches its target",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "body",
+    "position",
+    "target",
+    "reached",
+    "watch"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Watched Body Position",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Body Position",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Watched Body Position",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Body Position object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "BodyPositionObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "interval",
+      "label": "Check Every Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.25",
+      "description": "How often the script checks the distance.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "When a Body Position parent becomes close enough to its target, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Body Position"
+  ]
+}

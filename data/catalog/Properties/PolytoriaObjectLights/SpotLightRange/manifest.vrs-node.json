@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.lighting.object.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_SpotLightRange",
+  "type": "SpotLightRange",
+  "apiType": "Number",
+  "label": "Spot Light Range",
+  "value": "target=Self",
+  "description": "Outputs how far a spot light reaches.",
+  "status": "Ready",
+  "previewTemplate": "Range of ${target}",
+  "searchKeywords": [
+    "lighting",
+    "spot light",
+    "range"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Spot Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Spot light to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SpotLightObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how far a spot light reaches.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Reach"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectAnchored",
+  "type": "SetObjectAnchored",
+  "apiType": "Part",
+  "label": "Set Object Anchored",
+  "value": "target=Self;anchored=true",
+  "description": "Locks or unlocks an object when it exposes Anchored.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} anchored ${anchored}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "anchored",
+    "lock",
+    "physics",
+    "freeze",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to lock or unlock.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "anchored",
+      "label": "Anchored",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "Checked means the object should stay anchored.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do lock or unlock a scene object for physics.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}
+

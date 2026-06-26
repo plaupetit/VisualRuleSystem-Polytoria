@@ -1,0 +1,54 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectCollisionIsOn",
+  "type": "ObjectCollisionIsOn",
+  "apiType": "Part",
+  "label": "Object Collision Is On",
+  "value": "target=Self",
+  "description": "Checks whether a scene object is solid when collision data is available.",
+  "status": "Ready",
+  "previewTemplate": "${target} collision is on",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "collision",
+    "solid",
+    "block",
+    "part"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a scene object is solid.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Collision"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

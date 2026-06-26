@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Image Display",
+  "idBase": "COND_3DImageCastsShadows",
+  "type": "Image3DCastsShadows",
+  "apiType": "Image3D",
+  "label": "3D Image Casts Shadows",
+  "value": "target=Self",
+  "description": "Checks if a 3D image can cast shadows.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} casts shadows",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d image",
+    "image",
+    "shadow",
+    "shadows",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Image",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D image object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Image3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a 3D image can cast shadows.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Image Display"
+  ]
+}

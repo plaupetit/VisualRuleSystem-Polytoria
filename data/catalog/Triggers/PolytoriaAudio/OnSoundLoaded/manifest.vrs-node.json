@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.audio.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Audio",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Audio",
+  "idBase": "EV_OnSoundLoaded",
+  "type": "OnSoundLoaded",
+  "apiType": "Sound",
+  "label": "On Sound Loaded",
+  "value": "target=Self",
+  "description": "Runs when a sound finishes loading and is ready to use.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} is loaded",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "loaded",
+    "ready"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Watched Sound",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Watched Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "When a sound finishes loading, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Playback"
+  ]
+}

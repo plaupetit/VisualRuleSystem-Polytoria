@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.lighting",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetFogDistances",
+  "type": "SetFogDistances",
+  "apiType": "Lighting",
+  "label": "Set Fog Distances",
+  "value": "start=25;end=150",
+  "description": "Changes where world fog starts and becomes fully thick.",
+  "status": "Ready",
+  "previewTemplate": "Set fog from ${start} to ${end}",
+  "searchKeywords": [
+    "lighting",
+    "fog",
+    "distance",
+    "range"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "start",
+      "label": "Start Distance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "25",
+      "description": "Distance where fog starts.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "end",
+      "label": "End Distance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "150",
+      "description": "Distance where fog becomes fully thick.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do control how near or far fog appears.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Fog"
+  ]
+}

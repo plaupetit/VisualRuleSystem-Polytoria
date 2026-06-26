@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.playerdefaults.actions",
+  "kind": "Action",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player Defaults",
+  "idBase": "ACT_SetRespawnTime",
+  "type": "SetPlayerDefaultValue",
+  "apiType": "PlayerDefaults",
+  "label": "Set RespawnTime",
+  "value": "propertyName=RespawnTime;value=5",
+  "description": "Sets the default time before players respawn.",
+  "status": "Ready",
+  "previewTemplate": "Set RespawnTime to ${value}",
+  "searchKeywords": ["do", "player", "defaults", "respawn", "time", "death"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "RespawnTime", "description": "PlayerDefaults property to update.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] },
+    { "key": "value", "label": "Value", "type": "Number", "control": "Number", "required": true, "default": "5", "description": "New default value.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change how long players wait before respawning.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Health"]
+}

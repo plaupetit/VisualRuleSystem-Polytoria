@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "NPC Health",
+  "idBase": "ACT_HealNPC",
+  "type": "HealNPC",
+  "apiType": "NPC",
+  "label": "Heal NPC",
+  "value": "target=Self;amount=10",
+  "description": "Gives health back to an NPC.",
+  "status": "Ready",
+  "previewTemplate": "Heal ${target} by ${amount}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "heal",
+    "health",
+    "recover"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to heal.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "amount",
+      "label": "Healing",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Health amount to give back.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do give health back to an NPC.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Health"
+  ]
+}

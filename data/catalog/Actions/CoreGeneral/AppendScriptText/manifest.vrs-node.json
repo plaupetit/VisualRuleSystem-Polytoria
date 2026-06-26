@@ -1,0 +1,45 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Action",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Variables",
+  "idBase": "ACT_AppendScriptText",
+  "type": "AppendScriptText",
+  "apiType": "String",
+  "label": "Append Script Text",
+  "value": "name=Log;text=Hello",
+  "description": "Adds text to the end of a script variable.",
+  "status": "Ready",
+  "previewTemplate": "Append ${text} to ${name}",
+  "searchKeywords": ["variable", "text", "append", "join", "log", "string"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Log",
+      "description": "Text variable to update.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "text",
+      "label": "Text To Add",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text appended to the current variable value.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do add more text to a saved script text variable.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Script"]
+}

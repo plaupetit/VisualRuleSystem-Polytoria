@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.input.values",
+  "kind": "Property",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Input",
+  "idBase": "PROP_InputAxisValue",
+  "type": "InputAxisValue",
+  "apiType": "Number",
+  "label": "Input Axis Value",
+  "value": "actionName=Horizontal",
+  "description": "Outputs the current numeric value of a named input axis action.",
+  "status": "Ready",
+  "previewTemplate": "Input axis ${actionName}",
+  "searchKeywords": ["value", "input", "axis", "number", "client", "movement"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "actionName", "label": "Input Action", "type": "String", "control": "Choice", "required": true, "default": "Horizontal", "description": "Name of the Input axis action.", "valueSource": "String / Choice" }
+  ],
+  "beginnerSummary": "Value: read a numeric input axis.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

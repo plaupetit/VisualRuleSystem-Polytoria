@@ -1,0 +1,63 @@
+{
+  "moduleId": "polytoria.lighting",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetFogColor",
+  "type": "SetFogColor",
+  "apiType": "Lighting",
+  "label": "Set Fog Color",
+  "value": "r=0.8;g=0.8;b=0.8",
+  "description": "Changes the color of world fog.",
+  "status": "Ready",
+  "previewTemplate": "Set fog color ${r}, ${g}, ${b}",
+  "searchKeywords": [
+    "lighting",
+    "fog",
+    "color",
+    "atmosphere"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.8",
+      "description": "Red amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.8",
+      "description": "Green amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.8",
+      "description": "Blue amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change the fog color for the world.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Fog"
+  ]
+}

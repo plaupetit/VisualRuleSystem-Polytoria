@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.audio",
+  "kind": "Action",
+  "apiGroup": "Audio",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_StopSound",
+  "type": "StopSound",
+  "apiType": "Sound",
+  "label": "Stop Sound",
+  "value": "target=Self",
+  "description": "Stops a sound and sends it back to the beginning.",
+  "status": "Ready",
+  "previewTemplate": "Stop ${target}",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "music",
+    "stop"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to stop.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do stop a sound and restart it from the beginning next time.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Playback"
+  ]
+}

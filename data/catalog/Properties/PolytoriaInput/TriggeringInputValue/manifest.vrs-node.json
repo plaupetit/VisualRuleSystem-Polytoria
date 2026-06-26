@@ -1,0 +1,23 @@
+{
+  "moduleId": "polytoria.input.values",
+  "kind": "Property",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Input",
+  "idBase": "PROP_TriggeringInputValue",
+  "type": "TriggeringInputValue",
+  "apiType": "Any",
+  "label": "Triggering Input Value",
+  "value": "",
+  "description": "Outputs the value supplied by the current input trigger.",
+  "status": "Ready",
+  "previewTemplate": "Triggering input value",
+  "searchKeywords": ["value", "input", "trigger", "button", "pressed", "client"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: use the current input trigger value.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

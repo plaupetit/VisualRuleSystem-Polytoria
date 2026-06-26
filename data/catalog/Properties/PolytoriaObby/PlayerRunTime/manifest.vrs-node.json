@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.obby.values",
+  "kind": "Property",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player State",
+  "idBase": "PROP_PlayerRunTime",
+  "type": "PlayerRunTime",
+  "apiType": "Number",
+  "label": "Player Run Time",
+  "value": "player=",
+  "description": "Outputs the player's current or finished run time in seconds.",
+  "status": "Ready",
+  "previewTemplate": "Player run time",
+  "searchKeywords": ["value", "obby", "parcours", "timer", "run", "time", "seconds", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to read. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Value: seconds elapsed in the player's run.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Run State"
+  ]
+}

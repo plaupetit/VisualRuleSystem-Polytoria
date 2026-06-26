@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.tools.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Tools",
+  "idBase": "PROP_ToolHolder",
+  "type": "ToolHolder",
+  "apiType": "SceneObject",
+  "label": "Tool Holder",
+  "value": "target=Target",
+  "description": "Outputs the object currently holding the chosen tool.",
+  "status": "Ready",
+  "previewTemplate": "Holder of ${target}",
+  "searchKeywords": [
+    "tool",
+    "holder",
+    "held",
+    "player"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: get who is holding a chosen tool.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.lighting.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_FogStartDistance",
+  "type": "FogStartDistance",
+  "apiType": "Number",
+  "label": "Fog Start Distance",
+  "value": "",
+  "description": "Outputs the distance where world fog starts.",
+  "status": "Ready",
+  "previewTemplate": "Fog start distance",
+  "searchKeywords": [
+    "lighting",
+    "fog",
+    "start",
+    "distance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [],
+  "beginnerSummary": "Value: use where fog starts.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Fog"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsUnderObject",
+  "type": "ObjectIsUnderObject",
+  "apiType": "Instance",
+  "label": "Object Is Under Object",
+  "value": "target=Self;ancestor=Target",
+  "description": "Checks whether an object is anywhere inside another object.",
+  "status": "Ready",
+  "previewTemplate": "${target} is under ${ancestor}",
+  "searchKeywords": [
+    "check",
+    "object",
+    "parent",
+    "child",
+    "inside",
+    "hierarchy",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Child Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose parents will be checked.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    },
+    {
+      "key": "ancestor",
+      "label": "Object Above",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Object that should contain the child.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if an object is inside another object, even several levels deep.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Parent"]
+}

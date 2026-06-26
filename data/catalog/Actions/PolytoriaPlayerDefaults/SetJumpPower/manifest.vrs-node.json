@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.playerdefaults.actions",
+  "kind": "Action",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player Defaults",
+  "idBase": "ACT_SetJumpPower",
+  "type": "SetPlayerDefaultValue",
+  "apiType": "PlayerDefaults",
+  "label": "Set JumpPower",
+  "value": "propertyName=JumpPower;value=8",
+  "description": "Sets the default jump power used by players.",
+  "status": "Ready",
+  "previewTemplate": "Set JumpPower to ${value}",
+  "searchKeywords": ["do", "player", "defaults", "jump", "power", "movement"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "JumpPower", "description": "PlayerDefaults property to update.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] },
+    { "key": "value", "label": "Value", "type": "Number", "control": "Number", "required": true, "default": "8", "description": "New default value.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change the default player jump power.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Movement"]
+}

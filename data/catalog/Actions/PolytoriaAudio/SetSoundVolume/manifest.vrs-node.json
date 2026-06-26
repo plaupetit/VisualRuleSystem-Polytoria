@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.audio",
+  "kind": "Action",
+  "apiGroup": "Audio",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_SetSoundVolume",
+  "type": "SetSoundVolume",
+  "apiType": "Sound",
+  "label": "Set Sound Volume",
+  "value": "target=Self;volume=1",
+  "description": "Changes how loud a sound object is.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} volume ${volume}",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "volume",
+    "loud"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    },
+    {
+      "key": "volume",
+      "label": "Volume",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "New sound volume.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do make a sound louder or quieter.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Settings"
+  ]
+}

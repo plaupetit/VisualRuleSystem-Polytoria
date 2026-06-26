@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.vector.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Transform",
+  "idBase": "PROP_VectorSubtract",
+  "type": "VectorSubtract",
+  "apiType": "Vector3",
+  "label": "Vector Subtract",
+  "value": "left=0,0,0;right=0,1,0",
+  "description": "Subtracts one 3D vector value from another.",
+  "status": "Ready",
+  "previewTemplate": "Vector Subtract",
+  "searchKeywords": ["value", "vector", "vector3", "subtract", "difference", "direction", "position", "math"],
+  "corePack": true,
+  "familyFolder": "Core Values",
+  "utilityLayer": "Values",
+  "parameters": [
+    { "key": "left", "label": "Left Vector", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,0,0", "description": "Starting vector.", "valueSource": "Manual 3D Vector" },
+    { "key": "right", "label": "Right Vector", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,1,0", "description": "Vector subtracted from the first one.", "valueSource": "Manual 3D Vector" }
+  ],
+  "beginnerSummary": "Value: calculate the difference between vectors.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Vector"
+  ]
+}

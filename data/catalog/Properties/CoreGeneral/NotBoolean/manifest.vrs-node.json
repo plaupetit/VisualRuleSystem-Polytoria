@@ -1,0 +1,26 @@
+{
+  "moduleId": "core.general.logic",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Logic",
+  "idBase": "PROP_NotBoolean",
+  "type": "NotBoolean",
+  "apiType": "Boolean",
+  "label": "Not Boolean",
+  "value": "value=true",
+  "description": "Outputs the opposite of a boolean.",
+  "status": "Ready",
+  "previewTemplate": "NOT ${value}",
+  "searchKeywords": ["logic", "boolean", "not", "opposite", "invert"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "value", "label": "Boolean", "type": "Boolean", "control": "Toggle", "required": true, "default": "true", "description": "Boolean to invert.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: flip true to false or false to true.",
+  "surface": "UserFacing",
+  "palettePath": ["Logic", "Boolean"]
+}

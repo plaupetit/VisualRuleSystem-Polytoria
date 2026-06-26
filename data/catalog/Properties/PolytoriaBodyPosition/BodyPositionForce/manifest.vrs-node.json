@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.bodyposition",
+  "kind": "Property",
+  "apiGroup": "Physics",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Body Position",
+  "idBase": "PROP_BodyPositionForce",
+  "type": "BodyPositionForce",
+  "apiType": "BodyPosition",
+  "label": "Body Position Force",
+  "value": "target=Self",
+  "description": "Reads how strongly a Body Position object pulls its parent.",
+  "status": "Ready",
+  "previewTemplate": "Force of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "body",
+    "position",
+    "force",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Body Position",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Body Position",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Body Position object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "BodyPositionObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads how strongly a Body Position object pulls its parent.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Body Position"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "moduleId": "polytoria.players.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Players",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Players",
+  "idBase": "EV_OnPlayerLeft",
+  "type": "OnPlayerLeft",
+  "apiType": "Players",
+  "label": "On Player Left",
+  "value": "target=Self",
+  "description": "Starts the rule when a player leaves the server.",
+  "status": "Ready",
+  "previewTemplate": "When a player leaves on ${target}",
+  "searchKeywords": [
+    "when",
+    "player",
+    "leave",
+    "left",
+    "removed",
+    "players",
+    "server"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "When a player leaves the game.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Events"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

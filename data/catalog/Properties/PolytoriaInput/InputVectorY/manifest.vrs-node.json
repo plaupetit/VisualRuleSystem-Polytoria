@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.input.values",
+  "kind": "Property",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Input",
+  "idBase": "PROP_InputVectorY",
+  "type": "InputVectorY",
+  "apiType": "Number",
+  "label": "Input Vector Y",
+  "value": "actionName=Vertical",
+  "description": "Outputs the Y component of a named Vector2 input action.",
+  "status": "Ready",
+  "previewTemplate": "Input vector ${actionName} Y",
+  "searchKeywords": ["value", "input", "vector", "y", "vertical", "client"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "actionName", "label": "Input Action", "type": "String", "control": "Choice", "required": true, "default": "Vertical", "description": "Name of the Input vector action.", "valueSource": "String / Choice" }
+  ],
+  "beginnerSummary": "Value: read the Y axis of a Vector2 input.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

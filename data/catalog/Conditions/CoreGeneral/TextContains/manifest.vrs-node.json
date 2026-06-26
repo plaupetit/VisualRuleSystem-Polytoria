@@ -1,0 +1,63 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Text",
+  "idBase": "COND_TextContains",
+  "type": "TextContains",
+  "apiType": "String",
+  "label": "Text Contains",
+  "value": "text=Hello World;search=World;caseSensitive=false",
+  "description": "Checks whether text contains another piece of text.",
+  "status": "Ready",
+  "previewTemplate": "Does ${text} contain ${search}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "text",
+    "string",
+    "contains",
+    "find",
+    "search",
+    "includes"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello World",
+      "description": "Text that will be searched.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "search",
+      "label": "Search Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "World",
+      "description": "Text to look for.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "caseSensitive",
+      "label": "Case Sensitive",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "false",
+      "description": "When enabled, uppercase and lowercase letters must match exactly.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if text includes another word or sentence.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Match"]
+}

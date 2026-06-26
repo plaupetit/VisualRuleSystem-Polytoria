@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.effects.particles",
+  "kind": "Action",
+  "apiGroup": "Effects",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Particles",
+  "idBase": "ACT_BurstParticles",
+  "type": "EmitParticles",
+  "apiType": "Particles",
+  "label": "Burst Particles",
+  "value": "target=Self;count=20",
+  "description": "Creates a one-time burst from a particle effect.",
+  "status": "Ready",
+  "previewTemplate": "Burst ${count} particles on ${target}",
+  "searchKeywords": [
+    "effects",
+    "particles",
+    "burst",
+    "emit",
+    "spark"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Effects",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Particles",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Particle effect to burst.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ParticleObject"
+      ]
+    },
+    {
+      "key": "count",
+      "label": "Count",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "20",
+      "description": "How many particles to create in the burst.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do create a one-time burst of particles.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Effects",
+    "Particles"
+  ]
+}

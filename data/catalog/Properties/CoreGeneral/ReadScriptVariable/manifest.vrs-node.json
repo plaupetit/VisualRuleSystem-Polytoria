@@ -1,0 +1,51 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Variables",
+  "idBase": "PROP_ReadScriptVariable",
+  "type": "ReadScriptVariable",
+  "apiType": "Any",
+  "label": "Read Script Variable",
+  "value": "name=Score",
+  "description": "Reads a value stored inside this generated script.",
+  "status": "Ready",
+  "previewTemplate": "Read variable ${name}",
+  "searchKeywords": [
+    "variable",
+    "read",
+    "get",
+    "script",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Name of the variable stored in this script.",
+      "valueSource": "Script Variable"
+    }
+  ],
+  "beginnerSummary": "Value: read a stored script variable for another node.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Script"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

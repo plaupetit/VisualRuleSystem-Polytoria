@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player",
+  "idBase": "ACT_SetPlayerScore",
+  "type": "SetPlayerScore",
+  "apiType": "RuntimeState",
+  "label": "Set Player Score",
+  "value": "score=0",
+  "description": "Sets the triggering player's temporary score.",
+  "status": "Ready",
+  "previewTemplate": "Set player score to ${score}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "score",
+    "points",
+    "runtime",
+    "stat"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "score",
+      "label": "Score",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "New score value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do set the triggering player score.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

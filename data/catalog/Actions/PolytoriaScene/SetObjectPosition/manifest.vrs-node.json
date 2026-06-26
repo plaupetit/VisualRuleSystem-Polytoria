@@ -1,0 +1,79 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_SetObjectPosition",
+  "type": "SetObjectPosition",
+  "apiType": "Vector3",
+  "label": "Set Object Position",
+  "value": "target=Self;x=0;y=0;z=0",
+  "description": "Moves an object directly to a world position.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} position to ${x}, ${y}, ${z}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "position",
+    "move",
+    "teleport",
+    "x",
+    "y",
+    "z"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "x",
+      "label": "X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "World X position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "World Y position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "World Z position.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move an object to an exact position.",
+  "surface": "Support",
+  "palettePath": [
+    "Scene Object",
+    "Position"
+  ]
+}
+

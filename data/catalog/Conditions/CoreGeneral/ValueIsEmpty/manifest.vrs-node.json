@@ -1,0 +1,43 @@
+{
+  "moduleId": "core.general.logic",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Logic",
+  "idBase": "COND_ValueIsEmpty",
+  "type": "ValueIsEmpty",
+  "apiType": "ValueBase",
+  "label": "Value Is Empty",
+  "value": "value=",
+  "description": "Checks whether a value is nil or blank text.",
+  "status": "Ready",
+  "previewTemplate": "Is ${value} empty",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "empty",
+    "blank",
+    "nil",
+    "none",
+    "value",
+    "logic"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Value",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Value checked for nil or empty text.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if a value is blank, missing, or empty.",
+  "surface": "UserFacing",
+  "palettePath": ["Logic", "Values"]
+}

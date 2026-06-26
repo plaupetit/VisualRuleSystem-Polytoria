@@ -1,0 +1,72 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsFarFromObject",
+  "type": "ObjectIsFarFromObject",
+  "apiType": "Part",
+  "label": "Object Is Far From Object",
+  "value": "first=Self;second=Target;minDistance=25",
+  "description": "Checks whether two scene objects are far enough apart.",
+  "status": "Ready",
+  "previewTemplate": "${first} is far from ${second}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "far",
+    "away",
+    "distance",
+    "range",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "first",
+      "label": "First Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "First object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "second",
+      "label": "Second Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Second object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "minDistance",
+      "label": "Minimum Distance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "25",
+      "description": "Smallest distance that counts as far.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if two scene objects are far enough apart.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Geometry"
+  ]
+}

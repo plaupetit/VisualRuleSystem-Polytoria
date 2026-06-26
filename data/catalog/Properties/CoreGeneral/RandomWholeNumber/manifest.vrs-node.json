@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_RandomWholeNumber",
+  "type": "RandomWholeNumber",
+  "apiType": "Number",
+  "label": "Random Whole Number",
+  "value": "min=1;max=10",
+  "description": "Outputs a random whole number between two limits.",
+  "status": "Ready",
+  "previewTemplate": "Random whole number ${min} to ${max}",
+  "searchKeywords": [
+    "math",
+    "random",
+    "whole number",
+    "number",
+    "dice",
+    "roll"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "min",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Lowest possible whole number.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "max",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Highest possible whole number.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: roll a whole number between two limits.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Random"
+  ]
+}

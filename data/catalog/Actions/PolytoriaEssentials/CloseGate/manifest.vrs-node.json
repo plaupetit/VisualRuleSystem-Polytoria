@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Flow & Timing",
+  "idBase": "ACT_CloseGate",
+  "type": "CloseGate",
+  "apiType": "RuntimeState",
+  "label": "Close Gate",
+  "value": "gateName=Main Gate",
+  "description": "Sets a named temporary gate to closed.",
+  "status": "Ready",
+  "previewTemplate": "Close gate ${gateName}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "gate",
+    "close",
+    "state",
+    "branch",
+    "block"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "gateName",
+      "label": "Gate Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Main Gate",
+      "description": "Temporary gate name.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Do close a named logic gate.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Gate"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

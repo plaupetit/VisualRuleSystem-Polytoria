@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.lighting.object.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_SpotLightAngle",
+  "type": "SpotLightAngle",
+  "apiType": "Number",
+  "label": "Spot Light Angle",
+  "value": "target=Self",
+  "description": "Outputs how wide a spot light cone is.",
+  "status": "Ready",
+  "previewTemplate": "Angle of ${target}",
+  "searchKeywords": [
+    "lighting",
+    "spot light",
+    "angle",
+    "cone"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Spot Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Spot light to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SpotLightObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how wide a spot light cone is.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Reach"
+  ]
+}

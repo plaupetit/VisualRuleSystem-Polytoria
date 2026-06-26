@@ -1,0 +1,49 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "NPC Movement",
+  "idBase": "ACT_MakeNPCJump",
+  "type": "MakeNPCJump",
+  "apiType": "NPC",
+  "label": "Make NPC Jump",
+  "value": "target=Self",
+  "description": "Makes an NPC jump.",
+  "status": "Ready",
+  "previewTemplate": "Make ${target} jump",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "jump",
+    "movement"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC that should jump.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do make an NPC jump.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

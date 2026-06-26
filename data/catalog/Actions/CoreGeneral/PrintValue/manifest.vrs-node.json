@@ -1,0 +1,52 @@
+{
+  "moduleId": "core.general.debug",
+  "kind": "Action",
+  "apiGroup": "Debug",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Debug",
+  "idBase": "ACT_PrintValue",
+  "type": "PrintValue",
+  "apiType": "Debug",
+  "label": "Print Value",
+  "value": "value=Hello",
+  "description": "Prints any value to the Polytoria output console.",
+  "status": "Ready",
+  "previewTemplate": "Print ${value}",
+  "searchKeywords": [
+    "print",
+    "debug",
+    "log",
+    "value",
+    "console",
+    "inspect"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Value",
+      "type": "Any",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Value printed with tostring.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do print any value so you can inspect what a rule is using.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Debug"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "UI & Feedback"
+    ]
+  ]
+}
+

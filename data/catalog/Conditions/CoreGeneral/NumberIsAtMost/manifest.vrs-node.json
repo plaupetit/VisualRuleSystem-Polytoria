@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberIsAtMost",
+  "type": "NumberIsAtMost",
+  "apiType": "Number",
+  "label": "Number Is At Most",
+  "value": "value=3;maximum=5",
+  "description": "Checks whether a number is low enough.",
+  "status": "Ready",
+  "previewTemplate": "${value} is at most ${maximum}",
+  "searchKeywords": [
+    "number",
+    "maximum",
+    "at most",
+    "less",
+    "lives",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "3",
+      "description": "Number to check.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "maximum",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "5",
+      "description": "Largest accepted number.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a number is at most a maximum.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Comparison"
+  ]
+}

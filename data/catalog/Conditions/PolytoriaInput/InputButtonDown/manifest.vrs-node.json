@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.input.conditions",
+  "kind": "Condition",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "Input",
+  "idBase": "COND_InputButtonDown",
+  "type": "InputButtonDown",
+  "apiType": "InputService",
+  "label": "Input Button Down",
+  "value": "actionName=Interact",
+  "description": "Checks whether a named client input button action is currently pressed.",
+  "status": "Ready",
+  "previewTemplate": "Input ${actionName} is down",
+  "searchKeywords": ["check", "input", "button", "pressed", "down", "client", "key"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "actionName", "label": "Input Action", "type": "String", "control": "Choice", "required": true, "default": "Interact", "description": "Name of the Input action configured in Creator.", "valueSource": "String / Choice" }
+  ],
+  "beginnerSummary": "Check if a client input action is pressed right now.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

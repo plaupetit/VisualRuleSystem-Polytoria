@@ -1,0 +1,48 @@
+{
+  "moduleId": "polytoria.seat",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Seats",
+  "idBase": "PROP_SeatOccupant",
+  "type": "SeatOccupant",
+  "apiType": "Seat",
+  "label": "Seat Occupant",
+  "value": "target=Self",
+  "description": "Reads who is currently sitting on a seat.",
+  "status": "Ready",
+  "previewTemplate": "Occupant of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "seat",
+    "occupant",
+    "sit",
+    "sitting",
+    "person"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Seat",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Seat",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Seat object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SeatObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads who is sitting on a seat.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Seats"
+  ]
+}

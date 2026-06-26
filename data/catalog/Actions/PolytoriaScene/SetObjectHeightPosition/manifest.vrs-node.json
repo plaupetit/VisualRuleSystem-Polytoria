@@ -1,0 +1,59 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectHeightPosition",
+  "type": "SetObjectHeightPosition",
+  "apiType": "Part",
+  "label": "Set Object Height Position",
+  "value": "target=Self;height=10",
+  "description": "Moves an object up or down to a chosen height without changing its left-right or front-back position.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} height to ${height}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "position",
+    "height",
+    "y",
+    "up",
+    "down"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "height",
+      "label": "Height",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "New up-down position.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move an object to a chosen height while keeping the other position values.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Height"
+  ]
+}

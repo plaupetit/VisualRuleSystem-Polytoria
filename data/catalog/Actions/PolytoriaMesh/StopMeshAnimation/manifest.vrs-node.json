@@ -1,0 +1,55 @@
+{
+  "moduleId": "polytoria.mesh.actions",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Mesh Animation",
+  "idBase": "ACT_StopMeshAnimation",
+  "type": "StopMeshAnimation",
+  "apiType": "Mesh",
+  "label": "Stop Mesh Animation",
+  "value": "target=Self;animationName=Idle",
+  "description": "Stops one animation on a mesh object.",
+  "status": "Ready",
+  "previewTemplate": "Stop ${animationName} on ${target}",
+  "searchKeywords": [
+    "mesh",
+    "animation",
+    "stop"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Mesh",
+  "utilityLayer": "World",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Mesh",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Mesh object that should stop the animation.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "MeshObject"
+      ]
+    },
+    {
+      "key": "animationName",
+      "label": "Animation Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Idle",
+      "description": "Name of the animation to stop.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do stop a named animation on a mesh.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Mesh Animation"
+  ]
+}

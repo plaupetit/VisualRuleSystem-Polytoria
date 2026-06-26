@@ -1,0 +1,255 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_MoveObject",
+  "type": "MoveObject",
+  "apiType": "Vector3",
+  "label": "Move Object",
+  "value": "target=Self;positionMode=Add;motionMode=Instant;vector=0,1,0;x=0;y=1;z=0;duration=1;smoothing=Sine;direction=InOut;waitToComplete=true",
+  "description": "Moves an object by setting an exact position or adding an offset.",
+  "status": "Ready",
+  "previewTemplate": "Move ${target}: ${positionMode} ${vector} (${motionMode})",
+  "searchKeywords": [
+    "object",
+    "part",
+    "position",
+    "vector",
+    "move",
+    "teleport",
+    "offset",
+    "add",
+    "set",
+    "smooth",
+    "tween",
+    "x",
+    "y",
+    "z"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "positionMode",
+      "label": "Position Mode",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Add",
+      "description": "Choose whether this action jumps to an exact position or adds an offset to the current position.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Set",
+        "Add"
+      ],
+      "optionDetails": [
+        {
+          "value": "Set",
+          "label": "Set exact position",
+          "category": "Position Mode",
+          "description": "Move the object to these exact X, Y, Z coordinates.",
+          "searchKeywords": [
+            "set",
+            "exact",
+            "teleport",
+            "position"
+          ]
+        },
+        {
+          "value": "Add",
+          "label": "Add offset",
+          "category": "Position Mode",
+          "description": "Add these X, Y, Z values to where the object already is.",
+          "searchKeywords": [
+            "add",
+            "offset",
+            "relative",
+            "move by"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "motionMode",
+      "label": "Motion Mode",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Instant",
+      "description": "Choose whether the movement happens immediately or smoothly over time.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Instant",
+        "Smooth"
+      ],
+      "optionDetails": [
+        {
+          "value": "Instant",
+          "label": "Instant",
+          "category": "Motion Mode",
+          "description": "Apply the movement immediately in one step.",
+          "searchKeywords": [
+            "instant",
+            "now",
+            "immediate"
+          ]
+        },
+        {
+          "value": "Smooth",
+          "label": "Smooth over time",
+          "category": "Motion Mode",
+          "description": "Animate the movement over a duration.",
+          "searchKeywords": [
+            "smooth",
+            "duration",
+            "animate",
+            "tween"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "vector",
+      "label": "Position / Offset",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "0,1,0",
+      "description": "Exact position when Position Mode is Set, or relative movement when Position Mode is Add.",
+      "valueSource": "Manual 3D Vector"
+    },
+    {
+      "key": "x",
+      "label": "X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "X coordinate or offset.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Y coordinate or offset.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Z coordinate or offset.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "How long the smooth movement should take.",
+      "valueSource": "Suggested Value",
+      "visibleWhen": [
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "smoothing",
+      "label": "Smoothing",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Sine",
+      "description": "Shape of the smooth movement.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic"
+      ],
+      "visibleWhen": [
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "direction",
+      "label": "Smoothing Direction",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "InOut",
+      "description": "Where the smoothing is strongest.",
+      "valueSource": "Suggested Value",
+      "options": [
+        "InOut",
+        "In",
+        "Out"
+      ],
+      "visibleWhen": [
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "When true, the next connected action waits until the smooth movement ends.",
+      "valueSource": "Suggested Value",
+      "visibleWhen": [
+        {
+          "parameterKey": "motionMode",
+          "equals": "Smooth"
+        }
+      ]
+    }
+  ],
+  "beginnerSummary": "Do move an object now or smoothly over time.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Position"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}
+

@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player",
+  "idBase": "COND_PlayerScoreAtMost",
+  "type": "PlayerScoreAtMost",
+  "apiType": "RuntimeState",
+  "label": "Player Score Is At Most",
+  "value": "maximum=10",
+  "description": "Checks whether the triggering player's temporary score is low enough.",
+  "status": "Ready",
+  "previewTemplate": "Player score <= ${maximum}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "score",
+    "points",
+    "maximum",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "maximum",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Biggest accepted score.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if the triggering player score is not too high.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Score"
+  ]
+}

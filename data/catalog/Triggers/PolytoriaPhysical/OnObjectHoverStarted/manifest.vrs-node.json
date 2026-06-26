@@ -1,0 +1,66 @@
+{
+  "moduleId": "polytoria.physical.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Client",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectHoverStarted",
+  "type": "OnObjectHoverStarted",
+  "apiType": "Physical.MouseEnter",
+  "label": "On Object Hover Started",
+  "value": "target=Self",
+  "description": "Starts locally when the cursor begins hovering over a physics object.",
+  "status": "Ready",
+  "fallbackMode": "Log And Skip",
+  "previewTemplate": "When the cursor starts hovering over ${target}",
+  "searchKeywords": [
+    "when",
+    "hover",
+    "mouse",
+    "cursor",
+    "enter",
+    "object"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Hovered Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Hovered Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object that should listen for cursor hover.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "When the cursor starts hovering over this object, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Input"
+  ]
+}

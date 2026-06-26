@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.obby.conditions",
+  "kind": "Condition",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Checkpoint",
+  "idBase": "COND_PlayerReachedCheckpoint",
+  "type": "PlayerReachedCheckpoint",
+  "apiType": "VRS.PlayerState",
+  "label": "Player Reached Checkpoint",
+  "value": "player=;checkpointName=",
+  "description": "Checks whether the player's saved checkpoint name matches the expected checkpoint.",
+  "status": "Ready",
+  "previewTemplate": "Player reached checkpoint ${checkpointName}",
+  "searchKeywords": ["check", "obby", "parcours", "checkpoint", "stage", "reached", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to check. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "checkpointName", "label": "Checkpoint Name", "type": "String", "control": "Text", "required": false, "default": "", "description": "Expected checkpoint name. Empty uses the current checkpoint trigger object name when available.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether the player is at a specific checkpoint.",
+  "surface": "UserFacing",
+  "palettePath": ["Obby", "Checkpoint"]
+}

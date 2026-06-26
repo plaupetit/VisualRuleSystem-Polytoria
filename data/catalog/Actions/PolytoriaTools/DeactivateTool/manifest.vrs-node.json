@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.tools",
+  "kind": "Action",
+  "apiGroup": "Tools",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Tools",
+  "idBase": "ACT_DeactivateTool",
+  "type": "DeactivateTool",
+  "apiType": "Tool",
+  "label": "Deactivate Tool",
+  "value": "target=Target",
+  "description": "Deactivates the chosen tool.",
+  "status": "Ready",
+  "previewTemplate": "Deactivate ${target}",
+  "searchKeywords": [
+    "tool",
+    "deactivate",
+    "release"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object to deactivate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do deactivate a chosen tool.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

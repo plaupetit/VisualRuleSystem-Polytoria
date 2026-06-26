@@ -1,0 +1,32 @@
+{
+  "moduleId": "core.watch.variables",
+  "kind": "Trigger",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Variables",
+  "idBase": "EV_OnVariableBecameEmpty",
+  "type": "OnVariableBecameEmpty",
+  "apiType": "Any",
+  "label": "On Variable Became Empty",
+  "value": "target=Self;name=State;interval=0.25",
+  "description": "Runs when a temporary variable becomes empty.",
+  "status": "Ready",
+  "previewTemplate": "When ${name} becomes empty",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["variable", "watch", "empty", "missing", "clear", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Concerned Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Core Watch",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "target", "label": "Concerned Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Who this trigger is about.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "name", "label": "Variable Name", "type": "String", "control": "Text", "required": true, "default": "State", "description": "Temporary variable to watch.", "valueSource": "Temporary Variable" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the variable.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When a temporary variable becomes empty after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Changes"]
+}

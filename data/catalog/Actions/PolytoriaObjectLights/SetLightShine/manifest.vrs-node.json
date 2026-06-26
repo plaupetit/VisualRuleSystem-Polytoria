@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.lighting.objects",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetLightShine",
+  "type": "SetLightShine",
+  "apiType": "Light",
+  "label": "Set Light Shine",
+  "value": "target=Self;shine=0.5",
+  "description": "Changes how shiny the light looks on surfaces.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} shine ${shine}",
+  "searchKeywords": [
+    "lighting",
+    "light",
+    "shine",
+    "specular"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "LightObject"
+      ]
+    },
+    {
+      "key": "shine",
+      "label": "Shine",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.5",
+      "description": "New shine amount.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how shiny a light looks on surfaces.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Settings"
+  ]
+}

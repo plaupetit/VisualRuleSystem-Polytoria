@@ -1,0 +1,64 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Values",
+  "idBase": "PROP_DistanceBetweenObjects",
+  "type": "DistanceBetweenObjects",
+  "apiType": "Number",
+  "label": "Distance Between Objects",
+  "value": "from=Self;to=Target",
+  "description": "Outputs the distance between two scene object positions.",
+  "status": "Ready",
+  "previewTemplate": "Distance from ${from} to ${to}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "distance",
+    "object",
+    "position",
+    "range",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "from",
+      "label": "From Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "First object path.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "to",
+      "label": "To Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Second object path.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "Value: distance between two scene objects.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Geometry"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

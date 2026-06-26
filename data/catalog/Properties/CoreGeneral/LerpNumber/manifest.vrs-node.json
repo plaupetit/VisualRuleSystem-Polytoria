@@ -1,0 +1,31 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_LerpNumber",
+  "type": "LerpNumber",
+  "apiType": "Number",
+  "label": "Lerp Number",
+  "value": "from=0;to=10;alpha=0.5",
+  "description": "Blends between two numbers using an alpha from 0 to 1.",
+  "status": "Ready",
+  "previewTemplate": "Lerp ${from} to ${to} by ${alpha}",
+  "searchKeywords": ["math", "lerp", "blend", "interpolate", "number", "smooth"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "from", "label": "From", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Start number.", "valueSource": "Suggested Value" },
+    { "key": "to", "label": "To", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "End number.", "valueSource": "Suggested Value" },
+    { "key": "alpha", "label": "Alpha", "type": "Number", "control": "Number", "required": true, "default": "0.5", "description": "Blend amount from 0 to 1.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: blend smoothly between two numbers.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Range"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_FirstTextCharacters",
+  "type": "FirstTextCharacters",
+  "apiType": "String",
+  "label": "First Text Characters",
+  "value": "text=Hello;count=3",
+  "description": "Outputs the first characters of a text.",
+  "status": "Ready",
+  "previewTemplate": "First ${count} characters",
+  "searchKeywords": [
+    "text",
+    "first",
+    "characters",
+    "extract",
+    "left",
+    "message"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text to read from.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "count",
+      "label": "Count",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "3",
+      "description": "How many characters to keep.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: keep the first characters of a text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Text",
+    "Extract"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberIsEven",
+  "type": "NumberIsEven",
+  "apiType": "Number",
+  "label": "Number Is Even",
+  "value": "value=2",
+  "description": "Checks whether a number is divisible by 2.",
+  "status": "Ready",
+  "previewTemplate": "Is ${value} even",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["number", "math", "even", "odd", "divisible", "modulo"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "2",
+      "description": "Number to test.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a number is even.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Comparison"]
+}

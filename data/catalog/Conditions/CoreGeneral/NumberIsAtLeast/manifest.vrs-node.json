@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberIsAtLeast",
+  "type": "NumberIsAtLeast",
+  "apiType": "Number",
+  "label": "Number Is At Least",
+  "value": "value=10;minimum=5",
+  "description": "Checks whether a number is high enough.",
+  "status": "Ready",
+  "previewTemplate": "${value} is at least ${minimum}",
+  "searchKeywords": [
+    "number",
+    "minimum",
+    "at least",
+    "greater",
+    "score",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Number to check.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "minimum",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "5",
+      "description": "Smallest accepted number.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a number is at least a minimum.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Comparison"
+  ]
+}

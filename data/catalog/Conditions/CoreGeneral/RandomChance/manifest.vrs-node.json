@@ -1,0 +1,36 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_RandomChance",
+  "type": "RandomChance",
+  "apiType": "Number",
+  "label": "Random Chance",
+  "value": "percent=50",
+  "description": "Returns true randomly based on a percent chance.",
+  "status": "Ready",
+  "previewTemplate": "${percent}% chance",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["random", "chance", "percent", "probability", "luck", "roll"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "percent",
+      "label": "Chance Percent",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "50",
+      "description": "Percent chance from 0 to 100.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check a random percent chance before continuing.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Random"]
+}

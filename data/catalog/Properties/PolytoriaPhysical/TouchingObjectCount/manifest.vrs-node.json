@@ -1,0 +1,47 @@
+{
+  "moduleId": "polytoria.physical.properties",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_TouchingObjectCount",
+  "type": "TouchingObjectCount",
+  "apiType": "Number",
+  "label": "Touching Object Count",
+  "value": "target=Self",
+  "description": "Outputs how many physics objects are touching this object right now.",
+  "status": "Ready",
+  "previewTemplate": "Touching object count for ${target}",
+  "searchKeywords": [
+    "object",
+    "physics",
+    "touch",
+    "collision",
+    "count"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object whose touching objects will be counted.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: count how many objects are touching this object.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Touch"
+  ]
+}

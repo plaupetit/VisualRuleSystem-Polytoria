@@ -1,0 +1,80 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Transform",
+  "idBase": "ACT_AddObjectPosition",
+  "type": "AddObjectPosition",
+  "apiType": "Vector3",
+  "label": "Add Object Position",
+  "value": "target=Self;x=0;y=1;z=0",
+  "description": "Adds an offset to an object's current position.",
+  "status": "Ready",
+  "previewTemplate": "Move ${target} by ${x}, ${y}, ${z}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "position",
+    "move",
+    "offset",
+    "add",
+    "x",
+    "y",
+    "z"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "x",
+      "label": "X Offset",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "X amount added to the current position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y Offset",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Y amount added to the current position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z Offset",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Z amount added to the current position.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move an object by an offset from where it is now.",
+  "surface": "Support",
+  "palettePath": [
+    "Scene Object",
+    "Position"
+  ]
+}
+

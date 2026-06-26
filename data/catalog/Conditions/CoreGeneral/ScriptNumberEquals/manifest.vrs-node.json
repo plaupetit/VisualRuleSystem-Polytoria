@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Variables",
+  "idBase": "COND_ScriptNumberEquals",
+  "type": "ScriptNumberEquals",
+  "apiType": "Number",
+  "label": "Script Number Equals",
+  "value": "name=Score;expected=10",
+  "description": "Checks whether a script variable number matches a value.",
+  "status": "Ready",
+  "previewTemplate": "${name} equals ${expected}",
+  "searchKeywords": [
+    "check",
+    "variable",
+    "number",
+    "score",
+    "equals",
+    "same"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Variable to read as a number.",
+      "valueSource": "Script Variable"
+    },
+    {
+      "key": "expected",
+      "label": "Expected Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Number that should match.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a stored script number equals the expected number.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Script Numbers"
+  ]
+}

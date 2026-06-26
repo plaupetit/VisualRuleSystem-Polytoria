@@ -1,0 +1,55 @@
+{
+  "moduleId": "polytoria.vector.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Transform",
+  "idBase": "PROP_ManualVector3",
+  "type": "ManualVector3",
+  "apiType": "Vector3",
+  "label": "Manual 3D Vector",
+  "value": "vector=0,0,0",
+  "description": "Builds a 3D vector value from X, Y, and Z coordinates.",
+  "status": "Ready",
+  "previewTemplate": "3D vector ${vector}",
+  "searchKeywords": [
+    "value",
+    "vector",
+    "vector3",
+    "position",
+    "rotation",
+    "scale",
+    "x",
+    "y",
+    "z"
+  ],
+  "corePack": true,
+  "familyFolder": "Core Values",
+  "utilityLayer": "Values",
+  "parameters": [
+    {
+      "key": "vector",
+      "label": "Vector",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "0,0,0",
+      "description": "X, Y, and Z values.",
+      "valueSource": "Manual 3D Vector"
+    }
+  ],
+  "beginnerSummary": "Value: type an X, Y, Z vector.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Vector"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

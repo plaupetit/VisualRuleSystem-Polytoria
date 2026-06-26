@@ -1,0 +1,68 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_JoinText",
+  "type": "JoinText",
+  "apiType": "String",
+  "label": "Join Text",
+  "value": "first=Hello;separator= ;second=World",
+  "description": "Builds one text value from two values and an optional separator.",
+  "status": "Ready",
+  "previewTemplate": "Join ${first} and ${second}",
+  "searchKeywords": [
+    "text",
+    "string",
+    "join",
+    "concat",
+    "message"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "first",
+      "label": "First Value",
+      "type": "Any",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "First value converted to text.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "separator",
+      "label": "Separator",
+      "type": "String",
+      "control": "Text",
+      "required": false,
+      "default": " ",
+      "description": "Text placed between the first and second values.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "second",
+      "label": "Second Value",
+      "type": "Any",
+      "control": "Text",
+      "required": true,
+      "default": "World",
+      "description": "Second value converted to text.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: join two pieces of text into one message.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Edit"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

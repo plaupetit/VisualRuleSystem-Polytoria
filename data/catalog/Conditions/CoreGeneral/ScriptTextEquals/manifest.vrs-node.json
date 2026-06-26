@@ -1,0 +1,56 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Variables",
+  "idBase": "COND_ScriptTextEquals",
+  "type": "ScriptTextEquals",
+  "apiType": "String",
+  "label": "Script Text Equals",
+  "value": "name=Mode;expected=Open;caseSensitive=false",
+  "description": "Checks whether a script variable's text equals an expected value.",
+  "status": "Ready",
+  "previewTemplate": "Is ${name} text ${expected}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["variable", "text", "equals", "string", "mode", "compare"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Mode",
+      "description": "Variable to read.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "expected",
+      "label": "Expected Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Open",
+      "description": "Text expected in the variable.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "caseSensitive",
+      "label": "Case Sensitive",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "false",
+      "description": "When enabled, uppercase and lowercase letters must match exactly.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a saved script text variable matches expected text.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Script"]
+}

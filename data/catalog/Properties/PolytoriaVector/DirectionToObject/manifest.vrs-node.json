@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.vector.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Transform",
+  "idBase": "PROP_DirectionToObject",
+  "type": "DirectionToObject",
+  "apiType": "Vector3",
+  "label": "Direction To Object",
+  "value": "from=Self;to=Target",
+  "description": "Returns the vector from one object's position to another object's position.",
+  "status": "Ready",
+  "previewTemplate": "Direction ${from} to ${to}",
+  "searchKeywords": [
+    "value",
+    "vector",
+    "direction",
+    "look",
+    "object",
+    "position",
+    "target",
+    "to"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "from",
+      "label": "From Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object used as the start position.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "to",
+      "label": "To Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Object used as the destination position.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "Value: direction from one object to another.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Vector"]
+}
+

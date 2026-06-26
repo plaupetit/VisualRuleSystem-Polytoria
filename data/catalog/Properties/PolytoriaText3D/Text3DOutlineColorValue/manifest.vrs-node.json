@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "3D Text Display",
+  "idBase": "PROP_3DTextOutlineColor",
+  "type": "Text3DOutlineColorValue",
+  "apiType": "Text3D",
+  "label": "3D Text Outline Color",
+  "value": "target=Self",
+  "description": "Reads the outline color around 3D text.",
+  "status": "Ready",
+  "previewTemplate": "Outline color of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "outline",
+    "color",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads the outline color around 3D text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Display"
+  ]
+}

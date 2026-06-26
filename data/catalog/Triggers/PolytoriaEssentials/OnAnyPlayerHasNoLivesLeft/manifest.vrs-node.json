@@ -1,0 +1,85 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Trigger",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Player",
+  "idBase": "EV_OnAnyPlayerHasNoLivesLeft",
+  "type": "OnAnyPlayerHasNoLivesLeft",
+  "apiType": "RuntimeState",
+  "label": "On Any Player Has No Lives Left",
+  "value": "target=Self;lives=0;interval=0.25",
+  "description": "Runs when any player's temporary lives drop to the chosen number or lower.",
+  "status": "Ready",
+  "previewTemplate": "When any player lives reach ${lives}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "lives",
+    "health",
+    "zero",
+    "trigger"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    },
+    {
+      "key": "lives",
+      "label": "Lives",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Lives value that counts as no lives left.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "interval",
+      "label": "Check Every Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.25",
+      "description": "How often the script checks players.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "When any player has no temporary lives left, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Lives"
+  ]
+}

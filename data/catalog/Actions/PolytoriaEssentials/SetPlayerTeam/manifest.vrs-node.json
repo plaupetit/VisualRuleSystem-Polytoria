@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Action",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player",
+  "idBase": "ACT_SetPlayerTeam",
+  "type": "SetPlayerTeam",
+  "apiType": "RuntimeState",
+  "label": "Set Player Team",
+  "value": "teamName=Players",
+  "description": "Stores a temporary team label on the triggering player.",
+  "status": "Ready",
+  "previewTemplate": "Set player team to ${teamName}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "team",
+    "runtime",
+    "group",
+    "arena"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "teamName",
+      "label": "Team Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Players",
+      "description": "Temporary team label.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Do set the triggering player team label.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Team"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

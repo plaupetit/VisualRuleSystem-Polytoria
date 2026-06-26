@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.bodyposition",
+  "kind": "Property",
+  "apiGroup": "Physics",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Body Position",
+  "idBase": "PROP_BodyPositionDistanceToTarget",
+  "type": "BodyPositionDistanceToTarget",
+  "apiType": "BodyPosition",
+  "label": "Body Position Distance To Target",
+  "value": "target=Self",
+  "description": "Reads how far the parent is from the Body Position target.",
+  "status": "Ready",
+  "previewTemplate": "Distance from ${target} to its target",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "body",
+    "position",
+    "distance",
+    "target",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Body Position",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Body Position",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Body Position object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "BodyPositionObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads how far the parent is from the Body Position target.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Body Position"
+  ]
+}

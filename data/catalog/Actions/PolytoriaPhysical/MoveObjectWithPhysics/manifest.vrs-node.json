@@ -1,0 +1,78 @@
+{
+  "moduleId": "polytoria.physical.actions",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_MoveObjectWithPhysics",
+  "type": "MoveObjectWithPhysics",
+  "apiType": "Physical.MovePosition",
+  "label": "Move Object With Physics",
+  "value": "target=Self;x=0;y=0;z=0",
+  "description": "Moves a physics object to a position while keeping physics in mind.",
+  "status": "Ready",
+  "previewTemplate": "Move ${target} with physics to ${x}, ${y}, ${z}",
+  "searchKeywords": [
+    "object",
+    "physics",
+    "move",
+    "position",
+    "part",
+    "rigidbody"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Physical",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Object To Move",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Physics object to move.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PhysicsBody"
+      ]
+    },
+    {
+      "key": "x",
+      "label": "X",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target X position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "y",
+      "label": "Y",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target Y position.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "z",
+      "label": "Z",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target Z position.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do move a physics object to a position.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Physics Motion"
+  ]
+}

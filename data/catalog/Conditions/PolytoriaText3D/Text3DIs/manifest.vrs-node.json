@@ -1,0 +1,71 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Text Content",
+  "idBase": "COND_3DTextIs",
+  "type": "Text3DIs",
+  "apiType": "Text3D",
+  "label": "3D Text Is",
+  "value": "target=Self;text=Hello world;caseSensitive=true",
+  "description": "Checks if 3D text currently shows exact words.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} text is ${text}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "3d text",
+    "text",
+    "equals",
+    "match",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "3D Text",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "3D text object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Text3DObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    },
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello world",
+      "description": "Words expected in the 3D text.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "caseSensitive",
+      "label": "Match Uppercase Exactly",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Whether uppercase and lowercase must match exactly.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if 3D text shows specific words.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "3D Text Content"
+  ]
+}

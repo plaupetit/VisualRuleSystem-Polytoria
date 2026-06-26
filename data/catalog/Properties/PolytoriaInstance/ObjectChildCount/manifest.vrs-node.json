@@ -1,0 +1,47 @@
+{
+  "moduleId": "polytoria.instance.values",
+  "kind": "Property",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Instance",
+  "idBase": "PROP_ObjectChildCount",
+  "type": "ObjectChildCount",
+  "apiType": "Number",
+  "label": "Object Child Count",
+  "value": "target=Self",
+  "description": "Outputs how many direct children an object has.",
+  "status": "Ready",
+  "previewTemplate": "${target} child count",
+  "searchKeywords": [
+    "value",
+    "object",
+    "children",
+    "child count",
+    "count",
+    "instance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose direct children will be counted.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "Value: count an object's direct children.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Children"
+  ]
+}
+

@@ -1,0 +1,54 @@
+{
+  "moduleId": "core.text",
+  "kind": "Property",
+  "apiGroup": "Core",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_NumberFromText",
+  "type": "NumberFromText",
+  "apiType": "Number",
+  "label": "Number From Text",
+  "value": "text=0;fallback=0",
+  "description": "Reads a number from text, with a safe fallback when the text is not a number.",
+  "status": "Ready",
+  "previewTemplate": "Number from ${text}",
+  "searchKeywords": [
+    "number",
+    "text",
+    "convert",
+    "parse",
+    "score"
+  ],
+  "corePack": true,
+  "familyFolder": "Core Text",
+  "utilityLayer": "Core",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "0",
+      "description": "Text that should contain a number.",
+      "valueSource": "Chosen Value"
+    },
+    {
+      "key": "fallback",
+      "label": "Fallback Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to use when the text cannot be read as a number.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: turn text into a number when possible.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Text",
+    "Convert"
+  ]
+}

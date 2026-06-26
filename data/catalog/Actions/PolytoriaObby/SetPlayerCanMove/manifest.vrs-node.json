@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player State",
+  "idBase": "ACT_SetPlayerCanMove",
+  "type": "SetPlayerCanMove",
+  "apiType": "Player",
+  "label": "Set Player Can Move",
+  "value": "player=;canMove=true",
+  "description": "Sets the Polytoria Player CanMove property when available.",
+  "status": "Ready",
+  "previewTemplate": "Set player CanMove to ${canMove}",
+  "searchKeywords": ["do", "obby", "parcours", "player", "move", "freeze", "canmove", "control"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to freeze or unfreeze. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "canMove", "label": "Can Move", "type": "Boolean", "control": "Boolean", "required": true, "default": "true", "description": "Whether the player can move.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do allow or block player movement.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Player Control"
+  ]
+}

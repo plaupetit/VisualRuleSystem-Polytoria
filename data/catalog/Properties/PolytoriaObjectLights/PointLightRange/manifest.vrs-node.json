@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.lighting.object.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_PointLightRange",
+  "type": "PointLightRange",
+  "apiType": "Number",
+  "label": "Point Light Range",
+  "value": "target=Self",
+  "description": "Outputs how far a point light reaches.",
+  "status": "Ready",
+  "previewTemplate": "Range of ${target}",
+  "searchKeywords": [
+    "lighting",
+    "point light",
+    "range"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Point Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Point light to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PointLightObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how far a point light reaches.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Reach"
+  ]
+}

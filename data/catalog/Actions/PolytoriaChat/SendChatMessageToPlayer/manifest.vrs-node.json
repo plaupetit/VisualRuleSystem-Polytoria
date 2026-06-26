@@ -1,0 +1,70 @@
+{
+  "moduleId": "polytoria.chat.actions",
+  "kind": "Action",
+  "apiGroup": "Chat",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Chat",
+  "idBase": "ACT_SendChatMessageToPlayer",
+  "type": "SendChatMessageToPlayer",
+  "apiType": "ChatService",
+  "label": "Send Chat Message To Player",
+  "value": "message=Hello;player=;playerName=",
+  "description": "Sends a private chat message to one player.",
+  "status": "Ready",
+  "previewTemplate": "Send chat to ${playerName}: ${message}",
+  "searchKeywords": [
+    "do",
+    "chat",
+    "unicast",
+    "private",
+    "message",
+    "player",
+    "send"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "message",
+      "label": "Message",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Chat text to send.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "player",
+      "label": "Player Object",
+      "type": "Any",
+      "control": "Value",
+      "required": false,
+      "default": "",
+      "description": "Optional player object, such as Triggering Player.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "playerName",
+      "label": "Fallback Player Name",
+      "type": "String",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Used when no player object is connected.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do send a chat message to one player.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Chat"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "UI & Feedback"
+    ]
+  ]
+}
+

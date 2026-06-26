@@ -1,0 +1,61 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_MultiplyNumbers",
+  "type": "MultiplyNumbers",
+  "apiType": "Number",
+  "label": "Multiply Numbers",
+  "value": "left=1;right=1",
+  "description": "Outputs one number multiplied by another.",
+  "status": "Ready",
+  "previewTemplate": "${left} * ${right}",
+  "searchKeywords": [
+    "math",
+    "multiply",
+    "times",
+    "product",
+    "number"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "left",
+      "label": "Left Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "First number used by the multiplication.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "right",
+      "label": "Right Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Second number multiplied with the first number.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: multiply two numbers and pass the result into another node.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Arithmetic"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

@@ -1,0 +1,26 @@
+{
+  "moduleId": "core.general.timing",
+  "kind": "Action",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Timing",
+  "idBase": "ACT_StopFlow",
+  "type": "StopFlow",
+  "apiType": "Flow",
+  "label": "Stop Flow",
+  "value": "",
+  "description": "Stops the current flow branch.",
+  "status": "Draft",
+  "searchKeywords": ["stop", "flow", "break", "cancel", "return"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [],
+  "beginnerSummary": "Do stop this branch before it reaches the next node.",
+  "surface": "Support",
+  "palettePath": [
+    "Flow & Timing",
+    "Flow Control"
+  ]
+}

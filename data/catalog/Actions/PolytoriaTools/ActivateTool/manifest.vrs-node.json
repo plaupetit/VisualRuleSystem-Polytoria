@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.tools",
+  "kind": "Action",
+  "apiGroup": "Tools",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Tools",
+  "idBase": "ACT_ActivateTool",
+  "type": "ActivateTool",
+  "apiType": "Tool",
+  "label": "Activate Tool",
+  "value": "target=Target",
+  "description": "Activates the chosen tool.",
+  "status": "Ready",
+  "previewTemplate": "Activate ${target}",
+  "searchKeywords": [
+    "tool",
+    "activate",
+    "use"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object to activate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do activate a chosen tool.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Tools"
+  ]
+}

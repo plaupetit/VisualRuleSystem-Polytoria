@@ -1,0 +1,26 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_UppercaseText",
+  "type": "UppercaseText",
+  "apiType": "String",
+  "label": "Uppercase Text",
+  "value": "text=Hello",
+  "description": "Converts text to uppercase.",
+  "status": "Ready",
+  "previewTemplate": "Upper ${text}",
+  "searchKeywords": ["text", "string", "upper", "uppercase", "case"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "text", "label": "Text", "type": "String", "control": "Text", "required": true, "default": "Hello", "description": "Text to convert.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Value: convert text to uppercase.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Edit"]
+}

@@ -1,0 +1,23 @@
+{
+  "moduleId": "polytoria.chat.values",
+  "kind": "Property",
+  "apiGroup": "Chat",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Chat",
+  "idBase": "PROP_TriggeringChatPlayer",
+  "type": "TriggeringChatPlayer",
+  "apiType": "Any",
+  "label": "Triggering Chat Player",
+  "value": "",
+  "description": "Outputs the player who sent the current chat message.",
+  "status": "Ready",
+  "previewTemplate": "Triggering chat player",
+  "searchKeywords": ["value", "chat", "player", "sender", "trigger"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: use the player who sent the chat message.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Chat"]
+}

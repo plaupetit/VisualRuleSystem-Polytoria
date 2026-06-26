@@ -1,0 +1,68 @@
+{
+  "moduleId": "polytoria.players.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Players",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Players",
+  "idBase": "EV_OnPlayerJoined",
+  "type": "OnPlayerJoined",
+  "apiType": "Players",
+  "label": "On Player Joined",
+  "value": "target=Self",
+  "description": "Starts the rule when a player joins the server.",
+  "status": "Ready",
+  "previewTemplate": "When a player joins on ${target}",
+  "searchKeywords": [
+    "when",
+    "player",
+    "join",
+    "joined",
+    "added",
+    "players",
+    "server"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "description": "Who this trigger is about. Self resolves to the deployed script parent.",
+      "acceptedObjectGroups": [ "Any" ]
+    }
+  ],
+  "beginnerSummary": "When a player joins the game.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Events"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

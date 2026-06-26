@@ -1,0 +1,26 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_TrimText",
+  "type": "TrimText",
+  "apiType": "String",
+  "label": "Trim Text",
+  "value": "text= Hello ",
+  "description": "Removes spaces from the start and end of text.",
+  "status": "Ready",
+  "previewTemplate": "Trim ${text}",
+  "searchKeywords": ["text", "string", "trim", "spaces", "clean"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "text", "label": "Text", "type": "String", "control": "Text", "required": true, "default": " Hello ", "description": "Text to trim.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Value: remove extra spaces from text edges.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Edit"]
+}

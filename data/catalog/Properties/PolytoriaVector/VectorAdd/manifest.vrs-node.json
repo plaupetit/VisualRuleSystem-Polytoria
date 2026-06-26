@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.vector.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Transform",
+  "idBase": "PROP_VectorAdd",
+  "type": "VectorAdd",
+  "apiType": "Vector3",
+  "label": "Vector Add",
+  "value": "left=0,0,0;right=0,1,0",
+  "description": "Adds two 3D vector values together.",
+  "status": "Ready",
+  "previewTemplate": "Vector Add",
+  "searchKeywords": ["value", "vector", "vector3", "add", "offset", "position", "math"],
+  "corePack": true,
+  "familyFolder": "Core Values",
+  "utilityLayer": "Values",
+  "parameters": [
+    { "key": "left", "label": "Left Vector", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,0,0", "description": "First vector.", "valueSource": "Manual 3D Vector" },
+    { "key": "right", "label": "Right Vector", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,1,0", "description": "Vector added to the first one.", "valueSource": "Manual 3D Vector" }
+  ],
+  "beginnerSummary": "Value: add an offset to a vector.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Vector"
+  ]
+}

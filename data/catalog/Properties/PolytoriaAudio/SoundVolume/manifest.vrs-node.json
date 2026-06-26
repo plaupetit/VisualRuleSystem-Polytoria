@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.audio.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Audio",
+  "idBase": "PROP_SoundVolume",
+  "type": "SoundVolume",
+  "apiType": "Number",
+  "label": "Sound Volume",
+  "value": "target=Self",
+  "description": "Outputs how loud a sound object is.",
+  "status": "Ready",
+  "previewTemplate": "Volume of ${target}",
+  "searchKeywords": [
+    "audio",
+    "sound",
+    "volume",
+    "loud"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "SoundObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use a sound's volume.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Audio",
+    "Settings"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "moduleId": "polytoria.lighting",
+  "kind": "Action",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetFogEnabled",
+  "type": "SetFogEnabled",
+  "apiType": "Lighting",
+  "label": "Set Fog Enabled",
+  "value": "enabled=true",
+  "description": "Turns world fog on or off.",
+  "status": "Ready",
+  "previewTemplate": "Set fog enabled ${enabled}",
+  "searchKeywords": [
+    "lighting",
+    "fog",
+    "weather",
+    "atmosphere"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "enabled",
+      "label": "Enabled",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Turn fog on or off.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn world fog on or off.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Fog"
+  ]
+}

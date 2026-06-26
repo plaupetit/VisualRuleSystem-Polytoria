@@ -1,0 +1,72 @@
+{
+  "moduleId": "polytoria.scene.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectClicked",
+  "type": "OnObjectClicked",
+  "apiType": "Physical.Clicked",
+  "label": "On Object Clicked",
+  "value": "target=Self",
+  "description": "Runs when the player clicks a scene object.",
+  "status": "Ready",
+  "fallbackMode": "Log And Skip",
+  "previewTemplate": "When ${target} is clicked",
+  "searchKeywords": [
+    "when",
+    "click",
+    "mouse",
+    "tap",
+    "object",
+    "part",
+    "input"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Clicked Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Clicked Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should listen for clicks.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PhysicsBody" ]
+    }
+  ],
+  "beginnerSummary": "When a player clicks this object, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Input"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}
+

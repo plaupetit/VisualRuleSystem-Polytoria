@@ -1,0 +1,61 @@
+{
+  "moduleId": "core.scripting.raw",
+  "kind": "Condition",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Script",
+  "idBase": "COND_RunLuauCondition",
+  "type": "RunLuauCondition",
+  "apiType": "Boolean",
+  "label": "Code Condition",
+  "value": "code=return true",
+  "description": "Runs authored code that returns true or false.",
+  "comment": "[VSR] Advanced raw Luau condition emitted inside a protected call.",
+  "status": "Ready",
+  "previewTemplate": "Code returns true",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "run",
+    "luau",
+    "lua",
+    "code",
+    "script",
+    "raw",
+    "custom",
+    "advanced",
+    "condition",
+    "boolean"
+  ],
+  "debugHints": [
+    "The code can use triggerObject, triggerContext, VRS, resolveTarget, and makeVector3.",
+    "Return true to follow the TRUE branch; any other result follows the FALSE branch."
+  ],
+  "corePack": true,
+  "familyFolder": "Advanced Scripting",
+  "utilityLayer": "Advanced",
+  "parameters": [
+    {
+      "key": "code",
+      "label": "Script Code",
+      "type": "Code",
+      "control": "Code",
+      "required": true,
+      "default": "return true",
+      "valueSource": "Manual Script Input",
+      "description": "Runs as a boolean check and must return true or false."
+    }
+  ],
+  "beginnerSummary": "Run authored script code as a true or false check.",
+  "surface": "Advanced",
+  "palettePath": [
+    "Logic",
+    "Values"
+  ],
+  "paletteAliases": [
+    [
+      "Variables",
+      "Script"
+    ]
+  ]
+}

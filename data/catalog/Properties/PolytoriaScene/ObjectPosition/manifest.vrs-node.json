@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.scene.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectPosition",
+  "type": "ObjectPosition",
+  "apiType": "Vector3",
+  "label": "Object Position",
+  "value": "target=Self",
+  "description": "Outputs the current position of a scene object.",
+  "status": "Ready",
+  "previewTemplate": "Position of ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "position",
+    "location",
+    "scene",
+    "transform"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose position will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    }
+  ],
+  "beginnerSummary": "Value: use where an object is in the world.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Position"],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Values"
+    ]
+  ]
+}
+

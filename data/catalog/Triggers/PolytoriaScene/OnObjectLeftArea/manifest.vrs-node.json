@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.scene.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectLeftArea",
+  "type": "OnObjectLeftArea",
+  "apiType": "Part",
+  "label": "On Object Left Area",
+  "value": "target=Self;center=Target;radius=10;interval=0.25",
+  "description": "Runs when an object leaves a round area around another object.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} leaves area around ${center}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["object", "area", "zone", "radius", "left", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] },
+    { "key": "center", "label": "Area Center", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "Watched Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "center", "label": "Area Center", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Target", "description": "Object at the center of the area.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "radius", "label": "Radius", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Distance from the center that counts as inside.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the area.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When an object leaves a round area after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Zones"]
+}

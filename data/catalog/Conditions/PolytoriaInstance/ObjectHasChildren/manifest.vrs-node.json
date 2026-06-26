@@ -1,0 +1,47 @@
+{
+  "moduleId": "polytoria.instance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Instance",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectHasChildren",
+  "type": "ObjectHasChildren",
+  "apiType": "Instance",
+  "label": "Object Has Children",
+  "value": "target=Self",
+  "description": "Checks whether an object has at least one direct child.",
+  "status": "Ready",
+  "previewTemplate": "${target} has children",
+  "searchKeywords": [
+    "check",
+    "object",
+    "children",
+    "child count",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose direct children will be checked.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if an object has any direct children.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Children"
+  ]
+}

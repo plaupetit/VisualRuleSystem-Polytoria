@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.lighting.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_FogEndDistance",
+  "type": "FogEndDistance",
+  "apiType": "Number",
+  "label": "Fog End Distance",
+  "value": "",
+  "description": "Outputs the distance where world fog becomes fully thick.",
+  "status": "Ready",
+  "previewTemplate": "Fog end distance",
+  "searchKeywords": [
+    "lighting",
+    "fog",
+    "end",
+    "distance"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [],
+  "beginnerSummary": "Value: use where fog becomes fully thick.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Fog"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_FloorNumber",
+  "type": "FloorNumber",
+  "apiType": "Number",
+  "label": "Floor Number",
+  "value": "value=1.5",
+  "description": "Rounds a number down.",
+  "status": "Ready",
+  "previewTemplate": "Floor ${value}",
+  "searchKeywords": ["math", "floor", "round", "down", "number"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "value", "label": "Number", "type": "Number", "control": "Number", "required": true, "default": "1.5", "description": "Number to round down.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: round a number down to an integer.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Rounding"
+  ]
+}

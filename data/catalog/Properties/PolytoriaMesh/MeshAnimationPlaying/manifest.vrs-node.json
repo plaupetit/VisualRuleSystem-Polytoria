@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.mesh.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Mesh Animation",
+  "idBase": "PROP_MeshAnimationPlaying",
+  "type": "MeshAnimationPlaying",
+  "apiType": "Boolean",
+  "label": "Mesh Animation Playing",
+  "value": "target=Self",
+  "description": "Outputs true when a mesh animation is playing.",
+  "status": "Ready",
+  "previewTemplate": "Mesh animation playing on ${target}",
+  "searchKeywords": [
+    "mesh",
+    "animation",
+    "playing"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Mesh",
+  "utilityLayer": "World",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Mesh",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Mesh object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "MeshObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: check if a mesh animation is playing.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Mesh Animation"
+  ]
+}

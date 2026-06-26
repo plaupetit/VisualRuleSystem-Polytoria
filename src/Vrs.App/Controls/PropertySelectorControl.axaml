@@ -1,0 +1,172 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:Vrs.App.Controls"
+             xmlns:vm="using:Vrs.App.ViewModels"
+             x:Class="Vrs.App.Controls.PropertySelectorControl"
+             x:DataType="vm:NodeParameterEditorViewModel">
+    <Border Background="{Binding EditorBackgroundHex}"
+            BorderBrush="{Binding EditorBorderHex}"
+            BorderThickness="1"
+            Padding="{Binding EditorPadding}"
+            Margin="{Binding EditorMargin}"
+            IsVisible="{Binding IsVisible}"
+            ToolTip.Tip="{Binding TooltipText}">
+        <Grid RowDefinitions="Auto,Auto">
+            <Grid Grid.Row="0" ColumnDefinitions="138,*" ColumnSpacing="10">
+                <Grid Grid.Column="0" ColumnDefinitions="Auto,*" ColumnSpacing="7">
+                    <Border Grid.Column="0"
+                        Width="{Binding TypeIconBoxSize}"
+                        Height="{Binding TypeIconBoxSize}"
+                        CornerRadius="4"
+                        BorderBrush="{Binding TypeIconAccentHex}"
+                        Background="{Binding TypeIconBackgroundHex}"
+                        BorderThickness="1"
+                        ToolTip.Tip="{Binding TypeIconTooltip}">
+                        <Svg Path="{Binding TypeIconPath}"
+                         Width="{Binding TypeIconGlyphSize}"
+                         Height="{Binding TypeIconGlyphSize}"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" Spacing="2">
+                        <TextBlock Text="{Binding Label}" FontWeight="SemiBold" FontSize="{Binding ParameterLabelFontSize}" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding TypeIconLabel}" Foreground="{Binding TypeIconAccentHex}" FontSize="{Binding ParameterTypeFontSize}" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Grid.Column="1" Spacing="5">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="7">
+                        <Border Grid.Column="0"
+                            Width="{Binding SourceIconBoxSize}"
+                            Height="{Binding SourceIconBoxSize}"
+                            CornerRadius="4"
+                            BorderBrush="{Binding SourceIconAccentHex}"
+                            Background="{Binding SourceIconBackgroundHex}"
+                            BorderThickness="1"
+                            ToolTip.Tip="{Binding SourceIconTooltip}">
+                            <Svg Path="{Binding SourceIconPath}"
+                             Width="{Binding SourceIconGlyphSize}"
+                             Height="{Binding SourceIconGlyphSize}"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                        </Border>
+                        <controls:SearchableChoicePickerControl Grid.Column="1"
+                                                                 ItemsSource="{Binding SourceKindChoices}"
+                                                                 SelectedValue="{Binding SourceKindKey, Mode=TwoWay}"
+                                                                 PlaceholderText="Choose value source"
+                                                                 SearchPlaceholderText="Search value sources..."
+                                                                 PopupTitle="Choose Value Source"
+                                                                 PopupBreadcrumb="Value Sources"
+                                                                 UseFolderNavigation="True"
+                                                                 ToolTip.Tip="{Binding SourceIconTooltip}"/>
+                    </Grid>
+
+                    <StackPanel Spacing="4" IsVisible="{Binding UsesConstantValue}">
+                        <TextBox Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             IsVisible="{Binding UsesText}"
+                             ToolTip.Tip="{Binding ValueInputTooltip}"/>
+                        <NumericUpDown Value="{Binding NumberValue, Mode=TwoWay}"
+                                    Minimum="-1000000"
+                                    Maximum="1000000"
+                                    Increment="0.1"
+                                    IsVisible="{Binding UsesNumber}"
+                                    ToolTip.Tip="{Binding ValueInputTooltip}"/>
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6" IsVisible="{Binding UsesVector3}">
+                            <StackPanel Grid.Column="0" Spacing="2">
+                                <TextBlock Text="X" FontSize="10" Foreground="#9eb3c8" FontWeight="SemiBold"/>
+                                <NumericUpDown Value="{Binding VectorX, Mode=TwoWay}"
+                                           Minimum="-1000000"
+                                           Maximum="1000000"
+                                           Increment="0.1"
+                                           ToolTip.Tip="{Binding ValueInputTooltip}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Spacing="2">
+                                <TextBlock Text="Y" FontSize="10" Foreground="#9eb3c8" FontWeight="SemiBold"/>
+                                <NumericUpDown Value="{Binding VectorY, Mode=TwoWay}"
+                                           Minimum="-1000000"
+                                           Maximum="1000000"
+                                           Increment="0.1"
+                                           ToolTip.Tip="{Binding ValueInputTooltip}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Spacing="2">
+                                <TextBlock Text="Z" FontSize="10" Foreground="#9eb3c8" FontWeight="SemiBold"/>
+                                <NumericUpDown Value="{Binding VectorZ, Mode=TwoWay}"
+                                           Minimum="-1000000"
+                                           Maximum="1000000"
+                                           Increment="0.1"
+                                           ToolTip.Tip="{Binding ValueInputTooltip}"/>
+                            </StackPanel>
+                        </Grid>
+                        <CheckBox IsChecked="{Binding BooleanValue, Mode=TwoWay}"
+                              Content="{Binding Value}"
+                              IsVisible="{Binding UsesBoolean}"
+                              ToolTip.Tip="{Binding ValueInputTooltip}"/>
+                        <ComboBox ItemsSource="{Binding InputChoiceSourceFilterChoices}"
+                                  SelectedItem="{Binding InputChoiceSourceFilter, Mode=TwoWay}"
+                                  IsVisible="{Binding ShowsInputChoiceSourceFilter}"
+                                  MinHeight="26"
+                                  HorizontalAlignment="Stretch"
+                                  ToolTip.Tip="Filter input actions by project actions, VRS presets, or both."/>
+                        <controls:SearchableChoicePickerControl ItemsSource="{Binding OptionChoices}"
+                                                             SelectedValue="{Binding Value, Mode=TwoWay}"
+                                                             PlaceholderText="Choose option"
+                                                             SearchPlaceholderText="Search options..."
+                                                             PopupTitle="Choose Option"
+                                                             PopupBreadcrumb="Options"
+                                                             IsVisible="{Binding UsesChoice}"
+                                                             ToolTip.Tip="{Binding ChoicePickerTooltip}"/>
+                        <controls:SearchableChoicePickerControl ItemsSource="{Binding SceneObjectChoices}"
+                                                             SelectedValue="{Binding Value, Mode=TwoWay}"
+                                                             PlaceholderText="Choose object"
+                                                             SearchPlaceholderText="Search objects..."
+                                                             PopupTitle="Choose Object"
+                                                             PopupBreadcrumb="Object Sources"
+                                                             UseFolderNavigation="True"
+                                                             IsVisible="{Binding UsesSceneObject}"
+                                                             ToolTip.Tip="{Binding SceneObjectPickerTooltip}"/>
+                    </StackPanel>
+
+                    <Grid ColumnDefinitions="*,120" ColumnSpacing="8" IsVisible="{Binding UsesVariableSelector}">
+                        <TextBox Grid.Column="0"
+                             Text="{Binding VariableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             PlaceholderText="variable name"
+                             ToolTip.Tip="{Binding VariableNameTooltip}"/>
+                        <controls:SearchableChoicePickerControl Grid.Column="1"
+                                                             ItemsSource="{Binding VariableScopeChoices}"
+                                                             SelectedValue="{Binding VariableScopeKey, Mode=TwoWay}"
+                                                             PlaceholderText="Scope"
+                                                             SearchPlaceholderText="Search scopes..."
+                                                             PopupTitle="Choose Variable Scope"
+                                                             PopupBreadcrumb="Variable Scopes"
+                                                             UseFolderNavigation="True"
+                                                             ToolTip.Tip="{Binding VariableScopePickerTooltip}"/>
+                    </Grid>
+
+                    <controls:SearchableChoicePickerControl ItemsSource="{Binding SceneObjectChoices}"
+                                                         SelectedValue="{Binding SceneObjectPath, Mode=TwoWay}"
+                                                         PlaceholderText="Choose object"
+                                                         SearchPlaceholderText="Search objects..."
+                                                         PopupTitle="Choose Object"
+                                                         PopupBreadcrumb="Object Sources"
+                                                         UseFolderNavigation="True"
+                                                         IsVisible="{Binding UsesSceneObjectSelector}"
+                                                         ToolTip.Tip="{Binding SceneObjectPickerTooltip}"/>
+
+                    <StackPanel Spacing="5" IsVisible="{Binding UsesCatalogValue}">
+                        <controls:PropertyRecipePickerControl/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <ItemsControl Grid.Row="1"
+                          ItemsSource="{Binding RecipeParameters}"
+                          IsVisible="{Binding UsesCatalogValue}"
+                          Margin="{Binding RecipeParameterListMargin}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:NodeParameterEditorViewModel">
+                        <controls:PropertySelectorControl/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Border>
+</UserControl>

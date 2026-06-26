@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player State",
+  "idBase": "ACT_AddPlayerNumber",
+  "type": "AddPlayerNumber",
+  "apiType": "VRS.PlayerState",
+  "label": "Add Player Number",
+  "value": "player=;key=Score;amount=1",
+  "description": "Adds to a named temporary number for one player.",
+  "status": "Ready",
+  "previewTemplate": "Add ${amount} to player number ${key}",
+  "searchKeywords": ["do", "obby", "parcours", "player", "state", "number", "score", "add"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player whose number changes. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Score", "description": "Name of the temporary number.", "valueSource": "Suggested Value" },
+    { "key": "amount", "label": "Amount", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Amount to add.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do add to a temporary player number.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

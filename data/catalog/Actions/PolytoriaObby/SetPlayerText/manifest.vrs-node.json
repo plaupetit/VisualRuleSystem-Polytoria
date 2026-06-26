@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.obby.actions",
+  "kind": "Action",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player State",
+  "idBase": "ACT_SetPlayerText",
+  "type": "SetPlayerText",
+  "apiType": "VRS.PlayerState",
+  "label": "Set Player Text",
+  "value": "player=;key=Label;value=",
+  "description": "Stores a temporary text value for one player.",
+  "status": "Ready",
+  "previewTemplate": "Set player text ${key}",
+  "searchKeywords": ["do", "obby", "parcours", "player", "state", "text", "label", "string"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player whose text changes. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Label", "description": "Name of the temporary text.", "valueSource": "Suggested Value" },
+    { "key": "value", "label": "Value", "type": "String", "control": "Text", "required": false, "default": "", "description": "Text to store.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do set temporary text for this player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Temporary Player Values"
+  ]
+}

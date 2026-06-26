@@ -1,0 +1,23 @@
+{
+  "moduleId": "polytoria.players.values",
+  "kind": "Property",
+  "apiGroup": "Players",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Players",
+  "idBase": "PROP_LocalPlayer",
+  "type": "LocalPlayer",
+  "apiType": "Any",
+  "label": "Local Player",
+  "value": "",
+  "description": "Outputs the current client player.",
+  "status": "Ready",
+  "previewTemplate": "Local player",
+  "searchKeywords": ["value", "player", "local", "client", "self"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: use the player running this client script.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Context"]
+}

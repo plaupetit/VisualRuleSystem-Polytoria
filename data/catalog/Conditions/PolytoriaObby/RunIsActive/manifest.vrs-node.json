@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.obby.conditions",
+  "kind": "Condition",
+  "apiGroup": "Obby",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player State",
+  "idBase": "COND_RunIsActive",
+  "type": "RunIsActive",
+  "apiType": "VRS.PlayerState",
+  "label": "Run Is Active",
+  "value": "player=",
+  "description": "Checks whether the player's run timer has started and is not finished.",
+  "status": "Ready",
+  "previewTemplate": "Run is active",
+  "searchKeywords": ["check", "obby", "parcours", "run", "timer", "active", "started"],
+  "corePack": true,
+  "familyFolder": "Polytoria Obby",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to check. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Check whether the player's run is currently active.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Obby",
+    "Run State"
+  ]
+}

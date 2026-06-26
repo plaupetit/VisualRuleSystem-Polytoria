@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.scene.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectLeftHeightBand",
+  "type": "OnObjectLeftHeightBand",
+  "apiType": "Part",
+  "label": "On Object Left Height Band",
+  "value": "target=Self;minHeight=0;maxHeight=10;interval=0.25",
+  "description": "Runs when an object's height leaves a chosen band.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} height leaves ${minHeight} to ${maxHeight}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["object", "area", "height", "band", "left", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Object", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "Watched Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "minHeight", "label": "Minimum Height", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Lowest height that counts as inside.", "valueSource": "Suggested Value" },
+    { "key": "maxHeight", "label": "Maximum Height", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Highest height that counts as inside.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the object.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When an object's height leaves a chosen band after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Zones"]
+}

@@ -1,0 +1,62 @@
+{
+  "moduleId": "core.general.variables",
+  "kind": "Action",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Variables",
+  "idBase": "ACT_DecrementScriptNumber",
+  "type": "DecrementScriptNumber",
+  "apiType": "Number",
+  "label": "Decrement Script Number",
+  "value": "name=Score;amount=1",
+  "description": "Subtracts a number from a script variable.",
+  "status": "Ready",
+  "previewTemplate": "Subtract ${amount} from ${name}",
+  "searchKeywords": [
+    "variable",
+    "number",
+    "subtract",
+    "decrement",
+    "score",
+    "minus"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "name",
+      "label": "Variable Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Variable to update.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Amount to subtract.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do subtract from a saved script number like Score or Health.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Script Numbers"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Variables & State"
+    ]
+  ]
+}
+

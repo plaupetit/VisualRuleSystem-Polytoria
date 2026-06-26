@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.vector.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Transform",
+  "idBase": "PROP_VectorFromXYZ",
+  "type": "VectorFromXYZ",
+  "apiType": "Vector3",
+  "label": "Vector From XYZ",
+  "value": "x=0;y=0;z=0",
+  "description": "Builds a 3D vector from separate number properties.",
+  "status": "Ready",
+  "previewTemplate": "Vector from ${x}, ${y}, ${z}",
+  "searchKeywords": ["value", "vector", "vector3", "position", "rotation", "scale", "x", "y", "z", "math"],
+  "corePack": true,
+  "familyFolder": "Core Values",
+  "utilityLayer": "Values",
+  "parameters": [
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "X component.", "valueSource": "Suggested Value" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Y component.", "valueSource": "Suggested Value" },
+    { "key": "z", "label": "Z", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Z component.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: combine three numbers into a 3D vector.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Vector"
+  ]
+}

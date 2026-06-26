@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.effects.particles",
+  "kind": "Action",
+  "apiGroup": "Effects",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Particles",
+  "idBase": "ACT_StopParticles",
+  "type": "StopParticles",
+  "apiType": "Particles",
+  "label": "Stop Particles",
+  "value": "target=Self",
+  "description": "Stops a particle effect.",
+  "status": "Ready",
+  "previewTemplate": "Stop particles on ${target}",
+  "searchKeywords": [
+    "effects",
+    "particles",
+    "stop",
+    "spark"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Effects",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Particles",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Particle effect to stop.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ParticleObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do stop a particle effect.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Effects",
+    "Particles"
+  ]
+}

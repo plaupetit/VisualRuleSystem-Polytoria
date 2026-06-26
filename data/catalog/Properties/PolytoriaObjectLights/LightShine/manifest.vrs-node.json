@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.lighting.object.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_LightShine",
+  "type": "LightShine",
+  "apiType": "Number",
+  "label": "Light Shine",
+  "value": "target=Self",
+  "description": "Outputs how shiny a light looks on surfaces.",
+  "status": "Ready",
+  "previewTemplate": "Shine of ${target}",
+  "searchKeywords": [
+    "lighting",
+    "light",
+    "shine",
+    "specular"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "LightObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use how shiny a light looks on surfaces.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Lighting",
+    "Light Settings"
+  ]
+}

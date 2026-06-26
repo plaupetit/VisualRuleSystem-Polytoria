@@ -1,0 +1,89 @@
+{
+  "moduleId": "core.scripting.raw",
+  "kind": "Trigger",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Script",
+  "idBase": "EV_RunLuauTrigger",
+  "type": "RunLuauTrigger",
+  "apiType": "Script",
+  "label": "Run Code Trigger",
+  "value": "target=Self",
+  "description": "Runs setup code that can start connected nodes by calling fire.",
+  "comment": "[VSR] Advanced raw Luau trigger. The exported code provides fire(customContext) for graph flow.",
+  "status": "Ready",
+  "previewTemplate": "Run code trigger on ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "run",
+    "luau",
+    "lua",
+    "code",
+    "script",
+    "raw",
+    "custom",
+    "advanced",
+    "fire",
+    "callback"
+  ],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "dataType": "SceneObject",
+      "allowedSources": [
+        "Self",
+        "Target",
+        "SceneObject"
+      ],
+      "allowedScopes": [
+        "Script",
+        "State",
+        "Graph"
+      ]
+    }
+  ],
+  "debugHints": [
+    "The code can use triggerObject, triggerContext, VRS, resolveTarget, makeVector3, and fire(customContext).",
+    "Call fire({ value = ... }) whenever the connected visual flow should run."
+  ],
+  "corePack": true,
+  "familyFolder": "Advanced Scripting",
+  "utilityLayer": "Advanced",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Concerned Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "valueSource": "Target Context",
+      "description": "Object used as the default flow object.",
+      "acceptedObjectGroups": [ "Any" ]
+    },
+    {
+      "key": "code",
+      "label": "Script Code",
+      "type": "Code",
+      "control": "Code",
+      "required": true,
+      "default": "fire({ value = true })",
+      "valueSource": "Manual Script Input",
+      "description": "Runs setup code. Call fire from that code when the connected nodes should run."
+    }
+  ],
+  "beginnerSummary": "Run authored script code that decides when the connected flow starts.",
+  "surface": "Advanced",
+  "palettePath": [
+    "Flow & Timing",
+    "Script"
+  ],
+  "paletteAliases": [
+    [
+      "Variables",
+      "Script"
+    ]
+  ]
+}

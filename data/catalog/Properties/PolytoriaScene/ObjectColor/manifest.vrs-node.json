@@ -1,0 +1,46 @@
+{
+  "moduleId": "polytoria.scene.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_ObjectColor",
+  "type": "ObjectColor",
+  "apiType": "Color",
+  "label": "Object Color",
+  "value": "target=Self",
+  "description": "Outputs the current color of a scene object.",
+  "status": "Ready",
+  "previewTemplate": "Color of ${target}",
+  "searchKeywords": [
+    "object",
+    "part",
+    "color",
+    "read",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose color will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    }
+  ],
+  "beginnerSummary": "Value: use the color of an object.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Color"
+  ]
+}
+

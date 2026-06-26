@@ -1,0 +1,66 @@
+{
+  "moduleId": "core.general.logic",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Math",
+  "idBase": "COND_NumberInRange",
+  "type": "NumberInRange",
+  "apiType": "Number",
+  "label": "Number In Range",
+  "value": "value=0;min=0;max=1",
+  "description": "Checks whether a number is between a minimum and maximum.",
+  "status": "Ready",
+  "previewTemplate": "Is ${value} between ${min} and ${max}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "number",
+    "range",
+    "between",
+    "min",
+    "max",
+    "math"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "value",
+      "label": "Number",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to test.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "min",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Lowest accepted value.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "max",
+      "label": "Maximum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Highest accepted value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a number stays between a minimum and maximum.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Range"
+  ]
+}

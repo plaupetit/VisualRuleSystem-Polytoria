@@ -1,0 +1,53 @@
+{
+  "kind": "Action",
+  "apiGroup": "Scripting",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Timing",
+  "idBase": "ACT_WaitSeconds",
+  "type": "WaitSeconds",
+  "apiType": "Script",
+  "label": "Wait Seconds",
+  "value": "duration=1;waitToComplete=true",
+  "description": "Waits before the next action. Example: wait, then show message.",
+  "comment": "[VSR] Simple wait action for readable timing.",
+  "status": "Ready",
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "sketcher": "sketcher.vrs-test.json",
+  "parameters": [
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "required": true,
+      "default": "1",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "required": true,
+      "default": "true",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "templates": {
+    "server": "export.server.luau.tpl"
+  },
+  "beginnerSummary": "Do wait before continuing to the next node.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Flow & Timing",
+    "Timing"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Flow & Timing"
+    ]
+  ]
+}
+

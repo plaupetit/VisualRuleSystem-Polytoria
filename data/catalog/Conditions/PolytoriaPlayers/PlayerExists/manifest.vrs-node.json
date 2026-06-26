@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.players.conditions",
+  "kind": "Condition",
+  "apiGroup": "Players",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Players",
+  "idBase": "COND_PlayerExists",
+  "type": "PlayerExists",
+  "apiType": "Players",
+  "label": "Player Exists",
+  "value": "username=",
+  "description": "Checks whether a player with a username is currently connected.",
+  "status": "Ready",
+  "previewTemplate": "Player ${username} exists",
+  "searchKeywords": ["check", "player", "exists", "find", "username", "online"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "username", "label": "Username", "type": "String", "control": "Text", "required": true, "default": "", "description": "Player username to check.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Check if a named player is connected.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Lookup"]
+}

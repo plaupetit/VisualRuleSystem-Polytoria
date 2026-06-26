@@ -1,0 +1,62 @@
+{
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectColor",
+  "type": "SetObjectColor",
+  "apiType": "Color",
+  "label": "Set Object Color",
+  "value": "target=Part;r=1;g=1;b=1",
+  "description": "Sets a target object's color. Example: set Part to white.",
+  "comment": "[VSR] Keeps color channels explicit from 0 to 1.",
+  "previewTemplate": "Do Set Object Color: ${target} to RGB(${r}, ${g}, ${b})",
+  "status": "Ready",
+  "corePack": true,
+  "familyFolder": "Generic Toolkit",
+  "utilityLayer": "Generic",
+  "sketcher": "sketcher.vrs-test.json",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Part",
+      "valueSource": "Scene Object Picker",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "required": true,
+      "default": "1",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "required": true,
+      "default": "1",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "required": true,
+      "default": "1",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change the color of a Part in the scene.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Color"
+  ]
+}

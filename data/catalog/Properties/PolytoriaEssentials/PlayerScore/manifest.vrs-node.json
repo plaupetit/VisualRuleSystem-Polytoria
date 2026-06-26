@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Property",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player",
+  "idBase": "PROP_PlayerScore",
+  "type": "PlayerScore",
+  "apiType": "Number",
+  "label": "Player Score",
+  "value": "",
+  "description": "Outputs the triggering player's temporary score.",
+  "status": "Ready",
+  "previewTemplate": "Triggering player score",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "score",
+    "points",
+    "value",
+    "stat"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value: current score for the triggering player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

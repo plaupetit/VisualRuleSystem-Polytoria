@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player",
+  "idBase": "COND_PlayerScoreAtLeast",
+  "type": "PlayerScoreAtLeast",
+  "apiType": "RuntimeState",
+  "label": "Player Score At Least",
+  "value": "minimum=10",
+  "description": "Checks whether the triggering player score is high enough.",
+  "status": "Ready",
+  "previewTemplate": "Player score >= ${minimum}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "score",
+    "points",
+    "minimum",
+    "check"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "minimum",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Smallest accepted score.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if the triggering player has enough score.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Score"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

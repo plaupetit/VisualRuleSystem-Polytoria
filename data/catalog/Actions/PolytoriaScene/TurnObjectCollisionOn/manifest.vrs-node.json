@@ -1,0 +1,53 @@
+{
+  "moduleId": "polytoria.scene.object",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_TurnObjectCollisionOn",
+  "type": "TurnObjectCollisionOn",
+  "apiType": "Part",
+  "label": "Turn Object Collision On",
+  "value": "target=Self",
+  "description": "Makes a scene object solid when the object supports collision.",
+  "status": "Ready",
+  "previewTemplate": "Turn ${target} collision on",
+  "searchKeywords": [
+    "object",
+    "collision",
+    "solid",
+    "block",
+    "part"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object that should become solid.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do turn object collision on.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Collision"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

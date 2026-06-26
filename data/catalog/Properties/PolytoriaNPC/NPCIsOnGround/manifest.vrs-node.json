@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.npc",
+  "kind": "Property",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "NPC Movement",
+  "idBase": "PROP_NPCIsOnGround",
+  "type": "NPCIsOnGroundValue",
+  "apiType": "NPC",
+  "label": "NPC Is On Ground",
+  "value": "target=Self",
+  "description": "Reads whether an NPC is standing on the ground.",
+  "status": "Ready",
+  "previewTemplate": "Whether ${target} is on the ground",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "npc",
+    "ground",
+    "landed",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria NPC",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "NPC",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "NPC to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "NPCObject"
+      ],
+      "acceptedSceneRoots": [
+        "World"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value reads whether an NPC is standing on the ground.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "NPC Movement"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.scene.transform",
+  "kind": "Action",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetObjectHeightSize",
+  "type": "SetObjectHeightSize",
+  "apiType": "Part",
+  "label": "Set Object Height Size",
+  "value": "target=Self;size=2",
+  "description": "Changes how tall an object is without changing its width or depth.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} height size to ${size}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "size",
+    "scale",
+    "height",
+    "tall",
+    "y"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to resize.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    },
+    {
+      "key": "size",
+      "label": "Height Size",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "2",
+      "description": "New up-down size.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change an object's height while keeping the other size values.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Dimensions"]
+}

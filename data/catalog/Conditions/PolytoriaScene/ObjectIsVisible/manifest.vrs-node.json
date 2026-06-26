@@ -1,0 +1,49 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsVisible",
+  "type": "ObjectIsVisible",
+  "apiType": "Instance",
+  "label": "Object Is Visible",
+  "value": "target=Self",
+  "description": "Checks whether an object appears visible when visibility data is available.",
+  "status": "Ready",
+  "previewTemplate": "${target} is visible",
+  "searchKeywords": [
+    "check",
+    "object",
+    "part",
+    "visible",
+    "invisible",
+    "hide",
+    "show",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    }
+  ],
+  "beginnerSummary": "Check if an object is currently visible.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Visibility"
+  ]
+}
+

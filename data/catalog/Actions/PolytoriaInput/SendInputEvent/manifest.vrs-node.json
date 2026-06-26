@@ -1,0 +1,43 @@
+{
+  "moduleId": "polytoria.input.actions",
+  "kind": "Action",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Input",
+  "idBase": "ACT_SendInputEvent",
+  "type": "SendInputEvent",
+  "apiType": "NetworkEvent",
+  "label": "Send Input Event",
+  "value": "inputAction=Jump",
+  "description": "Invokes the VRS NetworkEvent for a named client input action.",
+  "status": "Ready",
+  "previewTemplate": "Send input ${inputAction} to server",
+  "searchKeywords": [
+    "input",
+    "networkevent",
+    "network event",
+    "send",
+    "invoke server",
+    "client",
+    "server"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "inputAction",
+      "label": "Input Action",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Jump",
+      "description": "Button input action whose VRS NetworkEvent should be invoked.",
+      "valueSource": "String / Choice"
+    }
+  ],
+  "beginnerSummary": "Client action: send an input event to a server VRS script.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

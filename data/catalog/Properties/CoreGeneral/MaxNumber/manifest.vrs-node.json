@@ -1,0 +1,30 @@
+{
+  "moduleId": "core.general.math",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Math",
+  "idBase": "PROP_MaxNumber",
+  "type": "MaxNumber",
+  "apiType": "Number",
+  "label": "Maximum Number",
+  "value": "left=0;right=1",
+  "description": "Outputs the larger of two numbers.",
+  "status": "Ready",
+  "previewTemplate": "Max ${left}, ${right}",
+  "searchKeywords": ["math", "maximum", "max", "larger", "number"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "left", "label": "Left Number", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "First number.", "valueSource": "Suggested Value" },
+    { "key": "right", "label": "Right Number", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Second number.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Value: use the larger of two numbers.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Math",
+    "Range"
+  ]
+}

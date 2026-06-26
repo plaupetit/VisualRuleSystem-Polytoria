@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player",
+  "idBase": "COND_PlayerTeamIs",
+  "type": "PlayerTeamIs",
+  "apiType": "RuntimeState",
+  "label": "Player Team Is",
+  "value": "teamName=Players",
+  "description": "Checks whether the triggering player's temporary team matches a label.",
+  "status": "Ready",
+  "previewTemplate": "Player team is ${teamName}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "player",
+    "team",
+    "check",
+    "runtime",
+    "group"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "teamName",
+      "label": "Team Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Players",
+      "description": "Expected temporary team label.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Check if the triggering player is in a temporary team.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Team"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Player"
+    ]
+  ]
+}
+

@@ -1,0 +1,28 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Condition",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Text",
+  "idBase": "COND_TextEndsWith",
+  "type": "TextEndsWith",
+  "apiType": "String",
+  "label": "Text Ends With",
+  "value": "text=Hello World;suffix=World;caseSensitive=false",
+  "description": "Checks whether text ends with a word or phrase.",
+  "status": "Ready",
+  "previewTemplate": "${text} ends with ${suffix}",
+  "searchKeywords": ["check", "text", "string", "ends", "suffix", "finish"],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    { "key": "text", "label": "Text", "type": "String", "control": "Text", "required": true, "default": "Hello World", "description": "Text to inspect.", "valueSource": "String / Manual Text Input" },
+    { "key": "suffix", "label": "Ends With", "type": "String", "control": "Text", "required": true, "default": "World", "description": "Text expected at the end.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Case Sensitive", "type": "Boolean", "control": "Boolean", "required": true, "default": "false", "description": "Checked means uppercase and lowercase must match.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if text ends with specific text.",
+  "surface": "UserFacing",
+  "palettePath": ["Text", "Match"]
+}

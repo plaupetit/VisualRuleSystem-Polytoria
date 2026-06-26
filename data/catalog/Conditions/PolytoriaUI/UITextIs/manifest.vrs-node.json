@@ -1,0 +1,73 @@
+{
+  "moduleId": "polytoria.ui",
+  "kind": "Condition",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "Custom UI",
+  "idBase": "COND_UITextIs",
+  "type": "UITextIs",
+  "apiType": "UILabel",
+  "label": "UI Text Is",
+  "value": "target=Self;text=Hello;caseSensitive=false",
+  "description": "Checks if a UI label or button shows the expected text.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} text is ${text}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "ui",
+    "interface",
+    "text",
+    "label",
+    "equals",
+    "match"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria UI",
+  "utilityLayer": "UI",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "UI Text Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "UI label or button to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "UILabelObject"
+      ],
+      "acceptedSceneRoots": [
+        "PlayerGUI",
+        "CoreUI"
+      ]
+    },
+    {
+      "key": "text",
+      "label": "Expected Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text to compare with.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "caseSensitive",
+      "label": "Match Exact Capitals",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "false",
+      "description": "Checked means capital letters must match too.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if UI text matches a text value.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "UI & Feedback",
+    "Custom UI"
+  ]
+}

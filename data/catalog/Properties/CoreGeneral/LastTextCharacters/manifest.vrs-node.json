@@ -1,0 +1,55 @@
+{
+  "moduleId": "core.general.text",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Text",
+  "idBase": "PROP_LastTextCharacters",
+  "type": "LastTextCharacters",
+  "apiType": "String",
+  "label": "Last Text Characters",
+  "value": "text=Hello;count=3",
+  "description": "Outputs the last characters of a text.",
+  "status": "Ready",
+  "previewTemplate": "Last ${count} characters",
+  "searchKeywords": [
+    "text",
+    "last",
+    "characters",
+    "extract",
+    "right",
+    "message"
+  ],
+  "corePack": true,
+  "familyFolder": "Core General",
+  "utilityLayer": "Generic",
+  "parameters": [
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text to read from.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "count",
+      "label": "Count",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "3",
+      "description": "How many characters to keep.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Value: keep the last characters of a text.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Text",
+    "Extract"
+  ]
+}

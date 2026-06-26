@@ -1,0 +1,54 @@
+{
+  "moduleId": "polytoria.scene.conditions",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_ObjectIsHidden",
+  "type": "ObjectIsHidden",
+  "apiType": "Part",
+  "label": "Object Is Hidden",
+  "value": "target=Self",
+  "description": "Checks whether a scene object is currently hidden when visibility data is available.",
+  "status": "Ready",
+  "previewTemplate": "${target} is hidden",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "object",
+    "hidden",
+    "invisible",
+    "visibility",
+    "scene"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene",
+  "utilityLayer": "Scene",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "PartLike"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a scene object is hidden.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Visibility"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Scene Object"
+    ]
+  ]
+}

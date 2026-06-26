@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.essentials.runtime",
+  "kind": "Condition",
+  "apiGroup": "Essentials",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Game Rules",
+  "idBase": "COND_RoundHasTimeLeft",
+  "type": "RoundHasTimeLeft",
+  "apiType": "RuntimeState",
+  "label": "Round Has Time Left",
+  "value": "roundName=Main Round",
+  "description": "Checks whether a named round is running and still has time left.",
+  "status": "Ready",
+  "previewTemplate": "${roundName} has time left",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "round",
+    "timer",
+    "time",
+    "countdown",
+    "game rules"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Essentials",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "roundName",
+      "label": "Round Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Main Round",
+      "description": "Temporary round name.",
+      "valueSource": "Temporary Name"
+    }
+  ],
+  "beginnerSummary": "Check if a named round still has time left.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Round"
+  ],
+  "paletteAliases": [
+    [
+      "Essentials",
+      "Game Rules"
+    ]
+  ]
+}
