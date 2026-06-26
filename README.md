@@ -31,6 +31,11 @@ It can also help text-first scripters inspect generated Luau patterns that work
 with Polytoria's APIs and project workflow, even when the visual graph becomes
 large, verbose, or messy.
 
+In theory, VRS can be used to build complex gameplay logic. In practice, that
+is not the main purpose that defines the project: VRS is primarily about making
+common logic easier to express, inspect, test, and iterate through a visual
+workflow.
+
 The maintainer personally relies on visual programming workflows and does not
 currently write code directly. Even when experienced developers describe text
 programming as easy, it is not equally accessible to everyone. This project
