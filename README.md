@@ -18,6 +18,18 @@ This project was created with AI assistance. AI-assisted generation does not
 change the license terms applied to files in this repository or to third-party
 materials.
 
+## Purpose and Expectations
+
+VRS is aimed at artists, level designers, and non-scripters who want a more
+human-readable way to create simple gameplay logic for Polytoria 2.0. It can
+help people script through a node graph, but it has limitations and is not a
+replacement for an experienced human scripter.
+
+The maintainer cannot guarantee that every feature or generated script works
+perfectly in every project. The goal is to test the tool, ask other users to
+test it, document known problems, and fix issues progressively as they are
+found.
+
 ## Status
 
 This is a working prototype, not a finished product. The current editor includes:
