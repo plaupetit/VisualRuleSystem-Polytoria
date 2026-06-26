@@ -5,7 +5,7 @@ Do not treat the percentages as a promise that every runtime behavior is impleme
 
 ## Sources
 
-- Generated UTC: `2026-06-26T15:51:42.1965979+00:00`
+- Generated UTC: `2026-06-26T16:21:10.2245597+00:00`
 - Docs-v2: `270a4c66f03f` (2026-05-08) from https://github.com/Polytoria/Docs-v2
 - lua-definitions: `af1a720fecbe` (2026-02-26) from https://github.com/Polytoria/lua-definitions
 
@@ -21,6 +21,21 @@ Do not treat the percentages as a promise that every runtime behavior is impleme
 | API types without VRS coverage | 125 |
 | Low-confidence / inferred catalog nodes | 553 |
 | Catalog nodes without API metadata | 0 |
+
+## Coverage Percentages
+
+| Metric | Percentage | Fraction |
+| --- | ---: | ---: |
+| API types with any VRS coverage | 20.38% | 32/157 |
+| API types without VRS coverage | 79.62% | 125/157 |
+| Direct API type coverage | 1.91% | 3/157 |
+| Partial API type coverage | 0% | 0/157 |
+| Indirect or synthetic API type coverage | 0% | 0/157 |
+| Inferred API type coverage | 18.47% | 29/157 |
+| Low-confidence / inferred catalog nodes | 99.1% | 553/558 |
+| Catalog nodes without API metadata | 0% | 0/558 |
+
+The main coverage percentage is type-level coverage, not member-level coverage. It does not yet count every property, method, or event separately.
 
 ## Catalog Nodes By Kind
 

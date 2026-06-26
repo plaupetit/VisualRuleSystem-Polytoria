@@ -56,7 +56,15 @@ public sealed record CoverageSummary(
     int IndirectOrSyntheticTypeCount,
     int InferredTypeCount,
     int LowConfidenceNodeCount,
-    int NodesWithoutApiReference);
+    int NodesWithoutApiReference,
+    double TypesWithAnyCoveragePercent,
+    double TypesWithoutCoveragePercent,
+    double DirectTypePercent,
+    double PartialTypePercent,
+    double IndirectOrSyntheticTypePercent,
+    double InferredTypePercent,
+    double LowConfidenceNodePercent,
+    double NodesWithoutApiReferencePercent);
 
 public sealed record TypeCoverageRow(
     string Type,

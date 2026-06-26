@@ -1,4 +1,5 @@
 using System.Text;
+using System.Globalization;
 
 namespace Vrs.Tools.PolytoriaApiCoverage;
 
@@ -30,6 +31,21 @@ public static class ApiCoverageMarkdownWriter
         builder.AppendLine($"| API types without VRS coverage | {result.Summary.TypesWithoutCoverage} |");
         builder.AppendLine($"| Low-confidence / inferred catalog nodes | {result.Summary.LowConfidenceNodeCount} |");
         builder.AppendLine($"| Catalog nodes without API metadata | {result.Summary.NodesWithoutApiReference} |");
+        builder.AppendLine();
+        builder.AppendLine("## Coverage Percentages");
+        builder.AppendLine();
+        builder.AppendLine("| Metric | Percentage | Fraction |");
+        builder.AppendLine("| --- | ---: | ---: |");
+        builder.AppendLine($"| API types with any VRS coverage | {Percent(result.Summary.TypesWithAnyCoveragePercent)} | {result.Summary.TypesWithAnyCoverage}/{result.Summary.OfficialTypes} |");
+        builder.AppendLine($"| API types without VRS coverage | {Percent(result.Summary.TypesWithoutCoveragePercent)} | {result.Summary.TypesWithoutCoverage}/{result.Summary.OfficialTypes} |");
+        builder.AppendLine($"| Direct API type coverage | {Percent(result.Summary.DirectTypePercent)} | {result.Summary.DirectTypeCount}/{result.Summary.OfficialTypes} |");
+        builder.AppendLine($"| Partial API type coverage | {Percent(result.Summary.PartialTypePercent)} | {result.Summary.PartialTypeCount}/{result.Summary.OfficialTypes} |");
+        builder.AppendLine($"| Indirect or synthetic API type coverage | {Percent(result.Summary.IndirectOrSyntheticTypePercent)} | {result.Summary.IndirectOrSyntheticTypeCount}/{result.Summary.OfficialTypes} |");
+        builder.AppendLine($"| Inferred API type coverage | {Percent(result.Summary.InferredTypePercent)} | {result.Summary.InferredTypeCount}/{result.Summary.OfficialTypes} |");
+        builder.AppendLine($"| Low-confidence / inferred catalog nodes | {Percent(result.Summary.LowConfidenceNodePercent)} | {result.Summary.LowConfidenceNodeCount}/{result.Catalog.TotalNodes} |");
+        builder.AppendLine($"| Catalog nodes without API metadata | {Percent(result.Summary.NodesWithoutApiReferencePercent)} | {result.Summary.NodesWithoutApiReference}/{result.Catalog.TotalNodes} |");
+        builder.AppendLine();
+        builder.AppendLine("The main coverage percentage is type-level coverage, not member-level coverage. It does not yet count every property, method, or event separately.");
         builder.AppendLine();
         builder.AppendLine("## Catalog Nodes By Kind");
         builder.AppendLine();
@@ -124,6 +140,11 @@ public static class ApiCoverageMarkdownWriter
         }
 
         builder.AppendLine();
+    }
+
+    private static string Percent(double value)
+    {
+        return string.Create(CultureInfo.InvariantCulture, $"{value:0.##}%");
     }
 
     private static string DateSuffix(DateTimeOffset? date)

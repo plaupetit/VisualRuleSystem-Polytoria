@@ -5600,7 +5600,7 @@
       }
     ]
   },
-  "generatedAtUtc": "2026-06-26T15:51:42.1965979+00:00",
+  "generatedAtUtc": "2026-06-26T16:21:10.2245597+00:00",
   "catalog": {
     "totalNodes": 558,
     "nodesByKind": {
@@ -5621,7 +5621,15 @@
     "indirectOrSyntheticTypeCount": 0,
     "inferredTypeCount": 29,
     "lowConfidenceNodeCount": 553,
-    "nodesWithoutApiReference": 0
+    "nodesWithoutApiReference": 0,
+    "typesWithAnyCoveragePercent": 20.38,
+    "typesWithoutCoveragePercent": 79.62,
+    "directTypePercent": 1.91,
+    "partialTypePercent": 0,
+    "indirectOrSyntheticTypePercent": 0,
+    "inferredTypePercent": 18.47,
+    "lowConfidenceNodePercent": 99.1,
+    "nodesWithoutApiReferencePercent": 0
   },
   "typeRows": [
     {

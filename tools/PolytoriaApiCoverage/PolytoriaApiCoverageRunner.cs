@@ -41,18 +41,34 @@ public static class PolytoriaApiCoverageAnalyzer
                 .OrderBy(group => group.Key, StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase));
 
+        var directTypeCount = typeRows.Count(row => row.Coverage.Equals("Direct", StringComparison.OrdinalIgnoreCase));
+        var partialTypeCount = typeRows.Count(row => row.Coverage.Equals("Partial", StringComparison.OrdinalIgnoreCase));
+        var indirectOrSyntheticTypeCount = typeRows.Count(row => row.Coverage is "Indirect" or "Synthetic");
+        var inferredTypeCount = typeRows.Count(row => row.Coverage.Equals("Inferred", StringComparison.OrdinalIgnoreCase));
+        var typesWithAnyCoverage = typeRows.Count(row => !row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
+        var typesWithoutCoverage = typeRows.Count(row => row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
+        var lowConfidenceNodeCount = rows.Count(row => row.Confidence.Equals("Low", StringComparison.OrdinalIgnoreCase) || row.Confidence.Equals("Inferred", StringComparison.OrdinalIgnoreCase));
+        var nodesWithoutApiReference = rows.Count(row => row.Coverage.Equals("NoReference", StringComparison.OrdinalIgnoreCase));
         var summary = new CoverageSummary(
             source.Types.Count,
             source.Enums.Count,
             source.Globals.Count,
-            typeRows.Count(row => !row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase)),
-            typeRows.Count(row => row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase)),
-            typeRows.Count(row => row.Coverage.Equals("Direct", StringComparison.OrdinalIgnoreCase)),
-            typeRows.Count(row => row.Coverage.Equals("Partial", StringComparison.OrdinalIgnoreCase)),
-            typeRows.Count(row => row.Coverage is "Indirect" or "Synthetic"),
-            typeRows.Count(row => row.Coverage.Equals("Inferred", StringComparison.OrdinalIgnoreCase)),
-            rows.Count(row => row.Confidence.Equals("Low", StringComparison.OrdinalIgnoreCase) || row.Confidence.Equals("Inferred", StringComparison.OrdinalIgnoreCase)),
-            rows.Count(row => row.Coverage.Equals("NoReference", StringComparison.OrdinalIgnoreCase)));
+            typesWithAnyCoverage,
+            typesWithoutCoverage,
+            directTypeCount,
+            partialTypeCount,
+            indirectOrSyntheticTypeCount,
+            inferredTypeCount,
+            lowConfidenceNodeCount,
+            nodesWithoutApiReference,
+            Percent(typesWithAnyCoverage, source.Types.Count),
+            Percent(typesWithoutCoverage, source.Types.Count),
+            Percent(directTypeCount, source.Types.Count),
+            Percent(partialTypeCount, source.Types.Count),
+            Percent(indirectOrSyntheticTypeCount, source.Types.Count),
+            Percent(inferredTypeCount, source.Types.Count),
+            Percent(lowConfidenceNodeCount, catalog.Nodes.Count),
+            Percent(nodesWithoutApiReference, catalog.Nodes.Count));
 
         return new ApiCoverageResult(
             source,
@@ -62,6 +78,11 @@ public static class PolytoriaApiCoverageAnalyzer
             typeRows,
             rows.Select(row => MarkUnknownReferences(row, officialTypes)).ToList(),
             catalog.Warnings);
+    }
+
+    private static double Percent(int value, int total)
+    {
+        return total <= 0 ? 0.0 : Math.Round(value * 100.0 / total, 2, MidpointRounding.AwayFromZero);
     }
 
     private static CatalogNodeCoverageRow ToNodeCoverageRow(NodeCatalogEntry node)
