@@ -8,6 +8,9 @@
   "idBase": "EV_OnPlayerJoined",
   "type": "OnPlayerJoined",
   "apiType": "Players",
+  "apiReferences": [
+    { "type": "Players", "memberKind": "Event", "member": "PlayerAdded", "coverage": "Direct" }
+  ],
   "label": "On Player Joined",
   "value": "target=Self",
   "description": "Starts the rule when a player joins the server.",

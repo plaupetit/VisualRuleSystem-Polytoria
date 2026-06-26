@@ -13,6 +13,7 @@ namespace Vrs.Core.Persistence;
     UseStringEnumConverter = true)]
 [JsonSerializable(typeof(RuleGraph))]
 [JsonSerializable(typeof(NodeCatalogEntry))]
+[JsonSerializable(typeof(NodeCatalogApiReference))]
 [JsonSerializable(typeof(NodeCatalogData))]
 [JsonSerializable(typeof(NodeCatalogParameterVisibilityCondition))]
 [JsonSerializable(typeof(ValidationResult))]

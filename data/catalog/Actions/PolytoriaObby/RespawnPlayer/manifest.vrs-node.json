@@ -8,6 +8,9 @@
   "idBase": "ACT_RespawnPlayer",
   "type": "RespawnPlayer",
   "apiType": "Player",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Method", "member": "Respawn", "coverage": "Direct" }
+  ],
   "label": "Respawn Player",
   "value": "player=",
   "description": "Respawns the player using the Polytoria Player Respawn method.",

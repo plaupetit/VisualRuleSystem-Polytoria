@@ -8,6 +8,9 @@
   "idBase": "ACT_SendInputEvent",
   "type": "SendInputEvent",
   "apiType": "NetworkEvent",
+  "apiReferences": [
+    { "type": "NetworkEvent", "memberKind": "Method", "member": "InvokeServer", "coverage": "Direct" }
+  ],
   "label": "Send Input Event",
   "value": "inputAction=Jump",
   "description": "Invokes the VRS NetworkEvent for a named client input action.",

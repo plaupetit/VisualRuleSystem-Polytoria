@@ -82,6 +82,16 @@ dotnet run --project src\Vrs.App\Vrs.App.csproj
 Full app, launcher, and Creator addon build steps are documented in
 [`BUILD.md`](BUILD.md).
 
+## Documentation
+
+- [User Guide](docs/USER_GUIDE.md) - navigation and interface overview.
+- [Workflows](docs/WORKFLOWS.md) - common tasks such as creating, deploying,
+  loading, and debugging VRS scripts.
+- [Troubleshooting](docs/TROUBLESHOOTING.md) - common bridge, deploy, and runtime
+  issues.
+- [Polytoria API Coverage](docs/API_COVERAGE.md) - generated coverage report for
+  public Polytoria 2.0+ API docs versus the VRS node catalog.
+
 The local root `VisualRuleSystem.exe` launcher is a developer convenience and is
 ignored by Git. Source users should build or run from the solution/project.
 

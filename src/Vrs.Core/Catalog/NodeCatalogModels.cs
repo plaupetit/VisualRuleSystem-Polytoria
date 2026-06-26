@@ -34,6 +34,7 @@ public sealed class NodeCatalogEntry
     public string FamilyFolder { get; set; } = "";
     public string UtilityLayer { get; set; } = "";
     public string Origin { get; set; } = "";
+    public List<NodeCatalogApiReference> ApiReferences { get; set; } = [];
     public Dictionary<string, string> Templates { get; set; } = [];
     public string Sketcher { get; set; } = "";
     public List<string> SearchKeywords { get; set; } = [];
@@ -169,4 +170,15 @@ public sealed class NodeCatalogData
     public List<NodeCatalogEntry> Nodes { get; set; } = [];
     public List<string> Warnings { get; set; } = [];
     public string SourceLabel { get; set; } = "";
+}
+
+/// <summary>
+/// Optional trace from a human-facing node to the public Polytoria API surface it covers.
+/// </summary>
+public sealed class NodeCatalogApiReference
+{
+    public string Type { get; set; } = "";
+    public string MemberKind { get; set; } = "";
+    public string Member { get; set; } = "";
+    public string Coverage { get; set; } = "Direct";
 }

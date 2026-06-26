@@ -119,7 +119,7 @@ public sealed class CatalogTests
         var triggers = catalog.Nodes.Where(node => node.Kind == NodeKind.Trigger).ToList();
 
         Assert.NotEmpty(triggers);
-        Assert.Equal(102, triggers.Count);
+        Assert.Equal(103, triggers.Count);
         foreach (var trigger in triggers)
         {
             Assert.Contains("target=Self", trigger.Value, StringComparison.OrdinalIgnoreCase);

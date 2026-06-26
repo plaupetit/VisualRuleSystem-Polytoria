@@ -99,6 +99,7 @@ source.
 | Svg.SceneGraph | 5.1.1 | MIT | SVG transitive dependency |
 | Svg.Skia | 5.1.1 | MIT | SVG/Skia integration |
 | Tmds.DBus.Protocol | 0.92.0 | MIT | Linux DBus support |
+| YamlDotNet | 16.3.0 | MIT | YAML parser for the Polytoria API coverage generator |
 | xunit | 2.9.3 | Apache-2.0 | Tests |
 | xunit.abstractions | 2.0.3 | xUnit project license URL in package metadata | Test abstraction package |
 | xunit.analyzers | 1.18.0 | Apache-2.0 | Test analyzers |

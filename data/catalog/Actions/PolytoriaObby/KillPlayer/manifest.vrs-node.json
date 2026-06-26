@@ -8,6 +8,9 @@
   "idBase": "ACT_KillPlayer",
   "type": "KillPlayer",
   "apiType": "Player",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Method", "member": "Respawn", "coverage": "Partial" }
+  ],
   "label": "Kill Player",
   "value": "player=",
   "description": "Makes the player die or respawn when the player API allows it.",

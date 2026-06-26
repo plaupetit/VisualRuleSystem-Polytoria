@@ -8,6 +8,9 @@
   "idBase": "EV_OnVrsInputEvent",
   "type": "OnVrsInputEvent",
   "apiType": "NetworkEvent",
+  "apiReferences": [
+    { "type": "NetworkEvent", "memberKind": "Event", "member": "InvokedServer", "coverage": "Direct" }
+  ],
   "label": "On VRS Input Event",
   "value": "target=Self;inputAction=Jump",
   "description": "Starts the rule when a VRS input NetworkEvent is invoked by a client.",
