@@ -25,6 +25,13 @@ human-readable way to create simple gameplay logic for Polytoria 2.0. It can
 help people script through a node graph, but it has limitations and is not a
 replacement for an experienced human scripter.
 
+The maintainer personally relies on visual programming workflows and does not
+currently write code directly. Even when experienced developers describe text
+programming as easy, it is not equally accessible to everyone. This project
+exists from that perspective: visual scripting can make logic creation more
+approachable without pretending that it removes the value of skilled
+programmers.
+
 The maintainer cannot guarantee that every feature or generated script works
 perfectly in every project. The goal is to test the tool, ask other users to
 test it, document known problems, and fix issues progressively as they are
