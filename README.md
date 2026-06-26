@@ -16,7 +16,9 @@ listed below.
 
 This project was created with AI assistance. AI-assisted generation does not
 change the license terms applied to files in this repository or to third-party
-materials.
+materials. During AI-assisted work, the maintainer used available controls to
+disable AI training/learning on the project content where the tools provided
+such settings.
 
 ## Purpose and Expectations
 
@@ -24,6 +26,10 @@ VRS is aimed at artists, level designers, and non-scripters who want a more
 human-readable way to create simple gameplay logic for Polytoria 2.0. It can
 help people script through a node graph, but it has limitations and is not a
 replacement for an experienced human scripter.
+
+It can also help text-first scripters inspect generated Luau patterns that work
+with Polytoria's APIs and project workflow, even when the visual graph becomes
+large, verbose, or messy.
 
 The maintainer personally relies on visual programming workflows and does not
 currently write code directly. Even when experienced developers describe text
