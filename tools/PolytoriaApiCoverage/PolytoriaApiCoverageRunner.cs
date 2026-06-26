@@ -32,7 +32,9 @@ public static class PolytoriaApiCoverageAnalyzer
     {
         var catalog = new NodeCatalogService().LoadCatalog(catalogRoot);
         var officialTypes = source.Types.ToDictionary(item => item.Name, StringComparer.OrdinalIgnoreCase);
-        var rows = catalog.Nodes.Select(ToNodeCoverageRow).ToList();
+        var officialEnums = source.Enums.ToDictionary(item => item.Name, StringComparer.OrdinalIgnoreCase);
+        var officialGlobals = source.Globals.ToDictionary(item => item.Name, StringComparer.OrdinalIgnoreCase);
+        var rows = catalog.Nodes.Select(node => ToNodeCoverageRow(node, officialTypes, officialEnums, officialGlobals)).ToList();
         var typeRows = BuildTypeRows(source.Types, rows);
         var catalogSummary = new CatalogSummary(
             catalog.Nodes.Count,
@@ -85,7 +87,11 @@ public static class PolytoriaApiCoverageAnalyzer
         return total <= 0 ? 0.0 : Math.Round(value * 100.0 / total, 2, MidpointRounding.AwayFromZero);
     }
 
-    private static CatalogNodeCoverageRow ToNodeCoverageRow(NodeCatalogEntry node)
+    private static CatalogNodeCoverageRow ToNodeCoverageRow(
+        NodeCatalogEntry node,
+        IReadOnlyDictionary<string, PolytoriaApiType> officialTypes,
+        IReadOnlyDictionary<string, PolytoriaApiEnum> officialEnums,
+        IReadOnlyDictionary<string, PolytoriaApiGlobal> officialGlobals)
     {
         if (node.ApiReferences.Count > 0)
         {
@@ -103,15 +109,16 @@ public static class PolytoriaApiCoverageAnalyzer
 
         if (!string.IsNullOrWhiteSpace(node.ApiType))
         {
+            var inferred = InferReference(node.ApiType, officialTypes, officialEnums, officialGlobals);
             return new CatalogNodeCoverageRow(
                 node.IdBase,
                 node.Kind.ToString(),
                 node.Label,
                 node.ApiType,
-                [InferReference(node.ApiType)],
-                "Inferred",
-                "Inferred",
-                "No apiReferences field; inferred from apiType only.");
+                [inferred.Reference],
+                inferred.Coverage,
+                inferred.Confidence,
+                inferred.Reason);
         }
 
         return new CatalogNodeCoverageRow(
@@ -138,7 +145,10 @@ public static class PolytoriaApiCoverageAnalyzer
             !string.IsNullOrWhiteSpace(reference.Type) &&
             !officialTypes.ContainsKey(reference.Type) &&
             !reference.MemberKind.Equals("Global", StringComparison.OrdinalIgnoreCase) &&
-            !reference.MemberKind.Equals("Enum", StringComparison.OrdinalIgnoreCase)))
+            !reference.MemberKind.Equals("Enum", StringComparison.OrdinalIgnoreCase) &&
+            !reference.MemberKind.Equals("Primitive", StringComparison.OrdinalIgnoreCase) &&
+            !reference.MemberKind.Equals("VRS", StringComparison.OrdinalIgnoreCase) &&
+            !reference.MemberKind.Equals("Helper", StringComparison.OrdinalIgnoreCase)))
         {
             return row with
             {
@@ -172,7 +182,7 @@ public static class PolytoriaApiCoverageAnalyzer
                 }
 
                 var coverage = StrongestCoverage(nodeRows.Select(row => row.Coverage));
-                var confidence = nodeRows.Any(row => row.Confidence is "Low" or "Inferred") ? "Mixed" : "Explicit";
+                var confidence = TypeRowConfidence(nodeRows);
                 var nodeLabels = nodeRows
                     .Select(row => $"{row.NodeId} ({row.Label})")
                     .Distinct(StringComparer.OrdinalIgnoreCase)
@@ -185,26 +195,213 @@ public static class PolytoriaApiCoverageAnalyzer
             .ToList();
     }
 
-    private static NodeCatalogApiReference InferReference(string apiType)
+    private static string TypeRowConfidence(IReadOnlyList<CatalogNodeCoverageRow> nodeRows)
     {
+        if (nodeRows.Any(row => row.Confidence is "Low" or "Inferred"))
+        {
+            return "Mixed";
+        }
+
+        var distinct = nodeRows
+            .Select(row => row.Confidence)
+            .Where(confidence => !string.IsNullOrWhiteSpace(confidence))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        if (distinct.Count == 1)
+        {
+            return distinct[0];
+        }
+
+        return "Mixed";
+    }
+
+    private static InferredApiReference InferReference(
+        string apiType,
+        IReadOnlyDictionary<string, PolytoriaApiType> officialTypes,
+        IReadOnlyDictionary<string, PolytoriaApiEnum> officialEnums,
+        IReadOnlyDictionary<string, PolytoriaApiGlobal> officialGlobals)
+    {
+        var trimmed = apiType.Trim();
+        if (TryClassifySynthetic(trimmed, out var syntheticReference))
+        {
+            return new InferredApiReference(
+                syntheticReference,
+                "Synthetic",
+                "AutoClassified",
+                "apiType describes a VRS helper or Lua/graph primitive rather than a Polytoria API member.");
+        }
+
         var parts = apiType.Split('.', 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length == 2)
         {
-            return new NodeCatalogApiReference
+            var typeName = parts[0];
+            var memberName = parts[1];
+            if (officialTypes.TryGetValue(typeName, out var apiTypeInfo))
             {
-                Type = parts[0],
-                Member = parts[1],
-                MemberKind = "Member",
-                Coverage = "Inferred"
-            };
+                var memberKind = FindMemberKind(apiTypeInfo, memberName);
+                if (!string.IsNullOrWhiteSpace(memberKind))
+                {
+                    return new InferredApiReference(
+                        new NodeCatalogApiReference
+                        {
+                            Type = typeName,
+                            Member = memberName,
+                            MemberKind = memberKind,
+                            Coverage = "Direct"
+                        },
+                        "Direct",
+                        "AutoVerified",
+                        "apiType matched a documented Polytoria type member.");
+                }
+
+                return new InferredApiReference(
+                    new NodeCatalogApiReference
+                    {
+                        Type = typeName,
+                        Member = memberName,
+                        MemberKind = "Member",
+                        Coverage = "Inferred"
+                    },
+                    "Inferred",
+                    "Low",
+                    "apiType matched a documented type, but the member was not found in Docs-v2.");
+            }
+
+            return new InferredApiReference(
+                new NodeCatalogApiReference
+                {
+                    Type = typeName,
+                    Member = memberName,
+                    MemberKind = "Member",
+                    Coverage = "Inferred"
+                },
+                "Inferred",
+                "Low",
+                "apiType looked like Type.Member, but the type was not found in Docs-v2.");
         }
 
-        return new NodeCatalogApiReference
+        if (officialTypes.ContainsKey(trimmed))
         {
-            Type = apiType.Trim(),
-            MemberKind = "Type",
-            Coverage = "Inferred"
+            return new InferredApiReference(
+                new NodeCatalogApiReference
+                {
+                    Type = trimmed,
+                    MemberKind = "Type",
+                    Coverage = "Partial"
+                },
+                "Partial",
+                "AutoVerified",
+                "apiType matched a documented Polytoria type; specific member is not annotated yet.");
+        }
+
+        if (officialEnums.ContainsKey(trimmed))
+        {
+            return new InferredApiReference(
+                new NodeCatalogApiReference
+                {
+                    Type = trimmed,
+                    MemberKind = "Enum",
+                    Coverage = "Partial"
+                },
+                "Partial",
+                "AutoVerified",
+                "apiType matched a documented Polytoria enum.");
+        }
+
+        if (officialGlobals.ContainsKey(trimmed))
+        {
+            return new InferredApiReference(
+                new NodeCatalogApiReference
+                {
+                    Type = trimmed,
+                    MemberKind = "Global",
+                    Coverage = "Direct"
+                },
+                "Direct",
+                "AutoVerified",
+                "apiType matched a documented Polytoria Luau global.");
+        }
+
+        return new InferredApiReference(
+            new NodeCatalogApiReference
+            {
+                Type = trimmed,
+                MemberKind = "Type",
+                Coverage = "Inferred"
+            },
+            "Inferred",
+            "Low",
+            "apiType could not be matched to Docs-v2, lua-definitions, or known VRS helper categories.");
+    }
+
+    private static string FindMemberKind(PolytoriaApiType apiType, string memberName)
+    {
+        if (apiType.Properties.Any(member => member.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase)))
+        {
+            return "Property";
+        }
+
+        if (apiType.Methods.Any(member => member.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase)))
+        {
+            return "Method";
+        }
+
+        if (apiType.Events.Any(member => member.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase)))
+        {
+            return "Event";
+        }
+
+        return "";
+    }
+
+    private static bool TryClassifySynthetic(string apiType, out NodeCatalogApiReference reference)
+    {
+        var primitiveTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Any",
+            "Boolean",
+            "Debug",
+            "Flow",
+            "Number",
+            "Object Path",
+            "SceneObject",
+            "String"
         };
+
+        if (primitiveTypes.Contains(apiType))
+        {
+            reference = new NodeCatalogApiReference
+            {
+                Type = "Lua",
+                Member = apiType,
+                MemberKind = "Primitive",
+                Coverage = "Synthetic"
+            };
+            return true;
+        }
+
+        var vrsTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "CoreUI",
+            "RuntimeState",
+            "VRS.PlayerState"
+        };
+
+        if (vrsTypes.Contains(apiType))
+        {
+            reference = new NodeCatalogApiReference
+            {
+                Type = "VRS",
+                Member = apiType,
+                MemberKind = "VRS",
+                Coverage = "Synthetic"
+            };
+            return true;
+        }
+
+        reference = new NodeCatalogApiReference();
+        return false;
     }
 
     private static string StrongestCoverage(IEnumerable<string> coverages)
@@ -251,4 +448,10 @@ public static class PolytoriaApiCoverageAnalyzer
             var other => other
         };
     }
+
+    private sealed record InferredApiReference(
+        NodeCatalogApiReference Reference,
+        string Coverage,
+        string Confidence,
+        string Reason);
 }

@@ -94,10 +94,11 @@ Options:
             Assert.Equal(1, result.Catalog.NodesByKind["Property"]);
             Assert.Equal(66.67, result.Summary.TypesWithAnyCoveragePercent);
             Assert.Equal(33.33, result.Summary.DirectTypePercent);
-            Assert.Equal(50.0, result.Summary.LowConfidenceNodePercent);
+            Assert.Equal(0.0, result.Summary.LowConfidenceNodePercent);
             Assert.Contains(result.TypeRows, row => row.Type == "Player" && row.Coverage == "Direct");
-            Assert.Contains(result.TypeRows, row => row.Type == "NetworkEvent" && row.Coverage == "Inferred");
-            Assert.Contains(result.NodeRows, row => row.NodeId == "PROP_NetworkEvent" && row.Confidence == "Inferred");
+            Assert.Contains(result.TypeRows, row => row.Type == "NetworkEvent" && row.Coverage == "Partial");
+            Assert.Contains(result.TypeRows, row => row.Type == "NetworkEvent" && row.Confidence == "AutoVerified");
+            Assert.Contains(result.NodeRows, row => row.NodeId == "PROP_NetworkEvent" && row.Confidence == "AutoVerified");
         }
         finally
         {
@@ -133,6 +134,8 @@ Options:
             Assert.Contains("Official API types", markdown, StringComparison.Ordinal);
             Assert.Contains("Coverage Percentages", markdown, StringComparison.Ordinal);
             Assert.Contains("API types with any VRS coverage", markdown, StringComparison.Ordinal);
+            Assert.Contains("Confidence labels", markdown, StringComparison.Ordinal);
+            Assert.Contains("AutoVerified", markdown, StringComparison.Ordinal);
             Assert.Contains("Low Confidence / Needs Annotation", markdown, StringComparison.Ordinal);
             Assert.Contains("ACT_NoApiMetadata", markdown, StringComparison.Ordinal);
         }

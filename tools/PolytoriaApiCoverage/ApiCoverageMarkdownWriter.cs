@@ -72,8 +72,16 @@ public static class ApiCoverageMarkdownWriter
         builder.AppendLine("- `Direct`: a node explicitly maps to a documented type/member.");
         builder.AppendLine("- `Partial`: a node covers only part of the official behavior.");
         builder.AppendLine("- `Indirect` / `Synthetic`: a node is a VRS workflow/helper, not a 1:1 API wrapper.");
-        builder.AppendLine("- `Inferred`: no explicit `apiReferences`; the report guessed from `apiType`.");
+        builder.AppendLine("- `Inferred`: the report could not match `apiType` to an official or synthetic reference and kept it as a weak guess.");
         builder.AppendLine("- `Uncovered`: no VRS node currently maps to that official type.");
+        builder.AppendLine();
+        builder.AppendLine("Confidence labels:");
+        builder.AppendLine();
+        builder.AppendLine("- `Explicit`: the catalog node has hand-written `apiReferences`.");
+        builder.AppendLine("- `AutoVerified`: `apiType` matched an official Docs-v2 type, method, property, event, enum, or global.");
+        builder.AppendLine("- `AutoClassified`: `apiType` was intentionally classified as a Lua primitive or VRS helper, not official Polytoria API coverage.");
+        builder.AppendLine("- `Mixed`: the type row combines multiple confidence levels.");
+        builder.AppendLine("- `Low` / `Inferred`: the node needs manual annotation or correction.");
         builder.AppendLine();
         AppendTypeTable(builder, "Covered Types", result.TypeRows.Where(row => row.Coverage != "Uncovered"));
         AppendTypeTable(builder, "Uncovered Types", result.TypeRows.Where(row => row.Coverage == "Uncovered"));
