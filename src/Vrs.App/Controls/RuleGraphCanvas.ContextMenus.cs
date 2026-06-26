@@ -6,6 +6,9 @@ namespace Vrs.App.Controls;
 
 public sealed partial class RuleGraphCanvas
 {
+    // Rule/state fragments are not ready for normal graph editing yet; keep the handlers compiled but hide the menu entries.
+    private static readonly bool ShowExperimentalRuleStateContextActions = false;
+
     // Context menu glue only: translate canvas selections into host commands without owning graph behavior.
     private void OpenContextMenu(GraphPoint graphPoint)
     {
@@ -97,8 +100,12 @@ public sealed partial class RuleGraphCanvas
         menu.Items.Add(MenuItem("Debug Marker", () => Host?.ToggleGraphNodeDebug(nodeId)));
         menu.Items.Add(MenuItem("Breakpoint Marker", () => Host?.ToggleGraphNodeBreakpoint(nodeId)));
         menu.Items.Add(MenuItem("Create Node Group", () => Host?.CreateGroupFromSelection()));
-        menu.Items.Add(MenuItem("Create Rule Fragment", () => Host?.CreateFragmentFromSelection(GraphFragmentKind.Rule)));
-        menu.Items.Add(MenuItem("Create State Fragment", () => Host?.CreateFragmentFromSelection(GraphFragmentKind.State)));
+        if (ShowExperimentalRuleStateContextActions)
+        {
+            menu.Items.Add(MenuItem("Create Rule Fragment", () => Host?.CreateFragmentFromSelection(GraphFragmentKind.Rule)));
+            menu.Items.Add(MenuItem("Create State Fragment", () => Host?.CreateFragmentFromSelection(GraphFragmentKind.State)));
+        }
+
         menu.Items.Add(MenuItem("Edit Comment", () =>
         {
             var node = NodeList().FirstOrDefault(item => item.Id == nodeId);
@@ -175,22 +182,26 @@ public sealed partial class RuleGraphCanvas
             "Create Empty Node Group Here",
             () => Host?.CreateEmptyGroupAtGraphPoint(graphPoint.X, graphPoint.Y),
             "Create an empty visual group at this canvas position."));
-        menu.Items.Add(MenuItem(
-            "Add Rule",
-            () => Host?.AddRuleFragmentAtGraphPoint(graphPoint.X, graphPoint.Y),
-            "Create a rule fragment at this canvas position."));
-        menu.Items.Add(MenuItem(
-            "Add State",
-            () => Host?.AddStateFragmentAtGraphPoint(graphPoint.X, graphPoint.Y),
-            "Create a state fragment at this canvas position."));
-        menu.Items.Add(MenuItem(
-            "Create Rule Fragment From Selection",
-            () => Host?.CreateFragmentFromSelection(GraphFragmentKind.Rule),
-            "Wrap the current selection in a rule fragment."));
-        menu.Items.Add(MenuItem(
-            "Create State Fragment From Selection",
-            () => Host?.CreateFragmentFromSelection(GraphFragmentKind.State),
-            "Wrap the current selection in a state fragment."));
+        if (ShowExperimentalRuleStateContextActions)
+        {
+            menu.Items.Add(MenuItem(
+                "Add Rule",
+                () => Host?.AddRuleFragmentAtGraphPoint(graphPoint.X, graphPoint.Y),
+                "Create a rule fragment at this canvas position."));
+            menu.Items.Add(MenuItem(
+                "Add State",
+                () => Host?.AddStateFragmentAtGraphPoint(graphPoint.X, graphPoint.Y),
+                "Create a state fragment at this canvas position."));
+            menu.Items.Add(MenuItem(
+                "Create Rule Fragment From Selection",
+                () => Host?.CreateFragmentFromSelection(GraphFragmentKind.Rule),
+                "Wrap the current selection in a rule fragment."));
+            menu.Items.Add(MenuItem(
+                "Create State Fragment From Selection",
+                () => Host?.CreateFragmentFromSelection(GraphFragmentKind.State),
+                "Wrap the current selection in a state fragment."));
+        }
+
         menu.Items.Add(MenuItem(
             "Create Node Group From Selection",
             () => Host?.CreateGroupFromSelection(),
