@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Characters",
+  "idBase": "PROP_CharacterState",
+  "type": "CharacterStateValue",
+  "apiType": "CharacterModel.CurrentState",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "CurrentState", "coverage": "Direct" },
+    { "type": "CharacterModelState", "memberKind": "Enum", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Character State",
+  "value": "target=Self",
+  "description": "Reads the current animation state of a character.",
+  "status": "Ready",
+  "returnType": "String",
+  "previewTemplate": "${target} character state",
+  "searchKeywords": ["character", "animation", "state", "idle", "walking", "running", "jumping", "climbing"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] }
+  ],
+  "beginnerSummary": "Value returns the character animation state.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_SetCharacterBodyMesh",
+  "type": "SetCharacterBodyMesh",
+  "apiType": "PolytorianModel.BodyMesh",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "BodyMesh", "coverage": "Direct" },
+    { "type": "MeshAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Character Body Mesh",
+  "value": "target=Self;mesh=",
+  "description": "Changes the body mesh on a character model.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} body mesh",
+  "searchKeywords": ["character", "body", "mesh", "avatar", "appearance"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] },
+    { "key": "mesh", "label": "Mesh", "type": "String", "control": "Text", "required": true, "default": "", "description": "Body mesh key or path.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change a character body mesh.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

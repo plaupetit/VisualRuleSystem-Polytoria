@@ -1,0 +1,36 @@
+{
+  "moduleId": "polytoria.sunlight.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Lighting",
+  "idBase": "EV_OnSunLightShadowsDisabled",
+  "type": "OnSunLightShadowsDisabled",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Shadows", "coverage": "Partial" }
+  ],
+  "label": "On Sun Light Shadows Disabled",
+  "value": "target=Self;interval=0.25",
+  "description": "Runs when the main sun light stops casting shadows.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} sun shadows turn off",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["sun", "sunlight", "light", "shadow", "shadows", "disabled", "watch", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Sun Light", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Watched Sun Light", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "SunLight object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["SunLightObject"] },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the sun light.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When the main sun light stops casting shadows after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light Changes"]
+}

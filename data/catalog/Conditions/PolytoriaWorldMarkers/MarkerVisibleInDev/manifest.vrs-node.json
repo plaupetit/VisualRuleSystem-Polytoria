@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.worldmarkers.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Markers",
+  "idBase": "COND_MarkerVisibleInDev",
+  "type": "MarkerVisibleInDev",
+  "apiType": "Marker3D.VisibleInDev",
+  "apiReferences": [{ "type": "Marker3D", "memberKind": "Property", "member": "VisibleInDev", "coverage": "Direct" }],
+  "label": "Marker Visible In Dev",
+  "value": "target=Self",
+  "description": "Checks if a 3D marker is visible in developer mode.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} is visible in dev",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["marker", "visible", "developer", "debug", "gizmo"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker3D object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] }
+  ],
+  "beginnerSummary": "Check whether a marker is visible while developing.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

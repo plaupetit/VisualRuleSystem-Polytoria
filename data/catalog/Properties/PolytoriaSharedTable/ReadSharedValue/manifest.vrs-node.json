@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.sharedtable.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Shared Values",
+  "idBase": "PROP_ReadSharedValue",
+  "type": "ReadSharedValue",
+  "apiType": "Any",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Read Shared Value",
+  "value": "key=Score",
+  "description": "Reads a value from Polytoria's shared script table.",
+  "status": "Ready",
+  "previewTemplate": "Read shared ${key}",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "read",
+    "value",
+    "between scripts"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "key",
+      "label": "Key",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Shared table key to read.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: read one value shared between scripts.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

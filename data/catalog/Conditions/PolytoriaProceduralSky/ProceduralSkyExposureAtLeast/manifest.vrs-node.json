@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.procedural_sky.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_ProceduralSkyExposureAtLeast",
+  "type": "ProceduralSkyExposureAtLeast",
+  "apiType": "ProceduralSky.Exposure",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "Exposure", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Procedural Sky Exposure At Least",
+  "value": "target=Self;exposure=1",
+  "description": "Checks whether a ProceduralSky exposure is at least a value.",
+  "status": "Ready",
+  "previewTemplate": "${target} exposure >= ${exposure}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["sky", "procedural", "exposure", "lighting", "condition"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Procedural Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ProceduralSky object to inspect.", "valueSource": "Target Context", "acceptedObjectGroups": ["ProceduralSkyObject"] },
+    { "key": "exposure", "label": "Exposure", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Minimum exposure.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if the procedural sky exposure is bright enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

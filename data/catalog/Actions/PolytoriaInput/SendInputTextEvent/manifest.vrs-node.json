@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.input.actions",
+  "kind": "Action",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Input",
+  "idBase": "ACT_SendInputTextEvent",
+  "type": "SendInputTextEvent",
+  "apiType": "NetMessage.AddString",
+  "apiReferences": [
+    { "type": "NetworkEvent", "memberKind": "Method", "member": "InvokeServer", "coverage": "Direct" },
+    { "type": "NetMessage", "memberKind": "Method", "member": "New", "coverage": "Direct" },
+    { "type": "NetMessage", "memberKind": "Method", "member": "AddString", "coverage": "Direct" },
+    { "type": "Hidden", "memberKind": "Type", "member": "", "coverage": "Indirect" },
+    { "type": "HiddenBase", "memberKind": "Type", "member": "", "coverage": "Indirect" }
+  ],
+  "label": "Send Input Text Event",
+  "value": "inputAction=Jump;payload=",
+  "description": "Invokes the User Input (NetworkEvent) relay and sends one text value in its NetMessage.",
+  "status": "Ready",
+  "previewTemplate": "Send input ${inputAction} text to server",
+  "searchKeywords": [
+    "input",
+    "networkevent",
+    "netmessage",
+    "message",
+    "text",
+    "send",
+    "invoke server",
+    "client",
+    "server"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "inputAction",
+      "label": "Input Action",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Jump",
+      "description": "Button input action whose User Input (NetworkEvent) relay should be invoked.",
+      "valueSource": "String / Choice"
+    },
+    {
+      "key": "payload",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "default": "",
+      "description": "Text payload added to the NetMessage before it is sent.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Client action: send a text payload through an input event.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Markers",
+  "idBase": "PROP_MarkerLength",
+  "type": "MarkerLengthValue",
+  "apiType": "Marker3D.Length",
+  "apiReferences": [
+    { "type": "Marker3D", "memberKind": "Property", "member": "Length", "coverage": "Direct" }
+  ],
+  "label": "Marker Length",
+  "value": "target=Self",
+  "description": "Reads how long a 3D marker appears.",
+  "status": "Ready",
+  "returnType": "Number",
+  "previewTemplate": "${target} marker length",
+  "searchKeywords": ["marker", "3d", "length", "indicator", "world"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] }
+  ],
+  "beginnerSummary": "Value returns marker length.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

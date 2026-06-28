@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.networkedobject.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input/Network",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Object Network",
+  "idBase": "PROP_ObjectTypeName",
+  "type": "ObjectTypeName",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "NetworkedObject", "memberKind": "Property", "member": "ClassName", "coverage": "Direct" }
+  ],
+  "label": "Object Type Name",
+  "value": "target=Self",
+  "description": "Outputs the Polytoria type name of a scene object.",
+  "status": "Ready",
+  "previewTemplate": "Type name of ${target}",
+  "searchKeywords": ["value", "object", "network", "class", "type", "classname", "scene"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose type name will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["Any"]
+    }
+  ],
+  "beginnerSummary": "Value reads the type name of a scene object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Network"]
+}

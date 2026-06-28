@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Markers",
+  "idBase": "ACT_SetMarkerAppearsOnTop",
+  "type": "SetMarkerAppearsOnTop",
+  "apiType": "Marker3D.AppearOnTop",
+  "apiReferences": [
+    { "type": "Marker3D", "memberKind": "Property", "member": "AppearOnTop", "coverage": "Direct" }
+  ],
+  "label": "Set Marker On Top",
+  "value": "target=Self;enabled=true",
+  "description": "Controls whether a 3D marker draws above nearby objects.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} marker on top ${enabled}",
+  "searchKeywords": ["marker", "3d", "top", "visible", "indicator"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] },
+    { "key": "enabled", "label": "Enabled", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Whether the marker draws on top.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do make a marker draw on top.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

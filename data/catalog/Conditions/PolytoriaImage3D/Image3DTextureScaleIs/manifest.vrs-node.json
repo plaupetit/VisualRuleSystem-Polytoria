@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Image Texture",
+  "idBase": "COND_3DImageTextureScaleIs",
+  "type": "Image3DTextureScaleIs",
+  "apiType": "Image3D.TextureScale",
+  "apiReferences": [
+    { "type": "Image3D", "memberKind": "Property", "member": "TextureScale", "coverage": "Direct" }
+  ],
+  "label": "3D Image Texture Scale Is",
+  "value": "target=Self;x=1;y=1",
+  "description": "Checks if a 3D image texture scale matches the expected X and Y values.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} texture scale is ${x}, ${y}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d image", "image", "texture", "scale", "tile", "match", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "3D Image", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D image object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Image3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "x", "label": "X Scale", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Expected horizontal texture scale.", "valueSource": "Number / Manual Value" },
+    { "key": "y", "label": "Y Scale", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Expected vertical texture scale.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check if a 3D image texture is tiled at a specific scale.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Image Texture"]
+}

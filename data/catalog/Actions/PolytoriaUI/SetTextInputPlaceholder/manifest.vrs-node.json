@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Text Input",
+  "idBase": "ACT_SetTextInputPlaceholder",
+  "type": "SetTextInputPlaceholder",
+  "apiType": "UITextInput.Placeholder",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "Placeholder", "coverage": "Direct" }
+  ],
+  "label": "Set Text Input Placeholder",
+  "value": "target=Self;placeholder=Type here...",
+  "description": "Changes the hint text shown when a UI text input is empty.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} placeholder to ${placeholder}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "placeholder", "hint", "field", "form"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    },
+    {
+      "key": "placeholder",
+      "label": "Placeholder",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Type here...",
+      "description": "Hint text to show before the player enters text.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do change the hint text inside a text input.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

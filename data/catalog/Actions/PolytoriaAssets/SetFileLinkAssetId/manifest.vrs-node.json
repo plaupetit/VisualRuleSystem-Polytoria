@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Files",
+  "idBase": "ACT_SetFileLinkAssetId",
+  "type": "SetFileLinkAssetId",
+  "apiType": "FileLinkAsset.LinkedID",
+  "apiReferences": [
+    { "type": "FileLinkAsset", "memberKind": "Property", "member": "LinkedID", "coverage": "Direct" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set File Link Asset ID",
+  "value": "target=Self;linkedId=",
+  "description": "Changes the linked ID stored on a FileLinkAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} linked ID",
+  "searchKeywords": ["file", "link", "asset", "linkedid", "id"],
+  "selectorHints": [
+    { "key": "target", "label": "File Link Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "File Link Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "FileLinkAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["FileLinkAssetObject"] },
+    { "key": "linkedId", "label": "Linked ID", "type": "String", "control": "Text", "default": "", "description": "New linked ID.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Do change the linked ID stored on a file link asset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Files"]
+}

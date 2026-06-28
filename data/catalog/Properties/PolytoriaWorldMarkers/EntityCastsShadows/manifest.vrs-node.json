@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Entity",
+  "idBase": "PROP_EntityCastsShadows",
+  "type": "EntityCastsShadowsValue",
+  "apiType": "Entity.CastShadows",
+  "apiReferences": [
+    { "type": "Entity", "memberKind": "Property", "member": "CastShadows", "coverage": "Direct" }
+  ],
+  "label": "Entity Shadows",
+  "value": "target=Self",
+  "description": "Reads whether an entity-like object casts shadows.",
+  "status": "Ready",
+  "returnType": "Boolean",
+  "previewTemplate": "${target} shadows",
+  "searchKeywords": ["entity", "object", "shadow", "lighting", "visual"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity-like object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] }
+  ],
+  "beginnerSummary": "Value returns whether an entity casts shadows.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity"]
+}

@@ -462,6 +462,44 @@ public sealed class AppViewModelTests
     }
 
     [Fact]
+    public void CanvasSelectionTargets_AreMutuallyExclusive()
+    {
+        var viewModel = CreateInitializedViewModel();
+        var firstNode = viewModel.Nodes.First();
+        var secondNode = viewModel.Nodes.Last();
+
+        viewModel.SelectGraphNodes([firstNode.Id, secondNode.Id], firstNode.Id);
+
+        Assert.Same(firstNode, viewModel.SelectedNode);
+        Assert.Equal([firstNode.Id, secondNode.Id], viewModel.SelectedNodeIds);
+        Assert.Equal(-1, viewModel.SelectedConnectionIndex);
+
+        viewModel.SelectedConnectionIndex = 0;
+
+        Assert.Null(viewModel.SelectedNode);
+        Assert.Empty(viewModel.SelectedNodeIds);
+        Assert.Equal("", viewModel.SelectedGroupId);
+        Assert.Equal("", viewModel.SelectedWireRerouteId);
+
+        viewModel.CreateEmptyGroupAtGraphPoint(100, 100);
+
+        var group = Assert.Single(viewModel.NodeGroups);
+        Assert.Equal(group.Id, viewModel.SelectedGroupId);
+        Assert.Null(viewModel.SelectedNode);
+        Assert.Empty(viewModel.SelectedNodeIds);
+        Assert.Equal(-1, viewModel.SelectedConnectionIndex);
+
+        viewModel.AddWireRerouteToConnection(0, 320, 180, insertAtIndex: 0);
+
+        var reroute = Assert.Single(viewModel.WireReroutes);
+        Assert.Equal(reroute.Id, viewModel.SelectedWireRerouteId);
+        Assert.Equal("", viewModel.SelectedGroupId);
+        Assert.Null(viewModel.SelectedNode);
+        Assert.Empty(viewModel.SelectedNodeIds);
+        Assert.Equal(-1, viewModel.SelectedConnectionIndex);
+    }
+
+    [Fact]
     public void ColorNodeParameters_ArePresentedAsPolytoriaColorPicker()
     {
         var viewModel = CreateInitializedViewModel();
@@ -945,6 +983,53 @@ public sealed class AppViewModelTests
     }
 
     [Fact]
+    public async Task RequestCreatorSnapshot_WritesSnapshotRequestAndAppState()
+    {
+        var tempRoot = CreateTempPolytoriaProject("vrs-viewmodel-snapshot-request");
+
+        try
+        {
+            var viewModel = CreateInitializedViewModel(loadSample: false);
+            viewModel.ActiveProjectRoot = tempRoot;
+            viewModel.ActiveProjectName = "SnapshotProject";
+            viewModel.HasLinkedProject = true;
+            viewModel.IsCreatorRuntimeReady = false;
+            viewModel.SetWindowFocusState(true);
+            AddCatalogNode(viewModel, "EV_OnStart");
+
+            Assert.True(viewModel.RequestCreatorSnapshotCommand.CanExecute(null));
+
+            await viewModel.RequestCreatorSnapshotCommand.ExecuteAsync(null);
+
+            var bridgeDirectory = Path.Combine(tempRoot, "addons", "visual-programming-bridge", "bridge");
+            var request = JsonSerializer.Deserialize(
+                await File.ReadAllTextAsync(Path.Combine(bridgeDirectory, "snapshot-request.json")),
+                VrsJsonContext.Default.SnapshotRequest);
+            var appState = JsonSerializer.Deserialize(
+                await File.ReadAllTextAsync(Path.Combine(bridgeDirectory, "app-state.json")),
+                VrsJsonContext.Default.BridgeAppState);
+
+            Assert.NotNull(request);
+            Assert.Equal("manual-vrs-workspace-request", request!.Reason);
+            Assert.Equal("full", request.Mode);
+            Assert.False(string.IsNullOrWhiteSpace(request.SessionId));
+            Assert.NotNull(appState);
+            Assert.True(appState!.ProjectLinked);
+            Assert.False(appState.CreatorReady);
+            Assert.True(appState.Focused);
+            Assert.Equal("Server", appState.ScriptKind);
+            Assert.Equal("VRS NewVisualScript", appState.CreatorScriptName);
+            Assert.Equal("scripts/VRS/server/VRS NewVisualScript.server.luau", appState.ProjectRelativeScriptPath);
+            Assert.Equal(1, appState.NodeCount);
+            Assert.Contains("Requested Creator snapshot", viewModel.StatusText, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Directory.Delete(tempRoot, recursive: true);
+        }
+    }
+
+    [Fact]
     public void CancelProjectSelection_DoesNotClearCurrentProject()
     {
         var viewModel = new MainWindowViewModel
@@ -1010,6 +1095,11 @@ public sealed class AppViewModelTests
         Assert.Contains("Content=\"Auto\"", xaml, StringComparison.Ordinal);
         Assert.Contains("Content=\"Deploy File\"", xaml, StringComparison.Ordinal);
         Assert.Contains("Content=\"Input Manager\"", xaml, StringComparison.Ordinal);
+        Assert.Contains("Visual Scripting Workspace", xaml, StringComparison.Ordinal);
+        Assert.Contains("Creator Bridge", xaml, StringComparison.Ordinal);
+        Assert.Contains("Content=\"Request Snapshot\"", xaml, StringComparison.Ordinal);
+        Assert.Contains("RequestCreatorSnapshotCommand", xaml, StringComparison.Ordinal);
+        Assert.Contains("CreatorBridgeWorkspaceSummary", xaml, StringComparison.Ordinal);
         Assert.Contains("EnsureInputManagerCommand", xaml, StringComparison.Ordinal);
         Assert.Contains("InputChoiceSourceFilterChoices", propertySelectorXaml, StringComparison.Ordinal);
         Assert.Contains("InputChoiceSourceFilter", propertySelectorXaml, StringComparison.Ordinal);

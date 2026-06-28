@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Characters",
+  "idBase": "PROP_CurrentCharacterAnimation",
+  "type": "CurrentCharacterAnimation",
+  "apiType": "Animator.CurrentAnimation",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "Animator", "coverage": "Direct" },
+    { "type": "Animator", "memberKind": "Property", "member": "CurrentAnimation", "coverage": "Direct" }
+  ],
+  "label": "Current Character Animation",
+  "value": "target=Self",
+  "description": "Reads the currently playing character animation name.",
+  "status": "Ready",
+  "returnType": "String",
+  "previewTemplate": "${target} current animation",
+  "searchKeywords": ["character", "animation", "animator", "current", "playing"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] }
+  ],
+  "beginnerSummary": "Value returns the current character animation name.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

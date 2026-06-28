@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "Text Input",
+  "idBase": "EV_OnTextInputChanged",
+  "type": "OnTextInputChanged",
+  "apiType": "UITextInput.Changed",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Event", "member": "Changed", "coverage": "Direct" }
+  ],
+  "label": "On Text Input Changed",
+  "value": "target=Self",
+  "description": "Starts when the text inside a UI text input changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} text changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "changed", "change", "typing", "form", "event"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    }
+  ],
+  "beginnerSummary": "When the player changes text in an input field.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

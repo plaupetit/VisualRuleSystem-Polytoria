@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.character.animation.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Characters",
+  "idBase": "EV_OnCharacterStateChanged",
+  "type": "OnCharacterStateChanged",
+  "apiType": "CharacterModel.CurrentState",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "CurrentState", "coverage": "Partial" },
+    { "type": "CharacterModelState", "memberKind": "Enum", "member": "", "coverage": "Partial" }
+  ],
+  "label": "On Character State Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a character animation state changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} state changes",
+  "searchKeywords": ["character", "animation", "state", "changed", "idle", "running", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the state.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a character changes movement state.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation Changes"]
+}

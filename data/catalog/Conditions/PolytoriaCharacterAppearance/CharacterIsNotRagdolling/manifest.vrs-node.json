@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.character.appearance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Character Appearance",
+  "idBase": "COND_CharacterIsNotRagdolling",
+  "type": "CharacterIsNotRagdolling",
+  "apiType": "PolytorianModel.Ragdolling",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "Ragdolling", "coverage": "Direct" }
+  ],
+  "label": "Character Is Not Ragdolling",
+  "value": "target=Self",
+  "description": "Checks if a character is not currently ragdolling.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} is not ragdolling",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["character", "ragdoll", "standing", "state", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Check if a character is not ragdolling.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Ragdoll"]
+}

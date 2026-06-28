@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.grabbable",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetGrabMaxRange",
+  "type": "SetGrabMaxRange",
+  "apiType": "Grabbable.MaxRange",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "MaxRange", "coverage": "Direct" }
+  ],
+  "label": "Set Grab Drag Range",
+  "value": "target=Self;range=30",
+  "description": "Changes how far a grabbed object can be dragged.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} drag range ${range}",
+  "searchKeywords": ["grab", "grabbable", "drag", "range", "distance"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "range", "label": "Range", "type": "Number", "control": "Number", "required": true, "default": "30", "description": "Maximum drag distance.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change how far a grabbed object can be dragged.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

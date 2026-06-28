@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionRotateTowards",
+  "type": "QuaternionRotateTowards",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "RotateTowards", "coverage": "Direct" }
+  ],
+  "label": "Rotate Towards",
+  "value": "from=0,0,0,1;to=0,1,0,0;maxDegrees=30",
+  "description": "Moves a rotation toward another rotation by a maximum number of degrees.",
+  "status": "Ready",
+  "previewTemplate": "Rotate toward target by ${maxDegrees} degrees",
+  "searchKeywords": ["quaternion", "rotation", "rotate", "towards", "turn", "step", "degrees", "smooth"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "from", "label": "From Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,0,0,1", "description": "Starting rotation.", "valueSource": "Rotation Value" },
+    { "key": "to", "label": "To Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,1,0,0", "description": "Target rotation.", "valueSource": "Rotation Value" },
+    { "key": "maxDegrees", "label": "Max Degrees", "type": "Number", "control": "Number", "required": true, "default": "30", "description": "Maximum turn amount in degrees.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Value: step a rotation toward another rotation.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

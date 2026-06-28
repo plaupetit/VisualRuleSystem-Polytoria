@@ -1,0 +1,49 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_GameTeamPlayers",
+  "type": "GameTeamPlayers",
+  "apiType": "Any",
+  "apiReferences": [
+    { "type": "Team", "memberKind": "Method", "member": "GetPlayers", "coverage": "Direct" }
+  ],
+  "label": "Game Team Players",
+  "value": "target=Target",
+  "description": "Outputs the player list assigned to a chosen game team.",
+  "status": "Ready",
+  "previewTemplate": "Players in ${target}",
+  "searchKeywords": [
+    "team",
+    "players",
+    "list"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Game Team",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Team object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "TeamObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: use the players assigned to a chosen game team.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Game Teams"
+  ]
+}

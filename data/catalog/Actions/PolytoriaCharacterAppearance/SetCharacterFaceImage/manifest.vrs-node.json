@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_SetCharacterFaceImage",
+  "type": "SetCharacterFaceImage",
+  "apiType": "PolytorianModel.FaceImage",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "FaceImage", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Character Face Image",
+  "value": "target=Self;image=",
+  "description": "Changes the face image on a character model.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} face image",
+  "searchKeywords": ["character", "face", "image", "avatar", "appearance"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] },
+    { "key": "image", "label": "Image", "type": "String", "control": "Text", "required": true, "default": "", "description": "Face image key or path.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change a character face image.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.ui.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "UI",
+  "idBase": "EV_OnUIImageChanged",
+  "type": "OnUIImageChanged",
+  "apiType": "UIImage.Image",
+  "apiReferences": [{ "type": "UIImage", "memberKind": "Property", "member": "Image", "coverage": "Partial" }],
+  "label": "On UI Image Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a UI image asset reference changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} image changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "image", "changed", "picture", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Image UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UIImage object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the image.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a UI image changes.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Changes"]
+}

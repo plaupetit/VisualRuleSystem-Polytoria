@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Entity",
+  "idBase": "PROP_EntityIsSpawn",
+  "type": "EntityIsSpawnValue",
+  "apiType": "Entity.IsSpawn",
+  "apiReferences": [
+    { "type": "Entity", "memberKind": "Property", "member": "IsSpawn", "coverage": "Direct" }
+  ],
+  "label": "Entity Is Spawn",
+  "value": "target=Self",
+  "description": "Reads whether an entity-like object is used as a spawn point.",
+  "status": "Ready",
+  "returnType": "Boolean",
+  "previewTemplate": "${target} is spawn",
+  "searchKeywords": ["entity", "spawn", "checkpoint", "start", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity-like object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] }
+  ],
+  "beginnerSummary": "Value returns whether an entity is a spawn point.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity"]
+}

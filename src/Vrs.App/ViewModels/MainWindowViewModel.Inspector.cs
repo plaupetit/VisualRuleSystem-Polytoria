@@ -226,10 +226,7 @@ public partial class MainWindowViewModel
 
     private void SelectNodeById(string nodeId)
     {
-        SelectedConnectionIndex = -1;
-        SelectedFragmentId = "";
-        SelectedNode = Nodes.FirstOrDefault(node => string.Equals(node.Id, nodeId, StringComparison.OrdinalIgnoreCase));
-        SelectedWireRerouteId = "";
+        SelectGraphNode(Nodes.FirstOrDefault(node => string.Equals(node.Id, nodeId, StringComparison.OrdinalIgnoreCase)));
     }
 
     private void SelectFragmentById(string fragmentId)
@@ -240,11 +237,8 @@ public partial class MainWindowViewModel
             return;
         }
 
-        SelectedNode = null;
-        SelectedConnectionIndex = -1;
-        SelectedGroupId = "";
-        SelectedWireRerouteId = "";
         SelectedFragmentId = fragmentId;
+        ClearInactiveCanvasSelections(CanvasSelectionTarget.Fragment, clearSelectedNodeIds: true);
     }
 
     private void SelectGroupById(string groupId)
@@ -255,12 +249,8 @@ public partial class MainWindowViewModel
             return;
         }
 
-        SelectedNode = null;
-        SelectedConnectionIndex = -1;
-        SelectedFragmentId = "";
-        SelectedWireRerouteId = "";
-        SelectedNodeIds.Clear();
         SelectedGroupId = groupId;
+        ClearInactiveCanvasSelections(CanvasSelectionTarget.Group, clearSelectedNodeIds: true);
     }
 
     private void SelectWireRerouteById(string rerouteId)
@@ -271,12 +261,8 @@ public partial class MainWindowViewModel
             return;
         }
 
-        SelectedNode = null;
-        SelectedConnectionIndex = -1;
-        SelectedFragmentId = "";
-        SelectedGroupId = "";
-        SelectedNodeIds.Clear();
         SelectedWireRerouteId = rerouteId;
+        ClearInactiveCanvasSelections(CanvasSelectionTarget.WireReroute, clearSelectedNodeIds: true);
     }
 
 }

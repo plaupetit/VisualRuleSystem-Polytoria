@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.grabbable",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetGrabPermissionMode",
+  "type": "SetGrabPermissionMode",
+  "apiType": "Grabbable.PermissionMode",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "PermissionMode", "coverage": "Direct" },
+    { "type": "GrabbablePermissionMode", "memberKind": "Enum", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Set Grab Permission",
+  "value": "target=Self;mode=Everyone",
+  "description": "Changes who is allowed to grab this object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} grab permission ${mode}",
+  "searchKeywords": ["grab", "grabbable", "permission", "mode", "allow", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "mode", "label": "Permission", "type": "String", "control": "Choice", "required": true, "default": "Everyone", "description": "Who can grab this object.", "valueSource": "String / Choice", "allowCustom": false, "options": ["None", "Everyone", "Scripted"] }
+  ],
+  "beginnerSummary": "Do choose who can grab an object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

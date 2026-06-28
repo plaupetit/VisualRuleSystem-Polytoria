@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Text Input",
+  "idBase": "ACT_FocusTextInput",
+  "type": "FocusTextInput",
+  "apiType": "UITextInput.Focus",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Method", "member": "Focus", "coverage": "Direct" }
+  ],
+  "label": "Focus Text Input",
+  "value": "target=Self",
+  "description": "Moves keyboard focus to a UI text input.",
+  "status": "Ready",
+  "previewTemplate": "Focus ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "focus", "keyboard", "typing", "form"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to focus.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    }
+  ],
+  "beginnerSummary": "Do move the player's typing focus to a text input.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

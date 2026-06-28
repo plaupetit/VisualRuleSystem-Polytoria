@@ -1,0 +1,36 @@
+{
+  "moduleId": "polytoria.stats",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player Stats",
+  "idBase": "COND_PlayerStatAtLeast",
+  "type": "PlayerStatAtLeast",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "Stat", "memberKind": "Method", "member": "Get", "coverage": "Direct" }
+  ],
+  "label": "Player Stat At Least",
+  "value": "target=Target;player=;minimum=1",
+  "description": "Checks whether a player's numeric Stat value is at least a threshold.",
+  "status": "Ready",
+  "previewTemplate": "${target} at least ${minimum}",
+  "searchKeywords": ["stat", "stats", "score", "points", "minimum", "at least", "leaderboard", "check"],
+  "selectorHints": [
+    { "key": "target", "label": "Stat", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] },
+    { "key": "player", "label": "Player", "dataType": "Player", "allowedSources": ["TriggeringPlayer", "CatalogValue"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Stats",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Stat", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Target", "description": "Stat object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["StatObject"] },
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to check. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "minimum", "label": "Minimum", "type": "Number", "control": "Number", "default": "1", "description": "Minimum value required.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Check whether a player's stat reached a score or counter threshold.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Player Stats"]
+}

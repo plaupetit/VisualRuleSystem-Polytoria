@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.teams",
   "kind": "Action",
+  "apiSurface": "Gameplay",
   "apiGroup": "Teams",
   "runtimeFamily": "Server",
   "category": "Actions",
@@ -8,6 +9,9 @@
   "idBase": "ACT_SetPlayerGameTeam",
   "type": "SetPlayerGameTeam",
   "apiType": "Player",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Team", "coverage": "Direct" }
+  ],
   "label": "Set Player Game Team",
   "value": "target=Target",
   "description": "Assigns the triggering player to a Polytoria team object.",

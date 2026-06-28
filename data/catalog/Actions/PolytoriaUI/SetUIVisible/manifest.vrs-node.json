@@ -1,0 +1,39 @@
+{
+  "moduleId": "polytoria.ui.actions",
+  "kind": "Action",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "UI",
+  "idBase": "ACT_SetUIVisible",
+  "type": "SetUIVisible",
+  "apiType": "GUI.Visible",
+  "apiReferences": [
+    { "type": "GUI", "memberKind": "Property", "member": "Visible", "coverage": "Direct" }
+  ],
+  "label": "Set UI Visible",
+  "value": "target=Self;visible=true",
+  "description": "Shows or hides a UI object that exposes the Visible property.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} visible ${visible}",
+  "searchKeywords": ["ui", "gui", "visible", "show", "hide", "screen"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "UI Object",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI object to show or hide.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "visible", "label": "Visible", "type": "Boolean", "control": "Toggle", "required": true, "default": "true", "description": "Whether the UI object should be visible.", "valueSource": "Boolean / Toggle" }
+  ],
+  "beginnerSummary": "Show or hide a UI object.",
+  "surface": "UserFacing",
+  "palettePath": ["UI"]
+}

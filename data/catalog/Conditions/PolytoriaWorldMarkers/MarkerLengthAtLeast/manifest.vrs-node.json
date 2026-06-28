@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.worldmarkers.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Markers",
+  "idBase": "COND_MarkerLengthAtLeast",
+  "type": "MarkerLengthAtLeast",
+  "apiType": "Marker3D.Length",
+  "apiReferences": [{ "type": "Marker3D", "memberKind": "Property", "member": "Length", "coverage": "Direct" }],
+  "label": "Marker Length At Least",
+  "value": "target=Self;length=10",
+  "description": "Checks if a 3D marker length is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} marker length is at least ${length}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["marker", "length", "gizmo", "debug", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker3D object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] },
+    { "key": "length", "label": "Minimum Length", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Minimum marker length.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a marker is long enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

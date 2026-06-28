@@ -113,7 +113,45 @@ public sealed partial class LuauExporter
 
     private static readonly HashSet<string> EssentialsVectorFactoryTypes = new(StringComparer.OrdinalIgnoreCase)
     {
-        "DistanceBetweenPositions"
+        "DistanceBetweenPositions",
+        "ObjectBoundsCenter",
+        "ObjectBoundsSize",
+        "ObjectBoundsExtents",
+        "ObjectBoundsContainsPoint",
+        "RaycastHits",
+        "RaycastResult",
+        "RaycastHitObject",
+        "RaycastHitPosition",
+        "RaycastHitNormal",
+        "RaycastHitDistance",
+        "QuaternionIdentity",
+        "QuaternionFromComponents",
+        "QuaternionFromEuler",
+        "QuaternionToEuler",
+        "QuaternionFromAxisAngle",
+        "QuaternionLookRotation",
+        "QuaternionFromToRotation",
+        "QuaternionInverse",
+        "QuaternionNormalize",
+        "QuaternionLerp",
+        "QuaternionSlerp",
+        "QuaternionRotateTowards",
+        "QuaternionAngle",
+        "QuaternionDot",
+        "QuaternionAngleAtMost",
+        "ColorSeriesFromColors",
+        "ColorFromColorSeries",
+        "ColorSeriesPointCount",
+        "ColorSeriesPointColor",
+        "ColorSeriesPointOffset",
+        "Vector2FromXY",
+        "Vector2X",
+        "Vector2Y",
+        "Vector2Magnitude",
+        "Vector2Normalized",
+        "Vector2Distance",
+        "Vector2Lerp",
+        "Vector2DistanceAtMost"
     };
 
     private static readonly HashSet<string> EssentialsTargetResolverTypes = new(StringComparer.OrdinalIgnoreCase)

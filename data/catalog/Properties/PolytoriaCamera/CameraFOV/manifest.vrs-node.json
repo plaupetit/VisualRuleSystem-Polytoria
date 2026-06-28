@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.camera.values",
+  "kind": "Property",
+  "apiGroup": "Camera",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Camera",
+  "idBase": "PROP_CameraFOV",
+  "type": "CameraFOVValue",
+  "apiType": "Camera.FOV",
+  "apiReferences": [
+    { "type": "Camera", "memberKind": "Property", "member": "FOV", "coverage": "Direct" }
+  ],
+  "label": "Camera FOV",
+  "value": "target=Self",
+  "description": "Outputs the field of view from a Camera object.",
+  "status": "Ready",
+  "previewTemplate": "${target} FOV",
+  "searchKeywords": ["camera", "fov", "field of view", "zoom", "value", "client"],
+  "parameters": [
+    { "key": "target", "label": "Camera", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Camera object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] }
+  ],
+  "beginnerSummary": "Value: current field of view of a camera.",
+  "surface": "UserFacing",
+  "palettePath": ["Camera"]
+}

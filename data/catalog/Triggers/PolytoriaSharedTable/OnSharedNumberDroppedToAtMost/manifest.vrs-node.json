@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.sharedtable.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Shared Values",
+  "idBase": "EV_OnSharedNumberDroppedToAtMost",
+  "type": "OnSharedNumberDroppedToAtMost",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "On Shared Number Dropped To At Most",
+  "value": "key=Score;maximum=0;interval=0.25",
+  "description": "Runs when a shared numeric value becomes low enough.",
+  "status": "Ready",
+  "previewTemplate": "When shared ${key} drops to at most ${maximum}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["shared", "table", "variable", "global", "number", "maximum", "score", "watch", "trigger"],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Score", "description": "Shared table key to watch as a number.", "valueSource": "String / Manual Text Input" },
+    { "key": "maximum", "label": "Maximum", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Highest number that starts the connected nodes.", "valueSource": "Number / Manual Number Input" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the shared value.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When a shared score or counter becomes low enough, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Shared"]
+}

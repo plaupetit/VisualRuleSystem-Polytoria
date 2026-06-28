@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.color_adjust.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ColorAdjustBrightness",
+  "type": "ColorAdjustBrightnessValue",
+  "apiType": "ColorAdjustModifier.Brightness",
+  "apiReferences": [
+    { "type": "ColorAdjustModifier", "memberKind": "Property", "member": "Brightness", "coverage": "Direct" },
+    { "type": "LightingModifier", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Color Adjust Brightness",
+  "value": "target=Self",
+  "description": "Outputs the brightness adjustment from a ColorAdjustModifier.",
+  "status": "Ready",
+  "previewTemplate": "Color adjust brightness of ${target}",
+  "searchKeywords": ["lighting", "post process", "color adjust", "brightness", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ColorAdjustModifier object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ColorAdjustModifierObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads the brightness adjustment.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Color Adjust"]
+}

@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.bindable.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input/Network",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Local Events",
+  "idBase": "ACT_FireBindableEvent",
+  "type": "FireBindableEvent",
+  "apiType": "BindableEvent",
+  "apiReferences": [
+    { "type": "BindableEvent", "memberKind": "Method", "member": "Invoke", "coverage": "Direct" }
+  ],
+  "label": "Fire Bindable Event",
+  "value": "target=Self;payload=",
+  "description": "Invokes a same-side BindableEvent relay, such as Server Script To Server Script or Client Script To Client Script.",
+  "status": "Ready",
+  "previewTemplate": "Fire ${target} with ${payload}",
+  "searchKeywords": ["bindable", "bindableevent", "local event", "same boundary", "invoke", "fire", "signal", "message"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Bindable Event", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BindableEvent object to invoke.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "payload", "label": "Payload Text", "type": "String", "control": "Text", "required": false, "default": "", "description": "Text payload sent as the first event argument.", "valueSource": "String" }
+  ],
+  "beginnerSummary": "Action: fire a local BindableEvent for another script on the same runtime side.",
+  "surface": "UserFacing",
+  "palettePath": ["Flow & Timing", "Local Events"]
+}

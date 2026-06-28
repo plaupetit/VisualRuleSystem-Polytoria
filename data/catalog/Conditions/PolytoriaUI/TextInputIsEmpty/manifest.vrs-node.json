@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "Text Input",
+  "idBase": "COND_TextInputIsEmpty",
+  "type": "TextInputIsEmpty",
+  "apiType": "UITextInput.Text",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "Text", "coverage": "Direct" }
+  ],
+  "label": "Text Input Is Empty",
+  "value": "target=Self",
+  "description": "Checks if a text input is empty.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} input is empty",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "text input", "field", "empty", "blank", "text"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Text Input", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Text input object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["UITextInputObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Check whether a text input has no text.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

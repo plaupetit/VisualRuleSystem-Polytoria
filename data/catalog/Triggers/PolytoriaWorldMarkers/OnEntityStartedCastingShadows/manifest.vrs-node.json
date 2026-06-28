@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.worldmarkers.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Entity",
+  "idBase": "EV_OnEntityStartedCastingShadows",
+  "type": "OnEntityStartedCastingShadows",
+  "apiType": "Entity.CastShadows",
+  "apiReferences": [{ "type": "Entity", "memberKind": "Property", "member": "CastShadows", "coverage": "Partial" }],
+  "label": "On Entity Started Casting Shadows",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when an entity begins casting shadows.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} starts casting shadows",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["entity", "shadow", "lighting", "enabled", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks shadows.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when an entity starts casting shadows.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity Changes"]
+}

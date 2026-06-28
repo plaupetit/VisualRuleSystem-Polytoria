@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_ClearCharacterAppearance",
+  "type": "ClearCharacterAppearance",
+  "apiType": "PolytorianModel.ClearAppearance",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Method", "member": "ClearAppearance", "coverage": "Direct" }
+  ],
+  "label": "Clear Character Appearance",
+  "value": "target=Self",
+  "description": "Clears the current appearance from a character model.",
+  "status": "Ready",
+  "previewTemplate": "Clear appearance on ${target}",
+  "searchKeywords": ["character", "appearance", "avatar", "clear", "reset", "outfit"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Do clear a character appearance.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

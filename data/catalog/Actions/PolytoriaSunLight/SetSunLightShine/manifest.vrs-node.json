@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.sunlight",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetSunLightShine",
+  "type": "SetSunLightShine",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Specular", "coverage": "Direct" }
+  ],
+  "label": "Set Sun Light Shine",
+  "value": "target=Self;shine=0.5",
+  "description": "Changes the specular shine from the main sun light.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} sun shine ${shine}",
+  "searchKeywords": ["sun", "sunlight", "light", "lighting", "shine", "specular", "highlight"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Sun Light", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "SunLight object to change.", "valueSource": "Target Context", "acceptedObjectGroups": ["SunLightObject"] },
+    { "key": "shine", "label": "Shine", "type": "Number", "control": "Number", "required": true, "default": "0.5", "description": "New sun specular amount.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change how shiny sun highlights look.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light"]
+}

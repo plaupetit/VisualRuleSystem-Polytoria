@@ -27,10 +27,18 @@ public sealed record NodePaletteDisplayEntry(
     public string GroupHeader => $"{IntentLabel} / {DomainLabel}";
 }
 
+public enum NodePaletteApiSurfaceFilter
+{
+    Gameplay,
+    All,
+    Creator
+}
+
 public sealed record NodePaletteBrowserQueryOptions(
     string Search,
     GraphScriptKind ScriptKind,
     bool CompatibleOnly,
+    NodePaletteApiSurfaceFilter ApiSurfaceFilter,
     string CurrentIntentKey,
     IReadOnlyList<string> CurrentDomainPath,
     Func<NodeCatalogEntry, string?> IncompatibilityReason);

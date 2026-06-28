@@ -1,0 +1,83 @@
+{
+  "moduleId": "polytoria.input.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Input",
+  "idBase": "ACT_BindInputButtonKey",
+  "type": "BindInputButtonKey",
+  "apiType": "InputService.BindButton",
+  "apiReferences": [
+    { "type": "InputService", "memberKind": "Method", "member": "BindButton", "coverage": "Direct" },
+    { "type": "InputAction", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "InputActionButton", "memberKind": "Property", "member": "Buttons", "coverage": "Direct" },
+    { "type": "InputButtonCollection", "memberKind": "Method", "member": "AddButton", "coverage": "Direct" },
+    { "type": "InputButton", "memberKind": "Method", "member": "New", "coverage": "Direct" },
+    { "type": "InputButton", "memberKind": "Property", "member": "KeyCode", "coverage": "Direct" }
+  ],
+  "label": "Bind Input Button Key",
+  "value": "actionName=Interact;keyCode=E",
+  "description": "Ensures a button input action exists and adds a keyboard or mouse key to it during play.",
+  "status": "Ready",
+  "previewTemplate": "Bind ${keyCode} to input ${actionName}",
+  "searchKeywords": [
+    "do",
+    "input",
+    "bind",
+    "button",
+    "key",
+    "keyboard",
+    "mouse",
+    "client",
+    "controls"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "actionName",
+      "label": "Input Action",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Interact",
+      "description": "Button input action to create or update.",
+      "valueSource": "String / Choice"
+    },
+    {
+      "key": "keyCode",
+      "label": "Key Code",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "E",
+      "description": "Polytoria KeyCode enum name to bind.",
+      "valueSource": "String / Choice",
+      "allowCustom": true,
+      "options": [
+        "E",
+        "F",
+        "Q",
+        "R",
+        "Space",
+        "Enter",
+        "Shift",
+        "Ctrl",
+        "Alt",
+        "MouseLeft",
+        "MouseRight",
+        "MouseMiddle",
+        "GamepadA",
+        "GamepadB",
+        "GamepadX",
+        "GamepadY"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do make a client input action react to a key.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

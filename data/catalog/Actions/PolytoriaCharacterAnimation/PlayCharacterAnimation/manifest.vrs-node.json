@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Characters",
+  "idBase": "ACT_PlayCharacterAnimation",
+  "type": "PlayCharacterAnimation",
+  "apiType": "Animator.PlayAnimation",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "Animator", "coverage": "Direct" },
+    { "type": "Animator", "memberKind": "Method", "member": "PlayAnimation", "coverage": "Direct" }
+  ],
+  "label": "Play Character Animation",
+  "value": "target=Self;animation=Idle",
+  "description": "Starts a looping animation on a character animation controller.",
+  "status": "Ready",
+  "previewTemplate": "Play ${animation} on ${target}",
+  "searchKeywords": ["character", "animation", "animator", "play", "loop", "idle", "run"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to animate.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "animation", "label": "Animation", "type": "String", "control": "Text", "required": true, "default": "Idle", "description": "Animation key to play.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do play a looping character animation.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

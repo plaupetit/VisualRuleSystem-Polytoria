@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.physical.properties",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Server",
   "category": "Properties",
@@ -8,6 +9,10 @@
   "idBase": "PROP_ObjectSpinVelocity",
   "type": "ObjectSpinVelocity",
   "apiType": "Vector3",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "AngularVelocity", "coverage": "Direct" },
+    { "type": "Physical", "memberKind": "Property", "member": "AngularVelocity", "coverage": "Partial" }
+  ],
   "label": "Object Spin Velocity",
   "value": "target=Self",
   "description": "Outputs how fast a physics object spins in each direction.",

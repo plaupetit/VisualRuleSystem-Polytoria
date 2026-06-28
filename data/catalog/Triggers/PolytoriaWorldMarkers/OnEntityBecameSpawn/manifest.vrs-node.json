@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.worldmarkers.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Entity",
+  "idBase": "EV_OnEntityBecameSpawn",
+  "type": "OnEntityBecameSpawn",
+  "apiType": "Entity.IsSpawn",
+  "apiReferences": [{ "type": "Entity", "memberKind": "Property", "member": "IsSpawn", "coverage": "Partial" }],
+  "label": "On Entity Became Spawn",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when an entity becomes marked as a spawn.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} becomes a spawn",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["entity", "spawn", "checkpoint", "enabled", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks spawn state.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when an entity becomes a spawn point.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity Changes"]
+}

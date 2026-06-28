@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Meshes",
+  "idBase": "ACT_SetPTMeshAssetId",
+  "type": "SetPTMeshAssetId",
+  "apiType": "PTMeshAsset.AssetID",
+  "apiReferences": [
+    { "type": "PTMeshAsset", "memberKind": "Property", "member": "AssetID", "coverage": "Direct" },
+    { "type": "MeshAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set PT Mesh Asset ID",
+  "value": "target=Self;assetId=0",
+  "description": "Changes the numeric Polytoria mesh ID stored on a PTMeshAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} mesh ID",
+  "searchKeywords": ["mesh", "asset", "ptmeshasset", "id", "model"],
+  "selectorHints": [
+    { "key": "target", "label": "Mesh Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Mesh Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTMeshAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAssetObject"] },
+    { "key": "assetId", "label": "Asset ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Polytoria mesh asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Do update the mesh ID on a PTMeshAsset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Meshes"]
+}

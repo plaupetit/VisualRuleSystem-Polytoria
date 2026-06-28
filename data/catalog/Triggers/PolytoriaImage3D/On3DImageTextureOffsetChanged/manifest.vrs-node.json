@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.image3d.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "3D Image",
+  "idBase": "EV_On3DImageTextureOffsetChanged",
+  "type": "On3DImageTextureOffsetChanged",
+  "apiType": "Image3D.TextureOffset",
+  "apiReferences": [
+    { "type": "Image3D", "memberKind": "Property", "member": "TextureOffset", "coverage": "Partial" }
+  ],
+  "label": "On 3D Image Texture Offset Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a 3D image texture offset changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} texture offset changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d image", "image", "texture", "offset", "scroll", "changed", "watcher", "trigger"],
+  "parameters": [
+    { "key": "target", "label": "3D Image", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D image object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["Image3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the texture offset.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a 3D image texture offset changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Image Changes"]
+}

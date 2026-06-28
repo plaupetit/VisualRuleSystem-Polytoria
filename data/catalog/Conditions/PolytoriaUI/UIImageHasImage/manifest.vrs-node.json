@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.ui.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "UI",
+  "idBase": "COND_UIImageHasImage",
+  "type": "UIImageHasImage",
+  "apiType": "UIImage.Image",
+  "apiReferences": [
+    { "type": "UIImage", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "UI Has Image",
+  "value": "target=Self",
+  "description": "Checks if a UI image has any image asset assigned.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} has an image",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "image", "picture", "asset", "empty", "assigned"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Image UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UIImage object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Check whether a UI image has an image assigned.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI"]
+}

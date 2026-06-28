@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Entity",
+  "idBase": "PROP_EntityColor",
+  "type": "EntityColorValue",
+  "apiType": "Entity.Color",
+  "apiReferences": [
+    { "type": "Entity", "memberKind": "Property", "member": "Color", "coverage": "Direct" },
+    { "type": "Color", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Entity Color",
+  "value": "target=Self",
+  "description": "Reads the color of an entity-like object.",
+  "status": "Ready",
+  "returnType": "Color",
+  "previewTemplate": "${target} entity color",
+  "searchKeywords": ["entity", "object", "color", "paint", "visual"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity-like object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] }
+  ],
+  "beginnerSummary": "Value returns entity color.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity"]
+}

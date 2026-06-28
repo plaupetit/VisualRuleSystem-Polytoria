@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionFromAxisAngle",
+  "type": "QuaternionFromAxisAngle",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "AngleAxis", "coverage": "Direct" }
+  ],
+  "label": "Rotation Around Axis",
+  "value": "axis=0,1,0;angle=90",
+  "description": "Creates a rotation around an axis, such as turning around Y.",
+  "status": "Ready",
+  "previewTemplate": "Rotate ${angle} degrees around ${axis}",
+  "searchKeywords": ["quaternion", "rotation", "axis", "angle", "angleaxis", "turn", "yaw", "spin"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "axis", "label": "Axis", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,1,0", "description": "Axis to rotate around.", "valueSource": "World Direction" },
+    { "key": "angle", "label": "Angle Degrees", "type": "Number", "control": "Number", "required": true, "default": "90", "description": "Degrees to rotate.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Value: make a rotation around one direction.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

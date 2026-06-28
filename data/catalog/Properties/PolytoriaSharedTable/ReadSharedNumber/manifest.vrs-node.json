@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.sharedtable.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Shared Values",
+  "idBase": "PROP_ReadSharedNumber",
+  "type": "ReadSharedNumber",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Read Shared Number",
+  "value": "key=Score;fallback=0",
+  "description": "Reads a shared value as a number with a fallback.",
+  "status": "Ready",
+  "previewTemplate": "Read shared number ${key}",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "read",
+    "number",
+    "score",
+    "counter"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "key",
+      "label": "Key",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Shared table key to read as a number.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "fallback",
+      "label": "Fallback",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Number to output when the shared value is missing or not numeric.",
+      "valueSource": "Number / Manual Number Input"
+    }
+  ],
+  "beginnerSummary": "Value: read a shared number such as a score or counter.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.tween.actions",
   "kind": "Action",
+  "apiSurface": "Gameplay",
   "apiGroup": "Tween",
   "runtimeFamily": "Shared",
   "category": "Actions",
@@ -8,8 +9,18 @@
   "idBase": "ACT_TweenObjectScale",
   "type": "TweenObjectScale",
   "apiType": "TweenService",
+  "apiReferences": [
+    { "type": "TweenService", "memberKind": "Method", "member": "NewTween", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenSize", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Method", "member": "SetTrans", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Method", "member": "SetDirection", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Property", "member": "SpeedScale", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Property", "member": "Looped", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Property", "member": "Parallel", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Event", "member": "Finished", "coverage": "Direct" }
+  ],
   "label": "Animate Object Scale",
-  "value": "target=Self;vector=1,1,1;x=1;y=1;z=1;duration=1;transition=Sine;direction=InOut;waitToComplete=true",
+  "value": "target=Self;vector=1,1,1;x=1;y=1;z=1;duration=1;transition=Sine;direction=InOut;speedScale=1;looped=false;parallel=false;waitToComplete=true",
   "description": "Animates an object to a target scale with a smooth animation.",
   "status": "Ready",
   "previewTemplate": "Animate ${target} scale to ${vector}",
@@ -127,6 +138,36 @@
         "Out",
         "InOut"
       ]
+    },
+    {
+      "key": "speedScale",
+      "label": "Speed Scale",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Multiplier for the tween speed.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "looped",
+      "label": "Loop",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "false",
+      "description": "When true, the tween repeats.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "parallel",
+      "label": "Parallel",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "false",
+      "description": "When true, chained tween steps can run together.",
+      "valueSource": "Suggested Value"
     },
     {
       "key": "waitToComplete",

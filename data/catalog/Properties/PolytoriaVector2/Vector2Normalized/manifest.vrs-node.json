@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.vector2.values",
+  "kind": "Property",
+  "apiGroup": "Math",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Vector",
+  "idBase": "PROP_Vector2Normalized",
+  "type": "Vector2Normalized",
+  "apiType": "Vector2",
+  "apiReferences": [
+    { "type": "Vector2", "memberKind": "Property", "member": "Normalized", "coverage": "Direct" }
+  ],
+  "label": "Normalize Vector2",
+  "value": "vector=0,0",
+  "description": "Outputs the same direction as a 2D vector with a length of one.",
+  "status": "Ready",
+  "previewTemplate": "Normalize Vector2",
+  "searchKeywords": ["vector2", "vector", "normalize", "normalized", "direction", "unit"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "vector", "label": "Vector", "type": "Vector2", "control": "Vector2", "required": true, "default": "0,0", "description": "2D vector to normalize.", "valueSource": "Vector2" }
+  ],
+  "beginnerSummary": "Value: keep the direction of a Vector2 but make its length one.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Vector"]
+}

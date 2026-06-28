@@ -63,6 +63,8 @@ public sealed partial class NodeCatalogService
             dataType.Equals("Number", StringComparison.OrdinalIgnoreCase) ||
             dataType.Equals("Boolean", StringComparison.OrdinalIgnoreCase) ||
             dataType.Equals("SceneObject", StringComparison.OrdinalIgnoreCase) ||
+            dataType.Equals("Quaternion", StringComparison.OrdinalIgnoreCase) ||
+            dataType.Equals("ColorSeries", StringComparison.OrdinalIgnoreCase) ||
             dataType.Equals("Vector3", StringComparison.OrdinalIgnoreCase) ||
             dataType.Equals("Color", StringComparison.OrdinalIgnoreCase) ||
             dataType.Equals("Any", StringComparison.OrdinalIgnoreCase);

@@ -9,6 +9,11 @@ Status: smart live prototype.
 This bridge lets Polytoria Creator remain the authority while a local visual
 programming app reads a hierarchy snapshot and queues safe commands.
 
+The full visual scripting UI/workspace stays in the VisualRuleSystem desktop
+app. The Creator addon is a visible `Tools > Addons` integration surface; it
+does not create a native docked Creator tab and does not launch external
+executables.
+
 The bridge is intentionally file-based:
 
 ```text
@@ -24,7 +29,8 @@ Open `Tools > Addons > [VRS]Visual Programming Bridge`.
 
 - `Export Visual Snapshot`: writes `bridge/scene-snapshot.json`.
 - `Apply Visual Commands`: reads `bridge/pending-commands.json` and applies V1 commands.
-- `Visual Bridge Status`: prints bridge paths and writes `bridge/status.json`.
+- `Visual Bridge Status`: prints bridge paths, reads `bridge/app-state.json`
+  when present, and writes `bridge/status.json`.
 - `Toggle Visual Auto Bridge`: toggles the optional heartbeat-aware loop.
 
 In smart live mode, Creator only works while VisualRuleSystem writes a fresh

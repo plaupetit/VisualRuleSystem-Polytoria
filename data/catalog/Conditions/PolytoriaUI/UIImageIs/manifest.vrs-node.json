@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.ui.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "UI",
+  "idBase": "COND_UIImageIs",
+  "type": "UIImageIs",
+  "apiType": "UIImage.Image",
+  "apiReferences": [
+    { "type": "UIImage", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "UI Image Is",
+  "value": "target=Self;image=images/icon.png;caseSensitive=false",
+  "description": "Checks if a UI image uses the expected image asset reference.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} image is ${image}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "image", "picture", "asset", "equals", "match"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Image UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UIImage object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] },
+    { "key": "image", "label": "Expected Image", "type": "String", "control": "Text", "required": true, "default": "images/icon.png", "description": "Image asset reference to compare with.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a UI image matches a specific image asset.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI"]
+}

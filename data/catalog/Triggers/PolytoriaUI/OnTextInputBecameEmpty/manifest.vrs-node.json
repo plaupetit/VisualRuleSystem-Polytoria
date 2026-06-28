@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.ui.textinput.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "Text Input",
+  "idBase": "EV_OnTextInputBecameEmpty",
+  "type": "OnTextInputBecameEmpty",
+  "apiType": "UITextInput.Text",
+  "apiReferences": [{ "type": "UITextInput", "memberKind": "Property", "member": "Text", "coverage": "Partial" }],
+  "label": "On Text Input Became Empty",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a text input changes from non-empty to empty.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} becomes empty",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "text input", "empty", "blank", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Text Input", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Text input to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["UITextInputObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the text.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a text input becomes empty.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input Changes"]
+}

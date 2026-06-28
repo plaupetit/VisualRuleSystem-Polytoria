@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "UI Layout",
+  "idBase": "PROP_LayoutSpacing",
+  "type": "LayoutSpacingValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "UIHVLayout", "memberKind": "Property", "member": "Spacing", "coverage": "Direct" }
+  ],
+  "label": "Layout Spacing",
+  "value": "target=Self",
+  "description": "Reads spacing between children in a horizontal or vertical UI layout.",
+  "status": "Ready",
+  "previewTemplate": "Layout spacing of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "layout", "spacing", "gap", "horizontal", "vertical"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "UI Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Layout to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIHVLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads the gap between items in a UI layout.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

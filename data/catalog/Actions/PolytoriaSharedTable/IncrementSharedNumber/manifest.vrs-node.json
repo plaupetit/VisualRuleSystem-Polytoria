@@ -1,0 +1,63 @@
+{
+  "moduleId": "polytoria.sharedtable.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Shared Values",
+  "idBase": "ACT_IncrementSharedNumber",
+  "type": "IncrementSharedNumber",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Increment Shared Number",
+  "value": "key=Score;amount=1",
+  "description": "Adds a number to a shared numeric value.",
+  "status": "Ready",
+  "previewTemplate": "Add ${amount} to shared ${key}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "number",
+    "increment",
+    "add",
+    "score",
+    "counter"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "key",
+      "label": "Key",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Shared table key to increment.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Number to add.",
+      "valueSource": "Number / Manual Number Input"
+    }
+  ],
+  "beginnerSummary": "Do add to a shared number, such as a shared score.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

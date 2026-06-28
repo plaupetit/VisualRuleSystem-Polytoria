@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Text Input",
+  "idBase": "ACT_SetTextInputReadOnly",
+  "type": "SetTextInputReadOnly",
+  "apiType": "UITextInput.ReadOnly",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "ReadOnly", "coverage": "Direct" }
+  ],
+  "label": "Set Text Input Read Only",
+  "value": "target=Self;readOnly=true",
+  "description": "Locks or unlocks player editing on a UI text input.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} read only ${readOnly}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "readonly", "read only", "lock", "unlock", "disabled"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to lock or unlock.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    },
+    {
+      "key": "readOnly",
+      "label": "Read Only",
+      "type": "Boolean",
+      "control": "Toggle",
+      "required": true,
+      "default": "true",
+      "description": "When enabled, the player cannot edit this input.",
+      "valueSource": "Boolean / Toggle"
+    }
+  ],
+  "beginnerSummary": "Do lock or unlock a text input.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

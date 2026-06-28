@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionNormalize",
+  "type": "QuaternionNormalize",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "Normalize", "coverage": "Direct" }
+  ],
+  "label": "Normalize Rotation",
+  "value": "rotation=0,0,0,1",
+  "description": "Makes a quaternion rotation valid and stable after calculations.",
+  "status": "Ready",
+  "previewTemplate": "Normalize rotation",
+  "searchKeywords": ["quaternion", "rotation", "normalize", "clean", "stable", "orientation"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "rotation", "label": "Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,0,0,1", "description": "Rotation to normalize.", "valueSource": "Rotation Value" }
+  ],
+  "beginnerSummary": "Value: clean up a rotation after math.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

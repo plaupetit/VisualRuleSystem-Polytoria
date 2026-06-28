@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.gradient_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_GradientSkySunHaloContribution",
+  "type": "GradientSkySunHaloContributionValue",
+  "apiType": "GradientSky.SunHaloContribution",
+  "apiReferences": [
+    { "type": "GradientSky", "memberKind": "Property", "member": "SunHaloContribution", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Gradient Sky Sun Halo Contribution",
+  "value": "target=Self",
+  "description": "Outputs the sun halo contribution from a GradientSky object.",
+  "status": "Ready",
+  "previewTemplate": "Sun halo contribution of ${target}",
+  "searchKeywords": ["sky", "gradient", "sun", "halo", "contribution", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientSky object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["GradientSkyObject"] }
+  ],
+  "beginnerSummary": "Value reads how much the sun halo contributes.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sky Sun Halo"]
+}

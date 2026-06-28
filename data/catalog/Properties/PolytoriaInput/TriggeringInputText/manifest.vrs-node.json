@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.input.values",
+  "kind": "Property",
+  "apiGroup": "Input",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Input",
+  "idBase": "PROP_TriggeringInputText",
+  "type": "TriggeringInputText",
+  "apiType": "NetMessage.GetString",
+  "apiReferences": [
+    { "type": "NetMessage", "memberKind": "Method", "member": "GetString", "coverage": "Direct" }
+  ],
+  "label": "Input Event Text",
+  "value": "",
+  "description": "Outputs the first text value from the message received by On Input Network Event.",
+  "status": "Ready",
+  "previewTemplate": "Input event text",
+  "searchKeywords": [
+    "input",
+    "networkevent",
+    "netmessage",
+    "message",
+    "text",
+    "payload",
+    "server"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: read text sent by a client input event.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

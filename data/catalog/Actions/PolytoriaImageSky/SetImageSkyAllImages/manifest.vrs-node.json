@@ -1,0 +1,43 @@
+{
+  "moduleId": "polytoria.imagesky",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetImageSkyAllImages",
+  "type": "SetImageSkyAllImages",
+  "apiType": "ImageSky",
+  "apiReferences": [
+    { "type": "ImageSky", "memberKind": "Property", "member": "TopImage", "coverage": "Direct" },
+    { "type": "ImageSky", "memberKind": "Property", "member": "BottomImage", "coverage": "Direct" },
+    { "type": "ImageSky", "memberKind": "Property", "member": "LeftImage", "coverage": "Direct" },
+    { "type": "ImageSky", "memberKind": "Property", "member": "RightImage", "coverage": "Direct" },
+    { "type": "ImageSky", "memberKind": "Property", "member": "FrontImage", "coverage": "Direct" },
+    { "type": "ImageSky", "memberKind": "Property", "member": "BackImage", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Image Sky Images",
+  "value": "target=Self;topImage=;bottomImage=;leftImage=;rightImage=;frontImage=;backImage=",
+  "description": "Sets all six image sides on an ImageSky skybox.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} skybox images",
+  "searchKeywords": ["sky", "skybox", "image", "images", "asset", "lighting", "environment"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Image Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ImageSky object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageSkyObject"] },
+    { "key": "topImage", "label": "Top Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference for the top side.", "valueSource": "String / Manual Text Input" },
+    { "key": "bottomImage", "label": "Bottom Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference for the bottom side.", "valueSource": "String / Manual Text Input" },
+    { "key": "leftImage", "label": "Left Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference for the left side.", "valueSource": "String / Manual Text Input" },
+    { "key": "rightImage", "label": "Right Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference for the right side.", "valueSource": "String / Manual Text Input" },
+    { "key": "frontImage", "label": "Front Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference for the front side.", "valueSource": "String / Manual Text Input" },
+    { "key": "backImage", "label": "Back Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference for the back side.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Do set every image used by a custom skybox.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Image Sky Setup"]
+}

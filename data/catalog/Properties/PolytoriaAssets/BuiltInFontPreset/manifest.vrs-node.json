@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Fonts",
+  "idBase": "PROP_BuiltInFontPreset",
+  "type": "BuiltInFontPresetValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "BuiltInFontAsset", "memberKind": "Property", "member": "FontPreset", "coverage": "Direct" },
+    { "type": "FontAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Built-In Font Preset",
+  "value": "target=Self",
+  "description": "Outputs the font preset name from a BuiltInFontAsset.",
+  "status": "Ready",
+  "previewTemplate": "${target} font preset",
+  "searchKeywords": ["font", "built-in", "preset", "text"],
+  "parameters": [
+    { "key": "target", "label": "Built-In Font Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BuiltInFontAsset to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["FontAssetObject"] }
+  ],
+  "beginnerSummary": "Value: read the preset name from a built-in font asset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Fonts"]
+}

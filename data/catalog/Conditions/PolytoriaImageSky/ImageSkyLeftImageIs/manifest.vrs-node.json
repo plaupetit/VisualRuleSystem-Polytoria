@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.imagesky.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Image Sky",
+  "idBase": "COND_ImageSkyLeftImageIs",
+  "type": "ImageSkyLeftImageIs",
+  "apiType": "ImageSky.LeftImage",
+  "apiReferences": [{ "type": "ImageSky", "memberKind": "Property", "member": "LeftImage", "coverage": "Direct" }],
+  "label": "Image Sky Left Image Is",
+  "value": "target=Self;image=;caseSensitive=false",
+  "description": "Checks if an ImageSky left face uses the expected image.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} left sky image is ${image}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["image", "sky", "left", "skybox", "asset", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Image Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ImageSky object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageSkyObject"] },
+    { "key": "image", "label": "Expected Image", "type": "String", "control": "Text", "required": true, "default": "", "description": "Expected left image asset reference.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check the left image of a skybox.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Image Sky Sides"]
+}

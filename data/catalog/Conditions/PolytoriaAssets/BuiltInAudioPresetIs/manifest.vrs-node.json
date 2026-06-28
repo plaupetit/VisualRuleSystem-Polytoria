@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Audio",
+  "idBase": "COND_BuiltInAudioPresetIs",
+  "type": "BuiltInAudioPresetIs",
+  "apiType": "BuiltInAudioAsset.AudioPreset",
+  "apiReferences": [
+    { "type": "BuiltInAudioAsset", "memberKind": "Property", "member": "AudioPreset", "coverage": "Direct" },
+    { "type": "AudioAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Built-In Audio Preset Is",
+  "value": "target=Self;preset=Jump;caseSensitive=true",
+  "description": "Checks if a BuiltInAudioAsset uses the expected preset.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} audio preset is ${preset}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "sound", "built-in", "preset", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Built-In Audio Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BuiltInAudioAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["AudioAssetObject"] },
+    { "key": "preset", "label": "Preset", "type": "String", "control": "Choice", "required": true, "default": "Jump", "description": "Expected built-in audio preset.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Jump", "Explosion"] },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a built-in audio asset uses a preset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Audio"]
+}

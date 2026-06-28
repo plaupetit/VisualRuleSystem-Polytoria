@@ -49,7 +49,24 @@ public sealed partial class RuleGraphCanvas
     private void DrawNodePaletteHeader(DrawingContext context, Rect bounds, int resultCount)
     {
         var title = nodePaletteConnectFrom is null ? "Add Node Here" : "Add Node And Connect";
-        DrawText(context, title, bounds.X + 12, bounds.Y + 8, 12.5, BrushFromHex("#b9c3cf"), FontWeight.SemiBold, bounds.Width - 150);
+        DrawText(context, title, bounds.X + 12, bounds.Y + 8, 12.5, BrushFromHex("#b9c3cf"), FontWeight.SemiBold, bounds.Width - 246);
+
+        var apiSurfaceRect = NodePaletteApiSurfaceToggleBounds(bounds);
+        var apiSurfaceLabel = NodePaletteApiSurfaceFilterText();
+        var apiSurfacePen = nodePaletteApiSurfaceFilter switch
+        {
+            NodePaletteApiSurfaceFilter.Creator => "#f59e0b",
+            NodePaletteApiSurfaceFilter.All => "#aeb8c4",
+            _ => "#60a5fa"
+        };
+        var apiSurfaceFill = nodePaletteApiSurfaceFilter switch
+        {
+            NodePaletteApiSurfaceFilter.Creator => "#352a1d",
+            NodePaletteApiSurfaceFilter.All => "#343434",
+            _ => "#1d2a38"
+        };
+        context.DrawRectangle(BrushFromHex(apiSurfaceFill), new Pen(BrushFromHex(apiSurfacePen), 1), apiSurfaceRect, 4, 4);
+        DrawText(context, apiSurfaceLabel, apiSurfaceRect.X + 8, apiSurfaceRect.Y + 4, 10.5, BrushFromHex(apiSurfacePen), FontWeight.SemiBold, apiSurfaceRect.Width - 12);
 
         var compatibleRect = NodePaletteCompatibleToggleBounds(bounds);
         var compatibleFill = nodePaletteCompatibleOnly ? "#1d2a38" : "#343434";
@@ -194,6 +211,17 @@ public sealed partial class RuleGraphCanvas
                 return new NodePaletteTooltip("Compatible filter", mode, nodePaletteCompatibleOnly ? "#34d399" : "#aeb8c4");
             }
 
+            if (NodePaletteApiSurfaceToggleBounds(paletteBounds).Contains(nodePalettePointerPoint))
+            {
+                var mode = nodePaletteApiSurfaceFilter switch
+                {
+                    NodePaletteApiSurfaceFilter.Creator => "Only Creator/editor/addon API nodes are shown. Press Ctrl+G or click to cycle.",
+                    NodePaletteApiSurfaceFilter.All => "Gameplay and Creator API nodes are shown together. Press Ctrl+G or click to cycle.",
+                    _ => "Only gameplay runtime API nodes are shown. Runtime UI nodes stay in Gameplay. Press Ctrl+G or click to cycle."
+                };
+                return new NodePaletteTooltip("API surface filter", mode, NodePaletteApiSurfaceAccentHex());
+            }
+
             if (CanGoBackNodePalette() && NodePaletteBackBounds(paletteBounds).Contains(nodePalettePointerPoint))
             {
                 return new NodePaletteTooltip(
@@ -314,6 +342,31 @@ public sealed partial class RuleGraphCanvas
     private Rect NodePaletteCompatibleToggleBounds(Rect bounds)
     {
         return new Rect(bounds.Right - 104, bounds.Y + 6, 92, 22);
+    }
+
+    private Rect NodePaletteApiSurfaceToggleBounds(Rect bounds)
+    {
+        return new Rect(bounds.Right - 204, bounds.Y + 6, 92, 22);
+    }
+
+    private string NodePaletteApiSurfaceFilterText()
+    {
+        return nodePaletteApiSurfaceFilter switch
+        {
+            NodePaletteApiSurfaceFilter.Creator => "Creator",
+            NodePaletteApiSurfaceFilter.All => "All",
+            _ => "Gameplay"
+        };
+    }
+
+    private string NodePaletteApiSurfaceAccentHex()
+    {
+        return nodePaletteApiSurfaceFilter switch
+        {
+            NodePaletteApiSurfaceFilter.Creator => "#f59e0b",
+            NodePaletteApiSurfaceFilter.All => "#aeb8c4",
+            _ => "#60a5fa"
+        };
     }
 
     private string NodePaletteBreadcrumbText(int resultCount)

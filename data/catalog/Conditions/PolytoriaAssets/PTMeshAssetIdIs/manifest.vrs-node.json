@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Meshes",
+  "idBase": "COND_PTMeshAssetIdIs",
+  "type": "PTMeshAssetIdIs",
+  "apiType": "PTMeshAsset.AssetID",
+  "apiReferences": [
+    { "type": "PTMeshAsset", "memberKind": "Property", "member": "AssetID", "coverage": "Direct" },
+    { "type": "MeshAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "PT Mesh Asset ID Is",
+  "value": "target=Self;assetId=0",
+  "description": "Checks if a PTMeshAsset stores the expected numeric mesh ID.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} mesh ID is ${assetId}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["mesh", "asset", "ptmeshasset", "id", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Mesh Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTMeshAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAssetObject"] },
+    { "key": "assetId", "label": "Asset ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Expected Polytoria mesh asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a mesh asset uses a specific ID.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Meshes"]
+}

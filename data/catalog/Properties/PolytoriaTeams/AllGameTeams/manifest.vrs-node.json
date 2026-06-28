@@ -1,0 +1,36 @@
+{
+  "moduleId": "polytoria.teams.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Game Team",
+  "idBase": "PROP_AllGameTeams",
+  "type": "AllGameTeams",
+  "apiType": "Any",
+  "apiReferences": [
+    { "type": "Teams", "memberKind": "Method", "member": "GetTeams", "coverage": "Direct" }
+  ],
+  "label": "All Game Teams",
+  "value": "",
+  "description": "Outputs the list of game teams in the place.",
+  "status": "Ready",
+  "previewTemplate": "All game teams",
+  "searchKeywords": [
+    "team",
+    "teams",
+    "list",
+    "all"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Teams",
+  "utilityLayer": "Teams",
+  "parameters": [],
+  "beginnerSummary": "Value: use the full game team list.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Game Rules",
+    "Game Teams"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.vector2.values",
+  "kind": "Property",
+  "apiGroup": "Math",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Vector",
+  "idBase": "PROP_Vector2FromXY",
+  "type": "Vector2FromXY",
+  "apiType": "Vector2",
+  "apiReferences": [
+    { "type": "Vector2", "memberKind": "Method", "member": "New", "coverage": "Direct" }
+  ],
+  "label": "Vector2 From X Y",
+  "value": "x=0;y=0",
+  "description": "Creates a 2D vector from X and Y numbers.",
+  "status": "Ready",
+  "previewTemplate": "Vector2 (${x}, ${y})",
+  "searchKeywords": ["vector2", "vector", "2d", "xy", "x", "y", "input", "ui", "point"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Horizontal component.", "valueSource": "Number" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Vertical component.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Value: make a 2D vector from two numbers.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Vector"]
+}

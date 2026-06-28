@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.gradient_sky.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetGradientSkySunDisc",
+  "type": "SetGradientSkySunDisc",
+  "apiType": "GradientSky.SunDiscColor",
+  "apiReferences": [
+    { "type": "GradientSky", "memberKind": "Property", "member": "SunDiscColor", "coverage": "Direct" },
+    { "type": "GradientSky", "memberKind": "Property", "member": "SunDiscMultiplier", "coverage": "Direct" },
+    { "type": "GradientSky", "memberKind": "Property", "member": "SunDiscExponent", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Gradient Sky Sun Disc",
+  "value": "target=Self;r=1;g=0.9;b=0.6;multiplier=1;exponent=1",
+  "description": "Changes the sun disc color, multiplier, and exponent on a GradientSky object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} sun disc",
+  "searchKeywords": ["sky", "gradient", "sun", "disc", "color", "lighting"],
+  "selectorHints": [
+    { "key": "target", "label": "Gradient Sky", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientSky object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GradientSkyObject"] },
+    { "key": "r", "label": "Red", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Red amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "g", "label": "Green", "type": "Number", "control": "Number", "required": true, "default": "0.9", "description": "Green amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "b", "label": "Blue", "type": "Number", "control": "Number", "required": true, "default": "0.6", "description": "Blue amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "multiplier", "label": "Multiplier", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Sun disc multiplier.", "valueSource": "Suggested Value" },
+    { "key": "exponent", "label": "Exponent", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Sun disc exponent.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do tune the visible sun disc in a gradient sky.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sky Sun Disc"]
+}

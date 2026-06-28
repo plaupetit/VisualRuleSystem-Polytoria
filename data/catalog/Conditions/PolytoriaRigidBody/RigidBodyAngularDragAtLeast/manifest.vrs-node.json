@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.rigidbody.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Physics",
+  "idBase": "COND_RigidBodyAngularDragAtLeast",
+  "type": "RigidBodyAngularDragAtLeast",
+  "apiType": "RigidBody.AngularDrag",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "AngularDrag", "coverage": "Direct" }
+  ],
+  "label": "Rigid Body Angular Drag At Least",
+  "value": "target=Self;angularDrag=0",
+  "description": "Checks if a RigidBody angular drag is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} angular drag is at least ${angularDrag}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "angular", "drag", "spin", "damping", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "angularDrag", "label": "Minimum Angular Drag", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Minimum angular drag.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a rigid body resists spinning enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

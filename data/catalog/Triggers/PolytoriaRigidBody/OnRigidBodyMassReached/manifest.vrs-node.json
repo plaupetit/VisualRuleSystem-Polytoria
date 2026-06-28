@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.rigidbody.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Physics",
+  "idBase": "EV_OnRigidBodyMassReached",
+  "type": "OnRigidBodyMassReached",
+  "apiType": "RigidBody.Mass",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Mass", "coverage": "Partial" }
+  ],
+  "label": "On Rigid Body Mass Reached",
+  "value": "target=Self;mass=1;interval=0.25",
+  "description": "Starts when a RigidBody mass reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} mass reaches ${mass}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "mass", "weight", "threshold", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "mass", "label": "Mass", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Mass threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks mass.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a rigid body becomes heavy enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body Changes"]
+}

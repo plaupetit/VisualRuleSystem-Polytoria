@@ -87,7 +87,7 @@ Luau files are not imported as graphs.
 2. Let VRS ensure common input presets such as `Jump`, `Interact`, `Sprint`,
    `Attack`, and movement axes.
 3. Let the bridge ensure `NetworkEvent` objects under
-   `World/Hidden/VRS/Events/Input`.
+   `World/Hidden/VRS/Events/User Input (NetworkEvent)/Input Manager`.
 4. In a client script, use `On Input Button Down` and `Send Input Event`.
 5. In a server script, use `On VRS Input Event`.
 

@@ -1,0 +1,39 @@
+{
+  "moduleId": "polytoria.camera.actions",
+  "kind": "Action",
+  "apiGroup": "Camera",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Camera",
+  "idBase": "ACT_SetCameraFOV",
+  "type": "SetCameraFOV",
+  "apiType": "Camera.FOV",
+  "apiReferences": [
+    { "type": "Camera", "memberKind": "Property", "member": "FOV", "coverage": "Direct" }
+  ],
+  "label": "Set Camera FOV",
+  "value": "target=Self;fov=70",
+  "description": "Changes the field of view on a Camera object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} FOV to ${fov}",
+  "searchKeywords": ["camera", "fov", "field of view", "zoom", "client"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Camera",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Camera", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Camera object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "fov", "label": "FOV", "type": "Number", "control": "Number", "required": true, "default": "70", "description": "New camera field of view.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Client action: change a camera field of view.",
+  "surface": "UserFacing",
+  "palettePath": ["Camera"]
+}

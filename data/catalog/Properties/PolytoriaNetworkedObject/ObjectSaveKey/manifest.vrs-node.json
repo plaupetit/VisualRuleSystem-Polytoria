@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.networkedobject.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input/Network",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Object Network",
+  "idBase": "PROP_ObjectSaveKey",
+  "type": "ObjectSaveKey",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "NetworkedObject", "memberKind": "Property", "member": "ObjectID", "coverage": "Direct" }
+  ],
+  "label": "Object Save Key",
+  "value": "target=Self",
+  "description": "Outputs the saved object key from the place file when available.",
+  "status": "Ready",
+  "previewTemplate": "Saved key of ${target}",
+  "searchKeywords": ["value", "object", "saved", "file", "key", "id", "scene"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose saved key will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["Any"]
+    }
+  ],
+  "beginnerSummary": "Value reads the saved key of a scene object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Network"]
+}

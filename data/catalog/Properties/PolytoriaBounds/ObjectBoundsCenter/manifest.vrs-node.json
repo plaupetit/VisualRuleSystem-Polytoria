@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.bounds",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Bounds",
+  "idBase": "PROP_ObjectBoundsCenter",
+  "type": "ObjectBoundsCenter",
+  "apiType": "Bounds.Center",
+  "apiReferences": [
+    { "type": "Dynamic", "memberKind": "Method", "member": "GetBounds", "coverage": "Partial" },
+    { "type": "Bounds", "memberKind": "Property", "member": "Center", "coverage": "Direct" },
+    { "type": "Vector3", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Object Bounds Center",
+  "value": "target=Self",
+  "description": "Reads the center point of an object's bounds.",
+  "status": "Ready",
+  "returnType": "Vector3",
+  "previewTemplate": "${target} bounds center",
+  "searchKeywords": ["bounds", "box", "center", "object", "size", "zone"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to measure.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] }
+  ],
+  "beginnerSummary": "Value returns the center of an object's bounds.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Bounds"]
+}

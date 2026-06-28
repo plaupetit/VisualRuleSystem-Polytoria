@@ -1,0 +1,42 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Text Input",
+  "idBase": "PROP_TextInputPlaceholder",
+  "type": "TextInputPlaceholderValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "Placeholder", "coverage": "Direct" }
+  ],
+  "label": "Text Input Placeholder",
+  "value": "target=Self",
+  "description": "Reads the placeholder hint text from a UI text input.",
+  "status": "Ready",
+  "previewTemplate": "Placeholder of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "placeholder", "hint", "form"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    }
+  ],
+  "beginnerSummary": "Value reads the hint text from a text input.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

@@ -8,6 +8,10 @@
   "idBase": "COND_InputButtonDown",
   "type": "InputButtonDown",
   "apiType": "InputService",
+  "apiReferences": [
+    { "type": "InputService", "memberKind": "Method", "member": "GetButton", "coverage": "Direct" },
+    { "type": "InputActionButton", "memberKind": "Property", "member": "IsPressed", "coverage": "Direct" }
+  ],
   "label": "Input Button Down",
   "value": "actionName=Interact",
   "description": "Checks whether a named client input button action is currently pressed.",

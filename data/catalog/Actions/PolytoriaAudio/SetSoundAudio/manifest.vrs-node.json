@@ -1,0 +1,59 @@
+{
+  "moduleId": "polytoria.audio",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_SetSoundAudio",
+  "type": "SetSoundAudio",
+  "apiType": "Sound.Audio",
+  "apiReferences": [
+    { "type": "Sound", "memberKind": "Property", "member": "Audio", "coverage": "Direct" },
+    { "type": "AudioAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Sound Audio",
+  "value": "target=Self;audio=",
+  "description": "Changes the audio asset used by a sound object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} audio",
+  "searchKeywords": ["audio", "sound", "asset", "music", "sfx", "clip"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to update.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SoundObject"]
+    },
+    {
+      "key": "audio",
+      "label": "Audio Asset",
+      "type": "Any",
+      "control": "Text",
+      "default": "",
+      "description": "Audio asset reference to use.",
+      "valueSource": "Value Source"
+    }
+  ],
+  "beginnerSummary": "Do change which audio a sound object uses.",
+  "surface": "UserFacing",
+  "palettePath": ["Audio", "Settings"]
+}

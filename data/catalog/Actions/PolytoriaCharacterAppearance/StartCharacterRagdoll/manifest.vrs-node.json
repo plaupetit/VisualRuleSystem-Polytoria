@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_StartCharacterRagdoll",
+  "type": "StartCharacterRagdoll",
+  "apiType": "PolytorianModel.StartRagdoll",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Method", "member": "StartRagdoll", "coverage": "Direct" },
+    { "type": "Vector3", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Start Character Ragdoll",
+  "value": "target=Self;x=0;y=0;z=0",
+  "description": "Starts ragdoll on a character model with an optional force.",
+  "status": "Ready",
+  "previewTemplate": "Start ragdoll on ${target}",
+  "searchKeywords": ["character", "ragdoll", "fall", "physics", "knockdown"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] },
+    { "key": "x", "label": "Force X", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Sideways force.", "valueSource": "Manual Value" },
+    { "key": "y", "label": "Force Y", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Upward force.", "valueSource": "Manual Value" },
+    { "key": "z", "label": "Force Z", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Forward force.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do start character ragdoll.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Ragdoll"]
+}

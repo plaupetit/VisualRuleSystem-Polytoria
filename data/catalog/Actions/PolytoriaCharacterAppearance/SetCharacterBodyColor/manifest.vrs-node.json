@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_SetCharacterBodyColor",
+  "type": "SetCharacterBodyColor",
+  "apiType": "PolytorianModel.HeadColor",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "HeadColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "TorsoColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "LeftArmColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "RightArmColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "LeftLegColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "RightLegColor", "coverage": "Direct" },
+    { "type": "Color", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Character Body Color",
+  "value": "target=Self;bodyPart=Head;r=1;g=1;b=1",
+  "description": "Changes one body color on a character model.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} ${bodyPart} color",
+  "searchKeywords": ["character", "body", "color", "avatar", "appearance"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] },
+    { "key": "bodyPart", "label": "Body Part", "type": "String", "control": "Choice", "required": true, "default": "Head", "description": "Body part color to change.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Head", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg"] },
+    { "key": "r", "label": "Red", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Red amount from 0 to 1.", "valueSource": "Manual Value" },
+    { "key": "g", "label": "Green", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Green amount from 0 to 1.", "valueSource": "Manual Value" },
+    { "key": "b", "label": "Blue", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Blue amount from 0 to 1.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do change one character body color.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

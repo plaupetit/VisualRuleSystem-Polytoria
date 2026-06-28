@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.text3d.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "3D Text",
+  "idBase": "EV_On3DTextColorChanged",
+  "type": "On3DTextColorChanged",
+  "apiType": "Text3D.Color",
+  "apiReferences": [
+    { "type": "Text3D", "memberKind": "Property", "member": "Color", "coverage": "Partial" }
+  ],
+  "label": "On 3D Text Color Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when 3D text color changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} text color changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d text", "text", "color", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "3D Text", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D text object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["Text3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the color.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when 3D text changes color.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Text Changes"]
+}

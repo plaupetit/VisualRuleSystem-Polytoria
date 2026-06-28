@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.color_adjust.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetColorAdjustBrightness",
+  "type": "SetColorAdjustBrightness",
+  "apiType": "ColorAdjustModifier.Brightness",
+  "apiReferences": [
+    { "type": "ColorAdjustModifier", "memberKind": "Property", "member": "Brightness", "coverage": "Direct" },
+    { "type": "LightingModifier", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Color Adjust Brightness",
+  "value": "target=Self;brightness=0",
+  "description": "Changes the brightness adjustment on a ColorAdjustModifier.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} color adjust brightness ${brightness}",
+  "searchKeywords": ["lighting", "post process", "color adjust", "brightness", "screen", "visual"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ColorAdjustModifier object to update.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ColorAdjustModifierObject"]
+    },
+    {
+      "key": "brightness",
+      "label": "Brightness",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Brightness adjustment value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do make the scene post-effect brighter or darker.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Color Adjust"]
+}

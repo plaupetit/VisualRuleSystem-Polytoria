@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.ui.textinput.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "Text Input",
+  "idBase": "EV_OnTextInputBecameReadOnly",
+  "type": "OnTextInputBecameReadOnly",
+  "apiType": "UITextInput.ReadOnly",
+  "apiReferences": [{ "type": "UITextInput", "memberKind": "Property", "member": "ReadOnly", "coverage": "Partial" }],
+  "label": "On Text Input Became Read Only",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a text input becomes locked.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} becomes read only",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "text input", "read only", "locked", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Text Input", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Text input to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["UITextInputObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the lock state.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a text input becomes locked.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input Changes"]
+}

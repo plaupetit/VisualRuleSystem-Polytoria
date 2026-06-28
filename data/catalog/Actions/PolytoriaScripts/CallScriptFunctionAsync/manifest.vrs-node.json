@@ -1,0 +1,78 @@
+{
+  "moduleId": "polytoria.scripts.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Script",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Scripts",
+  "idBase": "ACT_CallScriptFunctionAsync",
+  "type": "CallScriptFunctionAsync",
+  "apiType": "Script",
+  "apiReferences": [
+    { "type": "Script", "memberKind": "Method", "member": "CallAsync", "coverage": "Direct" },
+    { "type": "ServerScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ClientScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ModuleScript", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Call Script Function Async",
+  "value": "target=Target;functionName=Run;argument=",
+  "description": "Calls a named function on a script object without waiting for it.",
+  "status": "Ready",
+  "previewTemplate": "Call async ${functionName} on script ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "script",
+    "call",
+    "async",
+    "function",
+    "invoke",
+    "server script",
+    "client script",
+    "module script"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scripts",
+  "utilityLayer": "Scripts",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Script",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Script object that exposes the function.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ScriptObject"
+      ]
+    },
+    {
+      "key": "functionName",
+      "label": "Function",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Run",
+      "description": "Function name to call inside the target script.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "argument",
+      "label": "Argument",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Optional argument passed to the function.",
+      "valueSource": "Any Value"
+    }
+  ],
+  "beginnerSummary": "Advanced: trigger a function in another script without waiting.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Scripts"
+  ]
+}

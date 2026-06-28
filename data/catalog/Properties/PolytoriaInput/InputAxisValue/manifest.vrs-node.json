@@ -8,6 +8,10 @@
   "idBase": "PROP_InputAxisValue",
   "type": "InputAxisValue",
   "apiType": "Number",
+  "apiReferences": [
+    { "type": "InputService", "memberKind": "Method", "member": "GetAxis", "coverage": "Direct" },
+    { "type": "InputActionAxis", "memberKind": "Property", "member": "Value", "coverage": "Direct" }
+  ],
   "label": "Input Axis Value",
   "value": "actionName=Horizontal",
   "description": "Outputs the current numeric value of a named input axis action.",

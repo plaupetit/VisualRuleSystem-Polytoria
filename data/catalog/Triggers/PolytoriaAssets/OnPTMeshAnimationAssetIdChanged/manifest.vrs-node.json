@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Mesh Animation",
+  "idBase": "EV_OnPTMeshAnimationAssetIdChanged",
+  "type": "OnPTMeshAnimationAssetIdChanged",
+  "apiType": "PTMeshAnimationAsset.AssetID",
+  "apiReferences": [{ "type": "PTMeshAnimationAsset", "memberKind": "Property", "member": "AssetID", "coverage": "Partial" }],
+  "label": "On PT Mesh Animation Asset ID Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a PTMeshAnimationAsset ID changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} animation asset ID changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["mesh", "animation", "asset", "id", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Mesh Animation Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTMeshAnimationAsset to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAnimationAssetObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the animation asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a mesh animation asset ID changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Mesh Animation Changes"]
+}

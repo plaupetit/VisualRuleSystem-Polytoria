@@ -1,0 +1,38 @@
+{
+  "moduleId": "polytoria.tween.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Tween",
+  "idBase": "EV_OnTweenScaleReached",
+  "type": "OnTweenScaleReached",
+  "apiType": "TweenObject",
+  "apiReferences": [
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenSize", "coverage": "Indirect" },
+    { "type": "Part", "memberKind": "Property", "member": "Scale", "coverage": "Direct" }
+  ],
+  "label": "On Tween Scale Reached",
+  "value": "target=Self;vector=1,1,1;x=1;y=1;z=1;tolerance=0.01;interval=0.05",
+  "description": "Starts a flow when an object reaches a target tween scale.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} reaches tween scale ${vector}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["tween", "animate", "scale", "size", "reached", "finished", "trigger"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Target Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "vector", "label": "Target Scale", "type": "Vector3", "control": "Vector3", "required": true, "default": "1,1,1", "description": "Scale the tween should reach.", "valueSource": "Manual 3D Vector" },
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target X scale.", "valueSource": "Suggested Value" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target Y scale.", "valueSource": "Suggested Value" },
+    { "key": "z", "label": "Z", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target Z scale.", "valueSource": "Suggested Value" },
+    { "key": "tolerance", "label": "Tolerance", "type": "Number", "control": "Number", "required": true, "default": "0.01", "description": "Allowed scale difference.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.05", "description": "Polling interval used to detect completion.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Trigger when a scale animation reaches its target.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

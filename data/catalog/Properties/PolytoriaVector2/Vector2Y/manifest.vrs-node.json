@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.vector2.values",
+  "kind": "Property",
+  "apiGroup": "Math",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Vector",
+  "idBase": "PROP_Vector2Y",
+  "type": "Vector2Y",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "Vector2", "memberKind": "Property", "member": "Y", "coverage": "Direct" }
+  ],
+  "label": "Vector2 Y",
+  "value": "vector=0,0",
+  "description": "Outputs the Y component of a 2D vector.",
+  "status": "Ready",
+  "previewTemplate": "Vector2 Y",
+  "searchKeywords": ["vector2", "vector", "y", "axis", "vertical", "component"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "vector", "label": "Vector", "type": "Vector2", "control": "Vector2", "required": true, "default": "0,0", "description": "2D vector to read.", "valueSource": "Vector2" }
+  ],
+  "beginnerSummary": "Value: read the vertical part of a Vector2.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Vector"]
+}

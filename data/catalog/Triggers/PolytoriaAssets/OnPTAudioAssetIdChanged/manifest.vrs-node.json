@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Audio",
+  "idBase": "EV_OnPTAudioAssetIdChanged",
+  "type": "OnPTAudioAssetIdChanged",
+  "apiType": "PTAudioAsset.AudioID",
+  "apiReferences": [{ "type": "PTAudioAsset", "memberKind": "Property", "member": "AudioID", "coverage": "Partial" }],
+  "label": "On PT Audio Asset ID Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a PTAudioAsset audio ID changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} audio ID changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "sound", "asset", "id", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Audio Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTAudioAsset to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["AudioAssetObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the audio ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when an audio asset ID changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Audio Changes"]
+}

@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Audio",
+  "idBase": "PROP_PTAudioAssetId",
+  "type": "PTAudioAssetIdValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "PTAudioAsset", "memberKind": "Property", "member": "AudioID", "coverage": "Direct" },
+    { "type": "AudioAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "PT Audio Asset ID",
+  "value": "target=Self",
+  "description": "Outputs the numeric Polytoria audio ID from a PTAudioAsset.",
+  "status": "Ready",
+  "previewTemplate": "${target} audio ID",
+  "searchKeywords": ["audio", "asset", "ptaudioasset", "id", "sound"],
+  "parameters": [
+    { "key": "target", "label": "Audio Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTAudioAsset to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["AudioAssetObject"] }
+  ],
+  "beginnerSummary": "Value: read the audio ID from a PTAudioAsset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Audio"]
+}

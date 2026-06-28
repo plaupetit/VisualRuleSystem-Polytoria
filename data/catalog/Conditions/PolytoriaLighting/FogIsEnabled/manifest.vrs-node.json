@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.lighting.conditions",
+  "kind": "Condition",
+  "apiGroup": "Lighting",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_FogIsEnabled",
+  "type": "FogIsEnabled",
+  "apiType": "Lighting",
+  "apiReferences": [
+    { "type": "Lighting", "memberKind": "Property", "member": "FogEnabled", "coverage": "Direct" }
+  ],
+  "label": "Fog Is Enabled",
+  "value": "",
+  "description": "Checks if world fog is turned on.",
+  "status": "Ready",
+  "previewTemplate": "If fog is enabled",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["lighting", "fog", "enabled", "weather", "atmosphere", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [],
+  "beginnerSummary": "Check if world fog is on.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Fog"]
+}

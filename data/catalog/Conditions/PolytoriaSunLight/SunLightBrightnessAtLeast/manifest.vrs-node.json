@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.sunlight.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_SunLightBrightnessAtLeast",
+  "type": "SunLightBrightnessAtLeast",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Brightness", "coverage": "Direct" }
+  ],
+  "label": "Sun Light Brightness Is At Least",
+  "value": "target=Self;brightness=1",
+  "description": "Checks if the main sun light is at least this bright.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} sun brightness is at least ${brightness}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["sun", "sunlight", "light", "lighting", "brightness", "day", "at least", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Sun Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "SunLight object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SunLightObject"]
+    },
+    {
+      "key": "brightness",
+      "label": "Brightness",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Minimum sun light brightness.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if the sun light is bright enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light"]
+}

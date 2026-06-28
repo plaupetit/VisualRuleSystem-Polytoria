@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Fonts",
+  "idBase": "ACT_SetBuiltInFontSettings",
+  "type": "SetBuiltInFontSettings",
+  "apiType": "BuiltInFontAsset.FontPreset",
+  "apiReferences": [
+    { "type": "BuiltInFontAsset", "memberKind": "Property", "member": "FontPreset", "coverage": "Direct" },
+    { "type": "BuiltInFontAsset", "memberKind": "Property", "member": "FontWeight", "coverage": "Direct" },
+    { "type": "BuiltInFontAsset", "memberKind": "Property", "member": "FontStyle", "coverage": "Direct" },
+    { "type": "FontAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Built-In Font Settings",
+  "value": "target=Self;preset=SourceSans;weight=Regular;style=Normal",
+  "description": "Changes preset, weight, and style on a BuiltInFontAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} font settings",
+  "searchKeywords": ["font", "built-in", "builtin", "preset", "weight", "style", "text"],
+  "selectorHints": [
+    { "key": "target", "label": "Built-In Font Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Built-In Font Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BuiltInFontAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["FontAssetObject"] },
+    { "key": "preset", "label": "Preset", "type": "String", "control": "Choice", "required": true, "default": "SourceSans", "description": "Built-in font preset.", "valueSource": "String / Choice", "allowCustom": false, "options": ["SourceSans", "PressStart2P", "Montserrat", "RobotoMono", "Rubik", "Poppins", "Domine", "Fredoka", "ComicNeue", "Orbitron", "Papyrus", "ComicSansMS", "JetBrainsMono"] },
+    { "key": "weight", "label": "Weight", "type": "String", "control": "Choice", "required": true, "default": "Regular", "description": "Font weight.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Thin", "ExtraLight", "Light", "Regular", "Medium", "SemiBold", "Bold", "ExtraBold", "Black"] },
+    { "key": "style", "label": "Style", "type": "String", "control": "Choice", "required": true, "default": "Normal", "description": "Font style.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Normal", "Italic"] }
+  ],
+  "beginnerSummary": "Do change a built-in font asset preset, weight, and style.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Fonts"]
+}

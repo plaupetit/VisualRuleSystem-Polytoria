@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.physical.properties",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Server",
   "category": "Properties",
@@ -8,6 +9,10 @@
   "idBase": "PROP_ObjectVelocity",
   "type": "ObjectVelocity",
   "apiType": "Vector3",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Velocity", "coverage": "Direct" },
+    { "type": "Physical", "memberKind": "Property", "member": "Velocity", "coverage": "Partial" }
+  ],
   "label": "Object Velocity",
   "value": "target=Self",
   "description": "Outputs how fast a physics object moves in each direction.",

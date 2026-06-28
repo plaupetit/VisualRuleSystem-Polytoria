@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Vrs.Core.Bridge;
 using Vrs.Core.Persistence;
+using Vrs.Core.RuntimeEvents;
 using Vrs.Graph.Model;
 
 namespace Vrs.Tests;
@@ -71,6 +72,97 @@ public sealed class BridgeFileServiceTests
     }
 
     [Fact]
+    public async Task WriteAppState_WritesReadableWorkspaceSummary()
+    {
+        var tempRoot = Path.Combine(Path.GetTempPath(), $"vrs-app-state-test-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tempRoot);
+
+        try
+        {
+            var service = new BridgeFileService();
+            await service.WriteAppStateAsync(
+                tempRoot,
+                new BridgeAppState
+                {
+                    Focused = true,
+                    ActiveProjectName = "BridgeTest",
+                    ProjectUiMode = "Project linked; Creator not running",
+                    ProjectLinked = true,
+                    ScriptKind = "Server",
+                    AuthorScriptName = "TimerMessage",
+                    CreatorScriptName = "VRS TimerMessage",
+                    ProjectRelativeScriptPath = "scripts/VRS/server/VRS TimerMessage.server.luau",
+                    SelectedCreatorObjectPath = "World/Environment/Baseplate",
+                    DeployParentPath = "World/Environment",
+                    NodeCount = 3,
+                    ValidationMessageCount = 1,
+                    ValidationWarningCount = 1,
+                    BridgeBeatText = "Addon pending | VRS focus",
+                    StatusText = "Ready",
+                    LuauPreviewSummary = "-- preview",
+                    RecentLogs = ["12:00 Ready"]
+                });
+
+            var appStatePath = Path.Combine(tempRoot, "app-state.json");
+            var appState = JsonSerializer.Deserialize(
+                await File.ReadAllTextAsync(appStatePath),
+                VrsJsonContext.Default.BridgeAppState);
+
+            Assert.NotNull(appState);
+            Assert.Equal("visual-programming-bridge-app-state", appState!.Format);
+            Assert.Equal("VisualRuleSystem", appState.App);
+            Assert.False(string.IsNullOrWhiteSpace(appState.SessionId));
+            Assert.True(appState.ProcessId > 0);
+            Assert.False(string.IsNullOrWhiteSpace(appState.UpdatedAtUtc));
+            Assert.True(appState.Focused);
+            Assert.Equal("VRS TimerMessage", appState.CreatorScriptName);
+            Assert.Equal("scripts/VRS/server/VRS TimerMessage.server.luau", appState.ProjectRelativeScriptPath);
+            Assert.Equal("World/Environment/Baseplate", appState.SelectedCreatorObjectPath);
+            Assert.Equal(3, appState.NodeCount);
+            Assert.Equal(1, appState.ValidationWarningCount);
+
+            var loaded = await service.ReadAppStateAsync(tempRoot);
+            Assert.Equal(appState.CreatorScriptName, loaded!.CreatorScriptName);
+        }
+        finally
+        {
+            Directory.Delete(tempRoot, recursive: true);
+        }
+    }
+
+    [Fact]
+    public async Task WriteSnapshotRequest_WritesRequestForCreator()
+    {
+        var tempRoot = Path.Combine(Path.GetTempPath(), $"vrs-snapshot-request-test-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tempRoot);
+
+        try
+        {
+            var service = new BridgeFileService();
+            var requestId = await service.WriteSnapshotRequestAsync(tempRoot, "manual-test", "full");
+            var request = JsonSerializer.Deserialize(
+                await File.ReadAllTextAsync(Path.Combine(tempRoot, "snapshot-request.json")),
+                VrsJsonContext.Default.SnapshotRequest);
+
+            Assert.NotNull(request);
+            Assert.Equal("visual-programming-bridge-snapshot-request", request!.Format);
+            Assert.Equal(requestId, request.RequestId);
+            Assert.StartsWith("snapshot_request_", request.RequestId, StringComparison.Ordinal);
+            Assert.Equal("manual-test", request.Reason);
+            Assert.Equal("full", request.Mode);
+            Assert.False(string.IsNullOrWhiteSpace(request.SessionId));
+            Assert.False(string.IsNullOrWhiteSpace(request.CreatedAtUtc));
+
+            var loaded = await service.ReadSnapshotRequestAsync(tempRoot);
+            Assert.Equal(requestId, loaded!.RequestId);
+        }
+        finally
+        {
+            Directory.Delete(tempRoot, recursive: true);
+        }
+    }
+
+    [Fact]
     public async Task WriteCommands_RejectsUnsupportedCommand()
     {
         var tempRoot = Path.Combine(Path.GetTempPath(), $"vrs-bridge-test-{Guid.NewGuid():N}");
@@ -104,7 +196,7 @@ public sealed class BridgeFileServiceTests
             var service = new BridgeFileService();
             var commandId = await service.QueueEnsureFolderPathAsync(
                 tempRoot,
-                "World/Hidden/VRS Input Manager",
+                VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath,
                 dryRun: false);
 
             var commandJson = await File.ReadAllTextAsync(Path.Combine(tempRoot, "pending-commands.json"));
@@ -115,8 +207,8 @@ public sealed class BridgeFileServiceTests
             Assert.False(envelope.DryRun);
             Assert.Equal(commandId, command.Id);
             Assert.Equal("ensure_folder_path", command.Type);
-            Assert.Equal("World/Hidden/VRS Input Manager", command.Path);
-            Assert.Equal("World/Hidden/VRS Input Manager", command.TargetPath);
+            Assert.Equal(VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath, command.Path);
+            Assert.Equal(VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath, command.TargetPath);
             Assert.False(command.DryRun);
         }
         finally
@@ -136,7 +228,7 @@ public sealed class BridgeFileServiceTests
             var service = new BridgeFileService();
             var commandId = await service.QueueEnsureNetworkEventsAsync(
                 tempRoot,
-                "World/Hidden/VRS/Events/Input",
+                VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath,
                 ["Jump", "Interact"],
                 dryRun: false);
 
@@ -147,12 +239,12 @@ public sealed class BridgeFileServiceTests
             Assert.False(envelope.DryRun);
             Assert.Equal(3, envelope.Commands.Count);
             Assert.Equal("ensure_folder_path", envelope.Commands[0].Type);
-            Assert.Equal("World/Hidden/VRS/Events/Input", envelope.Commands[0].Path);
+            Assert.Equal(VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath, envelope.Commands[0].Path);
 
             var jump = envelope.Commands.Single(command => command.Type == "ensure_network_event" && command.Name == "Jump");
             Assert.Equal("NetworkEvent", jump.Kind);
-            Assert.Equal("World/Hidden/VRS/Events/Input", jump.ParentPath);
-            Assert.Equal("World/Hidden/VRS/Events/Input/Jump", jump.TargetPath);
+            Assert.Equal(VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath, jump.ParentPath);
+            Assert.Equal($"{VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath}/Jump", jump.TargetPath);
             Assert.False(jump.DryRun);
         }
         finally
@@ -347,7 +439,7 @@ public sealed class BridgeFileServiceTests
             var service = new BridgeFileService();
             var commandId = await service.QueueEnsureFolderPathAndUpsertLinkedScriptAsync(
                 tempRoot,
-                "World/Hidden/VRS Input Manager",
+                VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath,
                 "World/Hidden",
                 "VRS Input Script",
                 GraphScriptKind.Local,
@@ -366,7 +458,7 @@ public sealed class BridgeFileServiceTests
             Assert.Equal("upsert_script", envelope.Commands[1].Type);
             Assert.NotEqual(envelope.Commands[0].Id, envelope.Commands[1].Id);
             Assert.Equal(commandId, envelope.Commands[1].Id);
-            Assert.Equal("World/Hidden/VRS Input Manager", envelope.Commands[0].Path);
+            Assert.Equal(VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath, envelope.Commands[0].Path);
             Assert.Equal("ClientScript", envelope.Commands[1].Kind);
             Assert.Equal("scripts/VRS/client/VRS Input Script.client.luau", envelope.Commands[1].LinkedFilePath);
             Assert.True(envelope.Commands[1].ExactParent);

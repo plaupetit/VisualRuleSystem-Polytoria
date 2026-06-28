@@ -146,24 +146,19 @@ public partial class MainWindowViewModel
 
     partial void OnSelectedNodeChanged(RuleNode? value)
     {
-        if (value is not null && !string.IsNullOrWhiteSpace(SelectedFragmentId))
-        {
-            SelectedFragmentId = "";
-        }
-
-        if (value is not null && !string.IsNullOrWhiteSpace(SelectedGroupId))
-        {
-            SelectedGroupId = "";
-        }
-
-        if (value is not null && !string.IsNullOrWhiteSpace(SelectedWireRerouteId))
-        {
-            SelectedWireRerouteId = "";
-        }
-
         if (value is not null)
         {
+            ClearInactiveCanvasSelections(CanvasSelectionTarget.Node, clearSelectedNodeIds: false);
+            if (!preserveSelectedNodeIdsForSelectionChange)
+            {
+                ReplaceSelectedNodeIds([value.Id]);
+            }
+
             value.DetailsOpen = true;
+        }
+        else if (!preserveSelectedNodeIdsForSelectionChange)
+        {
+            SelectedNodeIds.Clear();
         }
 
         NotifySelectedNodeInspectorPropertiesChanged();
@@ -173,19 +168,9 @@ public partial class MainWindowViewModel
 
     partial void OnSelectedConnectionIndexChanged(int value)
     {
-        if (value >= 0 && !string.IsNullOrWhiteSpace(SelectedFragmentId))
+        if (value >= 0)
         {
-            SelectedFragmentId = "";
-        }
-
-        if (value >= 0 && !string.IsNullOrWhiteSpace(SelectedGroupId))
-        {
-            SelectedGroupId = "";
-        }
-
-        if (value >= 0 && !string.IsNullOrWhiteSpace(SelectedWireRerouteId))
-        {
-            SelectedWireRerouteId = "";
+            ClearInactiveCanvasSelections(CanvasSelectionTarget.Connection, clearSelectedNodeIds: true);
         }
 
         RefreshInspectorSummary();
@@ -195,18 +180,7 @@ public partial class MainWindowViewModel
     {
         if (!string.IsNullOrWhiteSpace(value))
         {
-            SelectedNode = null;
-            SelectedConnectionIndex = -1;
-        }
-
-        if (!string.IsNullOrWhiteSpace(value) && !string.IsNullOrWhiteSpace(SelectedGroupId))
-        {
-            SelectedGroupId = "";
-        }
-
-        if (!string.IsNullOrWhiteSpace(value) && !string.IsNullOrWhiteSpace(SelectedWireRerouteId))
-        {
-            SelectedWireRerouteId = "";
+            ClearInactiveCanvasSelections(CanvasSelectionTarget.Fragment, clearSelectedNodeIds: true);
         }
 
         NotifySelectedFragmentInspectorPropertiesChanged();
@@ -217,10 +191,7 @@ public partial class MainWindowViewModel
     {
         if (!string.IsNullOrWhiteSpace(value))
         {
-            SelectedNode = null;
-            SelectedConnectionIndex = -1;
-            SelectedFragmentId = "";
-            SelectedWireRerouteId = "";
+            ClearInactiveCanvasSelections(CanvasSelectionTarget.Group, clearSelectedNodeIds: true);
         }
 
         NotifySelectedGroupInspectorPropertiesChanged();
@@ -231,11 +202,7 @@ public partial class MainWindowViewModel
     {
         if (!string.IsNullOrWhiteSpace(value))
         {
-            SelectedNode = null;
-            SelectedConnectionIndex = -1;
-            SelectedFragmentId = "";
-            SelectedGroupId = "";
-            SelectedNodeIds.Clear();
+            ClearInactiveCanvasSelections(CanvasSelectionTarget.WireReroute, clearSelectedNodeIds: true);
         }
 
         NotifySelectedWireRerouteInspectorPropertiesChanged();
@@ -254,6 +221,7 @@ public partial class MainWindowViewModel
     partial void OnHasActiveProjectChanged(bool value)
     {
         OnPropertyChanged(nameof(CanUseCreatorBridgeCommands));
+        OnPropertyChanged(nameof(CanRequestCreatorSnapshot));
         NotifyExportCommandStateChanged();
     }
 
@@ -261,6 +229,7 @@ public partial class MainWindowViewModel
     {
         OnPropertyChanged(nameof(HasNoActiveProject));
         OnPropertyChanged(nameof(CanUseCreatorBridgeCommands));
+        OnPropertyChanged(nameof(CanRequestCreatorSnapshot));
         graph.AuthoringMode = value ? GraphAuthoringMode.CreatorLinked : GraphAuthoringMode.PolyCreatorLessDraft;
         documentStore.MarkDirty(GraphDocumentSection.Metadata);
         NotifyScriptBindingPropertiesChanged();
@@ -270,6 +239,7 @@ public partial class MainWindowViewModel
     partial void OnIsCreatorRuntimeReadyChanged(bool value)
     {
         OnPropertyChanged(nameof(CanUseCreatorBridgeCommands));
+        OnPropertyChanged(nameof(CreatorBridgeWorkspaceSummary));
         NotifyScriptBindingPropertiesChanged();
         NotifyExportCommandStateChanged();
     }
@@ -301,6 +271,8 @@ public partial class MainWindowViewModel
         OnPropertyChanged(nameof(ScriptFilePreviewPath));
         OnPropertyChanged(nameof(ScriptCreatorPreviewText));
         OnPropertyChanged(nameof(ScriptFilePreviewText));
+        OnPropertyChanged(nameof(VisualScriptingWorkspaceSummary));
+        OnPropertyChanged(nameof(CreatorBridgeWorkspaceSummary));
     }
 
     partial void OnGraphAutosaveEnabledChanged(bool value)
@@ -312,6 +284,7 @@ public partial class MainWindowViewModel
 
     partial void OnActiveProjectRootChanged(string value)
     {
+        OnPropertyChanged(nameof(CanRequestCreatorSnapshot));
         NotifyDeployScriptPropertiesChanged();
         if (deferProjectFileRefresh)
         {

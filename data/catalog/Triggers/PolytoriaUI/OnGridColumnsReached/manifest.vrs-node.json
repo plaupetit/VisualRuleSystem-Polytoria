@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.ui.layout.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "UI Layout",
+  "idBase": "EV_OnGridColumnsReached",
+  "type": "OnGridColumnsReached",
+  "apiType": "UIGridLayout.Columns",
+  "apiReferences": [{ "type": "UIGridLayout", "memberKind": "Property", "member": "Columns", "coverage": "Partial" }],
+  "label": "On Grid Columns Reached",
+  "value": "target=Self;columns=3;interval=0.25",
+  "description": "Starts when a UI grid reaches at least the chosen column count.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} columns >= ${columns}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "grid", "layout", "columns", "reached", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Grid Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grid layout to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIGridLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "columns", "label": "Columns", "type": "Number", "control": "Number", "required": true, "default": "3", "description": "Column count that triggers the flow.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the grid.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a grid layout reaches a column count.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout Changes"]
+}

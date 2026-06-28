@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.playerdefaults.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player Defaults",
+  "idBase": "COND_RespawnTimeAtLeast",
+  "type": "PlayerDefaultAtLeast",
+  "apiType": "PlayerDefaults.RespawnTime",
+  "apiReferences": [
+    { "type": "PlayerDefaults", "memberKind": "Property", "member": "RespawnTime", "coverage": "Direct" }
+  ],
+  "label": "RespawnTime At Least",
+  "value": "propertyName=RespawnTime;value=5",
+  "description": "Checks if the default respawn time is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If RespawnTime is at least ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["player", "defaults", "respawn", "time", "delay", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "RespawnTime", "description": "PlayerDefaults property to check.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] },
+    { "key": "value", "label": "Minimum Value", "type": "Number", "control": "Number", "required": true, "default": "5", "description": "Minimum default value.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether the default respawn delay is long enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Health"]
+}

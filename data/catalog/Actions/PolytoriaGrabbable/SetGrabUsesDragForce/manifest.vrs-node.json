@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.grabbable",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetGrabUsesDragForce",
+  "type": "SetGrabUsesDragForce",
+  "apiType": "Grabbable.UseDragForce",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "UseDragForce", "coverage": "Direct" }
+  ],
+  "label": "Set Grab Uses Drag Force",
+  "value": "target=Self;enabled=true",
+  "description": "Sets whether grabbing should push the object through physics force.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} grab force physics ${enabled}",
+  "searchKeywords": ["grab", "grabbable", "drag", "force", "physics", "enabled"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "enabled", "label": "Use Force", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Whether dragging should use physics force.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do choose whether grabbing uses physics force.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

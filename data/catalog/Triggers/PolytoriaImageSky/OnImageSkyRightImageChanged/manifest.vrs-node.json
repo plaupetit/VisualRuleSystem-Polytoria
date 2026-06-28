@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.imagesky.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Image Sky",
+  "idBase": "EV_OnImageSkyRightImageChanged",
+  "type": "OnImageSkyRightImageChanged",
+  "apiType": "ImageSky.RightImage",
+  "apiReferences": [{ "type": "ImageSky", "memberKind": "Property", "member": "RightImage", "coverage": "Partial" }],
+  "label": "On Image Sky Right Image Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when an ImageSky right image changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} right sky image changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["image", "sky", "right", "changed", "skybox", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Image Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ImageSky object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageSkyObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the sky image.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when the right image of a skybox changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Image Sky Changes"]
+}

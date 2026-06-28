@@ -9,11 +9,13 @@
   "type": "SendInputEvent",
   "apiType": "NetworkEvent",
   "apiReferences": [
-    { "type": "NetworkEvent", "memberKind": "Method", "member": "InvokeServer", "coverage": "Direct" }
+    { "type": "NetworkEvent", "memberKind": "Method", "member": "InvokeServer", "coverage": "Direct" },
+    { "type": "Hidden", "memberKind": "Type", "member": "", "coverage": "Indirect" },
+    { "type": "HiddenBase", "memberKind": "Type", "member": "", "coverage": "Indirect" }
   ],
   "label": "Send Input Event",
   "value": "inputAction=Jump",
-  "description": "Invokes the VRS NetworkEvent for a named client input action.",
+  "description": "Invokes the User Input (NetworkEvent) relay for a named client input action.",
   "status": "Ready",
   "previewTemplate": "Send input ${inputAction} to server",
   "searchKeywords": [
@@ -36,11 +38,11 @@
       "control": "Choice",
       "required": true,
       "default": "Jump",
-      "description": "Button input action whose VRS NetworkEvent should be invoked.",
+      "description": "Button input action whose User Input (NetworkEvent) relay should be invoked.",
       "valueSource": "String / Choice"
     }
   ],
-  "beginnerSummary": "Client action: send an input event to a server VRS script.",
+  "beginnerSummary": "Client action: send a user input NetworkEvent to a server script.",
   "surface": "UserFacing",
   "palettePath": ["Players", "Input"]
 }

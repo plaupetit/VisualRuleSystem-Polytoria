@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.grabbable",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetGrabPickupRange",
+  "type": "SetGrabPickupRange",
+  "apiType": "Grabbable.MaxGrabbableRange",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "MaxGrabbableRange", "coverage": "Direct" }
+  ],
+  "label": "Set Grab Pickup Range",
+  "value": "target=Self;range=15",
+  "description": "Changes how close a player must be before they can grab this object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} pickup range ${range}",
+  "searchKeywords": ["grab", "grabbable", "pickup", "reach", "range", "distance"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "range", "label": "Range", "type": "Number", "control": "Number", "required": true, "default": "15", "description": "Maximum distance from which a player can start grabbing.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change how close a player must be to grab an object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

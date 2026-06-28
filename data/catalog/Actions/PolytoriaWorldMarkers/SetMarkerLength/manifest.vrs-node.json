@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Markers",
+  "idBase": "ACT_SetMarkerLength",
+  "type": "SetMarkerLength",
+  "apiType": "Marker3D.Length",
+  "apiReferences": [
+    { "type": "Marker3D", "memberKind": "Property", "member": "Length", "coverage": "Direct" }
+  ],
+  "label": "Set Marker Length",
+  "value": "target=Self;length=10",
+  "description": "Changes how long a 3D marker appears.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} marker length to ${length}",
+  "searchKeywords": ["marker", "3d", "length", "indicator", "world"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] },
+    { "key": "length", "label": "Length", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "New marker length.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do change a marker length.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

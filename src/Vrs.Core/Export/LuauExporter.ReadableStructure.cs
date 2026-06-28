@@ -26,6 +26,7 @@ public sealed partial class LuauExporter
         var usesObbyTouchResolver = false;
         var usesObbyObjectPosition = false;
         var usesEssentialsRuntime = RuleUsesEssentialsRuntime(rule);
+        var usesTweenTargetRuntime = false;
         var usesInputEventRuntime = false;
         foreach (var node in OrderedNodes(rule))
         {
@@ -60,6 +61,12 @@ public sealed partial class LuauExporter
             {
                 usesVectorFactory = true;
                 usesVectorTween = true;
+            }
+
+            if (NodeUsesTweenTargetRuntime(node))
+            {
+                usesVectorFactory = true;
+                usesTweenTargetRuntime = true;
             }
 
             if (ObbyPlayerStateTypes.Contains(node.Type))
@@ -122,6 +129,7 @@ public sealed partial class LuauExporter
             usesObbyTouchResolver,
             usesObbyObjectPosition,
             usesEssentialsRuntime,
+            usesTweenTargetRuntime,
             usesInputEventRuntime);
     }
 
@@ -145,6 +153,7 @@ public sealed partial class LuauExporter
             || node.Type.Equals("ToggleObjectVisibility", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetObjectName", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetObjectParent", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GiveToolToPlayer", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetObjectTransparency", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetObjectAnchored", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("ToggleObjectAnchored", StringComparison.OrdinalIgnoreCase)
@@ -177,6 +186,12 @@ public sealed partial class LuauExporter
             || node.Type.Equals("TweenObjectRotation", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("TweenObjectScale", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("TweenObjectColor", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenObjectTransparency", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenPositionReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenRotationReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenScaleReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenColorReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenTransparencyReached", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetPlayerGameTeam", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("PlayerIsInGameTeam", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("PlaySound", StringComparison.OrdinalIgnoreCase)
@@ -185,19 +200,96 @@ public sealed partial class LuauExporter
             || node.Type.Equals("StopSound", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetSoundVolume", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetSoundLoop", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetSoundAudio", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetLightColor", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetLightBrightness", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetLightShine", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetLightShadows", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetSunLightColor", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetSunLightBrightness", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetSunLightShine", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetSunLightShadows", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetPointLightRange", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetSpotLightRange", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetSpotLightAngle", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetColorAdjustBrightness", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetColorAdjustContrast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetColorAdjustSaturation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetColorAdjustTint", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetProceduralSkySunSize", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetProceduralSkyTint", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetProceduralSkyHorizonColor", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetProceduralSkyGroundColor", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetProceduralSkyExposure", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ProceduralSkySunSizeAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ProceduralSkyTintIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ProceduralSkyHorizonColorIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ProceduralSkyGroundColorIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ProceduralSkyExposureAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGradientSkyColors", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGradientSkySunDisc", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGradientSkySunHalo", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGradientSkyHorizonLine", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetImageSkyAllImages", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetImageSkyTopImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetImageSkyBottomImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetImageSkyLeftImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetImageSkyRightImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetImageSkyFrontImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetImageSkyBackImage", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("StartParticles", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("StopParticles", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("EmitParticles", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetParticleAmount", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("PlayMeshAnimation", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("StopMeshAnimation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("PlayCharacterAnimation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("PlayCharacterOneShotAnimation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("StopCharacterAnimation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("StopCharacterOneShotAnimation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetCharacterState", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetCharacterAnimationSpeed", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CurrentCharacterAnimation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterAnimator", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterStateValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterAnimationSpeedValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterAttachment", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetAccessoryAttachment", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetClothingImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetCharacterFaceImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetCharacterBodyMesh", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetCharacterBodyColor", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("LoadCharacterAppearance", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ClearCharacterAppearance", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("StartCharacterRagdoll", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("StopCharacterRagdoll", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("AccessoryAttachmentValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ClothingImageValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterFaceImageValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterBodyMeshValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterBodyColorValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterRagdollingValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterRagdollPosition", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CharacterRagdollRotation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetMarkerLength", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetMarkerAppearsOnTop", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetMarkerVisibleInDev", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("MarkerLengthValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("MarkerAppearsOnTopValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("MarkerVisibleInDevValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetTrussClimbSpeed", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TrussClimbSpeedValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetEntityCastsShadows", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetEntityIsSpawn", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetEntityColor", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("EntityCastsShadowsValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("EntityIsSpawnValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("EntityColorValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ObjectBoundsCenter", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ObjectBoundsSize", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ObjectBoundsExtents", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ObjectBoundsVolume", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ObjectBoundsContainsPoint", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetSeatAllowsNPCs", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SeatIsOccupied", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SeatAllowsNPCs", StringComparison.OrdinalIgnoreCase)
@@ -222,6 +314,45 @@ public sealed partial class LuauExporter
             || node.Type.Equals("TurnObjectWithPhysics", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetObjectVelocity", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetObjectSpinVelocity", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetRigidBodyGravity", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetRigidBodyMass", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetRigidBodyFriction", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetRigidBodyDrag", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetRigidBodyAngularDrag", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetRigidBodyBounciness", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("RigidBodyGravityEnabled", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("RigidBodyMassAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("RigidBodyFrictionAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("RigidBodyDragAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("RigidBodyAngularDragAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("RigidBodyBouncinessAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetExplosionRadius", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetExplosionForce", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetExplosionDamage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetExplosionAffectAnchored", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ExplosionRadiusValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ExplosionForceValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ExplosionDamageValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ExplosionAffectAnchoredValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGrabForce", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGrabMaxRange", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGrabPickupRange", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGrabUsesDragForce", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGrabPermissionMode", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabForceAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabMaxRangeAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabPickupRangeAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabUsesDragForce", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabPermissionModeIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabForceValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabMaxRangeValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabPickupRangeValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabUsesDragForceValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GrabPermissionModeValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CurrentGrabber", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnGrabForceReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnGrabMaxRangeReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnGrabPickupRangeReached", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("ObjectIsMoving", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("ObjectSpeedAtLeast", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Set3DImageColor", StringComparison.OrdinalIgnoreCase)
@@ -233,6 +364,15 @@ public sealed partial class LuauExporter
             || node.Type.Equals("Image3DCastsShadows", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Image3DUsesLighting", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Image3DFacesCamera", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Image3DColorIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Image3DTextureScaleIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Image3DTextureOffsetIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("On3DImageColorChanged", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("On3DImageShadowsEnabled", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("On3DImageLightingEnabled", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("On3DImageFaceCameraEnabled", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("On3DImageTextureScaleChanged", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("On3DImageTextureOffsetChanged", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Set3DText", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Set3DTextFontSize", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Set3DTextRichText", StringComparison.OrdinalIgnoreCase)
@@ -243,21 +383,89 @@ public sealed partial class LuauExporter
             || node.Type.Equals("Set3DTextLighting", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Text3DIs", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Text3DIsEmpty", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Text3DFontSizeAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Text3DColorIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Text3DOutlineWidthAtLeast", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Text3DFacesCamera", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Text3DUsesRichText", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Text3DUsesLighting", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetUIText", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetUIColor", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetUITextWrapped", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetUIVisible", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetUIImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetTextInputText", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetTextInputPlaceholder", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetTextInputReadOnly", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("FocusTextInput", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetUIFieldZIndex", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetUIFieldIgnoresMouse", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetUIFieldClipDescendants", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetUIFieldRotation", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetUIFieldScale", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetScrollViewMode", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGridLayoutColumns", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CreateUIContainer", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGridLayoutSpacing", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetLayoutSpacing", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetLayoutChildAlignment", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("FireBindableEvent", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CreateSceneContainer", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGui3DShaded", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGui3DFaceCamera", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetGui3DTransparent", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("UITextIs", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("UITextIsEmpty", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("UITextWrapped", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("UIVisibleValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("UIImageValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TextInputTextValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TextInputPlaceholderValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TextInputReadOnlyValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("UIFieldZIndexValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("UIFieldIgnoresMouseValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("UIFieldClipDescendantsValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("UIFieldRotationValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("UIFieldScaleValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ScrollViewHorizontalModeValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ScrollViewVerticalModeValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GridLayoutColumnsValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("GridLayoutSpacingValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("LayoutSpacingValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("LayoutChildAlignmentValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Gui3DShadedValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Gui3DFaceCameraValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Gui3DTransparentValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetCameraFOV", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CameraFOVValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetValueObjectValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ValueObjectValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetIntegerValueObject", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("IntegerValueObjectValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetInstanceValueObject", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("InstanceValueObjectValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetPlayerStatNumber", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetPlayerStatText", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("PlayerStatAtLeast", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("PlayerStatValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("PlayerStatDisplayValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("StatDisplayName", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TeamStatTotal", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SaveDatastoreValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("RemoveDatastoreValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("DatastoreValue", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("DatastoreKey", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetDecalImage", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("DecalImageValue", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("ActivateTool", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("DeactivateTool", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("PlayToolAnimation", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetToolDroppable", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("ToolCanBeDropped", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("ToolIsHeld", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnExplosionTouched", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnObjectGrabbed", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnObjectReleased", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("OnPlayerTouchedObject", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("OnCheckpointTouched", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("OnHazardTouched", StringComparison.OrdinalIgnoreCase)
@@ -292,7 +500,19 @@ public sealed partial class LuauExporter
             || node.Type.Equals("ObjectChildCountAtMost", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("FindChild", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("FindChildByClass", StringComparison.OrdinalIgnoreCase)
-            || node.Type.Equals("ObjectChildCount", StringComparison.OrdinalIgnoreCase);
+            || node.Type.Equals("ObjectChildCount", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("SetScriptEnabled", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("EnableScript", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("DisableScript", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ToggleScriptEnabled", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CallScriptFunction", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("CallScriptFunctionAsync", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ScriptIsEnabled", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ScriptIsDisabled", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ScriptCanCallFunction", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ScriptCanCallAsyncFunction", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ScriptTargetExists", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("ScriptTargetMissing", StringComparison.OrdinalIgnoreCase);
     }
 
     private static bool NodeUsesVectorFactory(RuleNode node)
@@ -316,6 +536,8 @@ public sealed partial class LuauExporter
             || node.Type.Equals("SetObjectDepthSize", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Set3DImageTextureScale", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("Set3DImageTextureOffset", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Image3DTextureScaleIs", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("Image3DTextureOffsetIs", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetNPCNavigationTarget", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("SetBodyPositionTarget", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("MoveObjectWithPhysics", StringComparison.OrdinalIgnoreCase)
@@ -325,7 +547,24 @@ public sealed partial class LuauExporter
             || node.Type.Equals("TweenObjectPosition", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("TweenObjectRotation", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("TweenObjectScale", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenPositionReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenRotationReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenScaleReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnTweenPositionReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnTweenRotationReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnTweenScaleReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("StartCharacterRagdoll", StringComparison.OrdinalIgnoreCase)
             || node.Type.Equals("StartMovingPlatformLoop", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool NodeUsesTweenTargetRuntime(RuleNode node)
+    {
+        return node.Type.Equals("TweenPositionReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenRotationReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("TweenScaleReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnTweenPositionReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnTweenRotationReached", StringComparison.OrdinalIgnoreCase)
+            || node.Type.Equals("OnTweenScaleReached", StringComparison.OrdinalIgnoreCase);
     }
 
     private static bool NodeUsesVectorTween(
@@ -393,6 +632,10 @@ public sealed partial class LuauExporter
     private static readonly HashSet<string> TargetValueRecipeTypes = new(StringComparer.OrdinalIgnoreCase)
     {
         "ObjectName",
+        "ObjectTypeName",
+        "ObjectNetworkKey",
+        "ObjectSaveKey",
+        "ObjectIsNetworkedValue",
         "ChooseObject",
         "ObjectPosition",
         "ObjectXPosition",
@@ -412,18 +655,111 @@ public sealed partial class LuauExporter
         "SoundIsPlaying",
         "SoundLength",
         "SoundTime",
+        "SoundAudioValue",
         "LightColor",
         "LightBrightness",
         "LightShine",
         "LightShadows",
+        "SunLightColorValue",
+        "SunLightBrightnessValue",
+        "SunLightShineValue",
+        "SunLightShadowsValue",
         "PointLightRange",
         "SpotLightRange",
         "SpotLightAngle",
+        "ColorAdjustBrightnessValue",
+        "ColorAdjustContrastValue",
+        "ColorAdjustSaturationValue",
+        "ColorAdjustTintValue",
+        "ProceduralSkySunSizeValue",
+        "ProceduralSkyTintValue",
+        "ProceduralSkyHorizonColorValue",
+        "ProceduralSkyGroundColorValue",
+        "ProceduralSkyExposureValue",
+        "GradientSkyTopColorValue",
+        "GradientSkyBottomColorValue",
+        "GradientSkyExponentValue",
+        "GradientSkySunDiscColorValue",
+        "GradientSkySunDiscMultiplierValue",
+        "GradientSkySunDiscExponentValue",
+        "GradientSkySunHaloColorValue",
+        "GradientSkySunHaloExponentValue",
+        "GradientSkySunHaloContributionValue",
+        "GradientSkyHorizonLineColorValue",
+        "GradientSkyHorizonLineExponentValue",
+        "GradientSkyHorizonLineContributionValue",
+        "ImageSkyTopImageValue",
+        "ImageSkyBottomImageValue",
+        "ImageSkyLeftImageValue",
+        "ImageSkyRightImageValue",
+        "ImageSkyFrontImageValue",
+        "ImageSkyBackImageValue",
         "ParticlesPlaying",
         "ParticleAmount",
         "CurrentMeshAnimation",
         "MeshAnimationPlaying",
         "MeshLoading",
+        "CurrentCharacterAnimation",
+        "CharacterAnimator",
+        "CharacterStateValue",
+        "CharacterAnimationSpeedValue",
+        "CharacterAttachment",
+        "AccessoryAttachmentValue",
+        "ClothingImageValue",
+        "CharacterFaceImageValue",
+        "CharacterBodyMeshValue",
+        "CharacterBodyColorValue",
+        "CharacterRagdollingValue",
+        "CharacterRagdollPosition",
+        "CharacterRagdollRotation",
+        "CurrentCharacterAnimationIs",
+        "CharacterHasAnimator",
+        "CharacterStateIs",
+        "CharacterAnimationSpeedAtLeast",
+        "CharacterAnimationSpeedAtMost",
+        "CharacterHasAttachment",
+        "MarkerLengthValue",
+        "MarkerAppearsOnTopValue",
+        "MarkerVisibleInDevValue",
+        "TrussClimbSpeedValue",
+        "EntityCastsShadowsValue",
+        "EntityIsSpawnValue",
+        "EntityColorValue",
+        "ObjectBoundsCenter",
+        "ObjectBoundsSize",
+        "ObjectBoundsExtents",
+        "ObjectBoundsVolume",
+        "RaycastResult",
+        "RaycastHitObject",
+        "RaycastHitPosition",
+        "RaycastHitNormal",
+        "RaycastHitDistance",
+        "QuaternionIdentity",
+        "QuaternionFromComponents",
+        "QuaternionFromEuler",
+        "QuaternionToEuler",
+        "QuaternionFromAxisAngle",
+        "QuaternionLookRotation",
+        "QuaternionFromToRotation",
+        "QuaternionInverse",
+        "QuaternionNormalize",
+        "QuaternionLerp",
+        "QuaternionSlerp",
+        "QuaternionRotateTowards",
+        "QuaternionAngle",
+        "QuaternionDot",
+        "ColorSeriesFromColors",
+        "ColorFromColorSeries",
+        "ColorSeriesPointCount",
+        "ColorSeriesPointColor",
+        "ColorSeriesPointOffset",
+        "Vector2FromXY",
+        "Vector2X",
+        "Vector2Y",
+        "Vector2Magnitude",
+        "Vector2Normalized",
+        "Vector2Distance",
+        "Vector2Lerp",
         "SeatOccupant",
         "SeatAllowsNPCsValue",
         "NPCHealth",
@@ -439,6 +775,22 @@ public sealed partial class LuauExporter
         "ObjectVelocity",
         "ObjectSpeed",
         "ObjectSpinVelocity",
+        "RigidBodyGravityEnabledValue",
+        "RigidBodyMassValue",
+        "RigidBodyFrictionValue",
+        "RigidBodyDragValue",
+        "RigidBodyAngularDragValue",
+        "RigidBodyBouncinessValue",
+        "ExplosionRadiusValue",
+        "ExplosionForceValue",
+        "ExplosionDamageValue",
+        "ExplosionAffectAnchoredValue",
+        "GrabForceValue",
+        "GrabMaxRangeValue",
+        "GrabPickupRangeValue",
+        "GrabUsesDragForceValue",
+        "GrabPermissionModeValue",
+        "CurrentGrabber",
         "TouchingObjectCount",
         "Image3DColorValue",
         "Image3DCastsShadowsValue",
@@ -455,8 +807,15 @@ public sealed partial class LuauExporter
         "GameTeamName",
         "GameTeamColor",
         "GameTeamPlayerCount",
+        "GameTeamPlayers",
+        "PlayerStatValue",
+        "PlayerStatDisplayValue",
+        "StatDisplayName",
+        "TeamStatTotal",
         "ToolHolder",
         "ToolCanBeDroppedValue",
+        "PlayerInventory",
+        "FindToolInInventory",
         "FindChild",
         "FindChildByClass",
         "ObjectChildCount",
@@ -478,6 +837,10 @@ public sealed partial class LuauExporter
         "RandomTrueOrFalse",
         "RandomColor",
         "ObjectName",
+        "ObjectTypeName",
+        "ObjectNetworkKey",
+        "ObjectSaveKey",
+        "ObjectIsNetworkedValue",
         "ObjectPosition",
         "ObjectXPosition",
         "ObjectHeightPosition",
@@ -496,18 +859,97 @@ public sealed partial class LuauExporter
         "SoundIsPlaying",
         "SoundLength",
         "SoundTime",
+        "SoundAudioValue",
         "LightColor",
         "LightBrightness",
         "LightShine",
         "LightShadows",
+        "SunLightColorValue",
+        "SunLightBrightnessValue",
+        "SunLightShineValue",
+        "SunLightShadowsValue",
         "PointLightRange",
         "SpotLightRange",
         "SpotLightAngle",
+        "ColorAdjustBrightnessValue",
+        "ColorAdjustContrastValue",
+        "ColorAdjustSaturationValue",
+        "ColorAdjustTintValue",
+        "ProceduralSkySunSizeValue",
+        "ProceduralSkyTintValue",
+        "ProceduralSkyHorizonColorValue",
+        "ProceduralSkyGroundColorValue",
+        "ProceduralSkyExposureValue",
+        "GradientSkyTopColorValue",
+        "GradientSkyBottomColorValue",
+        "GradientSkyExponentValue",
+        "GradientSkySunDiscColorValue",
+        "GradientSkySunDiscMultiplierValue",
+        "GradientSkySunDiscExponentValue",
+        "GradientSkySunHaloColorValue",
+        "GradientSkySunHaloExponentValue",
+        "GradientSkySunHaloContributionValue",
+        "GradientSkyHorizonLineColorValue",
+        "GradientSkyHorizonLineExponentValue",
+        "GradientSkyHorizonLineContributionValue",
+        "ImageSkyTopImageValue",
+        "ImageSkyBottomImageValue",
+        "ImageSkyLeftImageValue",
+        "ImageSkyRightImageValue",
+        "ImageSkyFrontImageValue",
+        "ImageSkyBackImageValue",
         "ParticlesPlaying",
         "ParticleAmount",
         "CurrentMeshAnimation",
         "MeshAnimationPlaying",
         "MeshLoading",
+        "CurrentCharacterAnimation",
+        "CharacterAnimator",
+        "CharacterStateValue",
+        "CharacterAnimationSpeedValue",
+        "CharacterAttachment",
+        "AccessoryAttachmentValue",
+        "ClothingImageValue",
+        "CharacterFaceImageValue",
+        "CharacterBodyMeshValue",
+        "CharacterBodyColorValue",
+        "CharacterRagdollingValue",
+        "CharacterRagdollPosition",
+        "CharacterRagdollRotation",
+        "MarkerLengthValue",
+        "MarkerAppearsOnTopValue",
+        "MarkerVisibleInDevValue",
+        "TrussClimbSpeedValue",
+        "EntityCastsShadowsValue",
+        "EntityIsSpawnValue",
+        "EntityColorValue",
+        "WorldGravityValue",
+        "PartDestroyHeightValue",
+        "AutoGenerateNavMeshValue",
+        "CurrentCameraValue",
+        "ObjectBoundsCenter",
+        "ObjectBoundsSize",
+        "ObjectBoundsExtents",
+        "ObjectBoundsVolume",
+        "QuaternionIdentity",
+        "QuaternionFromComponents",
+        "QuaternionFromEuler",
+        "QuaternionToEuler",
+        "QuaternionFromAxisAngle",
+        "QuaternionLookRotation",
+        "QuaternionFromToRotation",
+        "QuaternionInverse",
+        "QuaternionNormalize",
+        "QuaternionLerp",
+        "QuaternionSlerp",
+        "QuaternionRotateTowards",
+        "QuaternionAngle",
+        "QuaternionDot",
+        "ColorSeriesFromColors",
+        "ColorFromColorSeries",
+        "ColorSeriesPointCount",
+        "ColorSeriesPointColor",
+        "ColorSeriesPointOffset",
         "SeatOccupant",
         "SeatAllowsNPCsValue",
         "NPCHealth",
@@ -523,6 +965,22 @@ public sealed partial class LuauExporter
         "ObjectVelocity",
         "ObjectSpeed",
         "ObjectSpinVelocity",
+        "RigidBodyGravityEnabledValue",
+        "RigidBodyMassValue",
+        "RigidBodyFrictionValue",
+        "RigidBodyDragValue",
+        "RigidBodyAngularDragValue",
+        "RigidBodyBouncinessValue",
+        "ExplosionRadiusValue",
+        "ExplosionForceValue",
+        "ExplosionDamageValue",
+        "ExplosionAffectAnchoredValue",
+        "GrabForceValue",
+        "GrabMaxRangeValue",
+        "GrabPickupRangeValue",
+        "GrabUsesDragForceValue",
+        "GrabPermissionModeValue",
+        "CurrentGrabber",
         "TouchingObjectCount",
         "FogEnabled",
         "FogStartDistance",
@@ -534,9 +992,37 @@ public sealed partial class LuauExporter
         "GameTeamName",
         "GameTeamColor",
         "GameTeamPlayerCount",
+        "GameTeamPlayers",
         "GameTeamCount",
+        "AllGameTeams",
+        "PlayerStatValue",
+        "PlayerStatDisplayValue",
+        "StatDisplayName",
+        "TeamStatTotal",
+        "AllPlayerStats",
+        "DatastoreValue",
+        "DatastoreKey",
         "ToolHolder",
         "ToolCanBeDroppedValue",
+        "PlayerInventory",
+        "FindToolInInventory",
+        "ReadSharedValue",
+        "ReadSharedNumber",
+        "ReadSharedText",
+        "ScriptEnabledValue",
+        "ObjectIsMissingInstanceValue",
+        "AssetReferenceValue",
+        "ResourceAssetReferenceValue",
+        "FontAssetReferenceValue",
+        "PTImageAssetIdValue",
+        "PTAudioAssetIdValue",
+        "PTMeshAssetIdValue",
+        "PTMeshAnimationAssetIdValue",
+        "BuiltInAudioPresetValue",
+        "BuiltInFontPresetValue",
+        "FileLinkAssetIdValue",
+        "GradientImageWidthValue",
+        "MeshAnimationInfoNameValue",
         "BuiltInChatVisible",
         "BuiltInLeaderboardVisible",
         "BuiltInHealthBarVisible",
@@ -558,6 +1044,9 @@ public sealed partial class LuauExporter
         "InputAxisValue",
         "InputVectorX",
         "InputVectorY",
+        "InputButtonFromKey",
+        "PlayerUIRoot",
+        "PlayerDefaultAtLeast",
         "PlayerDefaultValue",
         "FindChild",
         "FindChildByClass",
@@ -740,6 +1229,7 @@ public sealed partial class LuauExporter
             !plan.UsesObbyTouchResolver &&
             !plan.UsesObbyObjectPosition &&
             !plan.UsesEssentialsRuntime &&
+            !plan.UsesTweenTargetRuntime &&
             !plan.UsesInputEventRuntime)
         {
             return;
@@ -773,6 +1263,11 @@ public sealed partial class LuauExporter
         if (plan.UsesVectorTween)
         {
             AppendReadableVectorTweenRuntime(builder);
+        }
+
+        if (plan.UsesTweenTargetRuntime)
+        {
+            AppendReadableTweenTargetRuntime(builder);
         }
 
         if (plan.UsesTargetResolver)

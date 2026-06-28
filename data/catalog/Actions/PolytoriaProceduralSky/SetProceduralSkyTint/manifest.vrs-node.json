@@ -1,0 +1,80 @@
+{
+  "moduleId": "polytoria.procedural_sky.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetProceduralSkyTint",
+  "type": "SetProceduralSkyTint",
+  "apiType": "ProceduralSky.SkyTint",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "SkyTint", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Procedural Sky Tint",
+  "value": "target=Self;r=1;g=1;b=1",
+  "description": "Changes the sky tint color on a ProceduralSky object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} sky tint",
+  "searchKeywords": ["sky", "procedural", "tint", "color", "lighting", "environment"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ProceduralSky object to update.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ProceduralSkyObject"]
+    },
+    {
+      "key": "r",
+      "label": "Red",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Red amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "g",
+      "label": "Green",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Green amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "b",
+      "label": "Blue",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Blue amount from 0 to 1.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do tint the procedural sky.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

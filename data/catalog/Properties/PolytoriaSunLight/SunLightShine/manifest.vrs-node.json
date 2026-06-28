@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.sunlight.values",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_SunLightShine",
+  "type": "SunLightShineValue",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Specular", "coverage": "Direct" }
+  ],
+  "label": "Sun Light Shine",
+  "value": "target=Self",
+  "description": "Outputs the specular shine of the main sun light.",
+  "status": "Ready",
+  "previewTemplate": "Sun shine of ${target}",
+  "searchKeywords": ["sun", "sunlight", "light", "lighting", "shine", "specular"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Sun Light", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "SunLight object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["SunLightObject"] }
+  ],
+  "beginnerSummary": "Value: use the sun light shine amount.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light"]
+}

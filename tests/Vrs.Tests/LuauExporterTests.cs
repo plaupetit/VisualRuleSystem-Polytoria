@@ -1,5 +1,6 @@
 using Vrs.Core.Catalog;
 using Vrs.Core.Export;
+using Vrs.Core.RuntimeEvents;
 using Vrs.Core.Samples;
 using Vrs.Graph.Model;
 using Vrs.Graph.Modeling;
@@ -564,6 +565,699 @@ public sealed class LuauExporterTests
     }
 
     [Fact]
+    public void ExportRuleToLuau_EmitsScriptSharedTableNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartShared");
+        var set = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetSharedValue"), stableId: "ACT_SetShared");
+        var increment = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_IncrementSharedNumber"), stableId: "ACT_IncrementShared");
+        var append = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_AppendSharedText"), stableId: "ACT_AppendShared");
+        var exists = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_SharedValueExists"), stableId: "COND_SharedExists");
+        var printValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintSharedValue");
+        var atLeast = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_SharedNumberAtLeast"), stableId: "COND_SharedAtLeast");
+        var printNumber = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintSharedNumber");
+        var printText = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintSharedText");
+        var remove = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_RemoveSharedValue"), stableId: "ACT_RemoveShared");
+        var clearPrefix = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ClearSharedPrefix"), stableId: "ACT_ClearSharedPrefix");
+        var clearSuffix = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ClearSharedSuffix"), stableId: "ACT_ClearSharedSuffix");
+        var clearAll = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ClearSharedValues"), stableId: "ACT_ClearSharedAll");
+        var readValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ReadSharedValue"), stableId: "PROP_ReadSharedValue");
+        var readNumber = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ReadSharedNumber"), stableId: "PROP_ReadSharedNumber");
+        var readText = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ReadSharedText"), stableId: "PROP_ReadSharedText");
+
+        SetConstant(set, "key", "Score");
+        SetConstant(set, "value", "10");
+        SetConstant(increment, "key", "Score");
+        SetConstant(increment, "amount", "5");
+        SetConstant(append, "key", "Log");
+        SetConstant(append, "text", "!");
+        SetConstant(exists, "key", "Score");
+        SetConstant(atLeast, "key", "Score");
+        SetConstant(atLeast, "minimum", "10");
+        SetConstant(remove, "key", "Old");
+        SetConstant(clearPrefix, "prefix", "player:");
+        SetConstant(clearSuffix, "suffix", ":temp");
+        SetConstant(readValue, "key", "Score");
+        SetConstant(readNumber, "key", "Score");
+        SetConstant(readNumber, "fallback", "0");
+        SetConstant(readText, "key", "Log");
+        SetConstant(readText, "fallback", "");
+
+        var rule = new Rule
+        {
+            Id = "RULE_ScriptSharedTable",
+            Name = "ScriptSharedTable",
+            Nodes =
+            [
+                start,
+                set,
+                increment,
+                append,
+                exists,
+                printValue,
+                atLeast,
+                printNumber,
+                printText,
+                remove,
+                clearPrefix,
+                clearSuffix,
+                clearAll,
+                readValue,
+                readNumber,
+                readText
+            ],
+            Connections =
+            [
+                Flow("CONN_Shared_Start_Set", start.Id, GraphPortDefaults.FlowOut, set.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_Set_Increment", set.Id, GraphPortDefaults.FlowOut, increment.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_Increment_Append", increment.Id, GraphPortDefaults.FlowOut, append.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_Append_Exists", append.Id, GraphPortDefaults.FlowOut, exists.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_Exists_PrintValue", exists.Id, GraphPortDefaults.TrueOut, printValue.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_PrintValue_AtLeast", printValue.Id, GraphPortDefaults.FlowOut, atLeast.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_AtLeast_PrintNumber", atLeast.Id, GraphPortDefaults.TrueOut, printNumber.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_PrintNumber_PrintText", printNumber.Id, GraphPortDefaults.FlowOut, printText.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_PrintText_Remove", printText.Id, GraphPortDefaults.FlowOut, remove.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_Remove_ClearPrefix", remove.Id, GraphPortDefaults.FlowOut, clearPrefix.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_ClearPrefix_ClearSuffix", clearPrefix.Id, GraphPortDefaults.FlowOut, clearSuffix.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Shared_ClearSuffix_ClearAll", clearSuffix.Id, GraphPortDefaults.FlowOut, clearAll.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Shared_ReadValue_Print", readValue.Id, GraphPortDefaults.ValueOut, printValue.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Shared_ReadNumber_Print", readNumber.Id, GraphPortDefaults.ValueOut, printNumber.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Shared_ReadText_Print", readText.Id, GraphPortDefaults.ValueOut, printText.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "ScriptSharedTableGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("ScriptSharedTable[\"Score\"] = 10", luau);
+        Assert.Contains("ScriptSharedTable[\"Score\"] = (tonumber(ScriptSharedTable[\"Score\"]) or 0) + 5", luau);
+        Assert.Contains("ScriptSharedTable[\"Log\"] = tostring(ScriptSharedTable[\"Log\"] or \"\") .. tostring(\"!\")", luau);
+        Assert.Contains("return ScriptSharedTable[\"Score\"] ~= nil", luau);
+        Assert.Contains("return (tonumber(ScriptSharedTable[\"Score\"]) or 0) >= 10", luau);
+        Assert.Contains("print(tostring((function() if ScriptSharedTable == nil then return nil end return ScriptSharedTable[\"Score\"] end)()))", luau);
+        Assert.Contains("print(tostring((function() if ScriptSharedTable == nil then return 0 end return tonumber(ScriptSharedTable[\"Score\"]) or 0 end)()))", luau);
+        Assert.Contains("print(tostring((function() if ScriptSharedTable == nil then return \"\" end local sharedValue = ScriptSharedTable[\"Log\"]; if sharedValue == nil then return \"\" end return tostring(sharedValue) end)()))", luau);
+        Assert.Contains("ScriptSharedTable:Remove(tostring(\"Old\"))", luau);
+        Assert.Contains("ScriptSharedTable:ClearPrefix(tostring(\"player:\"))", luau);
+        Assert.Contains("ScriptSharedTable:ClearSuffix(tostring(\":temp\"))", luau);
+        Assert.Contains("ScriptSharedTable:Clear()", luau);
+        Assert.Contains("Set Shared Value stopped: ScriptSharedTable is not available.", luau);
+        Assert.DoesNotContain("Set Shared Value is not implemented", luau);
+        Assert.DoesNotContain("Read Shared Value is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsScriptSharedTableAdditionalConditions()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartSharedConditions");
+        var conditionIds = new[]
+        {
+            "COND_SharedValueMissing",
+            "COND_SharedNumberEquals",
+            "COND_SharedNumberAtMost",
+            "COND_SharedTextEquals",
+            "COND_SharedTextContains"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_SharedExtra_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_SharedConditionMessage");
+
+        SetConstant(conditions[0], "key", "Missing");
+        SetConstant(conditions[1], "key", "Score");
+        SetConstant(conditions[1], "expected", "10");
+        SetConstant(conditions[2], "key", "Score");
+        SetConstant(conditions[2], "maximum", "5");
+        SetConstant(conditions[3], "key", "Log");
+        SetConstant(conditions[3], "text", "Ready");
+        SetConstant(conditions[3], "caseSensitive", "false");
+        SetConstant(conditions[4], "key", "Log");
+        SetConstant(conditions[4], "search", "error");
+        SetConstant(conditions[4], "caseSensitive", "false");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_SharedCondition_Start", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count; index++)
+        {
+            var nextNodeId = index + 1 < conditions.Count ? conditions[index + 1].Id : message.Id;
+            connections.Add(Flow($"CONN_SharedCondition_{index}", conditions[index].Id, GraphPortDefaults.TrueOut, nextNodeId, GraphPortDefaults.FlowIn));
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_ScriptSharedTableConditions",
+            Name = "ScriptSharedTableConditions",
+            Nodes = [start, .. conditions, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ScriptSharedTableConditionsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("return ScriptSharedTable[\"Missing\"] == nil", luau);
+        Assert.Contains("return currentNumber == 10", luau);
+        Assert.Contains("return currentNumber <= 5", luau);
+        Assert.Contains("local expectedText = tostring(\"Ready\")", luau);
+        Assert.Contains("return currentText == expectedText", luau);
+        Assert.Contains("local expectedText = tostring(\"error\")", luau);
+        Assert.Contains("return string.find(currentText, expectedText, 1, true) ~= nil", luau);
+        Assert.DoesNotContain("Shared Value Missing is not implemented", luau);
+        Assert.DoesNotContain("Shared Text Contains is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsScriptSharedTableWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var triggerIds = new[]
+        {
+            "EV_OnSharedValueChanged",
+            "EV_OnSharedValueExists",
+            "EV_OnSharedValueRemoved",
+            "EV_OnSharedNumberReachedAtLeast",
+            "EV_OnSharedNumberDroppedToAtMost",
+            "EV_OnSharedTextBecame",
+            "EV_OnSharedTextContains"
+        };
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_SharedWatcher_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_SharedWatcherMessage");
+
+        foreach (var trigger in triggers.Take(5))
+        {
+            SetConstant(trigger, "key", "Score");
+            SetConstant(trigger, "interval", "0.1");
+        }
+
+        SetConstant(triggers[3], "minimum", "10");
+        SetConstant(triggers[4], "maximum", "0");
+        SetConstant(triggers[5], "key", "Log");
+        SetConstant(triggers[5], "text", "Ready");
+        SetConstant(triggers[5], "caseSensitive", "false");
+        SetConstant(triggers[5], "interval", "0.1");
+        SetConstant(triggers[6], "key", "Log");
+        SetConstant(triggers[6], "search", "error");
+        SetConstant(triggers[6], "caseSensitive", "false");
+        SetConstant(triggers[6], "interval", "0.1");
+
+        var connections = triggers
+            .Select((trigger, index) => Flow($"CONN_SharedWatcher_{index}", trigger.Id, GraphPortDefaults.FlowOut, message.Id, GraphPortDefaults.FlowIn))
+            .ToList();
+
+        var rule = new Rule
+        {
+            Id = "RULE_ScriptSharedTableWatchers",
+            Name = "ScriptSharedTableWatchers",
+            Nodes = [.. triggers, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ScriptSharedTableWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local watchedSharedKey = tostring(\"Score\")", luau);
+        Assert.Contains("return ScriptSharedTable[watchedSharedKey]", luau);
+        Assert.Contains("return currentValue ~= nil, currentValue", luau);
+        Assert.Contains("return currentValue == nil, currentValue", luau);
+        Assert.Contains("local watchedLimit = tonumber(10) or 10", luau);
+        Assert.Contains("return currentValue >= watchedLimit, currentValue", luau);
+        Assert.Contains("local watchedLimit = tonumber(0) or 0", luau);
+        Assert.Contains("return currentValue <= watchedLimit, currentValue", luau);
+        Assert.Contains("local expectedText = tostring(\"Ready\")", luau);
+        Assert.Contains("return currentText == expectedText, currentText", luau);
+        Assert.Contains("local expectedText = tostring(\"error\")", luau);
+        Assert.Contains("return string.find(currentText, expectedText, 1, true) ~= nil, currentText", luau);
+        Assert.Contains("sharedKey = watchedSharedKey, sharedValue = currentValue", luau);
+        Assert.DoesNotContain("On Shared Value Changed is not implemented", luau);
+        Assert.DoesNotContain("On Shared Text Contains is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsScriptRuntimeAndMissingInstanceNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartScripts");
+        var set = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetScriptEnabled"), stableId: "ACT_SetScriptEnabled");
+        var enable = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_EnableScript"), stableId: "ACT_EnableScript");
+        var disable = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_DisableScript"), stableId: "ACT_DisableScript");
+        var toggle = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ToggleScriptEnabled"), stableId: "ACT_ToggleScript");
+        var call = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_CallScriptFunction"), stableId: "ACT_CallScript");
+        var callAsync = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_CallScriptFunctionAsync"), stableId: "ACT_CallScriptAsync");
+        var scriptEnabledCondition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ScriptIsEnabled"), stableId: "COND_ScriptEnabled");
+        var scriptDisabledCondition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ScriptIsDisabled"), stableId: "COND_ScriptDisabled");
+        var scriptCanCallCondition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ScriptCanCallFunction"), stableId: "COND_ScriptCanCall");
+        var scriptCanCallAsyncCondition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ScriptCanCallAsyncFunction"), stableId: "COND_ScriptCanCallAsync");
+        var scriptTargetExistsCondition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ScriptTargetExists"), stableId: "COND_ScriptTargetExists");
+        var scriptTargetMissingCondition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ScriptTargetMissing"), stableId: "COND_ScriptTargetMissing");
+        var printScriptEnabled = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintScriptEnabled");
+        var printScriptRuntimeExtra = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintScriptRuntimeExtra");
+        var missingCondition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ObjectIsMissingInstance"), stableId: "COND_MissingInstance");
+        var printMissing = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintMissingInstance");
+        var scriptEnabledValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ScriptEnabled"), stableId: "PROP_ScriptEnabled");
+        var missingValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ObjectIsMissingInstance"), stableId: "PROP_MissingInstance");
+
+        foreach (var node in new[] { set, enable, disable, toggle, call, callAsync, scriptEnabledCondition, scriptDisabledCondition, scriptCanCallCondition, scriptCanCallAsyncCondition, scriptTargetExistsCondition, scriptEnabledValue })
+        {
+            SetConstant(node, "target", "World/Hidden/VRS Helper");
+        }
+
+        SetConstant(set, "enabled", "false");
+        SetConstant(call, "functionName", "Run");
+        SetConstant(call, "argument", "payload");
+        SetConstant(callAsync, "functionName", "RunAsync");
+        SetConstant(callAsync, "argument", "payload");
+        SetConstant(missingCondition, "target", "World/BrokenReference");
+        SetConstant(scriptTargetMissingCondition, "target", "World/BrokenReference");
+        SetConstant(missingValue, "target", "World/BrokenReference");
+
+        var rule = new Rule
+        {
+            Id = "RULE_ScriptRuntime",
+            Name = "ScriptRuntime",
+            Nodes =
+            [
+                start,
+                set,
+                enable,
+                disable,
+                toggle,
+                call,
+                callAsync,
+                scriptEnabledCondition,
+                scriptDisabledCondition,
+                scriptCanCallCondition,
+                scriptCanCallAsyncCondition,
+                scriptTargetExistsCondition,
+                scriptTargetMissingCondition,
+                printScriptEnabled,
+                printScriptRuntimeExtra,
+                missingCondition,
+                printMissing,
+                scriptEnabledValue,
+                missingValue
+            ],
+            Connections =
+            [
+                Flow("CONN_Script_Start_Set", start.Id, GraphPortDefaults.FlowOut, set.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Set_Enable", set.Id, GraphPortDefaults.FlowOut, enable.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Enable_Disable", enable.Id, GraphPortDefaults.FlowOut, disable.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Disable_Toggle", disable.Id, GraphPortDefaults.FlowOut, toggle.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Toggle_Call", toggle.Id, GraphPortDefaults.FlowOut, call.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Call_Async", call.Id, GraphPortDefaults.FlowOut, callAsync.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Async_Condition", callAsync.Id, GraphPortDefaults.FlowOut, scriptEnabledCondition.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Condition_Print", scriptEnabledCondition.Id, GraphPortDefaults.TrueOut, printScriptEnabled.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Print_MissingCondition", printScriptEnabled.Id, GraphPortDefaults.FlowOut, missingCondition.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_MissingCondition_Print", missingCondition.Id, GraphPortDefaults.TrueOut, printMissing.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Print_DisabledCondition", printMissing.Id, GraphPortDefaults.FlowOut, scriptDisabledCondition.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_Disabled_CanCall", scriptDisabledCondition.Id, GraphPortDefaults.TrueOut, scriptCanCallCondition.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_CanCall_CanCallAsync", scriptCanCallCondition.Id, GraphPortDefaults.TrueOut, scriptCanCallAsyncCondition.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_CanCallAsync_TargetExists", scriptCanCallAsyncCondition.Id, GraphPortDefaults.TrueOut, scriptTargetExistsCondition.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_TargetExists_TargetMissing", scriptTargetExistsCondition.Id, GraphPortDefaults.TrueOut, scriptTargetMissingCondition.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Script_TargetMissing_Print", scriptTargetMissingCondition.Id, GraphPortDefaults.TrueOut, printScriptRuntimeExtra.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Script_Value_Print", scriptEnabledValue.Id, GraphPortDefaults.ValueOut, printScriptEnabled.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Missing_Value_Print", missingValue.Id, GraphPortDefaults.ValueOut, printMissing.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "ScriptRuntimeGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("targetObject.IsEnabled = false", luau);
+        Assert.Contains("targetObject.IsEnabled = true", luau);
+        Assert.Contains("targetObject.IsEnabled = not (targetObject.IsEnabled == true)", luau);
+        Assert.Contains("scriptObject:Call(tostring(\"Run\"), \"payload\")", luau);
+        Assert.Contains("scriptObject:CallAsync(tostring(\"RunAsync\"), \"payload\")", luau);
+        Assert.Contains("return scriptObject.IsEnabled == true", luau);
+        Assert.Contains("return scriptObject.IsEnabled == false", luau);
+        Assert.Contains("return scriptObject.Call ~= nil", luau);
+        Assert.Contains("return scriptObject.CallAsync ~= nil", luau);
+        Assert.Contains("return scriptObject ~= nil and not (scriptObject ~= nil and ((scriptObject.ClassName == \"MissingInstance\")", luau);
+        Assert.Contains("return scriptObject == nil or (scriptObject ~= nil and ((scriptObject.ClassName == \"MissingInstance\")", luau);
+        Assert.Contains("return (targetObject ~= nil and ((targetObject.ClassName == \"MissingInstance\") or (targetObject.IsA ~= nil and targetObject:IsA(\"MissingInstance\"))))", luau);
+        Assert.Contains("return targetObject.IsEnabled == true", luau);
+        Assert.Contains("Script Enabled stopped: target does not expose IsEnabled.", luau);
+        Assert.DoesNotContain("Set Script Enabled is not implemented", luau);
+        Assert.DoesNotContain("Object Is Missing Instance is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsScriptRuntimeWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var triggerIds = new[]
+        {
+            "EV_OnScriptEnabled",
+            "EV_OnScriptDisabled",
+            "EV_OnScriptEnabledChanged",
+            "EV_OnScriptCallAvailable",
+            "EV_OnScriptCallAsyncAvailable",
+            "EV_OnScriptTargetMissing"
+        };
+
+        var triggers = triggerIds
+            .Select(id => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: id))
+            .ToList();
+
+        foreach (var trigger in triggers)
+        {
+            SetConstant(trigger, "target", "World/Hidden/VRS Helper");
+            SetConstant(trigger, "interval", "0.1");
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_ScriptWatchers",
+            Name = "ScriptWatchers",
+            Nodes = triggers
+        };
+        var graph = new RuleGraph { Name = "ScriptWatcherGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("return triggerObject.IsEnabled == true", luau);
+        Assert.Contains("return currentValue == false, currentValue", luau);
+        Assert.Contains("local previousValue = readWatchedValue()", luau);
+        Assert.Contains("return triggerObject.Call ~= nil", luau);
+        Assert.Contains("return triggerObject.CallAsync ~= nil", luau);
+        Assert.Contains("local targetMissing = triggerObject == nil or (triggerObject ~= nil and ((triggerObject.ClassName == \"MissingInstance\")", luau);
+        Assert.Contains("scriptTargetMissing = currentMatched", luau);
+        Assert.DoesNotContain("On Script Enabled is not implemented", luau);
+        Assert.DoesNotContain("On Script Target Missing is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsAssetMediaNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartAssets");
+        var setImage = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetPTImageAssetId"), stableId: "ACT_SetImageAssetId");
+        var setAudio = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetPTAudioAssetId"), stableId: "ACT_SetAudioAssetId");
+        var setMesh = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetPTMeshAssetId"), stableId: "ACT_SetMeshAssetId");
+        var setMeshAnimation = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetPTMeshAnimationAssetId"), stableId: "ACT_SetMeshAnimationAssetId");
+        var setMeshAnimationType = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetMeshAnimationType"), stableId: "ACT_SetMeshAnimationType");
+        var setBuiltInAudio = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetBuiltInAudioPreset"), stableId: "ACT_SetBuiltInAudioPreset");
+        var setBuiltInFont = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetBuiltInFontSettings"), stableId: "ACT_SetBuiltInFontSettings");
+        var setFileLink = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetFileLinkAssetId"), stableId: "ACT_SetFileLinkAssetId");
+        var setGradientSize = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetGradientImageSize"), stableId: "ACT_SetGradientImageSize");
+
+        var printAssetRef = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintAssetReference");
+        var printImageId = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintImageId");
+        var printAudioPreset = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintAudioPreset");
+        var printFontPreset = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintFontPreset");
+        var printFileLink = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintFileLink");
+        var printGradientWidth = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintGradientWidth");
+        var printAnimationInfoName = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintAnimationInfoName");
+
+        var assetReference = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_AssetReference"), stableId: "PROP_AssetReference");
+        var imageId = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_PTImageAssetId"), stableId: "PROP_ImageAssetId");
+        var audioPreset = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_BuiltInAudioPreset"), stableId: "PROP_AudioPreset");
+        var fontPreset = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_BuiltInFontPreset"), stableId: "PROP_FontPreset");
+        var fileLink = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_FileLinkAssetId"), stableId: "PROP_FileLinkAssetId");
+        var gradientWidth = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_GradientImageWidth"), stableId: "PROP_GradientWidth");
+        var animationInfoName = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_MeshAnimationInfoName"), stableId: "PROP_AnimationInfoName");
+
+        SetConstant(setImage, "target", "World/Hidden/VRS/Assets/TestImageAsset");
+        SetConstant(setImage, "assetId", "123");
+        SetConstant(setAudio, "target", "World/Hidden/VRS/Assets/TestAudioAsset");
+        SetConstant(setAudio, "assetId", "456");
+        SetConstant(setMesh, "target", "World/Hidden/VRS/Assets/TestMeshAsset");
+        SetConstant(setMesh, "assetId", "789");
+        SetConstant(setMeshAnimation, "target", "World/Hidden/VRS/Assets/TestMeshAnimationAsset");
+        SetConstant(setMeshAnimation, "assetId", "987");
+        SetConstant(setMeshAnimationType, "target", "World/Hidden/VRS/Assets/TestMeshAnimationAsset");
+        SetConstant(setMeshAnimationType, "animationType", "Looped");
+        SetConstant(setBuiltInAudio, "target", "World/Hidden/VRS/Assets/TestBuiltInAudio");
+        SetConstant(setBuiltInAudio, "preset", "Explosion");
+        SetConstant(setBuiltInFont, "target", "World/Hidden/VRS/Assets/TestFont");
+        SetConstant(setBuiltInFont, "preset", "Montserrat");
+        SetConstant(setBuiltInFont, "weight", "Bold");
+        SetConstant(setBuiltInFont, "style", "Italic");
+        SetConstant(setFileLink, "target", "World/Hidden/VRS/Assets/TestFileLink");
+        SetConstant(setFileLink, "linkedId", "file-1");
+        SetConstant(setGradientSize, "target", "World/Hidden/VRS/Assets/TestGradient");
+        SetConstant(setGradientSize, "width", "512");
+        SetConstant(setGradientSize, "height", "128");
+
+        SetConstant(assetReference, "target", "World/Hidden/VRS/Assets/TestImageAsset");
+        SetConstant(imageId, "target", "World/Hidden/VRS/Assets/TestImageAsset");
+        SetConstant(audioPreset, "target", "World/Hidden/VRS/Assets/TestBuiltInAudio");
+        SetConstant(fontPreset, "target", "World/Hidden/VRS/Assets/TestFont");
+        SetConstant(fileLink, "target", "World/Hidden/VRS/Assets/TestFileLink");
+        SetConstant(gradientWidth, "target", "World/Hidden/VRS/Assets/TestGradient");
+
+        var rule = new Rule
+        {
+            Id = "RULE_AssetMedia",
+            Name = "AssetMedia",
+            Nodes =
+            [
+                start,
+                setImage,
+                setAudio,
+                setMesh,
+                setMeshAnimation,
+                setMeshAnimationType,
+                setBuiltInAudio,
+                setBuiltInFont,
+                setFileLink,
+                setGradientSize,
+                printAssetRef,
+                printImageId,
+                printAudioPreset,
+                printFontPreset,
+                printFileLink,
+                printGradientWidth,
+                printAnimationInfoName,
+                assetReference,
+                imageId,
+                audioPreset,
+                fontPreset,
+                fileLink,
+                gradientWidth,
+                animationInfoName
+            ],
+            Connections =
+            [
+                Flow("CONN_Assets_Start_SetImage", start.Id, GraphPortDefaults.FlowOut, setImage.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetImage_SetAudio", setImage.Id, GraphPortDefaults.FlowOut, setAudio.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetAudio_SetMesh", setAudio.Id, GraphPortDefaults.FlowOut, setMesh.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetMesh_SetMeshAnimation", setMesh.Id, GraphPortDefaults.FlowOut, setMeshAnimation.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetMeshAnimation_SetType", setMeshAnimation.Id, GraphPortDefaults.FlowOut, setMeshAnimationType.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetType_SetAudioPreset", setMeshAnimationType.Id, GraphPortDefaults.FlowOut, setBuiltInAudio.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetAudioPreset_SetFont", setBuiltInAudio.Id, GraphPortDefaults.FlowOut, setBuiltInFont.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetFont_SetFileLink", setBuiltInFont.Id, GraphPortDefaults.FlowOut, setFileLink.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetFileLink_SetGradient", setFileLink.Id, GraphPortDefaults.FlowOut, setGradientSize.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_SetGradient_PrintAsset", setGradientSize.Id, GraphPortDefaults.FlowOut, printAssetRef.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_PrintAsset_PrintImage", printAssetRef.Id, GraphPortDefaults.FlowOut, printImageId.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_PrintImage_PrintAudio", printImageId.Id, GraphPortDefaults.FlowOut, printAudioPreset.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_PrintAudio_PrintFont", printAudioPreset.Id, GraphPortDefaults.FlowOut, printFontPreset.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_PrintFont_PrintFile", printFontPreset.Id, GraphPortDefaults.FlowOut, printFileLink.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_PrintFile_PrintGradient", printFileLink.Id, GraphPortDefaults.FlowOut, printGradientWidth.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Assets_PrintGradient_PrintInfo", printGradientWidth.Id, GraphPortDefaults.FlowOut, printAnimationInfoName.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Assets_Value_Asset", assetReference.Id, GraphPortDefaults.ValueOut, printAssetRef.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Assets_Value_ImageId", imageId.Id, GraphPortDefaults.ValueOut, printImageId.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Assets_Value_AudioPreset", audioPreset.Id, GraphPortDefaults.ValueOut, printAudioPreset.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Assets_Value_FontPreset", fontPreset.Id, GraphPortDefaults.ValueOut, printFontPreset.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Assets_Value_FileLink", fileLink.Id, GraphPortDefaults.ValueOut, printFileLink.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Assets_Value_GradientWidth", gradientWidth.Id, GraphPortDefaults.ValueOut, printGradientWidth.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Assets_Value_AnimationInfoName", animationInfoName.Id, GraphPortDefaults.ValueOut, printAnimationInfoName.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "AssetMediaGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("targetObject.ImageID = 123", luau);
+        Assert.Contains("targetObject.AudioID = 456", luau);
+        Assert.Contains("targetObject.AssetID = 789", luau);
+        Assert.Contains("targetObject.AssetID = 987", luau);
+        Assert.Contains("targetObject.AnimationType = \"Looped\"", luau);
+        Assert.Contains("targetObject.AudioPreset = \"Explosion\"", luau);
+        Assert.Contains("fontAsset.FontPreset = tostring(\"Montserrat\")", luau);
+        Assert.Contains("fontAsset.FontWeight = tostring(\"Bold\")", luau);
+        Assert.Contains("fontAsset.FontStyle = tostring(\"Italic\")", luau);
+        Assert.Contains("targetObject.LinkedID = \"file-1\"", luau);
+        Assert.Contains("assetObject.Width = 512", luau);
+        Assert.Contains("assetObject.Height = 128", luau);
+        Assert.Contains("return assetObject", luau);
+        Assert.Contains("return tonumber(targetObject.ImageID) or 0", luau);
+        Assert.Contains("return tostring(targetObject.AudioPreset or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.FontPreset or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.LinkedID or \"\")", luau);
+        Assert.Contains("return tonumber(targetObject.Width) or 0", luau);
+        Assert.Contains("animation info is not an object", luau);
+        Assert.DoesNotContain("Set PT Image Asset ID is not implemented", luau);
+        Assert.DoesNotContain("Mesh Animation Info Name is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsAssetMediaConditions()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_AssetConditionsStart");
+        var conditionIds = new[]
+        {
+            "COND_DecalImageIs",
+            "COND_DecalHasImage",
+            "COND_PTImageAssetIdIs",
+            "COND_PTAudioAssetIdIs",
+            "COND_PTMeshAssetIdIs",
+            "COND_PTMeshAnimationAssetIdIs",
+            "COND_BuiltInAudioPresetIs",
+            "COND_BuiltInFontPresetIs",
+            "COND_FileLinkAssetIdIs",
+            "COND_MeshAnimationTypeIs",
+            "COND_GradientImageWidthAtLeast",
+            "COND_GradientImageHeightAtLeast"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_AssetMedia_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_AssetConditionMessage");
+
+        SetConstant(conditions[0], "target", "World/Decals/Poster");
+        SetConstant(conditions[0], "image", "images/poster.png");
+        SetConstant(conditions[0], "caseSensitive", "true");
+        SetConstant(conditions[1], "target", "World/Decals/Poster");
+        SetConstant(conditions[2], "target", "World/Hidden/VRS/Assets/Image");
+        SetConstant(conditions[2], "assetId", "123");
+        SetConstant(conditions[3], "target", "World/Hidden/VRS/Assets/Audio");
+        SetConstant(conditions[3], "assetId", "456");
+        SetConstant(conditions[4], "target", "World/Hidden/VRS/Assets/Mesh");
+        SetConstant(conditions[4], "assetId", "789");
+        SetConstant(conditions[5], "target", "World/Hidden/VRS/Assets/Animation");
+        SetConstant(conditions[5], "assetId", "987");
+        SetConstant(conditions[6], "target", "World/Hidden/VRS/Assets/BuiltInAudio");
+        SetConstant(conditions[6], "preset", "Explosion");
+        SetConstant(conditions[7], "target", "World/Hidden/VRS/Assets/Font");
+        SetConstant(conditions[7], "preset", "Montserrat");
+        SetConstant(conditions[8], "target", "World/Hidden/VRS/Assets/File");
+        SetConstant(conditions[8], "linkedId", "file-1");
+        SetConstant(conditions[9], "target", "World/Hidden/VRS/Assets/Animation");
+        SetConstant(conditions[9], "animationType", "Looped");
+        SetConstant(conditions[10], "target", "World/Hidden/VRS/Assets/Gradient");
+        SetConstant(conditions[10], "width", "512");
+        SetConstant(conditions[11], "target", "World/Hidden/VRS/Assets/Gradient");
+        SetConstant(conditions[11], "height", "128");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_AssetCondition0", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count; index++)
+        {
+            var toNodeId = index + 1 < conditions.Count ? conditions[index + 1].Id : message.Id;
+            connections.Add(Flow($"CONN_AssetCondition_{index}", conditions[index].Id, GraphPortDefaults.TrueOut, toNodeId, GraphPortDefaults.FlowIn));
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_AssetConditions",
+            Name = "AssetConditions",
+            Nodes = [start, .. conditions, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "AssetConditionsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local currentText = tostring(targetObject.Image or \"\")", luau);
+        Assert.Contains("local expectedText = tostring(\"images/poster.png\")", luau);
+        Assert.Contains("return tostring(targetObject.Image or \"\") ~= \"\"", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.ImageID) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(123) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.AudioID) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.AssetID) or 0", luau);
+        Assert.Contains("local currentText = tostring(targetObject.AudioPreset or \"\")", luau);
+        Assert.Contains("local currentText = tostring(targetObject.FontPreset or \"\")", luau);
+        Assert.Contains("local currentText = tostring(targetObject.LinkedID or \"\")", luau);
+        Assert.Contains("local currentText = tostring(targetObject.AnimationType or \"\")", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.Width) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.Height) or 0", luau);
+        Assert.Contains("return currentNumber == expectedNumber", luau);
+        Assert.Contains("return currentNumber >= expectedNumber", luau);
+        Assert.DoesNotContain("Decal Image Is is not implemented", luau);
+        Assert.DoesNotContain("Gradient Image Height At Least is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsAssetMediaWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var triggerIds = new[]
+        {
+            "EV_OnDecalImageChanged",
+            "EV_OnPTImageAssetIdChanged",
+            "EV_OnPTAudioAssetIdChanged",
+            "EV_OnPTMeshAssetIdChanged",
+            "EV_OnPTMeshAnimationAssetIdChanged",
+            "EV_OnBuiltInAudioPresetChanged",
+            "EV_OnBuiltInFontPresetChanged",
+            "EV_OnFileLinkAssetIdChanged",
+            "EV_OnMeshAnimationTypeChanged",
+            "EV_OnGradientImageWidthReached",
+            "EV_OnGradientImageHeightReached"
+        };
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_AssetWatcher_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_AssetWatcherMessage");
+
+        SetConstant(triggers[0], "target", "World/Decals/Poster");
+        SetConstant(triggers[1], "target", "World/Hidden/VRS/Assets/Image");
+        SetConstant(triggers[2], "target", "World/Hidden/VRS/Assets/Audio");
+        SetConstant(triggers[3], "target", "World/Hidden/VRS/Assets/Mesh");
+        SetConstant(triggers[4], "target", "World/Hidden/VRS/Assets/Animation");
+        SetConstant(triggers[5], "target", "World/Hidden/VRS/Assets/BuiltInAudio");
+        SetConstant(triggers[6], "target", "World/Hidden/VRS/Assets/Font");
+        SetConstant(triggers[7], "target", "World/Hidden/VRS/Assets/File");
+        SetConstant(triggers[8], "target", "World/Hidden/VRS/Assets/Animation");
+        SetConstant(triggers[9], "target", "World/Hidden/VRS/Assets/Gradient");
+        SetConstant(triggers[9], "width", "512");
+        SetConstant(triggers[10], "target", "World/Hidden/VRS/Assets/Gradient");
+        SetConstant(triggers[10], "height", "128");
+
+        var connections = triggers
+            .Select((trigger, index) => Flow($"CONN_AssetWatcher_{index}", trigger.Id, GraphPortDefaults.FlowOut, message.Id, GraphPortDefaults.FlowIn))
+            .ToList();
+
+        var rule = new Rule
+        {
+            Id = "RULE_AssetWatchers",
+            Name = "AssetWatchers",
+            Nodes = [.. triggers, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "AssetWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("return tostring(triggerObject.Image or \"\")", luau);
+        Assert.Contains("return tonumber(triggerObject.ImageID) or 0", luau);
+        Assert.Contains("return tonumber(triggerObject.AudioID) or 0", luau);
+        Assert.Contains("return tonumber(triggerObject.AssetID) or 0", luau);
+        Assert.Contains("return tostring(triggerObject.AudioPreset or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.FontPreset or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.LinkedID or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.AnimationType or \"\")", luau);
+        Assert.Contains("local watchedLimit = tonumber(512) or 256", luau);
+        Assert.Contains("local watchedLimit = tonumber(128) or 256", luau);
+        Assert.Contains("return tonumber(triggerObject.Width) or 0", luau);
+        Assert.Contains("return tonumber(triggerObject.Height) or 0", luau);
+        Assert.Contains("return currentValue >= watchedLimit, currentValue", luau);
+        Assert.Contains("local previousValue = readWatchedValue()", luau);
+        Assert.Contains("local previousMatched = readMatched() == true", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, assetImage = currentValue }", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, imageWidth = currentValue }", luau);
+        Assert.DoesNotContain("On Decal Image Changed is not implemented", luau);
+        Assert.DoesNotContain("On Gradient Image Height Reached is not implemented", luau);
+    }
+
+    [Fact]
     public void ExportRuleToLuau_UsesCatalogValueRecipesInline()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -707,6 +1401,53 @@ public sealed class LuauExporterTests
     }
 
     [Fact]
+    public void ExportRuleToLuau_EmitsInputButtonBindingNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = catalog.Nodes.Single(node => node.IdBase == "EV_OnStart");
+        var bindKey = catalog.Nodes.Single(node => node.IdBase == "ACT_BindInputButtonKey");
+        var actionExists = catalog.Nodes.Single(node => node.IdBase == "COND_InputActionExists");
+        var buttonFromKey = catalog.Nodes.Single(node => node.IdBase == "PROP_InputButtonFromKey");
+        var showMessage = catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage");
+        var trigger = NodeCatalogService.CreateNode(start, 100, 100, "TRG_Start");
+        var bind = NodeCatalogService.CreateNode(bindKey, 320, 100, "ACT_BindKey");
+        var condition = NodeCatalogService.CreateNode(actionExists, 540, 100, "COND_InputExists");
+        var inputButton = NodeCatalogService.CreateNode(buttonFromKey, 540, 20, "PROP_InputButton");
+        var message = NodeCatalogService.CreateNode(showMessage, 760, 100, "ACT_PrintButton");
+        SetConstant(bind, "actionName", "Interact");
+        SetConstant(bind, "keyCode", "Space");
+        SetConstant(condition, "actionKind", "Axis");
+        SetConstant(condition, "actionName", "Horizontal");
+        SetConstant(inputButton, "keyCode", "MouseLeft");
+        var rule = new Rule
+        {
+            Id = "RULE_InputBinding",
+            Name = "InputBinding",
+            ScriptKind = GraphScriptKind.Local,
+            Nodes = [trigger, bind, condition, inputButton, message],
+            Connections =
+            [
+                Flow("CONN_Start_Bind", trigger.Id, GraphPortDefaults.FlowOut, bind.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Bind_Check", bind.Id, GraphPortDefaults.FlowOut, condition.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Check_Message", condition.Id, GraphPortDefaults.FlowOut, message.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_InputButton_Message", inputButton.Id, GraphPortDefaults.ValueOut, message.Id, GraphPortDefaults.ParameterPortId("message"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "InputBindingGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local buttonAction = Input:BindButton(inputActionName)", luau);
+        Assert.Contains("buttonAction.Buttons:AddButton(InputButton.New(KeyCode.Space))", luau);
+        Assert.Contains("if Input == nil or Input.GetAxis == nil then", luau);
+        Assert.Contains("return Input:GetAxis(tostring(\"Horizontal\")) ~= nil", luau);
+        Assert.Contains("return InputButton.New(KeyCode.MouseLeft)", luau);
+        Assert.DoesNotContain("Bind Input Button Key is not implemented", luau);
+        Assert.DoesNotContain("Input Action Exists is not implemented", luau);
+        Assert.DoesNotContain("Input Button From Key is not implemented", luau);
+    }
+
+    [Fact]
     public void ExportRuleToLuau_EmitsClientInputNetworkEventSend()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -732,10 +1473,45 @@ public sealed class LuauExporterTests
         var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
 
         Assert.Contains("local function vrsResolveInputNetworkEvent(actionName)", luau);
+        Assert.Contains("\"User Input (NetworkEvent)\", \"Input Manager\", inputEventName", luau);
+        Assert.Contains("\"User Input (NetworkEvent)\", inputEventName", luau);
+        Assert.Contains("\"Input\", inputEventName", luau);
         Assert.Contains("local inputEvent = vrsResolveInputNetworkEvent(inputActionName)", luau);
         Assert.Contains("local inputMessage = NetMessage:New()", luau);
         Assert.Contains("inputEvent:InvokeServer(inputMessage)", luau);
         Assert.Contains("Run VRS Input Manager first", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsClientInputTextNetworkEventSend()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var input = catalog.Nodes.Single(node => node.IdBase == "EV_OnInputButtonDown");
+        var sendInput = catalog.Nodes.Single(node => node.IdBase == "ACT_SendInputTextEvent");
+        var trigger = NodeCatalogService.CreateNode(input, 100, 100, "TRG_InputText");
+        var action = NodeCatalogService.CreateNode(sendInput, 340, 100, "ACT_SendInputText");
+        SetConstant(trigger, "actionName", "Interact");
+        SetConstant(action, "inputAction", "Interact");
+        SetConstant(action, "payload", "OpenDoor");
+        var rule = new Rule
+        {
+            Id = "RULE_InputTextSend",
+            Name = "InputTextSend",
+            ScriptKind = GraphScriptKind.Local,
+            Nodes = [trigger, action],
+            Connections =
+            [
+                Flow("CONN_Input_SendText", trigger.Id, GraphPortDefaults.FlowOut, action.Id, GraphPortDefaults.FlowIn)
+            ]
+        };
+        var graph = new RuleGraph { Name = "InputTextSendGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local inputMessage = NetMessage:New()", luau);
+        Assert.Contains("inputMessage:AddString(tostring(\"OpenDoor\"))", luau);
+        Assert.Contains("inputEvent:InvokeServer(inputMessage)", luau);
+        Assert.Contains("Send Input Text Event warning", luau);
     }
 
     [Fact]
@@ -769,6 +1545,276 @@ public sealed class LuauExporterTests
         Assert.Contains("VRS.actions.showMessage(triggerObject, triggerContext)", luau);
     }
 
+    [Fact]
+    public void ExportRuleToLuau_EmitsServerInputTextValue()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var inputEvent = catalog.Nodes.Single(node => node.IdBase == "EV_OnVrsInputEvent");
+        var inputText = catalog.Nodes.Single(node => node.IdBase == "PROP_TriggeringInputText");
+        var showMessage = catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage");
+        var trigger = NodeCatalogService.CreateNode(inputEvent, 100, 100, "TRG_InputTextEvent");
+        var property = NodeCatalogService.CreateNode(inputText, 320, 60, "PROP_InputText");
+        var action = NodeCatalogService.CreateNode(showMessage, 540, 100, "ACT_InputTextMessage");
+        SetConstant(trigger, "inputAction", "Interact");
+        var rule = new Rule
+        {
+            Id = "RULE_InputTextEvent",
+            Name = "InputTextEvent",
+            ScriptKind = GraphScriptKind.Server,
+            Nodes = [trigger, property, action],
+            Connections =
+            [
+                Flow("CONN_InputTextEvent_Message", trigger.Id, GraphPortDefaults.FlowOut, action.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_InputText_Message", property.Id, GraphPortDefaults.ValueOut, action.Id, GraphPortDefaults.ParameterPortId("message"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "InputTextEventGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("inputEvent.InvokedServer:Connect(function(player, inputMessage)", luau);
+        Assert.Contains("inputMessage:GetString(1)", luau);
+        Assert.Contains("VRS.actions.showMessage(triggerObject, triggerContext)", luau);
+        Assert.DoesNotContain("Triggering Input Text is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsBindableEventTriggerActionAndPayload()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var bindableTrigger = catalog.Nodes.Single(node => node.IdBase == "EV_OnBindableEvent");
+        var fireBindable = catalog.Nodes.Single(node => node.IdBase == "ACT_FireBindableEvent");
+        var payloadValue = catalog.Nodes.Single(node => node.IdBase == "PROP_TriggeringBindablePayload");
+        var showMessage = catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage");
+        var trigger = NodeCatalogService.CreateNode(bindableTrigger, 100, 100, "TRG_Bindable");
+        var fire = NodeCatalogService.CreateNode(fireBindable, 340, 100, "ACT_FireBindable");
+        var payload = NodeCatalogService.CreateNode(payloadValue, 340, 260, "PROP_BindablePayload");
+        var message = NodeCatalogService.CreateNode(showMessage, 580, 100, "ACT_BindableMessage");
+        var bindablePath = $"{VrsRuntimeEventPaths.ServerScriptBindableEventsPath}/Opened";
+        SetSceneObject(trigger, "target", bindablePath);
+        SetSceneObject(fire, "target", bindablePath);
+        SetConstant(fire, "payload", "DoorOpened");
+
+        var rule = new Rule
+        {
+            Id = "RULE_BindableEvent",
+            Name = "BindableEvent",
+            ScriptKind = GraphScriptKind.Server,
+            Nodes = [trigger, fire, payload, message],
+            Connections =
+            [
+                Flow("CONN_Bindable_Fire", trigger.Id, GraphPortDefaults.FlowOut, fire.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Bindable_Fire_Message", fire.Id, GraphPortDefaults.FlowOut, message.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_BindablePayload_Message", payload.Id, GraphPortDefaults.ValueOut, message.Id, GraphPortDefaults.ParameterPortId("message"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "BindableEventGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local function resolveTarget(triggerObject, targetName)", luau);
+        Assert.Contains("bindableEvent.Invoked:Connect(function(payload)", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, bindableEvent = bindableEvent, payload = payload, message = payload }", luau);
+        Assert.Contains($"local bindableEvent = resolveTarget(triggerObject, \"{bindablePath}\")", luau);
+        Assert.Contains("bindableEvent:Invoke(\"DoorOpened\")", luau);
+        Assert.Contains("triggerContext.payload", luau);
+        Assert.DoesNotContain("Fire Bindable Event is not implemented", luau);
+        Assert.DoesNotContain("Bindable Event Payload Text is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsApiCoveragePriorityPackNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartApiPacks");
+        var setVisible = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetUIVisible"), stableId: "ACT_SetVisible");
+        var setImage = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetUIImage"), stableId: "ACT_SetImage");
+        var setFov = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetCameraFOV"), stableId: "ACT_SetFov");
+        var setValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetValueObjectValue"), stableId: "ACT_SetValue");
+        var setDecal = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetDecalImage"), stableId: "ACT_SetDecal");
+        var propertyIds = new[]
+        {
+            "PROP_UIVisible",
+            "PROP_UIImage",
+            "PROP_CameraFOV",
+            "PROP_ValueObjectValue",
+            "PROP_DecalImage"
+        };
+        var properties = propertyIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_ApiPack_{index}"))
+            .ToList();
+        var prints = propertyIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintApiPack_{index}"))
+            .ToList();
+
+        SetSceneObject(setVisible, "target", "World/PlayerGUI/Hud");
+        SetSceneObject(setImage, "target", "World/PlayerGUI/Hud/Icon");
+        SetSceneObject(setFov, "target", "World/Camera");
+        SetSceneObject(setValue, "target", "World/Hidden/VRS/Values/Score");
+        SetSceneObject(setDecal, "target", "World/Environment/LogoDecal");
+        SetConstant(setVisible, "visible", "true");
+        SetConstant(setImage, "image", "ui://coin");
+        SetConstant(setFov, "fov", "80");
+        SetConstant(setValue, "value", "25");
+        SetConstant(setDecal, "image", "image://logo");
+
+        SetSceneObject(properties.Single(node => node.CatalogId == "PROP_UIVisible"), "target", "World/PlayerGUI/Hud");
+        SetSceneObject(properties.Single(node => node.CatalogId == "PROP_UIImage"), "target", "World/PlayerGUI/Hud/Icon");
+        SetSceneObject(properties.Single(node => node.CatalogId == "PROP_CameraFOV"), "target", "World/Camera");
+        SetSceneObject(properties.Single(node => node.CatalogId == "PROP_ValueObjectValue"), "target", "World/Hidden/VRS/Values/Score");
+        SetSceneObject(properties.Single(node => node.CatalogId == "PROP_DecalImage"), "target", "World/Environment/LogoDecal");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_Visible", start.Id, GraphPortDefaults.FlowOut, setVisible.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Visible_Image", setVisible.Id, GraphPortDefaults.FlowOut, setImage.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Image_Fov", setImage.Id, GraphPortDefaults.FlowOut, setFov.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Fov_Value", setFov.Id, GraphPortDefaults.FlowOut, setValue.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Value_Decal", setValue.Id, GraphPortDefaults.FlowOut, setDecal.Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < properties.Count; index++)
+        {
+            connections.Add(Value($"CONN_ApiPackValue_Print_{index}", properties[index].Id, GraphPortDefaults.ValueOut, prints[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < prints.Count)
+            {
+                connections.Add(Flow($"CONN_PrintApiPack_{index}_{index + 1}", prints[index].Id, GraphPortDefaults.FlowOut, prints[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_ApiCoveragePacks",
+            Name = "ApiCoveragePacks",
+            Nodes = [start, setVisible, setImage, setFov, setValue, setDecal, .. properties, .. prints],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ApiCoveragePacksGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("uiObject.Visible = true", luau);
+        Assert.Contains("imageObject.Image = tostring(\"ui://coin\")", luau);
+        Assert.Contains("targetObject.FOV = 80", luau);
+        Assert.Contains("targetObject.Value = 25", luau);
+        Assert.Contains("targetObject.Image = \"image://logo\"", luau);
+        Assert.Contains("return targetObject.Visible == true", luau);
+        Assert.Contains("return tostring(targetObject.Image or \"\")", luau);
+        Assert.Contains("return tonumber(targetObject.FOV) or 0", luau);
+        Assert.Contains("return targetObject.Value", luau);
+        Assert.DoesNotContain("Set UI Visible is not implemented", luau);
+        Assert.DoesNotContain("Set Camera FOV is not implemented", luau);
+        Assert.DoesNotContain("Set Value Object is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsIntegerAndInstanceValueObjectNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartValueObjects");
+        var setInteger = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetIntegerValueObject"), stableId: "ACT_SetInteger");
+        var setInstance = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetInstanceValueObject"), stableId: "ACT_SetInstance");
+        var integerValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_IntegerValueObject"), stableId: "PROP_IntegerValue");
+        var instanceValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_InstanceValueObject"), stableId: "PROP_InstanceValue");
+        var printInteger = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintInteger");
+        var printInstance = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintInstance");
+
+        SetSceneObject(setInteger, "target", "World/Hidden/VRS/Values/ScoreInt");
+        SetSceneObject(setInstance, "target", "World/Hidden/VRS/Values/TargetRef");
+        SetSceneObject(setInstance, "value", "World/Environment/Kill Brick");
+        SetSceneObject(integerValue, "target", "World/Hidden/VRS/Values/ScoreInt");
+        SetSceneObject(instanceValue, "target", "World/Hidden/VRS/Values/TargetRef");
+        SetConstant(setInteger, "value", "42.8");
+
+        var rule = new Rule
+        {
+            Id = "RULE_ValueObjects",
+            Name = "ValueObjects",
+            ScriptKind = GraphScriptKind.Server,
+            Nodes = [start, setInteger, setInstance, integerValue, instanceValue, printInteger, printInstance],
+            Connections =
+            [
+                Flow("CONN_Start_SetInteger", start.Id, GraphPortDefaults.FlowOut, setInteger.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_SetInteger_SetInstance", setInteger.Id, GraphPortDefaults.FlowOut, setInstance.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_SetInstance_PrintInteger", setInstance.Id, GraphPortDefaults.FlowOut, printInteger.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintInteger_PrintInstance", printInteger.Id, GraphPortDefaults.FlowOut, printInstance.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Integer_Print", integerValue.Id, GraphPortDefaults.ValueOut, printInteger.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Instance_Print", instanceValue.Id, GraphPortDefaults.ValueOut, printInstance.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "ValueObjectsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local integerValue = math.floor(tonumber(42.8) or 0)", luau);
+        Assert.Contains("targetObject.Value = integerValue", luau);
+        Assert.Contains("local storedObject = resolveTarget(triggerObject, \"World/Environment/Kill Brick\")", luau);
+        Assert.Contains("targetObject.Value = storedObject", luau);
+        Assert.Contains("return math.floor(tonumber(targetObject.Value) or 0)", luau);
+        Assert.Contains("return targetObject.Value", luau);
+        Assert.DoesNotContain("Set Integer Value Object is not implemented", luau);
+        Assert.DoesNotContain("Set Stored Object Reference is not implemented", luau);
+        Assert.DoesNotContain("Integer Value Object is not implemented", luau);
+        Assert.DoesNotContain("Stored Object Reference is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsWorldInfoValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartWorldInfo");
+        var valueIds = new[]
+        {
+            "PROP_WorldIsLocalTest",
+            "PROP_WorldIsOldFormat",
+            "PROP_WorldIdentifier",
+            "PROP_ServerIdentifier",
+            "PROP_WorldUptime",
+            "PROP_ServerTime",
+            "PROP_WorldObjectCount"
+        };
+        var values = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_WorldInfo_{index}"))
+            .ToList();
+        var prints = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintWorldInfo_{index}"))
+            .ToList();
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_PrintWorld0", start.Id, GraphPortDefaults.FlowOut, prints[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < values.Count; index++)
+        {
+            connections.Add(Value($"CONN_WorldInfo_{index}", values[index].Id, GraphPortDefaults.ValueOut, prints[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < prints.Count)
+            {
+                connections.Add(Flow($"CONN_PrintWorldInfo_{index}_{index + 1}", prints[index].Id, GraphPortDefaults.FlowOut, prints[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_WorldInfo",
+            Name = "WorldInfo",
+            ScriptKind = GraphScriptKind.Server,
+            Nodes = [start, .. values, .. prints],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "WorldInfoGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("return World.IsLocalTest == true", luau);
+        Assert.Contains("return World.IsLegacyWorld == true", luau);
+        Assert.Contains("return tostring(World.WorldID or \"\")", luau);
+        Assert.Contains("return tostring(World.ServerID or \"\")", luau);
+        Assert.Contains("return tonumber(World.UpTime) or 0", luau);
+        Assert.Contains("return tonumber(World.ServerTime) or 0", luau);
+        Assert.Contains("return tonumber(World.InstanceCount) or 0", luau);
+        Assert.DoesNotContain("Local Test Is Running is not implemented", luau);
+        Assert.DoesNotContain("World Object Count is not implemented", luau);
+    }
+
     [Theory]
     [InlineData("EV_OnStart", "local triggerContext = { object = triggerObject }")]
     [InlineData("EV_OnTimerTick", "local triggerContext = { object = triggerObject }")]
@@ -777,6 +1823,7 @@ public sealed class LuauExporterTests
     [InlineData("EV_OnChatMessage", "local triggerContext = { object = triggerObject, player = sender, message = message }")]
     [InlineData("EV_OnInputButtonDown", "local triggerContext = { object = triggerObject, inputAction = inputActionName, inputValue = true }")]
     [InlineData("EV_OnVrsInputEvent", "local triggerContext = { object = triggerObject, player = player, inputAction = inputActionName, inputMessage = inputMessage, message = inputMessage }")]
+    [InlineData("EV_OnBindableEvent", "local triggerContext = { object = triggerObject, bindableEvent = bindableEvent, payload = payload, message = payload }")]
     [InlineData("EV_OnPlayerRespawned", "local triggerContext = { object = triggerObject, player = player }")]
     public void ExportRuleToLuau_TriggerTargetsResolveConfiguredSceneObject(string triggerId, string expectedContext)
     {
@@ -2012,6 +3059,98 @@ public sealed class LuauExporterTests
     }
 
     [Fact]
+    public void ExportRuleToLuau_EmitsPlayerDefaultConditionsAndWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartPlayerDefaults");
+        var conditionIds = new[]
+        {
+            "COND_WalkSpeedAtLeast",
+            "COND_JumpPowerAtLeast",
+            "COND_SprintSpeedAtLeast",
+            "COND_MaxHealthAtLeast",
+            "COND_RespawnTimeAtLeast",
+            "COND_StaminaAtLeast"
+        };
+        var triggerIds = new[]
+        {
+            "EV_OnWalkSpeedReached",
+            "EV_OnJumpPowerReached",
+            "EV_OnSprintSpeedReached",
+            "EV_OnMaxHealthReached",
+            "EV_OnRespawnTimeReached",
+            "EV_OnStaminaReached"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_PlayerDefault_{index}"))
+            .ToList();
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_PlayerDefault_{index}"))
+            .ToList();
+        var printAfterConditions = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintPlayerDefaultConditions");
+        var triggerPrints = triggerIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintPlayerDefaultTrigger_{index}"))
+            .ToList();
+        var values = new[] { "7", "12", "10", "150", "6", "120" };
+
+        for (var index = 0; index < conditions.Count; index++)
+        {
+            SetConstant(conditions[index], "value", values[index]);
+            SetConstant(triggers[index], "value", values[index]);
+            SetConstant(triggerPrints[index], "value", $"player default watcher {index}");
+        }
+
+        SetConstant(printAfterConditions, "value", "player defaults conditions passed");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_PlayerDefaults_Start_Condition0", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count - 1; index++)
+        {
+            connections.Add(Flow($"CONN_PlayerDefaults_Condition_{index}_{index + 1}", conditions[index].Id, GraphPortDefaults.FlowOut, conditions[index + 1].Id, GraphPortDefaults.FlowIn));
+        }
+
+        connections.Add(Flow("CONN_PlayerDefaults_ConditionLast_Print", conditions[^1].Id, GraphPortDefaults.FlowOut, printAfterConditions.Id, GraphPortDefaults.FlowIn));
+        for (var index = 0; index < triggers.Count; index++)
+        {
+            connections.Add(Flow($"CONN_PlayerDefault_Trigger_{index}_Print", triggers[index].Id, GraphPortDefaults.FlowOut, triggerPrints[index].Id, GraphPortDefaults.FlowIn));
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_PlayerDefaultsWatchers",
+            Name = "Player Default Watchers",
+            Nodes = [start, .. conditions, printAfterConditions, .. triggers, .. triggerPrints],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "PlayerDefaultsWatcherGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local currentDefaultValue = tonumber(PlayerDefaults.WalkSpeed) or 4", luau);
+        Assert.Contains("local currentDefaultValue = tonumber(PlayerDefaults.JumpPower) or 8", luau);
+        Assert.Contains("local currentDefaultValue = tonumber(PlayerDefaults.SprintSpeed) or 8", luau);
+        Assert.Contains("local currentDefaultValue = tonumber(PlayerDefaults.MaxHealth) or 100", luau);
+        Assert.Contains("local currentDefaultValue = tonumber(PlayerDefaults.RespawnTime) or 5", luau);
+        Assert.Contains("local currentDefaultValue = tonumber(PlayerDefaults.Stamina) or 100", luau);
+        Assert.Contains("local expectedDefaultValue = tonumber(7) or 4", luau);
+        Assert.Contains("local expectedDefaultValue = tonumber(12) or 8", luau);
+        Assert.Contains("local expectedDefaultValue = tonumber(150) or 100", luau);
+        Assert.Contains("return currentDefaultValue >= expectedDefaultValue", luau);
+        Assert.Contains("local watchedDefaultLimit = tonumber(7) or 4", luau);
+        Assert.Contains("local watchedDefaultLimit = tonumber(12) or 8", luau);
+        Assert.Contains("local watchedDefaultLimit = tonumber(150) or 100", luau);
+        Assert.Contains("local currentValue = tonumber(PlayerDefaults.WalkSpeed) or 4", luau);
+        Assert.Contains("local currentValue = tonumber(PlayerDefaults.Stamina) or 100", luau);
+        Assert.Contains("return currentValue >= watchedDefaultLimit, currentValue", luau);
+        Assert.Contains("playerDefaultName = \"WalkSpeed\", playerDefaultValue = currentValue", luau);
+        Assert.Contains("playerDefaultName = \"Stamina\", playerDefaultValue = currentValue", luau);
+        Assert.Contains("player defaults conditions passed", luau);
+        Assert.Contains("player default watcher 5", luau);
+    }
+
+    [Fact]
     public void ExportRuleToLuau_EmitsInstanceAndTagChecks()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -2079,14 +3218,17 @@ public sealed class LuauExporterTests
         var once = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PlaySoundOnce"), stableId: "ACT_PlayOnce");
         var volume = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetSoundVolume"), stableId: "ACT_SetVolume");
         var loop = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetSoundLoop"), stableId: "ACT_SetLoop");
+        var audio = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetSoundAudio"), stableId: "ACT_SetSoundAudio");
         var pause = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PauseSound"), stableId: "ACT_PauseSound");
         var stop = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_StopSound"), stableId: "ACT_StopSound");
+        var printAudio = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintAudio");
         var printVolume = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintVolume");
         var printPlaying = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintPlaying");
+        var soundAudio = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_SoundAudio"), stableId: "PROP_SoundAudio");
         var soundVolume = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_SoundVolume"), stableId: "PROP_SoundVolume");
         var soundPlaying = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_SoundIsPlaying"), stableId: "PROP_SoundPlaying");
 
-        foreach (var node in new[] { play, once, volume, loop, pause, stop, soundVolume, soundPlaying })
+        foreach (var node in new[] { play, once, volume, loop, audio, pause, stop, soundAudio, soundVolume, soundPlaying })
         {
             SetSceneObject(node, "target", "World/Audio/Theme");
         }
@@ -2094,22 +3236,26 @@ public sealed class LuauExporterTests
         SetConstant(once, "volume", "0.75");
         SetConstant(volume, "volume", "0.5");
         SetConstant(loop, "enabled", "true");
+        SetConstant(audio, "audio", "asset://theme");
 
         var rule = new Rule
         {
             Id = "RULE_Sound",
             Name = "Sound",
-            Nodes = [start, play, once, volume, loop, pause, stop, printVolume, printPlaying, soundVolume, soundPlaying],
+            Nodes = [start, play, once, volume, loop, audio, pause, stop, printAudio, printVolume, printPlaying, soundAudio, soundVolume, soundPlaying],
             Connections =
             [
                 Flow("CONN_Start_Play", start.Id, GraphPortDefaults.FlowOut, play.Id, GraphPortDefaults.FlowIn),
                 Flow("CONN_Play_Once", play.Id, GraphPortDefaults.FlowOut, once.Id, GraphPortDefaults.FlowIn),
                 Flow("CONN_Once_Volume", once.Id, GraphPortDefaults.FlowOut, volume.Id, GraphPortDefaults.FlowIn),
                 Flow("CONN_Volume_Loop", volume.Id, GraphPortDefaults.FlowOut, loop.Id, GraphPortDefaults.FlowIn),
-                Flow("CONN_Loop_Pause", loop.Id, GraphPortDefaults.FlowOut, pause.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Loop_Audio", loop.Id, GraphPortDefaults.FlowOut, audio.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Audio_Pause", audio.Id, GraphPortDefaults.FlowOut, pause.Id, GraphPortDefaults.FlowIn),
                 Flow("CONN_Pause_Stop", pause.Id, GraphPortDefaults.FlowOut, stop.Id, GraphPortDefaults.FlowIn),
-                Flow("CONN_Stop_PrintVolume", stop.Id, GraphPortDefaults.FlowOut, printVolume.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Stop_PrintAudio", stop.Id, GraphPortDefaults.FlowOut, printAudio.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintAudio_PrintVolume", printAudio.Id, GraphPortDefaults.FlowOut, printVolume.Id, GraphPortDefaults.FlowIn),
                 Flow("CONN_PrintVolume_PrintPlaying", printVolume.Id, GraphPortDefaults.FlowOut, printPlaying.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Audio_Print", soundAudio.Id, GraphPortDefaults.ValueOut, printAudio.Id, GraphPortDefaults.ParameterPortId("value")),
                 Value("CONN_Volume_Print", soundVolume.Id, GraphPortDefaults.ValueOut, printVolume.Id, GraphPortDefaults.ParameterPortId("value")),
                 Value("CONN_Playing_Print", soundPlaying.Id, GraphPortDefaults.ValueOut, printPlaying.Id, GraphPortDefaults.ParameterPortId("value"))
             ]
@@ -2124,12 +3270,15 @@ public sealed class LuauExporterTests
         Assert.Contains("soundObject:PlayOneShot(0.75)", luau);
         Assert.Contains("soundObject.Volume = 0.5", luau);
         Assert.Contains("soundObject.Loop = true", luau);
+        Assert.Contains("soundObject.Audio = \"asset://theme\"", luau);
         Assert.Contains("soundObject:Pause()", luau);
         Assert.Contains("soundObject:Stop()", luau);
+        Assert.Contains("return targetObject.Audio", luau);
         Assert.Contains("return tonumber(targetObject.Volume) or 0", luau);
         Assert.Contains("return targetObject.Playing == true", luau);
         Assert.DoesNotContain("Play Sound is not implemented", luau);
         Assert.DoesNotContain("Set Sound Volume is not implemented", luau);
+        Assert.DoesNotContain("Set Sound Audio is not implemented", luau);
     }
 
     [Fact]
@@ -2158,6 +3307,110 @@ public sealed class LuauExporterTests
         Assert.Contains("local triggerContext = { object = triggerObject, sound = triggerObject }", luau);
         Assert.Contains("target has no Loaded event", luau);
         Assert.DoesNotContain("local function onStart()", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsAudioLightingConditions()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var soundPlaying = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_SoundIsPlaying"), stableId: "COND_SoundPlaying");
+        var soundVolume = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_SoundVolumeAtLeast"), stableId: "COND_SoundVolume");
+        var fogEnabled = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_FogIsEnabled"), stableId: "COND_FogEnabled");
+        var fogEnd = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_FogEndDistanceAtMost"), stableId: "COND_FogEnd");
+        var lightBrightness = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_LightBrightnessAtLeast"), stableId: "COND_LightBrightness");
+        var sunShadows = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_SunLightShadowsEnabled"), stableId: "COND_SunShadows");
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_Message");
+
+        SetSceneObject(soundPlaying, "target", "World/Audio/Theme");
+        SetSceneObject(soundVolume, "target", "World/Audio/Theme");
+        SetSceneObject(lightBrightness, "target", "World/Lighting/PointLamp");
+        SetSceneObject(sunShadows, "target", "World/Lighting/Sun");
+        SetConstant(soundVolume, "volume", "0.75");
+        SetConstant(fogEnd, "distance", "120");
+        SetConstant(lightBrightness, "brightness", "1.5");
+
+        var rule = new Rule
+        {
+            Id = "RULE_AudioLightingConditions",
+            Name = "AudioLightingConditions",
+            Nodes = [start, soundPlaying, soundVolume, fogEnabled, fogEnd, lightBrightness, sunShadows, message],
+            Connections =
+            [
+                Flow("CONN_Start_Playing", start.Id, GraphPortDefaults.FlowOut, soundPlaying.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Playing_Volume", soundPlaying.Id, GraphPortDefaults.TrueOut, soundVolume.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Volume_FogEnabled", soundVolume.Id, GraphPortDefaults.TrueOut, fogEnabled.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_FogEnabled_FogEnd", fogEnabled.Id, GraphPortDefaults.TrueOut, fogEnd.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_FogEnd_Light", fogEnd.Id, GraphPortDefaults.TrueOut, lightBrightness.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Light_Sun", lightBrightness.Id, GraphPortDefaults.TrueOut, sunShadows.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Sun_Message", sunShadows.Id, GraphPortDefaults.TrueOut, message.Id, GraphPortDefaults.FlowIn)
+            ]
+        };
+        var graph = new RuleGraph { Name = "AudioLightingConditionsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("return soundObject.Playing == true", luau);
+        Assert.Contains("return (tonumber(soundObject.Volume) or 0) >= 0.75", luau);
+        Assert.Contains("return Lighting.FogEnabled == true", luau);
+        Assert.Contains("return (tonumber(Lighting.FogEndDistance) or 0) <= 120", luau);
+        Assert.Contains("return (tonumber(lightObject.Brightness) or 0) >= 1.5", luau);
+        Assert.Contains("return sunLightObject.Shadows == true", luau);
+        Assert.DoesNotContain("Sound Is Playing is not implemented", luau);
+        Assert.DoesNotContain("Light Brightness Is At Least is not implemented", luau);
+        Assert.DoesNotContain("Sun Light Shadows Are Enabled is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsAudioLightingWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var soundVolume = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnSoundVolumeReached"), stableId: "TRG_SoundVolume");
+        var fogEnabled = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnFogEnabled"), stableId: "TRG_FogEnabled");
+        var lightDimmed = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnLightBrightnessDroppedTo"), stableId: "TRG_LightDimmed");
+        var sunShadows = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnSunLightShadowsEnabled"), stableId: "TRG_SunShadows");
+        var soundMessage = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_SoundMessage");
+        var fogMessage = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_FogMessage");
+        var lightMessage = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_LightMessage");
+        var sunMessage = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_SunMessage");
+
+        SetSceneObject(soundVolume, "target", "World/Audio/Theme");
+        SetSceneObject(lightDimmed, "target", "World/Lighting/PointLamp");
+        SetSceneObject(sunShadows, "target", "World/Lighting/Sun");
+        SetConstant(soundVolume, "volume", "0.75");
+        SetConstant(lightDimmed, "brightness", "0.2");
+
+        var rule = new Rule
+        {
+            Id = "RULE_AudioLightingWatchers",
+            Name = "AudioLightingWatchers",
+            Nodes = [soundVolume, fogEnabled, lightDimmed, sunShadows, soundMessage, fogMessage, lightMessage, sunMessage],
+            Connections =
+            [
+                Flow("CONN_Sound_Message", soundVolume.Id, GraphPortDefaults.FlowOut, soundMessage.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Fog_Message", fogEnabled.Id, GraphPortDefaults.FlowOut, fogMessage.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Light_Message", lightDimmed.Id, GraphPortDefaults.FlowOut, lightMessage.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Sun_Message", sunShadows.Id, GraphPortDefaults.FlowOut, sunMessage.Id, GraphPortDefaults.FlowIn)
+            ]
+        };
+        var graph = new RuleGraph { Name = "AudioLightingWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("if triggerObject.Volume == nil then", luau);
+        Assert.Contains("local watchedLimit = tonumber(0.75) or 1", luau);
+        Assert.Contains("local currentValue = tonumber(triggerObject.Volume) or 0", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, soundVolume = currentValue }", luau);
+        Assert.Contains("if Lighting == nil then", luau);
+        Assert.Contains("local currentValue = Lighting.FogEnabled == true", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, fogEnabled = currentValue }", luau);
+        Assert.Contains("if triggerObject.Brightness == nil then", luau);
+        Assert.Contains("local watchedLimit = tonumber(0.2) or 0.25", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, lightBrightness = currentValue }", luau);
+        Assert.Contains("if triggerObject.Shadows == nil then", luau);
+        Assert.Contains("local currentValue = triggerObject.Shadows == true", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, sunLightShadows = currentValue }", luau);
+        Assert.DoesNotContain("On Sound Volume Reached trigger stopped: no connected action or condition", luau);
     }
 
     [Fact]
@@ -2323,6 +3576,700 @@ public sealed class LuauExporterTests
     }
 
     [Fact]
+    public void ExportRuleToLuau_EmitsSunLightActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var actionIds = new[]
+        {
+            "ACT_SetSunLightColor",
+            "ACT_SetSunLightBrightness",
+            "ACT_SetSunLightShine",
+            "ACT_SetSunLightShadows"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_SunLight_{index}"))
+            .ToList();
+        var valueIds = new[]
+        {
+            "PROP_SunLightColor",
+            "PROP_SunLightBrightness",
+            "PROP_SunLightShine",
+            "PROP_SunLightShadows"
+        };
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_SunLight_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintSunLight_{index}"))
+            .ToList();
+
+        foreach (var node in actions.Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/Lighting/Sun");
+        }
+
+        SetConstant(actions[0], "r", "1");
+        SetConstant(actions[0], "g", "0.85");
+        SetConstant(actions[0], "b", "0.55");
+        SetConstant(actions[1], "brightness", "1.75");
+        SetConstant(actions[2], "shine", "0.35");
+        SetConstant(actions[3], "shadows", "true");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_SunLight0", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_SunLight_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_SunLight_Action_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_SunLightValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_SunLight_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_SunLight",
+            Name = "SunLight",
+            Nodes = [start, .. actions, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "SunLightGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("lightObject.Color = Color.New(1, 0.85, 0.55, 1)", luau);
+        Assert.Contains("lightObject.Brightness = 1.75", luau);
+        Assert.Contains("lightObject.Specular = 0.35", luau);
+        Assert.Contains("lightObject.Shadows = true", luau);
+        Assert.Contains("return targetObject.Color", luau);
+        Assert.Contains("return tonumber(targetObject.Brightness) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Specular) or 0", luau);
+        Assert.Contains("return targetObject.Shadows == true", luau);
+        Assert.DoesNotContain("Set Sun Light Color is not implemented", luau);
+        Assert.DoesNotContain("Sun Light Brightness is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsColorAdjustModifierActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var actionIds = new[]
+        {
+            "ACT_SetColorAdjustBrightness",
+            "ACT_SetColorAdjustContrast",
+            "ACT_SetColorAdjustSaturation",
+            "ACT_SetColorAdjustTint"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_ColorAdjust_{index}"))
+            .ToList();
+        var valueIds = new[]
+        {
+            "PROP_ColorAdjustBrightness",
+            "PROP_ColorAdjustContrast",
+            "PROP_ColorAdjustSaturation",
+            "PROP_ColorAdjustTint"
+        };
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_ColorAdjust_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintColorAdjust_{index}"))
+            .ToList();
+
+        foreach (var node in actions.Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/Lighting/ColorMood");
+        }
+
+        SetConstant(actions[0], "brightness", "0.15");
+        SetConstant(actions[1], "contrast", "0.4");
+        SetConstant(actions[2], "saturation", "-0.2");
+        SetConstant(actions[3], "r", "0.9");
+        SetConstant(actions[3], "g", "0.8");
+        SetConstant(actions[3], "b", "0.7");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_ColorAdjust0", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_ColorAdjust_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_ColorAdjust_Action_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_ColorAdjustValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_ColorAdjust_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_ColorAdjust",
+            Name = "ColorAdjust",
+            Nodes = [start, .. actions, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ColorAdjustGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("modifierObject.Brightness = 0.15", luau);
+        Assert.Contains("modifierObject.Contrast = 0.4", luau);
+        Assert.Contains("modifierObject.Saturation = -0.2", luau);
+        Assert.Contains("modifierObject.TintColor = Color.New(0.9, 0.8, 0.7, 1)", luau);
+        Assert.Contains("return tonumber(targetObject.Brightness) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Contrast) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Saturation) or 0", luau);
+        Assert.Contains("return targetObject.TintColor", luau);
+        Assert.DoesNotContain("Set Color Adjust Brightness is not implemented", luau);
+        Assert.DoesNotContain("Color Adjust Tint is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsProceduralSkyActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var actionIds = new[]
+        {
+            "ACT_SetProceduralSkySunSize",
+            "ACT_SetProceduralSkyTint",
+            "ACT_SetProceduralSkyHorizonColor",
+            "ACT_SetProceduralSkyGroundColor",
+            "ACT_SetProceduralSkyExposure"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_ProceduralSky_{index}"))
+            .ToList();
+        var valueIds = new[]
+        {
+            "PROP_ProceduralSkySunSize",
+            "PROP_ProceduralSkyTint",
+            "PROP_ProceduralSkyHorizonColor",
+            "PROP_ProceduralSkyGroundColor",
+            "PROP_ProceduralSkyExposure"
+        };
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_ProceduralSky_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintProceduralSky_{index}"))
+            .ToList();
+
+        foreach (var node in actions.Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/Lighting/MorningSky");
+        }
+
+        SetConstant(actions[0], "size", "2");
+        SetConstant(actions[1], "r", "0.4");
+        SetConstant(actions[1], "g", "0.6");
+        SetConstant(actions[1], "b", "0.9");
+        SetConstant(actions[2], "r", "1");
+        SetConstant(actions[2], "g", "0.5");
+        SetConstant(actions[2], "b", "0.25");
+        SetConstant(actions[3], "r", "0.1");
+        SetConstant(actions[3], "g", "0.15");
+        SetConstant(actions[3], "b", "0.2");
+        SetConstant(actions[4], "exposure", "1.25");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_ProceduralSky0", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_ProceduralSky_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_ProceduralSky_Action_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_ProceduralSkyValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_ProceduralSky_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_ProceduralSky",
+            Name = "ProceduralSky",
+            Nodes = [start, .. actions, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ProceduralSkyGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("skyObject.SunSize = 2", luau);
+        Assert.Contains("skyObject.SkyTint = Color.New(0.4, 0.6, 0.9, 1)", luau);
+        Assert.Contains("skyObject.HorizonColor = Color.New(1, 0.5, 0.25, 1)", luau);
+        Assert.Contains("skyObject.GroundColor = Color.New(0.1, 0.15, 0.2, 1)", luau);
+        Assert.Contains("skyObject.Exposure = 1.25", luau);
+        Assert.Contains("return tonumber(targetObject.SunSize) or 0", luau);
+        Assert.Contains("return targetObject.SkyTint", luau);
+        Assert.Contains("return targetObject.HorizonColor", luau);
+        Assert.Contains("return targetObject.GroundColor", luau);
+        Assert.Contains("return tonumber(targetObject.Exposure) or 0", luau);
+        Assert.DoesNotContain("Set Procedural Sky Sun Size is not implemented", luau);
+        Assert.DoesNotContain("Procedural Sky Exposure is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsProceduralSkyConditionsAndTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var conditionIds = new[]
+        {
+            "COND_ProceduralSkySunSizeAtLeast",
+            "COND_ProceduralSkyTintIs",
+            "COND_ProceduralSkyHorizonColorIs",
+            "COND_ProceduralSkyGroundColorIs",
+            "COND_ProceduralSkyExposureAtLeast"
+        };
+        var triggerIds = new[]
+        {
+            "EV_OnProceduralSkySunSizeReached",
+            "EV_OnProceduralSkyTintChanged",
+            "EV_OnProceduralSkyHorizonColorChanged",
+            "EV_OnProceduralSkyGroundColorChanged",
+            "EV_OnProceduralSkyExposureReached"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_ProceduralSky_{index}"))
+            .ToList();
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"EV_ProceduralSky_{index}"))
+            .ToList();
+
+        foreach (var node in conditions.Concat(triggers))
+        {
+            SetSceneObject(node, "target", "World/Lighting/MorningSky");
+        }
+
+        SetConstant(conditions[0], "size", "2");
+        SetConstant(conditions[1], "r", "0.4");
+        SetConstant(conditions[1], "g", "0.6");
+        SetConstant(conditions[1], "b", "0.9");
+        SetConstant(conditions[2], "r", "1");
+        SetConstant(conditions[2], "g", "0.5");
+        SetConstant(conditions[2], "b", "0.25");
+        SetConstant(conditions[3], "r", "0.1");
+        SetConstant(conditions[3], "g", "0.15");
+        SetConstant(conditions[3], "b", "0.2");
+        SetConstant(conditions[4], "exposure", "1.25");
+        SetConstant(triggers[0], "size", "2");
+        SetConstant(triggers[4], "exposure", "1.25");
+
+        var rule = new Rule
+        {
+            Id = "RULE_ProceduralSkyWatchers",
+            Name = "ProceduralSkyWatchers",
+            Nodes = [.. conditions, .. triggers]
+        };
+        var graph = new RuleGraph { Name = "ProceduralSkyWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local currentValue = tonumber(skyObject.SunSize) or 0", luau);
+        Assert.Contains("local expectedValue = tonumber(2) or 1", luau);
+        Assert.Contains("return skyObject.SkyTint == expectedColor", luau);
+        Assert.Contains("return skyObject.HorizonColor == expectedColor", luau);
+        Assert.Contains("return skyObject.GroundColor == expectedColor", luau);
+        Assert.Contains("local currentValue = tonumber(skyObject.Exposure) or 0", luau);
+        Assert.Contains("local watchedLimit = tonumber(2) or 1", luau);
+        Assert.Contains("local currentValue = tonumber(triggerObject.SunSize) or 0", luau);
+        Assert.Contains("return triggerObject.SkyTint", luau);
+        Assert.Contains("return triggerObject.HorizonColor", luau);
+        Assert.Contains("return triggerObject.GroundColor", luau);
+        Assert.Contains("local watchedLimit = tonumber(1.25) or 1", luau);
+        Assert.Contains("proceduralSkySunSize = currentValue", luau);
+        Assert.Contains("proceduralSkyTint = currentValue", luau);
+        Assert.Contains("proceduralSkyExposure = currentValue", luau);
+        Assert.DoesNotContain("Procedural Sky Sun Size At Least is not implemented", luau);
+        Assert.DoesNotContain("On Procedural Sky Exposure Reached is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsGradientSkyActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var actionIds = new[]
+        {
+            "ACT_SetGradientSkyColors",
+            "ACT_SetGradientSkySunDisc",
+            "ACT_SetGradientSkySunHalo",
+            "ACT_SetGradientSkyHorizonLine"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_GradientSky_{index}"))
+            .ToList();
+        var valueIds = new[]
+        {
+            "PROP_GradientSkyTopColor",
+            "PROP_GradientSkyBottomColor",
+            "PROP_GradientSkyExponent",
+            "PROP_GradientSkySunDiscColor",
+            "PROP_GradientSkySunDiscMultiplier",
+            "PROP_GradientSkySunDiscExponent",
+            "PROP_GradientSkySunHaloColor",
+            "PROP_GradientSkySunHaloExponent",
+            "PROP_GradientSkySunHaloContribution",
+            "PROP_GradientSkyHorizonLineColor",
+            "PROP_GradientSkyHorizonLineExponent",
+            "PROP_GradientSkyHorizonLineContribution"
+        };
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_GradientSky_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintGradientSky_{index}"))
+            .ToList();
+
+        foreach (var node in actions.Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/Lighting/SunsetGradient");
+        }
+
+        SetConstant(actions[0], "topR", "0.2");
+        SetConstant(actions[0], "topG", "0.4");
+        SetConstant(actions[0], "topB", "0.9");
+        SetConstant(actions[0], "bottomR", "1");
+        SetConstant(actions[0], "bottomG", "0.6");
+        SetConstant(actions[0], "bottomB", "0.2");
+        SetConstant(actions[0], "exponent", "1.5");
+        SetConstant(actions[1], "r", "1");
+        SetConstant(actions[1], "g", "0.9");
+        SetConstant(actions[1], "b", "0.4");
+        SetConstant(actions[1], "multiplier", "2");
+        SetConstant(actions[1], "exponent", "3");
+        SetConstant(actions[2], "r", "1");
+        SetConstant(actions[2], "g", "0.7");
+        SetConstant(actions[2], "b", "0.3");
+        SetConstant(actions[2], "exponent", "4");
+        SetConstant(actions[2], "contribution", "0.8");
+        SetConstant(actions[3], "r", "0.9");
+        SetConstant(actions[3], "g", "0.5");
+        SetConstant(actions[3], "b", "0.2");
+        SetConstant(actions[3], "exponent", "2.5");
+        SetConstant(actions[3], "contribution", "0.6");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_GradientSky0", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_GradientSky_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_GradientSky_Action_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_GradientSkyValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_GradientSky_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_GradientSky",
+            Name = "GradientSky",
+            Nodes = [start, .. actions, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "GradientSkyGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("skyObject.SkyGradientTop = Color.New(0.2, 0.4, 0.9, 1)", luau);
+        Assert.Contains("skyObject.SkyGradientBottom = Color.New(1, 0.6, 0.2, 1)", luau);
+        Assert.Contains("skyObject.SkyGradientExponent = 1.5", luau);
+        Assert.Contains("skyObject.SunDiscColor = Color.New(1, 0.9, 0.4, 1)", luau);
+        Assert.Contains("skyObject.SunDiscMultiplier = 2", luau);
+        Assert.Contains("skyObject.SunDiscExponent = 3", luau);
+        Assert.Contains("skyObject.SunHaloColor = Color.New(1, 0.7, 0.3, 1)", luau);
+        Assert.Contains("skyObject.SunHaloExponent = 4", luau);
+        Assert.Contains("skyObject.SunHaloContribution = 0.8", luau);
+        Assert.Contains("skyObject.HorizonLineColor = Color.New(0.9, 0.5, 0.2, 1)", luau);
+        Assert.Contains("skyObject.HorizonLineExponent = 2.5", luau);
+        Assert.Contains("skyObject.HorizonLineContribution = 0.6", luau);
+        Assert.Contains("return targetObject.SkyGradientTop", luau);
+        Assert.Contains("return targetObject.SkyGradientBottom", luau);
+        Assert.Contains("return tonumber(targetObject.SkyGradientExponent) or 0", luau);
+        Assert.Contains("return targetObject.SunDiscColor", luau);
+        Assert.Contains("return tonumber(targetObject.SunDiscMultiplier) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.SunDiscExponent) or 0", luau);
+        Assert.Contains("return targetObject.SunHaloColor", luau);
+        Assert.Contains("return tonumber(targetObject.SunHaloExponent) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.SunHaloContribution) or 0", luau);
+        Assert.Contains("return targetObject.HorizonLineColor", luau);
+        Assert.Contains("return tonumber(targetObject.HorizonLineExponent) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.HorizonLineContribution) or 0", luau);
+        Assert.DoesNotContain("Set Gradient Sky Colors is not implemented", luau);
+        Assert.DoesNotContain("Gradient Sky Horizon Line Contribution is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsImageSkyActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var allImages = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetImageSkyAllImages"), stableId: "ACT_ImageSky_All");
+        var actionIds = new[]
+        {
+            "ACT_SetImageSkyTopImage",
+            "ACT_SetImageSkyBottomImage",
+            "ACT_SetImageSkyLeftImage",
+            "ACT_SetImageSkyRightImage",
+            "ACT_SetImageSkyFrontImage",
+            "ACT_SetImageSkyBackImage"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_ImageSky_{index}"))
+            .ToList();
+        var valueIds = new[]
+        {
+            "PROP_ImageSkyTopImage",
+            "PROP_ImageSkyBottomImage",
+            "PROP_ImageSkyLeftImage",
+            "PROP_ImageSkyRightImage",
+            "PROP_ImageSkyFrontImage",
+            "PROP_ImageSkyBackImage"
+        };
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_ImageSky_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintImageSky_{index}"))
+            .ToList();
+
+        foreach (var node in new[] { allImages }.Concat(actions).Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/Lighting/EveningSkybox");
+        }
+
+        SetConstant(allImages, "topImage", "image://all-top");
+        SetConstant(allImages, "bottomImage", "image://all-bottom");
+        SetConstant(allImages, "leftImage", "image://all-left");
+        SetConstant(allImages, "rightImage", "image://all-right");
+        SetConstant(allImages, "frontImage", "image://all-front");
+        SetConstant(allImages, "backImage", "image://all-back");
+
+        var sideImages = new[]
+        {
+            "image://top",
+            "image://bottom",
+            "image://left",
+            "image://right",
+            "image://front",
+            "image://back"
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            SetConstant(actions[index], "image", sideImages[index]);
+        }
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_ImageSkyAll", start.Id, GraphPortDefaults.FlowOut, allImages.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_ImageSkyAll_Action0", allImages.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_ImageSky_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_ImageSky_Action_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_ImageSkyValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_ImageSky_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_ImageSky",
+            Name = "ImageSky",
+            Nodes = [start, allImages, .. actions, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ImageSkyGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("skyObject.TopImage = \"image://all-top\"", luau);
+        Assert.Contains("skyObject.BottomImage = \"image://all-bottom\"", luau);
+        Assert.Contains("skyObject.LeftImage = \"image://all-left\"", luau);
+        Assert.Contains("skyObject.RightImage = \"image://all-right\"", luau);
+        Assert.Contains("skyObject.FrontImage = \"image://all-front\"", luau);
+        Assert.Contains("skyObject.BackImage = \"image://all-back\"", luau);
+        Assert.Contains("skyObject.TopImage = \"image://top\"", luau);
+        Assert.Contains("skyObject.BottomImage = \"image://bottom\"", luau);
+        Assert.Contains("skyObject.LeftImage = \"image://left\"", luau);
+        Assert.Contains("skyObject.RightImage = \"image://right\"", luau);
+        Assert.Contains("skyObject.FrontImage = \"image://front\"", luau);
+        Assert.Contains("skyObject.BackImage = \"image://back\"", luau);
+        Assert.Contains("return tostring(targetObject.TopImage or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.BottomImage or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.LeftImage or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.RightImage or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.FrontImage or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.BackImage or \"\")", luau);
+        Assert.DoesNotContain("Set Image Sky Images is not implemented", luau);
+        Assert.DoesNotContain("Image Sky Top Image is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsImageSkyConditionsAndWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_ImageSkyConditionStart");
+        var conditionIds = new[]
+        {
+            "COND_ImageSkyTopImageIs",
+            "COND_ImageSkyBottomImageIs",
+            "COND_ImageSkyLeftImageIs",
+            "COND_ImageSkyRightImageIs",
+            "COND_ImageSkyFrontImageIs",
+            "COND_ImageSkyBackImageIs"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_ImageSky_{index}"))
+            .ToList();
+        var triggerIds = new[]
+        {
+            "EV_OnImageSkyTopImageChanged",
+            "EV_OnImageSkyBottomImageChanged",
+            "EV_OnImageSkyLeftImageChanged",
+            "EV_OnImageSkyRightImageChanged",
+            "EV_OnImageSkyFrontImageChanged",
+            "EV_OnImageSkyBackImageChanged"
+        };
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_ImageSkyWatcher_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_ImageSkyConditionMessage");
+
+        foreach (var node in conditions.Concat(triggers))
+        {
+            SetSceneObject(node, "target", "World/Lighting/EveningSkybox");
+        }
+
+        var sideImages = new[]
+        {
+            "image://top",
+            "image://bottom",
+            "image://left",
+            "image://right",
+            "image://front",
+            "image://back"
+        };
+        for (var index = 0; index < conditions.Count; index++)
+        {
+            SetConstant(conditions[index], "image", sideImages[index]);
+            SetConstant(conditions[index], "caseSensitive", "true");
+        }
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_ImageSkyCondition0", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count; index++)
+        {
+            var toNodeId = index + 1 < conditions.Count ? conditions[index + 1].Id : message.Id;
+            connections.Add(Flow($"CONN_ImageSkyCondition_{index}", conditions[index].Id, GraphPortDefaults.TrueOut, toNodeId, GraphPortDefaults.FlowIn));
+        }
+
+        connections.AddRange(triggers.Select((trigger, index) =>
+            Flow($"CONN_ImageSkyWatcher_{index}", trigger.Id, GraphPortDefaults.FlowOut, message.Id, GraphPortDefaults.FlowIn)));
+
+        var rule = new Rule
+        {
+            Id = "RULE_ImageSkyConditionsAndWatchers",
+            Name = "ImageSkyConditionsAndWatchers",
+            Nodes = [start, .. conditions, .. triggers, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ImageSkyConditionsAndWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local currentText = tostring(targetObject.TopImage or \"\")", luau);
+        Assert.Contains("local currentText = tostring(targetObject.BottomImage or \"\")", luau);
+        Assert.Contains("local currentText = tostring(targetObject.LeftImage or \"\")", luau);
+        Assert.Contains("local currentText = tostring(targetObject.RightImage or \"\")", luau);
+        Assert.Contains("local currentText = tostring(targetObject.FrontImage or \"\")", luau);
+        Assert.Contains("local currentText = tostring(targetObject.BackImage or \"\")", luau);
+        Assert.Contains("local expectedText = tostring(\"image://top\")", luau);
+        Assert.Contains("return currentText == expectedText", luau);
+        Assert.Contains("return tostring(triggerObject.TopImage or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.BottomImage or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.LeftImage or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.RightImage or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.FrontImage or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.BackImage or \"\")", luau);
+        Assert.Contains("local previousValue = readWatchedValue()", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, imageSkyImage = currentValue }", luau);
+        Assert.DoesNotContain("Image Sky Top Image Is is not implemented", luau);
+        Assert.DoesNotContain("On Image Sky Back Image Changed is not implemented", luau);
+    }
+
+    [Fact]
     public void ExportRuleToLuau_EmitsParticleActionsAndValues()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -2431,6 +4378,347 @@ public sealed class LuauExporterTests
         Assert.Contains("target mesh was not found", luau);
         Assert.DoesNotContain("Play Mesh Animation is not implemented", luau);
         Assert.DoesNotContain("Current Mesh Animation is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsEnvironmentAndBoundsActionsConditionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var setGravity = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetWorldGravity"), stableId: "ACT_SetGravity");
+        var setDestroyHeight = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetPartDestroyHeight"), stableId: "ACT_SetDestroyHeight");
+        var setAutoNav = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetAutoGenerateNavMesh"), stableId: "ACT_SetAutoNav");
+        var rebuildNav = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_RebuildNavMesh"), stableId: "ACT_RebuildNav");
+        var containsPoint = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ObjectBoundsContainsPoint"), stableId: "COND_BoundsContains");
+        var printCenter = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintBoundsCenter");
+        var printSize = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintBoundsSize");
+        var printExtents = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintBoundsExtents");
+        var printVolume = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintBoundsVolume");
+        var printGravity = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintGravity");
+        var printCamera = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintCamera");
+        var boundsCenter = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ObjectBoundsCenter"), stableId: "PROP_BoundsCenter");
+        var boundsSize = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ObjectBoundsSize"), stableId: "PROP_BoundsSize");
+        var boundsExtents = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ObjectBoundsExtents"), stableId: "PROP_BoundsExtents");
+        var boundsVolume = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ObjectBoundsVolume"), stableId: "PROP_BoundsVolume");
+        var worldGravity = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_WorldGravity"), stableId: "PROP_WorldGravity");
+        var currentCamera = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_CurrentCamera"), stableId: "PROP_CurrentCamera");
+
+        foreach (var node in new[] { containsPoint, boundsCenter, boundsSize, boundsExtents, boundsVolume })
+        {
+            SetSceneObject(node, "target", "World/Environment/Test Part");
+        }
+
+        SetConstant(setGravity, "gravity", "6.5");
+        SetConstant(setDestroyHeight, "height", "-250");
+        SetConstant(setAutoNav, "enabled", "false");
+        SetConstant(containsPoint, "x", "1");
+        SetConstant(containsPoint, "y", "2");
+        SetConstant(containsPoint, "z", "3");
+
+        var rule = new Rule
+        {
+            Id = "RULE_EnvironmentBounds",
+            Name = "Environment Bounds",
+            Nodes =
+            [
+                start,
+                setGravity,
+                setDestroyHeight,
+                setAutoNav,
+                rebuildNav,
+                containsPoint,
+                printCenter,
+                printSize,
+                printExtents,
+                printVolume,
+                printGravity,
+                printCamera,
+                boundsCenter,
+                boundsSize,
+                boundsExtents,
+                boundsVolume,
+                worldGravity,
+                currentCamera
+            ],
+            Connections =
+            [
+                Flow("CONN_Start_SetGravity", start.Id, GraphPortDefaults.FlowOut, setGravity.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_SetGravity_SetDestroyHeight", setGravity.Id, GraphPortDefaults.FlowOut, setDestroyHeight.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_SetDestroyHeight_SetAutoNav", setDestroyHeight.Id, GraphPortDefaults.FlowOut, setAutoNav.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_SetAutoNav_Rebuild", setAutoNav.Id, GraphPortDefaults.FlowOut, rebuildNav.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Rebuild_Contains", rebuildNav.Id, GraphPortDefaults.FlowOut, containsPoint.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Contains_PrintCenter", containsPoint.Id, GraphPortDefaults.FlowOut, printCenter.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintCenter_PrintSize", printCenter.Id, GraphPortDefaults.FlowOut, printSize.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintSize_PrintExtents", printSize.Id, GraphPortDefaults.FlowOut, printExtents.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintExtents_PrintVolume", printExtents.Id, GraphPortDefaults.FlowOut, printVolume.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintVolume_PrintGravity", printVolume.Id, GraphPortDefaults.FlowOut, printGravity.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintGravity_PrintCamera", printGravity.Id, GraphPortDefaults.FlowOut, printCamera.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Center_Print", boundsCenter.Id, GraphPortDefaults.ValueOut, printCenter.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Size_Print", boundsSize.Id, GraphPortDefaults.ValueOut, printSize.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Extents_Print", boundsExtents.Id, GraphPortDefaults.ValueOut, printExtents.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Volume_Print", boundsVolume.Id, GraphPortDefaults.ValueOut, printVolume.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Gravity_Print", worldGravity.Id, GraphPortDefaults.ValueOut, printGravity.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Camera_Print", currentCamera.Id, GraphPortDefaults.ValueOut, printCamera.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "EnvironmentBoundsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("Environment.Gravity = 6.5", luau);
+        Assert.Contains("Environment.PartDestroyHeight = -250", luau);
+        Assert.Contains("Environment.AutoGenerateNavMesh = false", luau);
+        Assert.Contains("Environment:RebuildNavMesh()", luau);
+        Assert.Contains("local bounds = targetObject:GetBounds()", luau);
+        Assert.Contains("return bounds:Contains(makeVector3(1, 2, 3))", luau);
+        Assert.Contains("return bounds.Center", luau);
+        Assert.Contains("return bounds.Size", luau);
+        Assert.Contains("return bounds.Extents", luau);
+        Assert.Contains("return tonumber(bounds.Volume) or 0", luau);
+        Assert.Contains("return tonumber(Environment.Gravity) or 0", luau);
+        Assert.Contains("return Environment.CurrentCamera", luau);
+        Assert.DoesNotContain("Set World Gravity is not implemented", luau);
+        Assert.DoesNotContain("Object Bounds Center is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsVector2HelpersConditionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Vector2Start");
+        var closeEnough = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_Vector2DistanceAtMost"), stableId: "COND_Vector2Close");
+        var vector = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_Vector2FromXY"), stableId: "PROP_Vector2");
+        var vectorX = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_Vector2X"), stableId: "PROP_Vector2X");
+        var vectorY = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_Vector2Y"), stableId: "PROP_Vector2Y");
+        var magnitude = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_Vector2Magnitude"), stableId: "PROP_Vector2Magnitude");
+        var normalized = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_Vector2Normalized"), stableId: "PROP_Vector2Normalized");
+        var distance = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_Vector2Distance"), stableId: "PROP_Vector2Distance");
+        var lerp = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_Vector2Lerp"), stableId: "PROP_Vector2Lerp");
+        var printNodes = Enumerable.Range(0, 6)
+            .Select(index => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintVector2_{index}"))
+            .ToList();
+
+        SetConstant(vector, "x", "3");
+        SetConstant(vector, "y", "4");
+        SetConstant(closeEnough, "second", "6,8");
+        SetConstant(closeEnough, "maximum", "5");
+        SetConstant(distance, "second", "6,8");
+        SetConstant(lerp, "to", "10,20");
+        SetConstant(lerp, "amount", "0.25");
+
+        var rule = new Rule
+        {
+            Id = "RULE_Vector2",
+            Name = "Vector2",
+            Nodes = [start, closeEnough, vector, vectorX, vectorY, magnitude, normalized, distance, lerp, .. printNodes],
+            Connections =
+            [
+                Flow("CONN_Vector2_Start_Check", start.Id, GraphPortDefaults.FlowOut, closeEnough.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Vector2_Check_Print0", closeEnough.Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Vector2_Print0_Print1", printNodes[0].Id, GraphPortDefaults.FlowOut, printNodes[1].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Vector2_Print1_Print2", printNodes[1].Id, GraphPortDefaults.FlowOut, printNodes[2].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Vector2_Print2_Print3", printNodes[2].Id, GraphPortDefaults.FlowOut, printNodes[3].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Vector2_Print3_Print4", printNodes[3].Id, GraphPortDefaults.FlowOut, printNodes[4].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Vector2_Print4_Print5", printNodes[4].Id, GraphPortDefaults.FlowOut, printNodes[5].Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Vector2_Check_First", vector.Id, GraphPortDefaults.ValueOut, closeEnough.Id, GraphPortDefaults.ParameterPortId("first")),
+                Value("CONN_Vector2_X_Source", vector.Id, GraphPortDefaults.ValueOut, vectorX.Id, GraphPortDefaults.ParameterPortId("vector")),
+                Value("CONN_Vector2_Y_Source", vector.Id, GraphPortDefaults.ValueOut, vectorY.Id, GraphPortDefaults.ParameterPortId("vector")),
+                Value("CONN_Vector2_Magnitude_Source", vector.Id, GraphPortDefaults.ValueOut, magnitude.Id, GraphPortDefaults.ParameterPortId("vector")),
+                Value("CONN_Vector2_Normalized_Source", vector.Id, GraphPortDefaults.ValueOut, normalized.Id, GraphPortDefaults.ParameterPortId("vector")),
+                Value("CONN_Vector2_Distance_Source", vector.Id, GraphPortDefaults.ValueOut, distance.Id, GraphPortDefaults.ParameterPortId("first")),
+                Value("CONN_Vector2_Lerp_Source", vector.Id, GraphPortDefaults.ValueOut, lerp.Id, GraphPortDefaults.ParameterPortId("from")),
+                Value("CONN_Vector2_X_Print", vectorX.Id, GraphPortDefaults.ValueOut, printNodes[0].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Vector2_Y_Print", vectorY.Id, GraphPortDefaults.ValueOut, printNodes[1].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Vector2_Magnitude_Print", magnitude.Id, GraphPortDefaults.ValueOut, printNodes[2].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Vector2_Normalized_Print", normalized.Id, GraphPortDefaults.ValueOut, printNodes[3].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Vector2_Distance_Print", distance.Id, GraphPortDefaults.ValueOut, printNodes[4].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Vector2_Lerp_Print", lerp.Id, GraphPortDefaults.ValueOut, printNodes[5].Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "Vector2Graph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local function makeVector2(x, y)", luau);
+        Assert.Contains("local function vrsVector2Distance(first, second)", luau);
+        Assert.Contains("return vrsVector2Distance(makeVector2(3, 4), makeVector2(6, 8)) <= 5", luau);
+        Assert.Contains("vrsVector2Axis(makeVector2(3, 4), \"X\", \"x\", 0)", luau);
+        Assert.Contains("vrsVector2Axis(makeVector2(3, 4), \"Y\", \"y\", 0)", luau);
+        Assert.Contains("vrsVector2Magnitude(makeVector2(3, 4))", luau);
+        Assert.Contains("vrsVector2Normalized(makeVector2(3, 4))", luau);
+        Assert.Contains("vrsVector2Distance(makeVector2(3, 4), makeVector2(6, 8))", luau);
+        Assert.Contains("vrsVector2Lerp(makeVector2(3, 4), makeVector2(10, 20), 0.25)", luau);
+        Assert.DoesNotContain("Vector2 Distance At Most is not implemented", luau);
+        Assert.DoesNotContain("Vector2 From X Y is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsRaycastConditionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_RaycastStart");
+        var hits = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_RaycastHits"), stableId: "COND_RaycastHits");
+        var result = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_RaycastResult"), stableId: "PROP_RaycastResult");
+        var hitObject = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_RaycastHitObject"), stableId: "PROP_RaycastObject");
+        var hitPosition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_RaycastHitPosition"), stableId: "PROP_RaycastPosition");
+        var hitNormal = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_RaycastHitNormal"), stableId: "PROP_RaycastNormal");
+        var hitDistance = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_RaycastHitDistance"), stableId: "PROP_RaycastDistance");
+        var printNodes = Enumerable.Range(0, 5)
+            .Select(index => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintRaycast_{index}"))
+            .ToList();
+
+        foreach (var node in new[] { hits, result, hitObject, hitPosition, hitNormal, hitDistance })
+        {
+            SetConstant(node, "origin", "0,10,0");
+            SetConstant(node, "direction", "0,-1,0");
+            SetConstant(node, "maxDistance", "50");
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_Raycast",
+            Name = "Raycast",
+            Nodes = [start, hits, result, hitObject, hitPosition, hitNormal, hitDistance, .. printNodes],
+            Connections =
+            [
+                Flow("CONN_Raycast_Start_Hits", start.Id, GraphPortDefaults.FlowOut, hits.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Raycast_Hits_Print0", hits.Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Raycast_Print0_Print1", printNodes[0].Id, GraphPortDefaults.FlowOut, printNodes[1].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Raycast_Print1_Print2", printNodes[1].Id, GraphPortDefaults.FlowOut, printNodes[2].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Raycast_Print2_Print3", printNodes[2].Id, GraphPortDefaults.FlowOut, printNodes[3].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Raycast_Print3_Print4", printNodes[3].Id, GraphPortDefaults.FlowOut, printNodes[4].Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Raycast_Result_Print", result.Id, GraphPortDefaults.ValueOut, printNodes[0].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Raycast_Object_Print", hitObject.Id, GraphPortDefaults.ValueOut, printNodes[1].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Raycast_Position_Print", hitPosition.Id, GraphPortDefaults.ValueOut, printNodes[2].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Raycast_Normal_Print", hitNormal.Id, GraphPortDefaults.ValueOut, printNodes[3].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Raycast_Distance_Print", hitDistance.Id, GraphPortDefaults.ValueOut, printNodes[4].Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "RaycastGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local function makeVector3(x, y, z)", luau);
+        Assert.Contains("local raycastResult = Environment:Raycast(makeVector3(0, 10, 0), makeVector3(0, -1, 0), 50)", luau);
+        Assert.Contains("return raycastResult ~= nil and raycastResult.Instance ~= nil", luau);
+        Assert.Contains("return raycastResult", luau);
+        Assert.Contains("return raycastResult.Instance", luau);
+        Assert.Contains("return raycastResult.Position", luau);
+        Assert.Contains("return raycastResult.Normal", luau);
+        Assert.Contains("return tonumber(raycastResult.Distance) or 0", luau);
+        Assert.DoesNotContain("Raycast Hits is not implemented", luau);
+        Assert.DoesNotContain("Raycast Hit Object is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsQuaternionHelpersConditionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_QuaternionStart");
+        var closeEnough = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_QuaternionAngleAtMost"), stableId: "COND_QuaternionClose");
+        var identity = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionIdentity"), stableId: "PROP_QuaternionIdentity");
+        var components = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionFromComponents"), stableId: "PROP_QuaternionComponents");
+        var fromEuler = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionFromEuler"), stableId: "PROP_QuaternionEuler");
+        var toEuler = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionToEuler"), stableId: "PROP_QuaternionToEuler");
+        var axisAngle = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionFromAxisAngle"), stableId: "PROP_QuaternionAxis");
+        var lookRotation = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionLookRotation"), stableId: "PROP_QuaternionLook");
+        var fromTo = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionFromToRotation"), stableId: "PROP_QuaternionFromTo");
+        var inverse = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionInverse"), stableId: "PROP_QuaternionInverse");
+        var normalize = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionNormalize"), stableId: "PROP_QuaternionNormalize");
+        var lerp = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionLerp"), stableId: "PROP_QuaternionLerp");
+        var slerp = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionSlerp"), stableId: "PROP_QuaternionSlerp");
+        var rotateTowards = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionRotateTowards"), stableId: "PROP_QuaternionRotateTowards");
+        var angle = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionAngle"), stableId: "PROP_QuaternionAngle");
+        var dot = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_QuaternionDot"), stableId: "PROP_QuaternionDot");
+        var printNodes = Enumerable.Range(0, 14)
+            .Select(index => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintQuaternion_{index}"))
+            .ToList();
+
+        SetConstant(components, "y", "0.25");
+        SetConstant(components, "w", "0.97");
+        SetConstant(fromEuler, "euler", "0,90,0");
+        SetConstant(axisAngle, "axis", "0,1,0");
+        SetConstant(axisAngle, "angle", "45");
+        SetConstant(lookRotation, "forward", "0,0,1");
+        SetConstant(lookRotation, "upwards", "0,1,0");
+        SetConstant(fromTo, "fromDirection", "0,0,1");
+        SetConstant(fromTo, "toDirection", "1,0,0");
+        SetConstant(closeEnough, "maximum", "15");
+        SetConstant(rotateTowards, "maxDegrees", "30");
+
+        var rule = new Rule
+        {
+            Id = "RULE_Quaternion",
+            Name = "Quaternion",
+            Nodes = [start, closeEnough, identity, components, fromEuler, toEuler, axisAngle, lookRotation, fromTo, inverse, normalize, lerp, slerp, rotateTowards, angle, dot, .. printNodes],
+            Connections =
+            [
+                Flow("CONN_Quaternion_Start_Check", start.Id, GraphPortDefaults.FlowOut, closeEnough.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Check_Print0", closeEnough.Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print0_Print1", printNodes[0].Id, GraphPortDefaults.FlowOut, printNodes[1].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print1_Print2", printNodes[1].Id, GraphPortDefaults.FlowOut, printNodes[2].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print2_Print3", printNodes[2].Id, GraphPortDefaults.FlowOut, printNodes[3].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print3_Print4", printNodes[3].Id, GraphPortDefaults.FlowOut, printNodes[4].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print4_Print5", printNodes[4].Id, GraphPortDefaults.FlowOut, printNodes[5].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print5_Print6", printNodes[5].Id, GraphPortDefaults.FlowOut, printNodes[6].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print6_Print7", printNodes[6].Id, GraphPortDefaults.FlowOut, printNodes[7].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print7_Print8", printNodes[7].Id, GraphPortDefaults.FlowOut, printNodes[8].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print8_Print9", printNodes[8].Id, GraphPortDefaults.FlowOut, printNodes[9].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print9_Print10", printNodes[9].Id, GraphPortDefaults.FlowOut, printNodes[10].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print10_Print11", printNodes[10].Id, GraphPortDefaults.FlowOut, printNodes[11].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print11_Print12", printNodes[11].Id, GraphPortDefaults.FlowOut, printNodes[12].Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Quaternion_Print12_Print13", printNodes[12].Id, GraphPortDefaults.FlowOut, printNodes[13].Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Quaternion_Check_First", fromEuler.Id, GraphPortDefaults.ValueOut, closeEnough.Id, GraphPortDefaults.ParameterPortId("first")),
+                Value("CONN_Quaternion_Check_Second", axisAngle.Id, GraphPortDefaults.ValueOut, closeEnough.Id, GraphPortDefaults.ParameterPortId("second")),
+                Value("CONN_Quaternion_ToEuler_Source", fromEuler.Id, GraphPortDefaults.ValueOut, toEuler.Id, GraphPortDefaults.ParameterPortId("rotation")),
+                Value("CONN_Quaternion_Inverse_Source", components.Id, GraphPortDefaults.ValueOut, inverse.Id, GraphPortDefaults.ParameterPortId("rotation")),
+                Value("CONN_Quaternion_Normalize_Source", components.Id, GraphPortDefaults.ValueOut, normalize.Id, GraphPortDefaults.ParameterPortId("rotation")),
+                Value("CONN_Quaternion_Lerp_From", fromEuler.Id, GraphPortDefaults.ValueOut, lerp.Id, GraphPortDefaults.ParameterPortId("from")),
+                Value("CONN_Quaternion_Lerp_To", axisAngle.Id, GraphPortDefaults.ValueOut, lerp.Id, GraphPortDefaults.ParameterPortId("to")),
+                Value("CONN_Quaternion_Slerp_From", fromEuler.Id, GraphPortDefaults.ValueOut, slerp.Id, GraphPortDefaults.ParameterPortId("from")),
+                Value("CONN_Quaternion_Slerp_To", axisAngle.Id, GraphPortDefaults.ValueOut, slerp.Id, GraphPortDefaults.ParameterPortId("to")),
+                Value("CONN_Quaternion_Rotate_From", fromEuler.Id, GraphPortDefaults.ValueOut, rotateTowards.Id, GraphPortDefaults.ParameterPortId("from")),
+                Value("CONN_Quaternion_Rotate_To", axisAngle.Id, GraphPortDefaults.ValueOut, rotateTowards.Id, GraphPortDefaults.ParameterPortId("to")),
+                Value("CONN_Quaternion_Angle_First", fromEuler.Id, GraphPortDefaults.ValueOut, angle.Id, GraphPortDefaults.ParameterPortId("first")),
+                Value("CONN_Quaternion_Angle_Second", axisAngle.Id, GraphPortDefaults.ValueOut, angle.Id, GraphPortDefaults.ParameterPortId("second")),
+                Value("CONN_Quaternion_Dot_First", fromEuler.Id, GraphPortDefaults.ValueOut, dot.Id, GraphPortDefaults.ParameterPortId("first")),
+                Value("CONN_Quaternion_Dot_Second", axisAngle.Id, GraphPortDefaults.ValueOut, dot.Id, GraphPortDefaults.ParameterPortId("second")),
+                Value("CONN_Quaternion_Identity_Print", identity.Id, GraphPortDefaults.ValueOut, printNodes[0].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Components_Print", components.Id, GraphPortDefaults.ValueOut, printNodes[1].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Euler_Print", fromEuler.Id, GraphPortDefaults.ValueOut, printNodes[2].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_ToEuler_Print", toEuler.Id, GraphPortDefaults.ValueOut, printNodes[3].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Axis_Print", axisAngle.Id, GraphPortDefaults.ValueOut, printNodes[4].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Look_Print", lookRotation.Id, GraphPortDefaults.ValueOut, printNodes[5].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_FromTo_Print", fromTo.Id, GraphPortDefaults.ValueOut, printNodes[6].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Inverse_Print", inverse.Id, GraphPortDefaults.ValueOut, printNodes[7].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Normalize_Print", normalize.Id, GraphPortDefaults.ValueOut, printNodes[8].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Lerp_Print", lerp.Id, GraphPortDefaults.ValueOut, printNodes[9].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Slerp_Print", slerp.Id, GraphPortDefaults.ValueOut, printNodes[10].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Rotate_Print", rotateTowards.Id, GraphPortDefaults.ValueOut, printNodes[11].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Angle_Print", angle.Id, GraphPortDefaults.ValueOut, printNodes[12].Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_Quaternion_Dot_Print", dot.Id, GraphPortDefaults.ValueOut, printNodes[13].Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "QuaternionGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local function makeQuaternion(x, y, z, w)", luau);
+        Assert.Contains("local function vrsQuaternionFromEuler(euler)", luau);
+        Assert.Contains("return vrsQuaternionAngle(vrsQuaternionFromEuler(makeVector3(0, 90, 0)), vrsQuaternionFromAxisAngle(makeVector3(0, 1, 0), 45)) <= 15", luau);
+        Assert.Contains("vrsQuaternionIdentity()", luau);
+        Assert.Contains("makeQuaternion(0, 0.25, 0, 0.97)", luau);
+        Assert.Contains("vrsQuaternionToEuler(vrsQuaternionFromEuler(makeVector3(0, 90, 0)))", luau);
+        Assert.Contains("vrsQuaternionLookRotation(makeVector3(0, 0, 1), makeVector3(0, 1, 0))", luau);
+        Assert.Contains("vrsQuaternionFromToRotation(makeVector3(0, 0, 1), makeVector3(1, 0, 0))", luau);
+        Assert.Contains("vrsQuaternionInverse(makeQuaternion(0, 0.25, 0, 0.97))", luau);
+        Assert.Contains("vrsQuaternionNormalize(makeQuaternion(0, 0.25, 0, 0.97))", luau);
+        Assert.Contains("vrsQuaternionLerp(vrsQuaternionFromEuler(makeVector3(0, 90, 0)), vrsQuaternionFromAxisAngle(makeVector3(0, 1, 0), 45), 0.5)", luau);
+        Assert.Contains("vrsQuaternionSlerp(vrsQuaternionFromEuler(makeVector3(0, 90, 0)), vrsQuaternionFromAxisAngle(makeVector3(0, 1, 0), 45), 0.5)", luau);
+        Assert.Contains("vrsQuaternionRotateTowards(vrsQuaternionFromEuler(makeVector3(0, 90, 0)), vrsQuaternionFromAxisAngle(makeVector3(0, 1, 0), 45), 30)", luau);
+        Assert.Contains("vrsQuaternionDot(vrsQuaternionFromEuler(makeVector3(0, 90, 0)), vrsQuaternionFromAxisAngle(makeVector3(0, 1, 0), 45))", luau);
+        Assert.DoesNotContain("Rotation Angle At Most is not implemented", luau);
+        Assert.DoesNotContain("Rotation From Euler is not implemented", luau);
     }
 
     [Fact]
@@ -2589,6 +4877,119 @@ public sealed class LuauExporterTests
     }
 
     [Fact]
+    public void ExportRuleToLuau_EmitsImage3DAdditionalConditions()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartImage3DConditions");
+        var color = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_3DImageColorIs"), stableId: "COND_Image3DColorIs");
+        var scale = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_3DImageTextureScaleIs"), stableId: "COND_Image3DScaleIs");
+        var offset = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_3DImageTextureOffsetIs"), stableId: "COND_Image3DOffsetIs");
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_Image3DConditionMessage");
+
+        foreach (var node in new[] { color, scale, offset })
+        {
+            SetSceneObject(node, "target", "World/Environment/BillboardImage");
+        }
+
+        SetConstant(color, "r", "0.1");
+        SetConstant(color, "g", "0.2");
+        SetConstant(color, "b", "0.3");
+        SetConstant(scale, "x", "2");
+        SetConstant(scale, "y", "3");
+        SetConstant(offset, "x", "0.25");
+        SetConstant(offset, "y", "0.5");
+
+        var rule = new Rule
+        {
+            Id = "RULE_Image3DConditions",
+            Name = "Image3DConditions",
+            Nodes = [start, color, scale, offset, message],
+            Connections =
+            [
+                Flow("CONN_Image3DCondition_Start_Color", start.Id, GraphPortDefaults.FlowOut, color.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Image3DCondition_Color_Scale", color.Id, GraphPortDefaults.TrueOut, scale.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Image3DCondition_Scale_Offset", scale.Id, GraphPortDefaults.TrueOut, offset.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Image3DCondition_Offset_Message", offset.Id, GraphPortDefaults.TrueOut, message.Id, GraphPortDefaults.FlowIn)
+            ]
+        };
+        var graph = new RuleGraph { Name = "Image3DConditionsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local expectedColor = Color.New(0.1, 0.2, 0.3, 1)", luau);
+        Assert.Contains("return imageObject.Color == expectedColor", luau);
+        Assert.Contains("local currentX = vrsVector2Axis(imageObject.TextureScale, \"X\", \"x\", 1)", luau);
+        Assert.Contains("local currentY = vrsVector2Axis(imageObject.TextureScale, \"Y\", \"y\", 1)", luau);
+        Assert.Contains("local expectedX = tonumber(2) or 1", luau);
+        Assert.Contains("local expectedY = tonumber(3) or 1", luau);
+        Assert.Contains("local currentX = vrsVector2Axis(imageObject.TextureOffset, \"X\", \"x\", 0)", luau);
+        Assert.Contains("local currentY = vrsVector2Axis(imageObject.TextureOffset, \"Y\", \"y\", 0)", luau);
+        Assert.Contains("local expectedX = tonumber(0.25) or 0", luau);
+        Assert.Contains("local expectedY = tonumber(0.5) or 0", luau);
+        Assert.Contains("return currentX == expectedX and currentY == expectedY", luau);
+        Assert.DoesNotContain("3D Image Color Is is not implemented", luau);
+        Assert.DoesNotContain("3D Image Texture Offset Is is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsImage3DWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var triggerIds = new[]
+        {
+            "EV_On3DImageColorChanged",
+            "EV_On3DImageShadowsEnabled",
+            "EV_On3DImageLightingEnabled",
+            "EV_On3DImageFaceCameraEnabled",
+            "EV_On3DImageTextureScaleChanged",
+            "EV_On3DImageTextureOffsetChanged"
+        };
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_Image3DWatcher_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_Image3DWatcherMessage");
+
+        foreach (var trigger in triggers)
+        {
+            SetSceneObject(trigger, "target", "World/Environment/BillboardImage");
+            SetConstant(trigger, "interval", "0.1");
+        }
+
+        var connections = triggers
+            .Select((trigger, index) => Flow($"CONN_Image3DWatcher_{index}", trigger.Id, GraphPortDefaults.FlowOut, message.Id, GraphPortDefaults.FlowIn))
+            .ToList();
+
+        var rule = new Rule
+        {
+            Id = "RULE_Image3DWatchers",
+            Name = "Image3DWatchers",
+            Nodes = [.. triggers, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "Image3DWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("if triggerObject.Color == nil then", luau);
+        Assert.Contains("return triggerObject.Color", luau);
+        Assert.Contains("if triggerObject.CastShadows == nil then", luau);
+        Assert.Contains("return triggerObject.CastShadows == true", luau);
+        Assert.Contains("if triggerObject.Shaded == nil then", luau);
+        Assert.Contains("return triggerObject.Shaded == true", luau);
+        Assert.Contains("if triggerObject.FaceCamera == nil then", luau);
+        Assert.Contains("return triggerObject.FaceCamera == true", luau);
+        Assert.Contains("if triggerObject.TextureScale == nil then", luau);
+        Assert.Contains("return triggerObject.TextureScale", luau);
+        Assert.Contains("if triggerObject.TextureOffset == nil then", luau);
+        Assert.Contains("return triggerObject.TextureOffset", luau);
+        Assert.Contains("local previousValue = readWatchedValue()", luau);
+        Assert.Contains("local previousMatched = readMatched() == true", luau);
+        Assert.Contains("image3DTextureOffset = currentValue", luau);
+        Assert.DoesNotContain("On 3D Image Color Changed is not implemented", luau);
+        Assert.DoesNotContain("On 3D Image Texture Offset Changed is not implemented", luau);
+    }
+
+    [Fact]
     public void ExportRuleToLuau_EmitsText3DActionsConditionsAndValues()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -2716,6 +5117,109 @@ public sealed class LuauExporterTests
         Assert.Contains("return targetObject.Shaded == true", luau);
         Assert.DoesNotContain("Set 3D Text is not implemented", luau);
         Assert.DoesNotContain("3D Text is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsText3DAdditionalConditionsAndWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartText3DWatchers");
+        var conditionIds = new[]
+        {
+            "COND_3DTextFontSizeAtLeast",
+            "COND_3DTextColorIs",
+            "COND_3DTextOutlineWidthAtLeast"
+        };
+        var triggerIds = new[]
+        {
+            "EV_On3DTextChanged",
+            "EV_On3DTextSizeReached",
+            "EV_On3DTextColorChanged",
+            "EV_On3DTextOutlineWidthReached",
+            "EV_On3DTextOutlineColorChanged",
+            "EV_On3DTextFaceCameraEnabled",
+            "EV_On3DTextRichTextEnabled",
+            "EV_On3DTextLightingEnabled"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_Text3DExtra_{index}"))
+            .ToList();
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_Text3DWatcher_{index}"))
+            .ToList();
+        var printAfterConditions = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintText3DExtraConditions");
+        var triggerPrints = triggerIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintText3DWatcher_{index}"))
+            .ToList();
+
+        foreach (var node in conditions.Concat(triggers))
+        {
+            SetSceneObject(node, "target", "World/Labels/ScoreText");
+        }
+
+        SetConstant(conditions[0], "size", "32");
+        SetConstant(conditions[1], "r", "0.2");
+        SetConstant(conditions[1], "g", "0.8");
+        SetConstant(conditions[1], "b", "1");
+        SetConstant(conditions[2], "width", "2");
+        SetConstant(triggers[1], "size", "32");
+        SetConstant(triggers[3], "width", "2");
+        SetConstant(printAfterConditions, "value", "text3d extra conditions passed");
+        for (var index = 0; index < triggerPrints.Count; index++)
+        {
+            SetConstant(triggerPrints[index], "value", $"text3d watcher {index}");
+        }
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Text3DExtra_Start_Condition0", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count - 1; index++)
+        {
+            connections.Add(Flow($"CONN_Text3DExtra_Condition_{index}_{index + 1}", conditions[index].Id, GraphPortDefaults.FlowOut, conditions[index + 1].Id, GraphPortDefaults.FlowIn));
+        }
+
+        connections.Add(Flow("CONN_Text3DExtra_ConditionLast_Print", conditions[^1].Id, GraphPortDefaults.FlowOut, printAfterConditions.Id, GraphPortDefaults.FlowIn));
+        for (var index = 0; index < triggers.Count; index++)
+        {
+            connections.Add(Flow($"CONN_Text3DWatcher_{index}_Print", triggers[index].Id, GraphPortDefaults.FlowOut, triggerPrints[index].Id, GraphPortDefaults.FlowIn));
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_Text3DWatchers",
+            Name = "Text3D Watchers",
+            Nodes = [start, .. conditions, printAfterConditions, .. triggers, .. triggerPrints],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "Text3DWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local currentNumber = tonumber(textObject.FontSize) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(32) or 24", luau);
+        Assert.Contains("local expectedColor = Color.New(0.2, 0.8, 1, 1)", luau);
+        Assert.Contains("return textObject.Color == expectedColor", luau);
+        Assert.Contains("local currentNumber = tonumber(textObject.OutlineWidth) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(2) or 1", luau);
+        Assert.Contains("return currentNumber >= expectedNumber", luau);
+        Assert.Contains("return tostring(triggerObject.Text or \"\")", luau);
+        Assert.Contains("local watchedLimit = tonumber(", luau);
+        Assert.Contains("or 24", luau);
+        Assert.Contains("return tonumber(triggerObject.FontSize) or 0", luau);
+        Assert.Contains("return triggerObject.Color", luau);
+        Assert.Contains("or 1", luau);
+        Assert.Contains("return tonumber(triggerObject.OutlineWidth) or 0", luau);
+        Assert.Contains("return triggerObject.OutlineColor", luau);
+        Assert.Contains("return triggerObject.FaceCamera == true", luau);
+        Assert.Contains("return triggerObject.UseRichText == true", luau);
+        Assert.Contains("return triggerObject.Shaded == true", luau);
+        Assert.Contains("text3DText = currentValue", luau);
+        Assert.Contains("text3DFontSize = currentValue", luau);
+        Assert.Contains("text3DOutlineWidth = currentValue", luau);
+        Assert.Contains("text3DFacesCamera = currentValue", luau);
+        Assert.Contains("text3d extra conditions passed", luau);
+        Assert.Contains("text3d watcher 7", luau);
     }
 
     [Fact]
@@ -3004,6 +5508,524 @@ public sealed class LuauExporterTests
     }
 
     [Fact]
+    public void ExportRuleToLuau_EmitsExpandedCustomUiConditions()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var conditionIds = new[]
+        {
+            "COND_UIVisible",
+            "COND_UIHidden",
+            "COND_UIImageIs",
+            "COND_UIImageHasImage",
+            "COND_TextInputTextIs",
+            "COND_TextInputIsEmpty",
+            "COND_TextInputReadOnly",
+            "COND_TextInputEditable",
+            "COND_UIFieldIgnoresMouse",
+            "COND_UIFieldClipsChildren",
+            "COND_Gui3DShaded",
+            "COND_Gui3DFacesCamera",
+            "COND_Gui3DTransparent",
+            "COND_GridColumnsAtLeast",
+            "COND_ScrollViewHorizontalModeIs"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_ExpandedUi_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_Message");
+
+        foreach (var node in conditions.Take(4))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Hud/Icon");
+        }
+
+        foreach (var node in conditions.Skip(4).Take(4))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Menu/NameInput");
+        }
+
+        foreach (var node in conditions.Skip(8).Take(2))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Menu/Panel");
+        }
+
+        foreach (var node in conditions.Skip(10).Take(3))
+        {
+            SetSceneObject(node, "target", "World/Signs/QuestGui");
+        }
+
+        SetSceneObject(conditions[13], "target", "World/PlayerGUI/Menu/Grid");
+        SetSceneObject(conditions[14], "target", "World/PlayerGUI/Menu/List");
+        SetConstant(conditions[2], "image", "images/icon.png");
+        SetConstant(conditions[2], "caseSensitive", "true");
+        SetConstant(conditions[4], "text", "PlayerName");
+        SetConstant(conditions[4], "caseSensitive", "false");
+        SetConstant(conditions[13], "columns", "3");
+        SetConstant(conditions[14], "mode", "Auto");
+        SetConstant(conditions[14], "caseSensitive", "true");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_Condition0", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count; index++)
+        {
+            var toNodeId = index + 1 < conditions.Count ? conditions[index + 1].Id : message.Id;
+            connections.Add(Flow($"CONN_ExpandedUiCondition_{index}", conditions[index].Id, GraphPortDefaults.TrueOut, toNodeId, GraphPortDefaults.FlowIn));
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_ExpandedCustomUI",
+            Name = "ExpandedCustomUI",
+            Nodes = [start, .. conditions, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ExpandedCustomUIGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("return (targetObject.Visible == true) == true", luau);
+        Assert.Contains("return (targetObject.Visible == true) == false", luau);
+        Assert.Contains("local currentText = tostring(targetObject.Image or \"\")", luau);
+        Assert.Contains("local expectedText = tostring(\"images/icon.png\")", luau);
+        Assert.Contains("return tostring(targetObject.Image or \"\") ~= \"\"", luau);
+        Assert.Contains("local currentText = tostring(targetObject.Text or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.Text or \"\") == \"\"", luau);
+        Assert.Contains("return (targetObject.ReadOnly == true) == true", luau);
+        Assert.Contains("return (targetObject.ReadOnly == true) == false", luau);
+        Assert.Contains("return (targetObject.IgnoreMouse == true) == true", luau);
+        Assert.Contains("return (targetObject.ClipDescendants == true) == true", luau);
+        Assert.Contains("return (targetObject.Shaded == true) == true", luau);
+        Assert.Contains("return (targetObject.FaceCamera == true) == true", luau);
+        Assert.Contains("return (targetObject.Transparent == true) == true", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.Columns) or 0", luau);
+        Assert.Contains("return currentNumber >= expectedNumber", luau);
+        Assert.Contains("local currentText = tostring(targetObject.HorizontalScrollMode or \"\")", luau);
+        Assert.DoesNotContain("UI Is Visible is not implemented", luau);
+        Assert.DoesNotContain("Horizontal Scroll Mode Is is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsCustomUiWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var triggerIds = new[]
+        {
+            "EV_OnUIBecameVisible",
+            "EV_OnUIBecameHidden",
+            "EV_OnUIImageChanged",
+            "EV_OnTextInputBecameEmpty",
+            "EV_OnTextInputBecameReadOnly",
+            "EV_OnUIFieldStartedIgnoringMouse",
+            "EV_OnGui3DShadedEnabled",
+            "EV_OnGridColumnsReached",
+            "EV_OnScrollViewHorizontalModeChanged"
+        };
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_CustomUiWatcher_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_Message");
+
+        foreach (var node in triggers.Take(3))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Hud/Icon");
+        }
+
+        foreach (var node in triggers.Skip(3).Take(2))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Menu/NameInput");
+        }
+
+        SetSceneObject(triggers[5], "target", "World/PlayerGUI/Menu/Panel");
+        SetSceneObject(triggers[6], "target", "World/Signs/QuestGui");
+        SetSceneObject(triggers[7], "target", "World/PlayerGUI/Menu/Grid");
+        SetSceneObject(triggers[8], "target", "World/PlayerGUI/Menu/List");
+        SetConstant(triggers[7], "columns", "3");
+
+        var connections = triggers
+            .Select((trigger, index) => Flow($"CONN_CustomUiWatcher_{index}", trigger.Id, GraphPortDefaults.FlowOut, message.Id, GraphPortDefaults.FlowIn))
+            .ToList();
+
+        var rule = new Rule
+        {
+            Id = "RULE_CustomUIWatchers",
+            Name = "CustomUIWatchers",
+            Nodes = [.. triggers, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "CustomUIWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("return triggerObject.Visible == true", luau);
+        Assert.Contains("return currentValue == true, currentValue", luau);
+        Assert.Contains("return currentValue == false, currentValue", luau);
+        Assert.Contains("return tostring(triggerObject.Image or \"\")", luau);
+        Assert.Contains("return tostring(triggerObject.Text or \"\")", luau);
+        Assert.Contains("return triggerObject.ReadOnly == true", luau);
+        Assert.Contains("return triggerObject.IgnoreMouse == true", luau);
+        Assert.Contains("return triggerObject.Shaded == true", luau);
+        Assert.Contains("local watchedLimit = tonumber(3) or 2", luau);
+        Assert.Contains("return tonumber(triggerObject.Columns) or 0", luau);
+        Assert.Contains("return currentValue >= watchedLimit, currentValue", luau);
+        Assert.Contains("return tostring(triggerObject.HorizontalScrollMode or \"\")", luau);
+        Assert.Contains("local previousMatched = readMatched() == true", luau);
+        Assert.Contains("local previousValue = readWatchedValue()", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, uiVisible = currentValue }", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, uiImage = currentValue }", luau);
+        Assert.DoesNotContain("On UI Became Visible is not implemented", luau);
+        Assert.DoesNotContain("On Grid Columns Reached is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsPlayerUiRootAndCreateUiContainer()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_CreateUiStart");
+        var create = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_CreateUIContainer"), stableId: "ACT_CreateUiContainer");
+        var playerUiRoot = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_PlayerUIRoot"), stableId: "PROP_PlayerUiRoot");
+        var print = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintPlayerUiRoot");
+
+        SetConstant(create, "uiKind", "Horizontal Flow");
+        SetConstant(create, "objectName", "QuickMenuFlow");
+
+        var rule = new Rule
+        {
+            Id = "RULE_CreatePlayerUi",
+            Name = "CreatePlayerUi",
+            ScriptKind = GraphScriptKind.Local,
+            Nodes = [start, create, playerUiRoot, print],
+            Connections =
+            [
+                Flow("CONN_Start_CreateUi", start.Id, GraphPortDefaults.FlowOut, create.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_CreateUi_Print", create.Id, GraphPortDefaults.FlowOut, print.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_PlayerUi_CreateParent", playerUiRoot.Id, GraphPortDefaults.ValueOut, create.Id, GraphPortDefaults.ParameterPortId("target")),
+                Value("CONN_PlayerUi_Print", playerUiRoot.Id, GraphPortDefaults.ValueOut, print.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "CreatePlayerUiGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local requestedUiParent = PlayerGUI", luau);
+        Assert.Contains("parentUiObject = PlayerGUI", luau);
+        Assert.Contains("local createdUiObject = Instance.New(\"UIHFlow\", parentUiObject)", luau);
+        Assert.Contains("createdUiObject.Name = createdUiObjectName", luau);
+        Assert.Contains("print(tostring(PlayerGUI))", luau);
+        Assert.DoesNotContain("Create UI Container is not implemented", luau);
+        Assert.DoesNotContain("Player UI Root is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsCreateSceneContainer()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_CreateContainerStart");
+        var create = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_CreateSceneContainer"), stableId: "ACT_CreateSceneContainer");
+
+        SetSceneObject(create, "target", "World/Environment");
+        SetConstant(create, "containerKind", "Model");
+        SetConstant(create, "objectName", "EnemyGroup");
+
+        var rule = new Rule
+        {
+            Id = "RULE_CreateSceneContainer",
+            Name = "CreateSceneContainer",
+            ScriptKind = GraphScriptKind.Server,
+            Nodes = [start, create],
+            Connections =
+            [
+                Flow("CONN_Start_CreateContainer", start.Id, GraphPortDefaults.FlowOut, create.Id, GraphPortDefaults.FlowIn)
+            ]
+        };
+        var graph = new RuleGraph { Name = "CreateSceneContainerGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local requestedParent = \"World/Environment\"", luau);
+        Assert.Contains("parentObject = resolveTarget(triggerObject, requestedParent)", luau);
+        Assert.Contains("local createdContainerObject = Instance.New(\"Model\", parentObject)", luau);
+        Assert.Contains("createdContainerObject.Name = createdContainerName", luau);
+        Assert.DoesNotContain("Create Scene Container is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsTextInputTriggersActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var changed = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnTextInputChanged"), stableId: "TRG_TextInputChanged");
+        var submitted = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnTextInputSubmitted"), stableId: "TRG_TextInputSubmitted");
+        var setText = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetTextInputText"), stableId: "ACT_SetInputText");
+        var setPlaceholder = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetTextInputPlaceholder"), stableId: "ACT_SetInputPlaceholder");
+        var setReadOnly = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetTextInputReadOnly"), stableId: "ACT_SetInputReadOnly");
+        var focus = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_FocusTextInput"), stableId: "ACT_FocusInput");
+        var valueIds = new[]
+        {
+            "PROP_TextInputText",
+            "PROP_TextInputPlaceholder",
+            "PROP_TextInputReadOnly"
+        };
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_TextInput_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintTextInput_{index}"))
+            .ToList();
+
+        foreach (var node in new[] { changed, submitted, setText, setPlaceholder, setReadOnly, focus }.Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Profile/NameInput");
+        }
+
+        SetConstant(setText, "text", "Player");
+        SetConstant(setPlaceholder, "placeholder", "Name");
+        SetConstant(setReadOnly, "readOnly", "true");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_TextInputChanged_SetText", changed.Id, GraphPortDefaults.FlowOut, setText.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_TextInputSubmitted_SetPlaceholder", submitted.Id, GraphPortDefaults.FlowOut, setPlaceholder.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_SetText_SetReadOnly", setText.Id, GraphPortDefaults.FlowOut, setReadOnly.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_SetReadOnly_Focus", setReadOnly.Id, GraphPortDefaults.FlowOut, focus.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Focus_Print0", focus.Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_TextInputValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_PrintTextInput_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_TextInput",
+            Name = "TextInput",
+            ScriptKind = GraphScriptKind.Local,
+            Nodes = [changed, submitted, setText, setPlaceholder, setReadOnly, focus, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "TextInputGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("triggerObject.Changed:Connect(function(value)", luau);
+        Assert.Contains("triggerObject.Submitted:Connect(function(value)", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, uiTextInput = triggerObject, text = tostring(inputText or \"\") }", luau);
+        Assert.Contains("textInputObject.Text = tostring(\"Player\")", luau);
+        Assert.Contains("textInputObject.Placeholder = tostring(\"Name\")", luau);
+        Assert.Contains("textInputObject.ReadOnly = true", luau);
+        Assert.Contains("textInputObject:Focus()", luau);
+        Assert.Contains("return tostring(targetObject.Text or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.Placeholder or \"\")", luau);
+        Assert.Contains("return targetObject.ReadOnly == true", luau);
+        Assert.DoesNotContain("On Text Input Changed is not implemented", luau);
+        Assert.DoesNotContain("Set Text Input Text is not implemented", luau);
+        Assert.DoesNotContain("Text Input Text is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsUiFieldAndScrollViewActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartUiField");
+        var setLayer = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetUIFieldZIndex"), stableId: "ACT_SetUiLayer");
+        var setIgnoreMouse = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetUIFieldIgnoresMouse"), stableId: "ACT_SetUiIgnoreMouse");
+        var setClip = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetUIFieldClipDescendants"), stableId: "ACT_SetUiClip");
+        var setRotation = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetUIFieldRotation"), stableId: "ACT_SetUiRotation");
+        var setScale = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetUIFieldScale"), stableId: "ACT_SetUiScale");
+        var setScroll = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetScrollViewMode"), stableId: "ACT_SetScrollMode");
+        var valueIds = new[]
+        {
+            "PROP_UIFieldZIndex",
+            "PROP_UIFieldIgnoresMouse",
+            "PROP_UIFieldClipDescendants",
+            "PROP_UIFieldRotation",
+            "PROP_UIFieldScale",
+            "PROP_ScrollViewHorizontalMode",
+            "PROP_ScrollViewVerticalMode"
+        };
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_UiField_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintUiField_{index}"))
+            .ToList();
+
+        foreach (var node in new[] { setLayer, setIgnoreMouse, setClip, setRotation, setScale }.Concat(valueNodes.Take(5)))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Hud/Panel");
+        }
+
+        SetSceneObject(setScroll, "target", "World/PlayerGUI/Hud/ScrollPanel");
+        SetSceneObject(valueNodes.Single(node => node.CatalogId == "PROP_ScrollViewHorizontalMode"), "target", "World/PlayerGUI/Hud/ScrollPanel");
+        SetSceneObject(valueNodes.Single(node => node.CatalogId == "PROP_ScrollViewVerticalMode"), "target", "World/PlayerGUI/Hud/ScrollPanel");
+        SetConstant(setLayer, "zIndex", "5");
+        SetConstant(setIgnoreMouse, "ignoreMouse", "true");
+        SetConstant(setClip, "clipDescendants", "true");
+        SetConstant(setRotation, "rotation", "15");
+        SetConstant(setScale, "scale", "1.25");
+        SetConstant(setScroll, "axis", "Both");
+        SetConstant(setScroll, "mode", "AlwaysShow");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_SetLayer", start.Id, GraphPortDefaults.FlowOut, setLayer.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_SetLayer_IgnoreMouse", setLayer.Id, GraphPortDefaults.FlowOut, setIgnoreMouse.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_IgnoreMouse_Clip", setIgnoreMouse.Id, GraphPortDefaults.FlowOut, setClip.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Clip_Rotation", setClip.Id, GraphPortDefaults.FlowOut, setRotation.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Rotation_Scale", setRotation.Id, GraphPortDefaults.FlowOut, setScale.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Scale_Scroll", setScale.Id, GraphPortDefaults.FlowOut, setScroll.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Scroll_Print0", setScroll.Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_UiFieldValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_PrintUiField_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_UiField",
+            Name = "UiField",
+            ScriptKind = GraphScriptKind.Local,
+            Nodes = [start, setLayer, setIgnoreMouse, setClip, setRotation, setScale, setScroll, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "UiFieldGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("uiFieldObject.ZIndex = 5", luau);
+        Assert.Contains("uiFieldObject.IgnoreMouse = true", luau);
+        Assert.Contains("uiFieldObject.ClipDescendants = true", luau);
+        Assert.Contains("uiFieldObject.Rotation = 15", luau);
+        Assert.Contains("uiFieldObject.Scale = 1.25", luau);
+        Assert.Contains("local scrollAxis = tostring(\"Both\")", luau);
+        Assert.Contains("local scrollMode = tostring(\"AlwaysShow\")", luau);
+        Assert.Contains("scrollViewObject.HorizontalScrollMode = scrollMode", luau);
+        Assert.Contains("scrollViewObject.VerticalScrollMode = scrollMode", luau);
+        Assert.Contains("return tonumber(targetObject.ZIndex) or 0", luau);
+        Assert.Contains("return targetObject.IgnoreMouse == true", luau);
+        Assert.Contains("return targetObject.ClipDescendants == true", luau);
+        Assert.Contains("return tonumber(targetObject.Rotation) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Scale) or 1", luau);
+        Assert.Contains("return tostring(targetObject.HorizontalScrollMode or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.VerticalScrollMode or \"\")", luau);
+        Assert.DoesNotContain("Set UI Layer is not implemented", luau);
+        Assert.DoesNotContain("Set Scroll View Mode is not implemented", luau);
+        Assert.DoesNotContain("UI Layer is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsUiLayoutAndGui3DActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartUiLayout");
+        var setGridColumns = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetGridLayoutColumns"), stableId: "ACT_SetGridColumns");
+        var setGridSpacing = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetGridLayoutSpacing"), stableId: "ACT_SetGridSpacing");
+        var setLayoutSpacing = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetLayoutSpacing"), stableId: "ACT_SetLayoutSpacing");
+        var setAlignment = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetLayoutChildAlignment"), stableId: "ACT_SetAlignment");
+        var setShaded = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetGui3DShaded"), stableId: "ACT_SetGui3DShaded");
+        var setFaceCamera = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetGui3DFaceCamera"), stableId: "ACT_SetGui3DFaceCamera");
+        var setTransparent = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetGui3DTransparent"), stableId: "ACT_SetGui3DTransparent");
+        var valueIds = new[]
+        {
+            "PROP_GridLayoutColumns",
+            "PROP_GridLayoutSpacing",
+            "PROP_LayoutSpacing",
+            "PROP_LayoutChildAlignment",
+            "PROP_Gui3DShaded",
+            "PROP_Gui3DFaceCamera",
+            "PROP_Gui3DTransparent"
+        };
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_UiLayout_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintUiLayout_{index}"))
+            .ToList();
+
+        foreach (var node in new[] { setGridColumns, setGridSpacing }.Concat(valueNodes.Take(2)))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Hud/InventoryGrid");
+        }
+
+        foreach (var node in new[] { setLayoutSpacing, setAlignment }.Concat(valueNodes.Skip(2).Take(2)))
+        {
+            SetSceneObject(node, "target", "World/PlayerGUI/Hud/MenuLayout");
+        }
+
+        foreach (var node in new[] { setShaded, setFaceCamera, setTransparent }.Concat(valueNodes.Skip(4)))
+        {
+            SetSceneObject(node, "target", "World/HudSign");
+        }
+
+        SetConstant(setGridColumns, "columns", "4");
+        SetConstant(setGridSpacing, "spacing", "12");
+        SetConstant(setLayoutSpacing, "spacing", "6");
+        SetConstant(setAlignment, "alignment", "End");
+        SetConstant(setShaded, "shaded", "false");
+        SetConstant(setFaceCamera, "faceCamera", "true");
+        SetConstant(setTransparent, "transparent", "false");
+
+        var actionNodes = new[] { setGridColumns, setGridSpacing, setLayoutSpacing, setAlignment, setShaded, setFaceCamera, setTransparent };
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_GridColumns", start.Id, GraphPortDefaults.FlowOut, actionNodes[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index + 1 < actionNodes.Length; index++)
+        {
+            connections.Add(Flow($"CONN_UiLayoutAction_{index}_{index + 1}", actionNodes[index].Id, GraphPortDefaults.FlowOut, actionNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+        }
+
+        connections.Add(Flow("CONN_UiLayoutActions_Print0", actionNodes[^1].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_UiLayoutValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_PrintUiLayout_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_UiLayout",
+            Name = "UiLayout",
+            ScriptKind = GraphScriptKind.Local,
+            Nodes = [start, .. actionNodes, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "UiLayoutGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("layoutObject.Columns = 4", luau);
+        Assert.Contains("layoutObject.Spacing = 12", luau);
+        Assert.Contains("layoutObject.Spacing = 6", luau);
+        Assert.Contains("layoutObject.ChildAlignment = tostring(\"End\")", luau);
+        Assert.Contains("gui3DObject.Shaded = false", luau);
+        Assert.Contains("gui3DObject.FaceCamera = true", luau);
+        Assert.Contains("gui3DObject.Transparent = false", luau);
+        Assert.Contains("return tonumber(targetObject.Columns) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Spacing) or 0", luau);
+        Assert.Contains("return tostring(targetObject.ChildAlignment or \"\")", luau);
+        Assert.Contains("return targetObject.Shaded == true", luau);
+        Assert.Contains("return targetObject.FaceCamera == true", luau);
+        Assert.Contains("return targetObject.Transparent == true", luau);
+        Assert.DoesNotContain("Set Grid Columns is not implemented", luau);
+        Assert.DoesNotContain("Set Layout Child Alignment is not implemented", luau);
+        Assert.DoesNotContain("3D UI Shaded is not implemented", luau);
+    }
+
+    [Fact]
     public void ExportRuleToLuau_EmitsToolEventTriggers()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -3109,6 +6131,53 @@ public sealed class LuauExporterTests
     }
 
     [Fact]
+    public void ExportRuleToLuau_EmitsInventoryActionsConditionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var joined = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnPlayerJoined"), stableId: "TRG_PlayerJoined");
+        var giveTool = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_GiveToolToPlayer"), stableId: "ACT_GiveTool");
+        var hasTool = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_PlayerHasTool"), stableId: "COND_HasTool");
+        var inventoryValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_PlayerInventory"), stableId: "PROP_PlayerInventory");
+        var findTool = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_FindToolInInventory"), stableId: "PROP_FindTool");
+        var printInventory = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintInventory");
+        var printTool = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintTool");
+
+        SetSceneObject(giveTool, "target", "World/Tools/KeyCard");
+        SetConstant(hasTool, "toolName", "KeyCard");
+        SetConstant(findTool, "toolName", "KeyCard");
+
+        var rule = new Rule
+        {
+            Id = "RULE_Inventory",
+            Name = "Inventory",
+            Nodes = [joined, giveTool, hasTool, inventoryValue, findTool, printInventory, printTool],
+            Connections =
+            [
+                Flow("CONN_Joined_Give", joined.Id, GraphPortDefaults.FlowOut, giveTool.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Give_Check", giveTool.Id, GraphPortDefaults.FlowOut, hasTool.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Check_PrintInventory", hasTool.Id, GraphPortDefaults.TrueOut, printInventory.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintInventory_PrintTool", printInventory.Id, GraphPortDefaults.FlowOut, printTool.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_Inventory_Print", inventoryValue.Id, GraphPortDefaults.ValueOut, printInventory.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_FindTool_Print", findTool.Id, GraphPortDefaults.ValueOut, printTool.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "InventoryGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local inventory = player.Inventory", luau);
+        Assert.Contains("\"World/Tools/KeyCard\"", luau);
+        Assert.Contains("local toolObject = resolveTarget(triggerObject,", luau);
+        Assert.Contains("toolObject.Parent = inventory", luau);
+        Assert.Contains("return inventory:FindChild(tostring(\"KeyCard\")) ~= nil", luau);
+        Assert.Contains("return player.Inventory", luau);
+        Assert.Contains("return inventory:FindChild(tostring(\"KeyCard\"))", luau);
+        Assert.DoesNotContain("Give Tool To Player is not implemented", luau);
+        Assert.DoesNotContain("Player Has Tool is not implemented", luau);
+        Assert.DoesNotContain("Player Inventory is not implemented", luau);
+    }
+
+    [Fact]
     public void ExportRuleToLuau_EmitsGameTeamTriggerActionAndCondition()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -3164,7 +6233,9 @@ public sealed class LuauExporterTests
             "PROP_GameTeamName",
             "PROP_GameTeamColor",
             "PROP_GameTeamPlayerCount",
-            "PROP_GameTeamCount"
+            "PROP_GameTeamPlayers",
+            "PROP_GameTeamCount",
+            "PROP_AllGameTeams"
         };
         var valueNodes = valueIds
             .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_Team_{index}"))
@@ -3210,10 +6281,146 @@ public sealed class LuauExporterTests
         Assert.Contains("targetTeam:GetDisplayName()", luau);
         Assert.Contains("return targetTeam.Color", luau);
         Assert.Contains("targetTeam:GetPlayers()", luau);
+        Assert.Contains("return players", luau);
         Assert.Contains("Teams:GetTeams()", luau);
         Assert.Contains("return #teams", luau);
+        Assert.Contains("return teams", luau);
         Assert.DoesNotContain("Game Team Name is not implemented", luau);
         Assert.DoesNotContain("Game Team Player Count is not implemented", luau);
+        Assert.DoesNotContain("Game Team Players is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsPlayerStatActionsConditionAndProperties()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var trigger = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnPlayerGameTeamChanged"), stableId: "TRG_StatsPlayerContext");
+        var setNumber = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetPlayerStatNumber"), stableId: "ACT_SetStatNumber");
+        var setText = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SetPlayerStatText"), stableId: "ACT_SetStatText");
+        var condition = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_PlayerStatAtLeast"), stableId: "COND_StatAtLeast");
+        var valueIds = new[]
+        {
+            "PROP_PlayerStatValue",
+            "PROP_PlayerStatDisplayValue",
+            "PROP_StatDisplayName",
+            "PROP_TeamStatTotal",
+            "PROP_AllPlayerStats"
+        };
+        var values = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_Stats_{index}"))
+            .ToList();
+        var prints = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintStats_{index}"))
+            .ToList();
+
+        SetSceneObject(trigger, "target", "World/Rules/StatsWatcher");
+        SetSceneObject(setNumber, "target", "Stats/Score");
+        SetSceneObject(setText, "target", "Stats/Rank");
+        SetSceneObject(condition, "target", "Stats/Score");
+        SetConstant(setNumber, "value", "15");
+        SetConstant(setText, "value", "Champion");
+        SetConstant(condition, "minimum", "10");
+        foreach (var node in values.Where(node => node.CatalogId != "PROP_AllPlayerStats"))
+        {
+            SetSceneObject(node, "target", "Stats/Score");
+        }
+
+        SetSceneObject(values.Single(node => node.CatalogId == "PROP_TeamStatTotal"), "team", "Teams/Blue");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_StatsTrigger_SetNumber", trigger.Id, GraphPortDefaults.FlowOut, setNumber.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_SetNumber_SetText", setNumber.Id, GraphPortDefaults.FlowOut, setText.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_SetText_Check", setText.Id, GraphPortDefaults.FlowOut, condition.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Check_Print0", condition.Id, GraphPortDefaults.TrueOut, prints[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < prints.Count; index++)
+        {
+            connections.Add(Value($"CONN_StatsValue_Print_{index}", values[index].Id, GraphPortDefaults.ValueOut, prints[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < prints.Count)
+            {
+                connections.Add(Flow($"CONN_PrintStats_{index}_{index + 1}", prints[index].Id, GraphPortDefaults.FlowOut, prints[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_PlayerStats",
+            Name = "PlayerStats",
+            ScriptKind = GraphScriptKind.Server,
+            Nodes = [trigger, setNumber, setText, condition, .. values, .. prints],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "PlayerStatsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("statObject:Set(player, tonumber(15) or 0)", luau);
+        Assert.Contains("statObject:Set(player, tostring(\"Champion\"))", luau);
+        Assert.Contains("return (tonumber(statObject:Get(player)) or 0) >= (tonumber(10) or 0)", luau);
+        Assert.Contains("return statObject:Get(player)", luau);
+        Assert.Contains("statObject:GetDisplayValue(player)", luau);
+        Assert.Contains("statObject:GetDisplayName()", luau);
+        Assert.Contains("statObject:GetTotalForTeam(teamObject)", luau);
+        Assert.Contains("Stats:GetStats()", luau);
+        Assert.DoesNotContain("Set Player Stat Number is not implemented", luau);
+        Assert.DoesNotContain("Player Stat At Least is not implemented", luau);
+        Assert.DoesNotContain("Player Stat Value is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsSavedDataActionsAndProperties()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var trigger = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_SavedDataStart");
+        var save = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_SaveDatastoreValue"), stableId: "ACT_SaveSavedValue");
+        var remove = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_RemoveDatastoreValue"), stableId: "ACT_RemoveSavedValue");
+        var savedValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_DatastoreValue"), stableId: "PROP_SavedValue");
+        var savedStoreName = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_DatastoreKey"), stableId: "PROP_SavedStoreName");
+        var printValue = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintSavedValue");
+        var printStoreName = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintSavedStoreName");
+
+        foreach (var node in new[] { save, remove, savedValue, savedStoreName })
+        {
+            SetConstant(node, "storeKey", "PlayerData");
+        }
+
+        SetConstant(save, "entryKey", "Coins");
+        SetConstant(save, "value", "10");
+        SetConstant(remove, "entryKey", "Coins");
+        SetConstant(savedValue, "entryKey", "Coins");
+        SetConstant(savedValue, "fallbackValue", "0");
+
+        var rule = new Rule
+        {
+            Id = "RULE_SavedData",
+            Name = "SavedData",
+            ScriptKind = GraphScriptKind.Server,
+            Nodes = [trigger, save, remove, savedValue, savedStoreName, printValue, printStoreName],
+            Connections =
+            [
+                Flow("CONN_Start_Save", trigger.Id, GraphPortDefaults.FlowOut, save.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Save_Remove", save.Id, GraphPortDefaults.FlowOut, remove.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Remove_PrintValue", remove.Id, GraphPortDefaults.FlowOut, printValue.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_PrintValue_PrintStoreName", printValue.Id, GraphPortDefaults.FlowOut, printStoreName.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_SavedValue_Print", savedValue.Id, GraphPortDefaults.ValueOut, printValue.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_StoreName_Print", savedStoreName.Id, GraphPortDefaults.ValueOut, printStoreName.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "SavedDataGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("Datastore:GetDatastore(savedStoreName)", luau);
+        Assert.Contains("savedStore:SetAsync(tostring(savedEntryName), \"10\")", luau);
+        Assert.Contains("savedStore:RemoveAsync(tostring(savedEntryName))", luau);
+        Assert.Contains("Datastore:GetDatastore(tostring(\"PlayerData\"))", luau);
+        Assert.Contains("savedStore:GetAsync(tostring(\"Coins\"))", luau);
+        Assert.Contains("local savedStoreKey = tostring(savedStore.Key or \"\")", luau);
+        Assert.Contains("savedStore:Disconnect()", luau);
+        Assert.DoesNotContain("Save Saved Value is not implemented", luau);
+        Assert.DoesNotContain("Remove Saved Value is not implemented", luau);
+        Assert.DoesNotContain("Saved Value is not implemented", luau);
     }
 
     [Fact]
@@ -3223,24 +6430,32 @@ public sealed class LuauExporterTests
         var start = catalog.Nodes.Single(node => node.IdBase == "EV_OnStart");
         var tweenPosition = catalog.Nodes.Single(node => node.IdBase == "ACT_TweenObjectPosition");
         var tweenColor = catalog.Nodes.Single(node => node.IdBase == "ACT_TweenObjectColor");
+        var tweenTransparency = catalog.Nodes.Single(node => node.IdBase == "ACT_TweenObjectTransparency");
         var trigger = NodeCatalogService.CreateNode(start, 100, 100, "TRG_Start");
         var position = NodeCatalogService.CreateNode(tweenPosition, 320, 100, "ACT_TweenPosition");
         var color = NodeCatalogService.CreateNode(tweenColor, 540, 100, "ACT_TweenColor");
+        var transparency = NodeCatalogService.CreateNode(tweenTransparency, 760, 100, "ACT_TweenTransparency");
         SetConstant(position, "duration", "2");
         SetConstant(position, "vector", "1,2,3");
+        SetConstant(position, "speedScale", "1.5");
+        SetConstant(position, "looped", "true");
+        SetConstant(position, "parallel", "true");
         SetConstant(color, "r", "0.25");
         SetConstant(color, "g", "0.5");
         SetConstant(color, "b", "0.75");
+        SetConstant(transparency, "transparency", "0.5");
+        SetConstant(transparency, "duration", "3");
 
         var rule = new Rule
         {
             Id = "RULE_Tweens",
             Name = "Tweens",
-            Nodes = [trigger, position, color],
+            Nodes = [trigger, position, color, transparency],
             Connections =
             [
                 Flow("CONN_Start_Position", trigger.Id, GraphPortDefaults.FlowOut, position.Id, GraphPortDefaults.FlowIn),
-                Flow("CONN_Position_Color", position.Id, GraphPortDefaults.FlowOut, color.Id, GraphPortDefaults.FlowIn)
+                Flow("CONN_Position_Color", position.Id, GraphPortDefaults.FlowOut, color.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Color_Transparency", color.Id, GraphPortDefaults.FlowOut, transparency.Id, GraphPortDefaults.FlowIn)
             ]
         };
         var graph = new RuleGraph { Name = "TweenGraph", Rules = [rule] };
@@ -3250,10 +6465,134 @@ public sealed class LuauExporterTests
         Assert.Contains("local tween = Tween:NewTween()", luau);
         Assert.Contains("local endValue = makeVector3(1, 2, 3)", luau);
         Assert.Contains("tween:TweenPosition(targetObject, endValue, 2)", luau);
+        Assert.Contains("tween.SpeedScale = math.max(0.001, 1.5)", luau);
+        Assert.Contains("tween.Looped = true", luau);
+        Assert.Contains("tween.Parallel = true", luau);
         Assert.Contains("local endColor = Color.New(0.25, 0.5, 0.75, 1)", luau);
         Assert.Contains("tween:TweenColor(targetObject.Color, endColor, 1, function(color)", luau);
+        Assert.Contains("local endValue = tonumber(0.5) or 0", luau);
+        Assert.Contains("tween:TweenNumber(tonumber(targetObject.Transparency) or 0, endValue, 3, function(value)", luau);
+        Assert.Contains("targetObject.Transparency = value", luau);
         Assert.DoesNotContain("Tween Object Position is not implemented", luau);
         Assert.DoesNotContain("Tween Object Color is not implemented", luau);
+        Assert.DoesNotContain("Animate Object Transparency is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsTweenParityConditions()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var conditionIds = new[]
+        {
+            "COND_TweenPositionReached",
+            "COND_TweenRotationReached",
+            "COND_TweenScaleReached",
+            "COND_TweenColorReached",
+            "COND_TweenTransparencyReached"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), 100 + index * 40, 100, id))
+            .ToList();
+
+        foreach (var condition in conditions)
+        {
+            SetConstant(condition, "target", "World/Environment/TweenTarget");
+            if (condition.Parameters.Any(parameter => parameter.Key == "tolerance"))
+            {
+                SetConstant(condition, "tolerance", "0.02");
+            }
+        }
+
+        SetConstant(conditions[0], "vector", "1,2,3");
+        SetConstant(conditions[1], "vector", "0,90,0");
+        SetConstant(conditions[2], "vector", "2,2,2");
+        SetConstant(conditions[3], "r", "0.25");
+        SetConstant(conditions[3], "g", "0.5");
+        SetConstant(conditions[3], "b", "0.75");
+        SetConstant(conditions[4], "transparency", "0.5");
+
+        var rule = new Rule
+        {
+            Id = "RULE_TweenConditions",
+            Name = "Tween Conditions",
+            Nodes = conditions
+        };
+        var graph = new RuleGraph { Name = "TweenConditionsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local function vrsTweenVectorReached", luau);
+        Assert.Contains("local expectedTweenValue = makeVector3(1, 2, 3)", luau);
+        Assert.Contains("return vrsTweenVectorReached(targetObject.Position, expectedTweenValue, tweenTolerance)", luau);
+        Assert.Contains("local expectedTweenValue = makeVector3(0, 90, 0)", luau);
+        Assert.Contains("return vrsTweenVectorReached(targetObject.Rotation, expectedTweenValue, tweenTolerance)", luau);
+        Assert.Contains("local expectedTweenValue = makeVector3(2, 2, 2)", luau);
+        Assert.Contains("return vrsTweenVectorReached(targetObject.Scale, expectedTweenValue, tweenTolerance)", luau);
+        Assert.Contains("local expectedTweenValue = Color.New(0.25, 0.5, 0.75, 1)", luau);
+        Assert.Contains("return targetObject.Color == expectedTweenValue", luau);
+        Assert.Contains("local expectedTweenValue = tonumber(0.5) or 0", luau);
+        Assert.Contains("return math.abs(currentValue - expectedTweenValue) <= tweenTolerance", luau);
+        Assert.DoesNotContain("Tween Position Reached is not implemented", luau);
+        Assert.DoesNotContain("Tween Transparency Reached is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsTweenParityTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var triggerIds = new[]
+        {
+            "EV_OnTweenPositionReached",
+            "EV_OnTweenRotationReached",
+            "EV_OnTweenScaleReached",
+            "EV_OnTweenColorReached",
+            "EV_OnTweenTransparencyReached"
+        };
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), 100 + index * 40, 100, id))
+            .ToList();
+
+        foreach (var trigger in triggers)
+        {
+            SetConstant(trigger, "target", "World/Environment/TweenTarget");
+            if (trigger.Parameters.Any(parameter => parameter.Key == "tolerance"))
+            {
+                SetConstant(trigger, "tolerance", "0.02");
+            }
+            SetConstant(trigger, "interval", "0.1");
+        }
+
+        SetConstant(triggers[0], "vector", "1,2,3");
+        SetConstant(triggers[1], "vector", "0,90,0");
+        SetConstant(triggers[2], "vector", "2,2,2");
+        SetConstant(triggers[3], "r", "0.25");
+        SetConstant(triggers[3], "g", "0.5");
+        SetConstant(triggers[3], "b", "0.75");
+        SetConstant(triggers[4], "transparency", "0.5");
+
+        var rule = new Rule
+        {
+            Id = "RULE_TweenTriggers",
+            Name = "Tween Triggers",
+            Nodes = triggers
+        };
+        var graph = new RuleGraph { Name = "TweenTriggersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local function vrsTweenVectorReached", luau);
+        Assert.Contains("return vrsTweenVectorReached(currentValue, expectedTweenValue, tweenTolerance), currentValue", luau);
+        Assert.Contains("local currentValue = triggerObject.Color", luau);
+        Assert.Contains("return currentValue == expectedTweenValue, currentValue", luau);
+        Assert.Contains("local currentValue = tonumber(triggerObject.Transparency) or 0", luau);
+        Assert.Contains("return math.abs(currentValue - expectedTweenValue) <= tweenTolerance, currentValue", luau);
+        Assert.Contains("tweenPosition = currentValue", luau);
+        Assert.Contains("tweenRotation = currentValue", luau);
+        Assert.Contains("tweenScale = currentValue", luau);
+        Assert.Contains("tweenColor = currentValue", luau);
+        Assert.Contains("tweenTransparency = currentValue", luau);
+        Assert.DoesNotContain("On Tween Position Reached is not implemented", luau);
+        Assert.DoesNotContain("On Tween Transparency Reached is not implemented", luau);
     }
 
     [Fact]
@@ -3600,6 +6939,67 @@ public sealed class LuauExporterTests
     }
 
     [Fact]
+    public void ExportRuleToLuau_EmitsColorSeriesHelpersAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_ColorSeriesStart");
+        var series = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ColorSeriesFromColors"), stableId: "PROP_ColorSeries");
+        var sample = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ColorFromColorSeries"), stableId: "PROP_ColorSeriesSample");
+        var count = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ColorSeriesPointCount"), stableId: "PROP_ColorSeriesCount");
+        var pointColor = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ColorSeriesPointColor"), stableId: "PROP_ColorSeriesPointColor");
+        var pointOffset = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "PROP_ColorSeriesPointOffset"), stableId: "PROP_ColorSeriesPointOffset");
+        var printSample = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintColorSeriesSample");
+        var printCount = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintColorSeriesCount");
+        var printPointColor = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintColorSeriesPointColor");
+        var printPointOffset = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintColorSeriesPointOffset");
+
+        SetConstant(series, "min", "1,0,0");
+        SetConstant(series, "max", "0,0,1");
+        SetConstant(sample, "amount", "0.25");
+        SetConstant(pointColor, "point", "1");
+        SetConstant(pointOffset, "point", "2");
+
+        var rule = new Rule
+        {
+            Id = "RULE_ColorSeries",
+            Name = "ColorSeries",
+            Nodes = [start, series, sample, count, pointColor, pointOffset, printSample, printCount, printPointColor, printPointOffset],
+            Connections =
+            [
+                Flow("CONN_ColorSeries_Start_PrintSample", start.Id, GraphPortDefaults.FlowOut, printSample.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_ColorSeries_PrintSample_Count", printSample.Id, GraphPortDefaults.FlowOut, printCount.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_ColorSeries_PrintCount_PointColor", printCount.Id, GraphPortDefaults.FlowOut, printPointColor.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_ColorSeries_PrintPointColor_PointOffset", printPointColor.Id, GraphPortDefaults.FlowOut, printPointOffset.Id, GraphPortDefaults.FlowIn),
+                Value("CONN_ColorSeries_Series_Sample", series.Id, GraphPortDefaults.ValueOut, sample.Id, GraphPortDefaults.ParameterPortId("series")),
+                Value("CONN_ColorSeries_Series_Count", series.Id, GraphPortDefaults.ValueOut, count.Id, GraphPortDefaults.ParameterPortId("series")),
+                Value("CONN_ColorSeries_Series_PointColor", series.Id, GraphPortDefaults.ValueOut, pointColor.Id, GraphPortDefaults.ParameterPortId("series")),
+                Value("CONN_ColorSeries_Series_PointOffset", series.Id, GraphPortDefaults.ValueOut, pointOffset.Id, GraphPortDefaults.ParameterPortId("series")),
+                Value("CONN_ColorSeries_Sample_Print", sample.Id, GraphPortDefaults.ValueOut, printSample.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_ColorSeries_Count_Print", count.Id, GraphPortDefaults.ValueOut, printCount.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_ColorSeries_PointColor_Print", pointColor.Id, GraphPortDefaults.ValueOut, printPointColor.Id, GraphPortDefaults.ParameterPortId("value")),
+                Value("CONN_ColorSeries_PointOffset_Print", pointOffset.Id, GraphPortDefaults.ValueOut, printPointOffset.Id, GraphPortDefaults.ParameterPortId("value"))
+            ]
+        };
+        var graph = new RuleGraph { Name = "ColorSeriesGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local function vrsColorSeriesFromColors", luau);
+        Assert.Contains("return ColorSeries.New(minColor, maxColor)", luau);
+        Assert.Contains("return series:Lerp(amount)", luau);
+        Assert.Contains("return tonumber(series.PointCount) or 0", luau);
+        Assert.Contains("return series:GetColor(point)", luau);
+        Assert.Contains("return series:GetOffset(point)", luau);
+        Assert.Contains("vrsColorSeriesFromColors(Color.New(1, 0, 0, 1), Color.New(0, 0, 1, 1))", luau);
+        Assert.Contains("vrsColorSeriesLerp(vrsColorSeriesFromColors", luau);
+        Assert.Contains("vrsColorSeriesPointCount(vrsColorSeriesFromColors", luau);
+        Assert.Contains("vrsColorSeriesColorAt(vrsColorSeriesFromColors", luau);
+        Assert.Contains("vrsColorSeriesOffsetAt(vrsColorSeriesFromColors", luau);
+        Assert.DoesNotContain("Color Series From Colors is not implemented", luau);
+        Assert.DoesNotContain("Color From Color Series is not implemented", luau);
+    }
+
+    [Fact]
     public void ExportRuleToLuau_EmitsFusedTransformVariants()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -3851,6 +7251,10 @@ public sealed class LuauExporterTests
             "PROP_RGBColor",
             "PROP_RandomColor",
             "PROP_ObjectName",
+            "PROP_ObjectTypeName",
+            "PROP_ObjectNetworkKey",
+            "PROP_ObjectSaveKey",
+            "PROP_ObjectIsNetworked",
             "PROP_ObjectVisibleValue",
             "PROP_ObjectCollisionValue",
             "PROP_ObjectAnchoredValue",
@@ -3899,6 +7303,10 @@ public sealed class LuauExporterTests
         Assert.Contains("Color.New(math.random(), math.random(), math.random(), 1)", luau);
         Assert.Contains("local function resolveTarget(triggerObject, targetName)", luau);
         Assert.Contains("return tostring(targetObject.Name)", luau);
+        Assert.Contains("return tostring(targetObject.ClassName)", luau);
+        Assert.Contains("return tostring(targetObject.NetworkedObjectID)", luau);
+        Assert.Contains("return tostring(targetObject.ObjectID)", luau);
+        Assert.Contains("return targetObject.ExistInNetwork == true", luau);
         Assert.Contains("return targetObject.Visible == true", luau);
         Assert.Contains("return targetObject.CanCollide == true", luau);
         Assert.Contains("return targetObject.Anchored == true", luau);
@@ -4901,7 +8309,13 @@ public sealed class LuauExporterTests
             "ACT_MoveObjectWithPhysics",
             "ACT_TurnObjectWithPhysics",
             "ACT_SetObjectVelocity",
-            "ACT_SetObjectSpinVelocity"
+            "ACT_SetObjectSpinVelocity",
+            "ACT_SetRigidBodyGravity",
+            "ACT_SetRigidBodyMass",
+            "ACT_SetRigidBodyFriction",
+            "ACT_SetRigidBodyDrag",
+            "ACT_SetRigidBodyAngularDrag",
+            "ACT_SetRigidBodyBounciness"
         };
         var conditionIds = new[]
         {
@@ -4913,7 +8327,13 @@ public sealed class LuauExporterTests
             "PROP_ObjectVelocity",
             "PROP_ObjectSpeed",
             "PROP_ObjectSpinVelocity",
-            "PROP_TouchingObjectCount"
+            "PROP_TouchingObjectCount",
+            "PROP_RigidBodyGravityEnabled",
+            "PROP_RigidBodyMass",
+            "PROP_RigidBodyFriction",
+            "PROP_RigidBodyDrag",
+            "PROP_RigidBodyAngularDrag",
+            "PROP_RigidBodyBounciness"
         };
         var triggers = triggerIds
             .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_Physical_{index}"))
@@ -4951,6 +8371,12 @@ public sealed class LuauExporterTests
         SetConstant(actions[3], "x", "0");
         SetConstant(actions[3], "y", "3");
         SetConstant(actions[3], "z", "0");
+        SetConstant(actions[4], "enabled", "false");
+        SetConstant(actions[5], "mass", "12");
+        SetConstant(actions[6], "friction", "0.25");
+        SetConstant(actions[7], "drag", "0.4");
+        SetConstant(actions[8], "angularDrag", "0.6");
+        SetConstant(actions[9], "bounciness", "0.8");
         SetConstant(conditions[0], "minimumSpeed", "0.5");
         SetConstant(conditions[1], "speed", "10");
         SetConstant(triggerPrints[0], "value", "touch ended");
@@ -4998,6 +8424,12 @@ public sealed class LuauExporterTests
         Assert.Contains("targetObject:MoveRotation(makeVector3(4, 5, 6))", luau);
         Assert.Contains("targetObject.Velocity = makeVector3(7, 8, 9)", luau);
         Assert.Contains("targetObject.AngularVelocity = makeVector3(0, 3, 0)", luau);
+        Assert.Contains("targetObject.UseGravity = false", luau);
+        Assert.Contains("targetObject.Mass = 12", luau);
+        Assert.Contains("targetObject.Friction = 0.25", luau);
+        Assert.Contains("targetObject.Drag = 0.4", luau);
+        Assert.Contains("targetObject.AngularDrag = 0.6", luau);
+        Assert.Contains("targetObject.Bounciness = 0.8", luau);
         Assert.Contains("local currentSpeed = vrsDistanceBetweenPositions(targetObject.Velocity, makeVector3(0, 0, 0))", luau);
         Assert.Contains("return currentSpeed >= 0.5", luau);
         Assert.Contains("return currentSpeed >= 10", luau);
@@ -5006,6 +8438,12 @@ public sealed class LuauExporterTests
         Assert.Contains("return targetObject.AngularVelocity", luau);
         Assert.Contains("local touchingObjects = targetObject:GetTouching()", luau);
         Assert.Contains("return #touchingObjects", luau);
+        Assert.Contains("return targetObject.UseGravity == true", luau);
+        Assert.Contains("return tonumber(targetObject.Mass) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Friction) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Drag) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.AngularDrag) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Bounciness) or 0", luau);
         Assert.Contains("listenObject.TouchEnded:Connect(function(hit)", luau);
         Assert.Contains("local triggerContext = { object = triggerObject, touchObject = hit, touchObjectSource = triggerObject }", luau);
         Assert.Contains("listenObject.MouseEnter:Connect(function()", luau);
@@ -5013,6 +8451,1017 @@ public sealed class LuauExporterTests
         Assert.Contains("touch ended", luau);
         Assert.Contains("hover started", luau);
         Assert.Contains("hover ended", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsRigidBodyConditionsAndWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartRigidBody");
+        var conditionIds = new[]
+        {
+            "COND_RigidBodyGravityEnabled",
+            "COND_RigidBodyMassAtLeast",
+            "COND_RigidBodyFrictionAtLeast",
+            "COND_RigidBodyDragAtLeast",
+            "COND_RigidBodyAngularDragAtLeast",
+            "COND_RigidBodyBouncinessAtLeast"
+        };
+        var triggerIds = new[]
+        {
+            "EV_OnRigidBodyGravityEnabled",
+            "EV_OnRigidBodyMassReached",
+            "EV_OnRigidBodyFrictionReached",
+            "EV_OnRigidBodyDragReached",
+            "EV_OnRigidBodyAngularDragReached",
+            "EV_OnRigidBodyBouncinessReached"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_RigidBody_{index}"))
+            .ToList();
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_RigidBody_{index}"))
+            .ToList();
+        var printAfterConditions = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintRigidBodyConditions");
+        var triggerPrints = triggerIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintRigidBodyTrigger_{index}"))
+            .ToList();
+
+        foreach (var node in conditions.Concat(triggers))
+        {
+            SetSceneObject(node, "target", "World/Environment/RigidBodyBlock");
+        }
+
+        SetConstant(conditions[1], "mass", "2");
+        SetConstant(conditions[2], "friction", "0.25");
+        SetConstant(conditions[3], "drag", "0.4");
+        SetConstant(conditions[4], "angularDrag", "0.6");
+        SetConstant(conditions[5], "bounciness", "0.8");
+        SetConstant(triggers[1], "mass", "2");
+        SetConstant(triggers[2], "friction", "0.25");
+        SetConstant(triggers[3], "drag", "0.4");
+        SetConstant(triggers[4], "angularDrag", "0.6");
+        SetConstant(triggers[5], "bounciness", "0.8");
+        SetConstant(printAfterConditions, "value", "rigidbody conditions passed");
+        for (var index = 0; index < triggerPrints.Count; index++)
+        {
+            SetConstant(triggerPrints[index], "value", $"rigidbody watcher {index}");
+        }
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_RigidBody_Start_Condition0", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count - 1; index++)
+        {
+            connections.Add(Flow($"CONN_RigidBody_Condition_{index}_{index + 1}", conditions[index].Id, GraphPortDefaults.FlowOut, conditions[index + 1].Id, GraphPortDefaults.FlowIn));
+        }
+
+        connections.Add(Flow("CONN_RigidBody_ConditionLast_Print", conditions[^1].Id, GraphPortDefaults.FlowOut, printAfterConditions.Id, GraphPortDefaults.FlowIn));
+        for (var index = 0; index < triggers.Count; index++)
+        {
+            connections.Add(Flow($"CONN_RigidBody_Trigger_{index}_Print", triggers[index].Id, GraphPortDefaults.FlowOut, triggerPrints[index].Id, GraphPortDefaults.FlowIn));
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_RigidBody",
+            Name = "Rigid Body Watchers",
+            Nodes = [start, .. conditions, printAfterConditions, .. triggers, .. triggerPrints],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "RigidBodyGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("return (targetObject.UseGravity == true) == true", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.Mass) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.Friction) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.Drag) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.AngularDrag) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.Bounciness) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(2) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(0.25) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(0.4) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(0.6) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(0.8) or 0", luau);
+        Assert.Contains("local previousMatched = readMatched() == true", luau);
+        Assert.Contains("local watchedLimit = tonumber(2) or 1", luau);
+        Assert.Contains("local watchedLimit = tonumber(0.25) or 0.5", luau);
+        Assert.Contains("local watchedLimit = tonumber(0.4) or 0", luau);
+        Assert.Contains("local watchedLimit = tonumber(0.6) or 0", luau);
+        Assert.Contains("local watchedLimit = tonumber(0.8) or 0", luau);
+        Assert.Contains("return currentValue >= watchedLimit, currentValue", luau);
+        Assert.Contains("gravityEnabled = currentValue", luau);
+        Assert.Contains("rigidBodyMass = currentValue", luau);
+        Assert.Contains("rigidBodyFriction = currentValue", luau);
+        Assert.Contains("rigidBodyDrag = currentValue", luau);
+        Assert.Contains("rigidBodyAngularDrag = currentValue", luau);
+        Assert.Contains("rigidBodyBounciness = currentValue", luau);
+        Assert.Contains("rigidbody conditions passed", luau);
+        Assert.Contains("rigidbody watcher 5", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsExplosionActionsValuesAndTouchedTrigger()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var touched = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnExplosionTouched"), stableId: "TRG_ExplosionTouched");
+        var actionIds = new[]
+        {
+            "ACT_SetExplosionRadius",
+            "ACT_SetExplosionForce",
+            "ACT_SetExplosionDamage",
+            "ACT_SetExplosionAffectAnchored"
+        };
+        var valueIds = new[]
+        {
+            "PROP_ExplosionRadius",
+            "PROP_ExplosionForce",
+            "PROP_ExplosionDamage",
+            "PROP_ExplosionAffectAnchored"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_Explosion_{index}"))
+            .ToList();
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_Explosion_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintExplosion_{index}"))
+            .ToList();
+        var touchedPrint = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintExplosionTouched");
+
+        foreach (var node in new[] { touched }.Concat(actions).Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/Effects/Blast");
+        }
+
+        SetConstant(actions[0], "radius", "18");
+        SetConstant(actions[1], "force", "650");
+        SetConstant(actions[2], "damage", "80");
+        SetConstant(actions[3], "enabled", "true");
+        SetConstant(touchedPrint, "value", "explosion touched");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_Explosion0", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_ExplosionTouched_Print", touched.Id, GraphPortDefaults.FlowOut, touchedPrint.Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_Explosion_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_Explosion_Action_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_ExplosionValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_Explosion_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_Explosion",
+            Name = "Explosion",
+            Nodes = [start, touched, .. actions, .. valueNodes, .. printNodes, touchedPrint],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "ExplosionGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("targetObject.Radius = 18", luau);
+        Assert.Contains("targetObject.Force = 650", luau);
+        Assert.Contains("targetObject.Damage = 80", luau);
+        Assert.Contains("targetObject.AffectAnchored = true", luau);
+        Assert.Contains("return tonumber(targetObject.Radius) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Force) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.Damage) or 0", luau);
+        Assert.Contains("return targetObject.AffectAnchored == true", luau);
+        Assert.Contains("listenObject.Touched:Connect(function(hit)", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, explosion = triggerObject, touchObject = hit, affectedObject = hit, touchObjectSource = triggerObject }", luau);
+        Assert.Contains("explosion touched", luau);
+        Assert.DoesNotContain("Set Explosion Radius is not implemented", luau);
+        Assert.DoesNotContain("Explosion Affect Anchored is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsGrabbableActionsValuesAndEvents()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var grabbed = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnObjectGrabbed"), stableId: "TRG_Grabbed");
+        var released = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnObjectReleased"), stableId: "TRG_Released");
+        var actionIds = new[]
+        {
+            "ACT_SetGrabForce",
+            "ACT_SetGrabMaxRange",
+            "ACT_SetGrabPickupRange",
+            "ACT_SetGrabUsesDragForce",
+            "ACT_SetGrabPermissionMode"
+        };
+        var conditionIds = new[]
+        {
+            "COND_GrabForceAtLeast",
+            "COND_GrabMaxRangeAtLeast",
+            "COND_GrabPickupRangeAtLeast",
+            "COND_GrabUsesDragForce",
+            "COND_GrabPermissionModeIs"
+        };
+        var watcherIds = new[]
+        {
+            "EV_OnGrabForceReached",
+            "EV_OnGrabMaxRangeReached",
+            "EV_OnGrabPickupRangeReached"
+        };
+        var valueIds = new[]
+        {
+            "PROP_GrabForce",
+            "PROP_GrabMaxRange",
+            "PROP_GrabPickupRange",
+            "PROP_GrabUsesDragForce",
+            "PROP_GrabPermissionMode",
+            "PROP_CurrentGrabber"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_Grab_{index}"))
+            .ToList();
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_Grab_{index}"))
+            .ToList();
+        var watchers = watcherIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_GrabWatcher_{index}"))
+            .ToList();
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_Grab_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintGrab_{index}"))
+            .ToList();
+        var grabbedPrint = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintGrabbed");
+        var releasedPrint = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintReleased");
+        var watcherPrints = watcherIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintGrabWatcher_{index}"))
+            .ToList();
+        var conditionPassedPrint = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintGrabConditions");
+
+        foreach (var node in new[] { grabbed, released }.Concat(actions).Concat(conditions).Concat(watchers).Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/Environment/CrateGrabber");
+        }
+
+        SetConstant(actions[0], "force", "900");
+        SetConstant(actions[1], "range", "40");
+        SetConstant(actions[2], "range", "12");
+        SetConstant(actions[3], "enabled", "false");
+        SetConstant(actions[4], "mode", "Scripted");
+        SetConstant(conditions[0], "force", "500");
+        SetConstant(conditions[1], "range", "30");
+        SetConstant(conditions[2], "range", "15");
+        SetConstant(conditions[4], "mode", "Scripted");
+        SetConstant(watchers[0], "force", "500");
+        SetConstant(watchers[1], "range", "30");
+        SetConstant(watchers[2], "range", "15");
+        SetConstant(grabbedPrint, "value", "grabbed");
+        SetConstant(releasedPrint, "value", "released");
+        SetConstant(watcherPrints[0], "value", "grab force reached");
+        SetConstant(watcherPrints[1], "value", "grab drag range reached");
+        SetConstant(watcherPrints[2], "value", "grab pickup range reached");
+        SetConstant(conditionPassedPrint, "value", "grab conditions passed");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_Grab0", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Grabbed_Print", grabbed.Id, GraphPortDefaults.FlowOut, grabbedPrint.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_Released_Print", released.Id, GraphPortDefaults.FlowOut, releasedPrint.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_GrabWatcher_0_Print", watchers[0].Id, GraphPortDefaults.FlowOut, watcherPrints[0].Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_GrabWatcher_1_Print", watchers[1].Id, GraphPortDefaults.FlowOut, watcherPrints[1].Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_GrabWatcher_2_Print", watchers[2].Id, GraphPortDefaults.FlowOut, watcherPrints[2].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_Grab_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_Grab_Action_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_GrabValue_Print_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_Grab_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        connections.Add(Flow("CONN_Grab_Print_Conditions", printNodes[^1].Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn));
+        for (var index = 0; index < conditions.Count; index++)
+        {
+            if (index + 1 < conditions.Count)
+            {
+                connections.Add(Flow($"CONN_Grab_Condition_{index}_{index + 1}", conditions[index].Id, GraphPortDefaults.FlowOut, conditions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_Grab_Conditions_Print", conditions[index].Id, GraphPortDefaults.FlowOut, conditionPassedPrint.Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_Grab",
+            Name = "Grab",
+            Nodes = [start, grabbed, released, .. watchers, .. actions, .. conditions, .. valueNodes, .. printNodes, grabbedPrint, releasedPrint, .. watcherPrints, conditionPassedPrint],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "GrabGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("targetObject.Force = 900", luau);
+        Assert.Contains("targetObject.MaxRange = 40", luau);
+        Assert.Contains("targetObject.MaxGrabbableRange = 12", luau);
+        Assert.Contains("targetObject.UseDragForce = false", luau);
+        Assert.Contains("local grabPermissionModeName = tostring(\"Scripted\" or \"Everyone\")", luau);
+        Assert.Contains("targetObject.PermissionMode = Enums.GrabbablePermissionMode[grabPermissionModeName]", luau);
+        Assert.Contains("return tonumber(targetObject.Force) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.MaxRange) or 0", luau);
+        Assert.Contains("return tonumber(targetObject.MaxGrabbableRange) or 0", luau);
+        Assert.Contains("return targetObject.UseDragForce == true", luau);
+        Assert.Contains("return tostring(targetObject.PermissionMode or \"\")", luau);
+        Assert.Contains("return targetObject.Dragger", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.Force) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.MaxRange) or 0", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.MaxGrabbableRange) or 0", luau);
+        Assert.Contains("return (targetObject.UseDragForce == true) == true", luau);
+        Assert.Contains("return tostring(targetObject.PermissionMode or \"\") == tostring(\"Scripted\")", luau);
+        Assert.Contains("listenObject.Grabbed:Connect(function(player)", luau);
+        Assert.Contains("listenObject.Released:Connect(function(player)", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, player = player, grabber = player, grabbable = triggerObject }", luau);
+        Assert.Contains("local watchedLimit = tonumber(500) or 500", luau);
+        Assert.Contains("local watchedLimit = tonumber(30) or 30", luau);
+        Assert.Contains("local watchedLimit = tonumber(15) or 15", luau);
+        Assert.Contains("triggerObject.Force", luau);
+        Assert.Contains("triggerObject.MaxRange", luau);
+        Assert.Contains("triggerObject.MaxGrabbableRange", luau);
+        Assert.Contains("grabForce = currentValue", luau);
+        Assert.Contains("grabMaxRange = currentValue", luau);
+        Assert.Contains("grabPickupRange = currentValue", luau);
+        Assert.Contains("grabbed", luau);
+        Assert.Contains("released", luau);
+        Assert.Contains("grab conditions passed", luau);
+        Assert.Contains("grab force reached", luau);
+        Assert.DoesNotContain("Set Grab Force is not implemented", luau);
+        Assert.DoesNotContain("Current Grabber is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsCharacterAnimationActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var actionIds = new[]
+        {
+            "ACT_PlayCharacterAnimation",
+            "ACT_PlayCharacterOneShotAnimation",
+            "ACT_StopCharacterAnimation",
+            "ACT_StopCharacterOneShotAnimation",
+            "ACT_SetCharacterState",
+            "ACT_SetCharacterAnimationSpeed"
+        };
+        var valueIds = new[]
+        {
+            "PROP_CurrentCharacterAnimation",
+            "PROP_CharacterAnimator",
+            "PROP_CharacterState",
+            "PROP_CharacterAnimationSpeed",
+            "PROP_CharacterAttachment"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_CharacterAnimation_{index}"))
+            .ToList();
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_CharacterAnimation_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintCharacterAnimation_{index}"))
+            .ToList();
+
+        foreach (var node in actions.Concat(valueNodes))
+        {
+            SetSceneObject(node, "target", "World/Characters/Hero");
+        }
+
+        SetConstant(actions[0], "animation", "Run");
+        SetConstant(actions[1], "animation", "Wave");
+        SetConstant(actions[4], "state", "Running");
+        SetConstant(actions[5], "speed", "1.25");
+        SetConstant(valueNodes[4], "attachment", "HandRight");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_PlayCharacterAnimation", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_CharacterAnimation_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_CharacterAnimation_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_CharacterAnimation_Value_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_CharacterAnimation_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_CharacterAnimation",
+            Name = "Character Animation",
+            Nodes = [start, .. actions, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "CharacterAnimationGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local animatorObject = characterObject.Animator", luau);
+        Assert.Contains("animatorObject:PlayAnimation(tostring(\"Run\"))", luau);
+        Assert.Contains("animatorObject:PlayOneShotAnimation(tostring(\"Wave\"))", luau);
+        Assert.Contains("animatorObject:StopAnimation()", luau);
+        Assert.Contains("animatorObject:StopOneShotAnimation()", luau);
+        Assert.Contains("local characterStateName = tostring(\"Running\" or \"Idle\")", luau);
+        Assert.Contains("characterObject.CurrentState = Enums.CharacterModelState[characterStateName]", luau);
+        Assert.Contains("targetObject.CurrentSpeed = 1.25", luau);
+        Assert.Contains("return tostring(animatorObject.CurrentAnimation or \"\")", luau);
+        Assert.Contains("return targetObject.Animator", luau);
+        Assert.Contains("return tostring(targetObject.CurrentState or \"\")", luau);
+        Assert.Contains("return tonumber(targetObject.CurrentSpeed) or 0", luau);
+        Assert.Contains("local attachmentName = tostring(\"HandRight\" or \"Head\")", luau);
+        Assert.Contains("return characterObject:GetAttachment(attachmentValue)", luau);
+        Assert.DoesNotContain("Play Character Animation is not implemented", luau);
+        Assert.DoesNotContain("Character Attachment is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsCharacterAnimationConditionsAndWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartCharacterAnimationConditions");
+        var conditionIds = new[]
+        {
+            "COND_CurrentCharacterAnimationIs",
+            "COND_CharacterHasAnimator",
+            "COND_CharacterStateIs",
+            "COND_CharacterAnimationSpeedAtLeast",
+            "COND_CharacterAnimationSpeedAtMost",
+            "COND_CharacterHasAttachment"
+        };
+        var triggerIds = new[]
+        {
+            "EV_OnCharacterAnimationChanged",
+            "EV_OnCharacterAnimationBecame",
+            "EV_OnCharacterStateChanged",
+            "EV_OnCharacterStateBecame",
+            "EV_OnCharacterAnimationSpeedReached",
+            "EV_OnCharacterAttachmentAvailable"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_CharacterAnimation_{index}"))
+            .ToList();
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_CharacterAnimation_{index}"))
+            .ToList();
+        var printAfterConditions = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintCharacterAnimationConditions");
+        var triggerPrints = triggerIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintCharacterAnimationTrigger_{index}"))
+            .ToList();
+
+        foreach (var node in conditions.Concat(triggers))
+        {
+            SetSceneObject(node, "target", "World/Characters/Hero");
+        }
+
+        SetConstant(conditions[0], "animation", "Run");
+        SetConstant(conditions[2], "state", "Running");
+        SetConstant(conditions[3], "speed", "1.25");
+        SetConstant(conditions[4], "speed", "2");
+        SetConstant(conditions[5], "attachment", "HandRight");
+        SetConstant(triggers[1], "animation", "Run");
+        SetConstant(triggers[3], "state", "Running");
+        SetConstant(triggers[4], "speed", "1.25");
+        SetConstant(triggers[5], "attachment", "HandRight");
+        SetConstant(printAfterConditions, "value", "character animation conditions passed");
+        for (var index = 0; index < triggerPrints.Count; index++)
+        {
+            SetConstant(triggerPrints[index], "value", $"character animation watcher {index}");
+        }
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_CharacterAnimation_Start_Condition0", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count - 1; index++)
+        {
+            connections.Add(Flow($"CONN_CharacterAnimation_Condition_{index}_{index + 1}", conditions[index].Id, GraphPortDefaults.FlowOut, conditions[index + 1].Id, GraphPortDefaults.FlowIn));
+        }
+
+        connections.Add(Flow("CONN_CharacterAnimation_ConditionLast_Print", conditions[^1].Id, GraphPortDefaults.FlowOut, printAfterConditions.Id, GraphPortDefaults.FlowIn));
+        for (var index = 0; index < triggers.Count; index++)
+        {
+            connections.Add(Flow($"CONN_CharacterAnimation_Trigger_{index}_Print", triggers[index].Id, GraphPortDefaults.FlowOut, triggerPrints[index].Id, GraphPortDefaults.FlowIn));
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_CharacterAnimationConditions",
+            Name = "Character Animation Conditions",
+            Nodes = [start, .. conditions, printAfterConditions, .. triggers, .. triggerPrints],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "CharacterAnimationConditionsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local currentText = tostring(characterObject.Animator.CurrentAnimation or \"\")", luau);
+        Assert.Contains("local expectedText = tostring(\"Run\" or \"Idle\")", luau);
+        Assert.Contains("return characterObject ~= nil and characterObject.Animator ~= nil", luau);
+        Assert.Contains("local currentText = tostring(characterObject.CurrentState or \"\")", luau);
+        Assert.Contains("local expectedText = tostring(\"Running\" or \"Idle\")", luau);
+        Assert.Contains("local currentNumber = tonumber(characterObject.CurrentSpeed) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(1.25) or 1", luau);
+        Assert.Contains("local expectedNumber = tonumber(2) or 1", luau);
+        Assert.Contains("return currentNumber >= expectedNumber", luau);
+        Assert.Contains("return currentNumber <= expectedNumber", luau);
+        Assert.Contains("return characterObject:GetAttachment(attachmentValue) ~= nil", luau);
+        Assert.Contains("return tostring(triggerObject.Animator.CurrentAnimation or \"\")", luau);
+        Assert.Contains("local expectedAnimation = tostring(\"Run\" or \"Idle\")", luau);
+        Assert.Contains("return currentValue == expectedAnimation, currentValue", luau);
+        Assert.Contains("return tostring(triggerObject.CurrentState or \"\")", luau);
+        Assert.Contains("local expectedState = tostring(\"Running\" or \"Idle\")", luau);
+        Assert.Contains("return currentValue == expectedState, currentValue", luau);
+        Assert.Contains("local watchedSpeed = tonumber(1.25) or 1", luau);
+        Assert.Contains("return currentValue >= watchedSpeed, currentValue", luau);
+        Assert.Contains("return triggerObject:GetAttachment(attachmentValue)", luau);
+        Assert.Contains("characterAnimation = currentValue", luau);
+        Assert.Contains("characterAnimationSpeed = currentValue", luau);
+        Assert.Contains("characterAttachment = currentValue", luau);
+        Assert.Contains("character animation conditions passed", luau);
+        Assert.Contains("character animation watcher 5", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsCharacterAppearanceConditions()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var accessoryAttachment = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_AccessoryAttachmentIs"), stableId: "COND_AccessoryAttachment");
+        var clothingHasImage = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_ClothingHasImage"), stableId: "COND_ClothingImage");
+        var faceImage = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_CharacterFaceImageIs"), stableId: "COND_FaceImage");
+        var notRagdolling = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "COND_CharacterIsNotRagdolling"), stableId: "COND_NotRagdolling");
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_Message");
+
+        SetSceneObject(accessoryAttachment, "target", "World/Players/NPC/Hat");
+        SetSceneObject(clothingHasImage, "target", "World/Players/NPC/Shirt");
+        SetSceneObject(faceImage, "target", "World/Players/NPC");
+        SetSceneObject(notRagdolling, "target", "World/Players/NPC");
+        SetConstant(accessoryAttachment, "attachment", "Head");
+        SetConstant(faceImage, "image", "images/face.png");
+
+        var rule = new Rule
+        {
+            Id = "RULE_CharacterAppearanceConditions",
+            Name = "Character Appearance Conditions",
+            Nodes = [start, accessoryAttachment, clothingHasImage, faceImage, notRagdolling, message],
+            Connections =
+            [
+                Flow("CONN_Start_Attachment", start.Id, GraphPortDefaults.FlowOut, accessoryAttachment.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Attachment_Clothing", accessoryAttachment.Id, GraphPortDefaults.TrueOut, clothingHasImage.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Clothing_Face", clothingHasImage.Id, GraphPortDefaults.TrueOut, faceImage.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Face_Ragdoll", faceImage.Id, GraphPortDefaults.TrueOut, notRagdolling.Id, GraphPortDefaults.FlowIn),
+                Flow("CONN_Ragdoll_Message", notRagdolling.Id, GraphPortDefaults.TrueOut, message.Id, GraphPortDefaults.FlowIn)
+            ]
+        };
+        var graph = new RuleGraph { Name = "CharacterAppearanceConditionsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local currentText = tostring(targetObject.TargetAttachment or \"\")", luau);
+        Assert.Contains("local expectedText = tostring(\"Head\" or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.Image or \"\") ~= \"\"", luau);
+        Assert.Contains("local currentText = tostring(targetObject.FaceImage or \"\")", luau);
+        Assert.Contains("local expectedText = tostring(\"images/face.png\" or \"\")", luau);
+        Assert.Contains("return (targetObject.Ragdolling == true) == false", luau);
+        Assert.DoesNotContain("Accessory Attachment Is is not implemented", luau);
+        Assert.DoesNotContain("Character Is Not Ragdolling is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsCharacterAppearanceActionsValuesAndEvents()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var ragdollStarted = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnCharacterRagdollStarted"), stableId: "TRG_RagdollStarted");
+        var ragdollStopped = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnCharacterRagdollStopped"), stableId: "TRG_RagdollStopped");
+        var actionIds = new[]
+        {
+            "ACT_SetAccessoryAttachment",
+            "ACT_SetClothingImage",
+            "ACT_SetCharacterFaceImage",
+            "ACT_SetCharacterBodyMesh",
+            "ACT_SetCharacterBodyColor",
+            "ACT_LoadCharacterAppearance",
+            "ACT_ClearCharacterAppearance",
+            "ACT_StartCharacterRagdoll",
+            "ACT_StopCharacterRagdoll"
+        };
+        var valueIds = new[]
+        {
+            "PROP_AccessoryAttachment",
+            "PROP_ClothingImage",
+            "PROP_CharacterFaceImage",
+            "PROP_CharacterBodyMesh",
+            "PROP_CharacterBodyColor",
+            "PROP_CharacterRagdolling",
+            "PROP_CharacterRagdollPosition",
+            "PROP_CharacterRagdollRotation"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_CharacterAppearance_{index}"))
+            .ToList();
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_CharacterAppearance_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintCharacterAppearance_{index}"))
+            .ToList();
+        var startedPrint = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintRagdollStarted");
+        var stoppedPrint = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: "ACT_PrintRagdollStopped");
+
+        SetSceneObject(actions[0], "target", "World/Characters/Hero/Hat");
+        SetSceneObject(actions[1], "target", "World/Characters/Hero/Shirt");
+        foreach (var node in actions.Skip(2).Concat(new[] { ragdollStarted, ragdollStopped }))
+        {
+            SetSceneObject(node, "target", "World/Characters/Hero");
+        }
+
+        SetSceneObject(valueNodes[0], "target", "World/Characters/Hero/Hat");
+        SetSceneObject(valueNodes[1], "target", "World/Characters/Hero/Shirt");
+        foreach (var node in valueNodes.Skip(2))
+        {
+            SetSceneObject(node, "target", "World/Characters/Hero");
+        }
+
+        SetConstant(actions[0], "attachment", "HandRight");
+        SetConstant(actions[1], "image", "images/shirt.png");
+        SetConstant(actions[2], "image", "images/face.png");
+        SetConstant(actions[3], "mesh", "meshes/body.mesh");
+        SetConstant(actions[4], "bodyPart", "Left Arm");
+        SetConstant(actions[4], "r", "0.2");
+        SetConstant(actions[4], "g", "0.4");
+        SetConstant(actions[4], "b", "0.6");
+        SetConstant(actions[5], "userId", "12345");
+        SetConstant(actions[5], "loadTools", "false");
+        SetConstant(actions[7], "x", "1");
+        SetConstant(actions[7], "y", "2");
+        SetConstant(actions[7], "z", "3");
+        SetConstant(valueNodes[4], "bodyPart", "Left Arm");
+        SetConstant(startedPrint, "value", "started");
+        SetConstant(stoppedPrint, "value", "stopped");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_Appearance0", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_RagdollStarted_Print", ragdollStarted.Id, GraphPortDefaults.FlowOut, startedPrint.Id, GraphPortDefaults.FlowIn),
+            Flow("CONN_RagdollStopped_Print", ragdollStopped.Id, GraphPortDefaults.FlowOut, stoppedPrint.Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_CharacterAppearance_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_CharacterAppearance_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_CharacterAppearance_Value_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_CharacterAppearance_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_CharacterAppearance",
+            Name = "Character Appearance",
+            Nodes = [start, ragdollStarted, ragdollStopped, .. actions, .. valueNodes, .. printNodes, startedPrint, stoppedPrint],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "CharacterAppearanceGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("targetObject.TargetAttachment = attachmentValue", luau);
+        Assert.Contains("targetObject.Image = tostring(\"images/shirt.png\")", luau);
+        Assert.Contains("targetObject.FaceImage = tostring(\"images/face.png\")", luau);
+        Assert.Contains("targetObject.BodyMesh = tostring(\"meshes/body.mesh\")", luau);
+        Assert.Contains("local bodyPartName = tostring(\"Left Arm\" or \"Head\")", luau);
+        Assert.Contains("characterObject.LeftArmColor = bodyColor", luau);
+        Assert.Contains("characterObject:LoadAppearance(math.floor(tonumber(12345) or 0), false)", luau);
+        Assert.Contains("characterObject:ClearAppearance()", luau);
+        Assert.Contains("characterObject:StartRagdoll(makeVector3(1, 2, 3))", luau);
+        Assert.Contains("characterObject:StopRagdoll()", luau);
+        Assert.Contains("return tostring(targetObject.TargetAttachment or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.Image or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.FaceImage or \"\")", luau);
+        Assert.Contains("return tostring(targetObject.BodyMesh or \"\")", luau);
+        Assert.Contains("return characterObject.LeftArmColor or Color.New(1, 1, 1, 1)", luau);
+        Assert.Contains("return targetObject.Ragdolling == true", luau);
+        Assert.Contains("return targetObject.RagdollPosition", luau);
+        Assert.Contains("return targetObject.RagdollRotation", luau);
+        Assert.Contains("triggerObject.RagdollStarted:Connect(function()", luau);
+        Assert.Contains("triggerObject.RagdollStopped:Connect(function()", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, character = triggerObject }", luau);
+        Assert.DoesNotContain("Set Accessory Attachment is not implemented", luau);
+        Assert.DoesNotContain("Character Ragdoll Position is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsWorldMarkerTrussAndEntityActionsAndValues()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_Start");
+        var actionIds = new[]
+        {
+            "ACT_SetMarkerLength",
+            "ACT_SetMarkerAppearsOnTop",
+            "ACT_SetMarkerVisibleInDev",
+            "ACT_SetTrussClimbSpeed",
+            "ACT_SetEntityCastsShadows",
+            "ACT_SetEntityIsSpawn",
+            "ACT_SetEntityColor"
+        };
+        var valueIds = new[]
+        {
+            "PROP_MarkerLength",
+            "PROP_MarkerAppearsOnTop",
+            "PROP_MarkerVisibleInDev",
+            "PROP_TrussClimbSpeed",
+            "PROP_EntityCastsShadows",
+            "PROP_EntityIsSpawn",
+            "PROP_EntityColor"
+        };
+        var actions = actionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"ACT_WorldMarker_{index}"))
+            .ToList();
+        var valueNodes = valueIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"PROP_WorldMarker_{index}"))
+            .ToList();
+        var printNodes = valueIds
+            .Select((_, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_PrintValue"), stableId: $"ACT_PrintWorldMarker_{index}"))
+            .ToList();
+
+        foreach (var node in actions.Take(3).Concat(valueNodes.Take(3)))
+        {
+            SetSceneObject(node, "target", "World/Environment/Quest Marker");
+        }
+
+        SetSceneObject(actions[3], "target", "World/Environment/Ladder");
+        SetSceneObject(valueNodes[3], "target", "World/Environment/Ladder");
+        foreach (var node in actions.Skip(4).Concat(valueNodes.Skip(4)))
+        {
+            SetSceneObject(node, "target", "World/Environment/Spawn Block");
+        }
+
+        SetConstant(actions[0], "length", "7.5");
+        SetConstant(actions[1], "enabled", "false");
+        SetConstant(actions[2], "enabled", "false");
+        SetConstant(actions[3], "speed", "12");
+        SetConstant(actions[4], "enabled", "false");
+        SetConstant(actions[5], "enabled", "true");
+        SetConstant(actions[6], "r", "0.25");
+        SetConstant(actions[6], "g", "0.5");
+        SetConstant(actions[6], "b", "0.75");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_WorldMarker0", start.Id, GraphPortDefaults.FlowOut, actions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < actions.Count; index++)
+        {
+            if (index + 1 < actions.Count)
+            {
+                connections.Add(Flow($"CONN_WorldMarker_Action_{index}_{index + 1}", actions[index].Id, GraphPortDefaults.FlowOut, actions[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+            else
+            {
+                connections.Add(Flow("CONN_WorldMarker_Print0", actions[index].Id, GraphPortDefaults.FlowOut, printNodes[0].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        for (var index = 0; index < printNodes.Count; index++)
+        {
+            connections.Add(Value($"CONN_WorldMarker_Value_{index}", valueNodes[index].Id, GraphPortDefaults.ValueOut, printNodes[index].Id, GraphPortDefaults.ParameterPortId("value")));
+            if (index + 1 < printNodes.Count)
+            {
+                connections.Add(Flow($"CONN_WorldMarker_Print_{index}_{index + 1}", printNodes[index].Id, GraphPortDefaults.FlowOut, printNodes[index + 1].Id, GraphPortDefaults.FlowIn));
+            }
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_WorldMarker",
+            Name = "World Marker",
+            Nodes = [start, .. actions, .. valueNodes, .. printNodes],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "WorldMarkerGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("targetObject.Length = 7.5", luau);
+        Assert.Contains("targetObject.AppearOnTop = false", luau);
+        Assert.Contains("targetObject.VisibleInDev = false", luau);
+        Assert.Contains("targetObject.ClimbSpeed = 12", luau);
+        Assert.Contains("targetObject.CastShadows = false", luau);
+        Assert.Contains("targetObject.IsSpawn = true", luau);
+        Assert.Contains("targetObject.Color = Color.New(0.25, 0.5, 0.75, 1)", luau);
+        Assert.Contains("return tonumber(targetObject.Length) or 0", luau);
+        Assert.Contains("return targetObject.AppearOnTop == true", luau);
+        Assert.Contains("return targetObject.VisibleInDev == true", luau);
+        Assert.Contains("return tonumber(targetObject.ClimbSpeed) or 0", luau);
+        Assert.Contains("return targetObject.CastShadows == true", luau);
+        Assert.Contains("return targetObject.IsSpawn == true", luau);
+        Assert.Contains("return targetObject.Color", luau);
+        Assert.DoesNotContain("Set Marker Length is not implemented", luau);
+        Assert.DoesNotContain("Entity Color is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsWorldMarkerTrussAndEntityConditions()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var start = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "EV_OnStart"), stableId: "TRG_StartWorldMarkerConditions");
+        var conditionIds = new[]
+        {
+            "COND_MarkerLengthAtLeast",
+            "COND_MarkerAppearsOnTop",
+            "COND_MarkerVisibleInDev",
+            "COND_TrussClimbSpeedAtLeast",
+            "COND_EntityCastsShadows",
+            "COND_EntityIsSpawn",
+            "COND_EntityColorIs"
+        };
+        var conditions = conditionIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"COND_WorldMarker_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_WorldMarkerConditionMessage");
+
+        foreach (var node in conditions.Take(3))
+        {
+            SetSceneObject(node, "target", "World/Environment/Quest Marker");
+        }
+
+        SetSceneObject(conditions[3], "target", "World/Environment/Ladder");
+        foreach (var node in conditions.Skip(4))
+        {
+            SetSceneObject(node, "target", "World/Environment/Spawn Block");
+        }
+
+        SetConstant(conditions[0], "length", "7.5");
+        SetConstant(conditions[3], "speed", "12");
+        SetConstant(conditions[6], "r", "0.25");
+        SetConstant(conditions[6], "g", "0.5");
+        SetConstant(conditions[6], "b", "0.75");
+
+        var connections = new List<GraphConnection>
+        {
+            Flow("CONN_Start_WorldMarkerCondition0", start.Id, GraphPortDefaults.FlowOut, conditions[0].Id, GraphPortDefaults.FlowIn)
+        };
+        for (var index = 0; index < conditions.Count; index++)
+        {
+            var toNodeId = index + 1 < conditions.Count ? conditions[index + 1].Id : message.Id;
+            connections.Add(Flow($"CONN_WorldMarkerCondition_{index}", conditions[index].Id, GraphPortDefaults.TrueOut, toNodeId, GraphPortDefaults.FlowIn));
+        }
+
+        var rule = new Rule
+        {
+            Id = "RULE_WorldMarkerConditions",
+            Name = "World Marker Conditions",
+            Nodes = [start, .. conditions, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "WorldMarkerConditionsGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local currentNumber = tonumber(targetObject.Length) or 0", luau);
+        Assert.Contains("local expectedNumber = tonumber(7.5) or 0", luau);
+        Assert.Contains("return (targetObject.AppearOnTop == true) == true", luau);
+        Assert.Contains("return (targetObject.VisibleInDev == true) == true", luau);
+        Assert.Contains("local currentNumber = tonumber(targetObject.ClimbSpeed) or 0", luau);
+        Assert.Contains("return (targetObject.CastShadows == true) == true", luau);
+        Assert.Contains("return (targetObject.IsSpawn == true) == true", luau);
+        Assert.Contains("local expectedColor = Color.New(0.25, 0.5, 0.75, 1)", luau);
+        Assert.Contains("return targetObject.Color == expectedColor", luau);
+        Assert.DoesNotContain("Marker Length At Least is not implemented", luau);
+        Assert.DoesNotContain("Entity Color Is is not implemented", luau);
+    }
+
+    [Fact]
+    public void ExportRuleToLuau_EmitsWorldMarkerTrussAndEntityWatcherTriggers()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var triggerIds = new[]
+        {
+            "EV_OnMarkerLengthReached",
+            "EV_OnMarkerAppearsOnTopEnabled",
+            "EV_OnMarkerVisibleInDevEnabled",
+            "EV_OnTrussClimbSpeedReached",
+            "EV_OnEntityStartedCastingShadows",
+            "EV_OnEntityBecameSpawn",
+            "EV_OnEntityColorChanged"
+        };
+        var triggers = triggerIds
+            .Select((id, index) => NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == id), stableId: $"TRG_WorldMarkerWatcher_{index}"))
+            .ToList();
+        var message = NodeCatalogService.CreateNode(catalog.Nodes.Single(node => node.IdBase == "ACT_ShowMessage"), stableId: "ACT_WorldMarkerWatcherMessage");
+
+        foreach (var node in triggers.Take(3))
+        {
+            SetSceneObject(node, "target", "World/Environment/Quest Marker");
+        }
+
+        SetSceneObject(triggers[3], "target", "World/Environment/Ladder");
+        foreach (var node in triggers.Skip(4))
+        {
+            SetSceneObject(node, "target", "World/Environment/Spawn Block");
+        }
+
+        SetConstant(triggers[0], "length", "7.5");
+        SetConstant(triggers[3], "speed", "12");
+
+        var connections = triggers
+            .Select((trigger, index) => Flow($"CONN_WorldMarkerWatcher_{index}", trigger.Id, GraphPortDefaults.FlowOut, message.Id, GraphPortDefaults.FlowIn))
+            .ToList();
+
+        var rule = new Rule
+        {
+            Id = "RULE_WorldMarkerWatchers",
+            Name = "World Marker Watchers",
+            Nodes = [.. triggers, message],
+            Connections = connections
+        };
+        var graph = new RuleGraph { Name = "WorldMarkerWatchersGraph", Rules = [rule] };
+
+        var luau = new LuauExporter().ExportRuleToLuau(rule, graph, catalog.Nodes);
+
+        Assert.Contains("local watchedLimit = tonumber(7.5) or 10", luau);
+        Assert.Contains("return tonumber(triggerObject.Length) or 0", luau);
+        Assert.Contains("return triggerObject.AppearOnTop == true", luau);
+        Assert.Contains("return triggerObject.VisibleInDev == true", luau);
+        Assert.Contains("local watchedLimit = tonumber(12) or 12", luau);
+        Assert.Contains("return tonumber(triggerObject.ClimbSpeed) or 0", luau);
+        Assert.Contains("return triggerObject.CastShadows == true", luau);
+        Assert.Contains("return triggerObject.IsSpawn == true", luau);
+        Assert.Contains("return triggerObject.Color", luau);
+        Assert.Contains("local previousMatched = readMatched() == true", luau);
+        Assert.Contains("local previousValue = readWatchedValue()", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, markerLength = currentValue }", luau);
+        Assert.Contains("local triggerContext = { object = triggerObject, entityColor = currentValue }", luau);
+        Assert.DoesNotContain("On Marker Length Reached is not implemented", luau);
+        Assert.DoesNotContain("On Entity Color Changed is not implemented", luau);
     }
 
     private static GraphConnection Flow(string id, string fromNodeId, string fromPortId, string toNodeId, string toPortId)
@@ -5126,6 +9575,10 @@ public sealed class LuauExporterTests
                 SetConstant(recipe, "b", "0.75");
                 break;
             case "ObjectName":
+            case "ObjectTypeName":
+            case "ObjectNetworkKey":
+            case "ObjectSaveKey":
+            case "ObjectIsNetworkedValue":
                 SetConstant(recipe, "target", "Self");
                 break;
             case "ObjectXPosition":

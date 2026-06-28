@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.grabbable.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_GrabMaxRangeAtLeast",
+  "type": "GrabMaxRangeAtLeast",
+  "apiType": "Grabbable.MaxRange",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "MaxRange", "coverage": "Direct" }
+  ],
+  "label": "Grab Drag Range At Least",
+  "value": "target=Self;range=30",
+  "description": "Checks if a grabbed object can be dragged at least the expected distance.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} grab drag range is at least ${range}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["grab", "grabbable", "drag", "range", "distance", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "range", "label": "Minimum Range", "type": "Number", "control": "Number", "required": true, "default": "30", "description": "Minimum drag range.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a grabbed object can be dragged far enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

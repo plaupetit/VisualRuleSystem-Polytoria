@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "Text Input",
+  "idBase": "COND_TextInputTextIs",
+  "type": "TextInputTextIs",
+  "apiType": "UITextInput.Text",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "Text", "coverage": "Direct" }
+  ],
+  "label": "Text Input Text Is",
+  "value": "target=Self;text=Hello;caseSensitive=false",
+  "description": "Checks if a text input currently contains the expected text.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} input text is ${text}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "text input", "field", "text", "equals", "match"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Text Input", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Text input object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["UITextInputObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "text", "label": "Expected Text", "type": "String", "control": "Text", "required": true, "default": "Hello", "description": "Text to compare with.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check what a player typed in a text input.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

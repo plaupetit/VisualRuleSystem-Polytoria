@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.animation.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Characters",
+  "idBase": "COND_CharacterStateIs",
+  "type": "CharacterStateIs",
+  "apiType": "CharacterModel.CurrentState",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "CurrentState", "coverage": "Direct" },
+    { "type": "CharacterModelState", "memberKind": "Enum", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Character State Is",
+  "value": "target=Self;state=Idle",
+  "description": "Checks if a character is in the expected animation state.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} state is ${state}",
+  "searchKeywords": ["character", "animation", "state", "idle", "walking", "running", "jumping", "climbing"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "state", "label": "State", "type": "String", "control": "Choice", "required": true, "default": "Idle", "description": "Character animation state to compare.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Idle", "Walking", "Running", "Jumping", "Climbing"] }
+  ],
+  "beginnerSummary": "Check whether a character is idle, walking, running, jumping, or climbing.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

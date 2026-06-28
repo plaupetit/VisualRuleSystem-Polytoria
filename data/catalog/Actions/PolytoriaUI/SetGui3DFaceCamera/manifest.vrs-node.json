@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.ui.3d",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "3D UI",
+  "idBase": "ACT_SetGui3DFaceCamera",
+  "type": "SetGui3DFaceCamera",
+  "apiType": "GUI3D.FaceCamera",
+  "apiReferences": [
+    { "type": "GUI3D", "memberKind": "Property", "member": "FaceCamera", "coverage": "Direct" }
+  ],
+  "label": "Set 3D UI Face Camera",
+  "value": "target=Self;faceCamera=true",
+  "description": "Makes a 3D GUI face the camera or keep its own rotation.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} face camera to ${faceCamera}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "3d", "gui3d", "billboard", "face", "camera"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "3D UI",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "3D UI", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D GUI to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GUI3DObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] },
+    { "key": "faceCamera", "label": "Face Camera", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Whether the 3D UI should face the camera.", "valueSource": "Boolean / Manual" }
+  ],
+  "beginnerSummary": "Do make a 3D UI face the player's camera.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "3D UI"]
+}

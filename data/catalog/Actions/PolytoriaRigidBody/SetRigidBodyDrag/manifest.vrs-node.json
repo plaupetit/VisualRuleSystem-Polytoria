@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.rigidbody.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Physics",
+  "idBase": "ACT_SetRigidBodyDrag",
+  "type": "SetRigidBodyDrag",
+  "apiType": "RigidBody.Drag",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Drag", "coverage": "Direct" }
+  ],
+  "label": "Set Rigid Body Drag",
+  "value": "target=Self;drag=0",
+  "description": "Sets how much a RigidBody slows down while moving.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} drag to ${drag}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "drag", "slow", "air resistance"],
+  "selectorHints": [
+    { "key": "target", "label": "Rigid Body", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose drag will change.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "drag", "label": "Drag", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "New linear drag value.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Set how quickly a moving rigid body slows down.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

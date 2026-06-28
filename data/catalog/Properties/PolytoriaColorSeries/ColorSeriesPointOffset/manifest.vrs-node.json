@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.colorseries.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Color Series",
+  "idBase": "PROP_ColorSeriesPointOffset",
+  "type": "ColorSeriesPointOffset",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "ColorSeries", "memberKind": "Method", "member": "GetOffset", "coverage": "Direct" }
+  ],
+  "label": "Color Series Point Offset",
+  "value": "point=1",
+  "description": "Outputs the offset stored at a ColorSeries point.",
+  "status": "Ready",
+  "previewTemplate": "Color series point ${point} offset",
+  "searchKeywords": ["color series", "gradient", "point", "offset", "get offset", "colorseries"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "series", "label": "Color Series", "type": "ColorSeries", "control": "Text", "required": true, "default": "", "description": "ColorSeries value to inspect.", "valueSource": "Color Series" },
+    { "key": "point", "label": "Point", "type": "Number", "control": "Number", "required": true, "default": "1", "min": 0, "step": 1, "description": "Point index to read.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Value: read one point offset from a gradient.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Color Series"]
+}

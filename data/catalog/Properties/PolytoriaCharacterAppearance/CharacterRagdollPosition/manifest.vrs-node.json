@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Character Appearance",
+  "idBase": "PROP_CharacterRagdollPosition",
+  "type": "CharacterRagdollPosition",
+  "apiType": "PolytorianModel.RagdollPosition",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "RagdollPosition", "coverage": "Direct" },
+    { "type": "Vector3", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Character Ragdoll Position",
+  "value": "target=Self",
+  "description": "Reads the current ragdoll position from a character model.",
+  "status": "Ready",
+  "returnType": "Vector",
+  "previewTemplate": "${target} ragdoll position",
+  "searchKeywords": ["character", "ragdoll", "position", "physics", "fall"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Value returns the character ragdoll position.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Ragdoll"]
+}

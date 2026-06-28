@@ -24,6 +24,8 @@ namespace Vrs.Core.Persistence;
 [JsonSerializable(typeof(CommandResultEntry))]
 [JsonSerializable(typeof(CommandResultDetails))]
 [JsonSerializable(typeof(BridgeStatus))]
+[JsonSerializable(typeof(BridgeAppState))]
+[JsonSerializable(typeof(SnapshotRequest))]
 [JsonSerializable(typeof(AppHeartbeat))]
 [JsonSerializable(typeof(VrsManagedInputRegistry))]
 [JsonSerializable(typeof(VrsManagedInputRecord))]

@@ -7,6 +7,7 @@ public sealed partial class LuauExporter
 {
     private static bool IsInputEventRuntimeNode(string nodeType)
         => nodeType.Equals("SendInputEvent", StringComparison.OrdinalIgnoreCase) ||
+            nodeType.Equals("SendInputTextEvent", StringComparison.OrdinalIgnoreCase) ||
             nodeType.Equals("OnVrsInputEvent", StringComparison.OrdinalIgnoreCase);
 
     private static void AppendReadableInputEventRuntime(StringBuilder builder)
@@ -46,14 +47,24 @@ public sealed partial class LuauExporter
         builder.AppendLine("end");
         builder.AppendLine();
         builder.AppendLine("local function vrsResolveInputNetworkEvent(actionName)");
-        builder.AppendLine("    local current = Hidden");
-        builder.AppendLine("    for _, segment in ipairs({ \"VRS\", \"Events\", \"Input\", vrsInputEventName(actionName) }) do");
-        builder.AppendLine("        current = vrsFindInputChild(current, segment)");
-        builder.AppendLine("        if current == nil then");
-        builder.AppendLine("            return nil");
+        builder.AppendLine("    local inputEventName = vrsInputEventName(actionName)");
+        builder.AppendLine("    for _, pathSegments in ipairs({");
+        builder.AppendLine("        { \"VRS\", \"Events\", \"User Input (NetworkEvent)\", \"Input Manager\", inputEventName },");
+        builder.AppendLine("        { \"VRS\", \"Events\", \"User Input (NetworkEvent)\", inputEventName },");
+        builder.AppendLine("        { \"VRS\", \"Events\", \"Input\", inputEventName }");
+        builder.AppendLine("    }) do");
+        builder.AppendLine("        local current = Hidden");
+        builder.AppendLine("        for _, segment in ipairs(pathSegments) do");
+        builder.AppendLine("            current = vrsFindInputChild(current, segment)");
+        builder.AppendLine("            if current == nil then");
+        builder.AppendLine("                break");
+        builder.AppendLine("            end");
+        builder.AppendLine("        end");
+        builder.AppendLine("        if current ~= nil then");
+        builder.AppendLine("            return current");
         builder.AppendLine("        end");
         builder.AppendLine("    end");
-        builder.AppendLine("    return current");
+        builder.AppendLine("    return nil");
         builder.AppendLine("end");
     }
 
@@ -66,6 +77,9 @@ public sealed partial class LuauExporter
     {
         var indent = IndentText(indentLevel);
         var actionName = ParameterExpression(rule, action, nodesById, "inputAction", "String", "Jump");
+        var payload = action.Type.Equals("SendInputTextEvent", StringComparison.OrdinalIgnoreCase)
+            ? ParameterExpression(rule, action, nodesById, "payload", "String", "")
+            : null;
         builder.AppendLine($"{indent}local inputActionName = tostring({actionName.Code})");
         builder.AppendLine($"{indent}local inputEvent = vrsResolveInputNetworkEvent(inputActionName)");
         builder.AppendLine($"{indent}if inputEvent == nil or inputEvent.InvokeServer == nil then");
@@ -77,6 +91,15 @@ public sealed partial class LuauExporter
         builder.AppendLine($"{indent}    return");
         builder.AppendLine($"{indent}end");
         builder.AppendLine($"{indent}local inputMessage = NetMessage:New()");
+        if (payload is not null)
+        {
+            builder.AppendLine($"{indent}if inputMessage.AddString ~= nil then");
+            builder.AppendLine($"{indent}    inputMessage:AddString(tostring({payload.Code}))");
+            builder.AppendLine($"{indent}else");
+            builder.AppendLine($"{indent}    print(\"Send Input Text Event warning: NetMessage:AddString is not available; sending an empty message.\")");
+            builder.AppendLine($"{indent}end");
+        }
+
         builder.AppendLine($"{indent}inputEvent:InvokeServer(inputMessage)");
     }
 

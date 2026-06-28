@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.environment",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_AutoGenerateNavMesh",
+  "type": "AutoGenerateNavMeshValue",
+  "apiType": "Environment.AutoGenerateNavMesh",
+  "apiReferences": [
+    { "type": "Environment", "memberKind": "Property", "member": "AutoGenerateNavMesh", "coverage": "Direct" }
+  ],
+  "label": "Auto Nav Mesh",
+  "value": "",
+  "description": "Reads whether NPC navigation is rebuilt automatically.",
+  "status": "Ready",
+  "returnType": "Boolean",
+  "previewTemplate": "Auto nav mesh",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "environment", "navmesh", "navigation", "npc", "path"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value returns whether automatic navigation rebuilds are enabled.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Environment"]
+}

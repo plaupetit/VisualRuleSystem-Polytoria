@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.teams.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Shared",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_TriggeringPlayerGameTeam",
   "type": "TriggeringPlayerGameTeam",
   "apiType": "SceneObject",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Team", "coverage": "Direct" }
+  ],
   "label": "Triggering Player Game Team",
   "value": "",
   "description": "Outputs the game team assigned to the triggering player.",

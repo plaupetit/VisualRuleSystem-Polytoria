@@ -232,6 +232,7 @@ public sealed partial class NodeParameterEditorViewModel
                 Search: recipeBrowserSearch,
                 ScriptKind: GraphScriptKind.Server,
                 CompatibleOnly: true,
+                ApiSurfaceFilter: NodePaletteApiSurfaceFilter.All,
                 CurrentIntentKey: "Value",
                 CurrentDomainPath: recipeBrowserCurrentDomainPath,
                 IncompatibilityReason: RecipeBrowserIncompatibilityReason));

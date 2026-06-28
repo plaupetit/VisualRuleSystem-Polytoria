@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.rigidbody.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Physics",
+  "idBase": "EV_OnRigidBodyFrictionReached",
+  "type": "OnRigidBodyFrictionReached",
+  "apiType": "RigidBody.Friction",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Friction", "coverage": "Partial" }
+  ],
+  "label": "On Rigid Body Friction Reached",
+  "value": "target=Self;friction=0.5;interval=0.25",
+  "description": "Starts when a RigidBody friction reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} friction reaches ${friction}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "friction", "grip", "threshold", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "friction", "label": "Friction", "type": "Number", "control": "Number", "required": true, "default": "0.5", "description": "Friction threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks friction.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a rigid body gets enough friction.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body Changes"]
+}

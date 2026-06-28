@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.audio.conditions",
+  "kind": "Condition",
+  "apiGroup": "Audio",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Audio",
+  "idBase": "COND_SoundVolumeAtMost",
+  "type": "SoundVolumeAtMost",
+  "apiType": "Sound",
+  "apiReferences": [
+    { "type": "Sound", "memberKind": "Property", "member": "Volume", "coverage": "Direct" }
+  ],
+  "label": "Sound Volume Is At Most",
+  "value": "target=Self;volume=0.25",
+  "description": "Checks if a sound is this quiet or quieter.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} volume is at most ${volume}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "sound", "volume", "quiet", "at most", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SoundObject"]
+    },
+    {
+      "key": "volume",
+      "label": "Volume",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.25",
+      "description": "Maximum volume.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a sound is quiet enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Audio", "Settings"]
+}

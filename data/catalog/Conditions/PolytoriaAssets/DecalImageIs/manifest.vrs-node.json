@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Images",
+  "idBase": "COND_DecalImageIs",
+  "type": "DecalImageIs",
+  "apiType": "Decal.Image",
+  "apiReferences": [
+    { "type": "Decal", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Decal Image Is",
+  "value": "target=Self;image=;caseSensitive=false",
+  "description": "Checks if a Decal uses the expected image asset reference.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} decal image is ${image}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["decal", "image", "asset", "texture", "equals", "match"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Decal", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Decal object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "image", "label": "Expected Image", "type": "String", "control": "Text", "required": true, "default": "", "description": "Image asset reference to compare with.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a Decal uses a specific image.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

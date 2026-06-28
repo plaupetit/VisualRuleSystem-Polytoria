@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.ui.3d.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "3D UI",
+  "idBase": "EV_OnGui3DFaceCameraEnabled",
+  "type": "OnGui3DFaceCameraEnabled",
+  "apiType": "GUI3D.FaceCamera",
+  "apiReferences": [{ "type": "GUI3D", "memberKind": "Property", "member": "FaceCamera", "coverage": "Partial" }],
+  "label": "On 3D UI Faces Camera Enabled",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a 3D UI begins facing the camera.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} starts facing camera",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui3d", "3d", "camera", "billboard", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "3D UI", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D UI to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["GUI3DObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the 3D UI.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a 3D UI starts facing the camera.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "3D UI Changes"]
+}

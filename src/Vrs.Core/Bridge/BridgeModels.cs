@@ -207,6 +207,59 @@ public sealed class BridgeStatus
 }
 
 /// <summary>
+/// Small editor state summary published for Creator-side diagnostics.
+/// </summary>
+/// <remarks>
+/// The Creator addon reads this as status context only. Scene mutations still
+/// flow through explicit bridge commands handled by Creator.
+/// </remarks>
+public sealed class BridgeAppState
+{
+    public string Format { get; set; } = "visual-programming-bridge-app-state";
+    public int Version { get; set; } = 1;
+    public string App { get; set; } = "VisualRuleSystem";
+    public string SessionId { get; set; } = "";
+    public bool Focused { get; set; }
+    public int ProcessId { get; set; }
+    public string UpdatedAtUtc { get; set; } = "";
+    public string ActiveProjectName { get; set; } = "";
+    public string ProjectUiMode { get; set; } = "";
+    public bool ProjectLinked { get; set; }
+    public bool CreatorReady { get; set; }
+    public string ScriptKind { get; set; } = "";
+    public string AuthorScriptName { get; set; } = "";
+    public string CreatorScriptName { get; set; } = "";
+    public string ProjectRelativeScriptPath { get; set; } = "";
+    public string CreatorObjectPath { get; set; } = "";
+    public string SelectedCreatorObjectPath { get; set; } = "";
+    public string DeployParentPath { get; set; } = "";
+    public int NodeCount { get; set; }
+    public int ValidationMessageCount { get; set; }
+    public int ValidationErrorCount { get; set; }
+    public int ValidationWarningCount { get; set; }
+    public string BridgeBeatText { get; set; } = "";
+    public string BridgeBeatDetail { get; set; } = "";
+    public string SnapshotStatus { get; set; } = "";
+    public string StatusText { get; set; } = "";
+    public string LuauPreviewSummary { get; set; } = "";
+    public List<string> RecentLogs { get; set; } = [];
+}
+
+/// <summary>
+/// Snapshot request written by the editor and handled by the Creator addon.
+/// </summary>
+public sealed class SnapshotRequest
+{
+    public string Format { get; set; } = "visual-programming-bridge-snapshot-request";
+    public int Version { get; set; } = 1;
+    public string RequestId { get; set; } = "";
+    public string CreatedAtUtc { get; set; } = "";
+    public string Reason { get; set; } = "";
+    public string Mode { get; set; } = "full";
+    public string SessionId { get; set; } = "";
+}
+
+/// <summary>
 /// Heartbeat written by the editor so bridge-side tools can detect the active VRS session.
 /// </summary>
 public sealed class AppHeartbeat

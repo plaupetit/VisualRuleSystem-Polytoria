@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Images",
+  "idBase": "COND_PTImageAssetIdIs",
+  "type": "PTImageAssetIdIs",
+  "apiType": "PTImageAsset.ImageID",
+  "apiReferences": [
+    { "type": "PTImageAsset", "memberKind": "Property", "member": "ImageID", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "PT Image Asset ID Is",
+  "value": "target=Self;assetId=0",
+  "description": "Checks if a PTImageAsset stores the expected numeric image ID.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} image ID is ${assetId}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["image", "asset", "ptimageasset", "id", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Image Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTImageAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageAssetObject"] },
+    { "key": "assetId", "label": "Asset ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Expected Polytoria image asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether an image asset uses a specific ID.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

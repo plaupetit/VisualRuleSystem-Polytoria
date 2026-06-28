@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Fonts",
+  "idBase": "COND_BuiltInFontPresetIs",
+  "type": "BuiltInFontPresetIs",
+  "apiType": "BuiltInFontAsset.FontPreset",
+  "apiReferences": [
+    { "type": "BuiltInFontAsset", "memberKind": "Property", "member": "FontPreset", "coverage": "Direct" },
+    { "type": "FontAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Built-In Font Preset Is",
+  "value": "target=Self;preset=SourceSans;caseSensitive=true",
+  "description": "Checks if a BuiltInFontAsset uses the expected font preset.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} font preset is ${preset}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["font", "built-in", "preset", "text", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Built-In Font Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BuiltInFontAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["FontAssetObject"] },
+    { "key": "preset", "label": "Preset", "type": "String", "control": "Text", "required": true, "default": "SourceSans", "description": "Expected font preset.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a built-in font asset uses a preset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Fonts"]
+}

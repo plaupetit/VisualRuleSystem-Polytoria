@@ -1,0 +1,157 @@
+{
+  "moduleId": "polytoria.tween.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Tween",
+  "idBase": "ACT_TweenObjectTransparency",
+  "type": "TweenObjectTransparency",
+  "apiType": "TweenObject.TweenNumber",
+  "apiReferences": [
+    { "type": "TweenService", "memberKind": "Method", "member": "NewTween", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenNumber", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Method", "member": "SetTrans", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Method", "member": "SetDirection", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Property", "member": "SpeedScale", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Property", "member": "Looped", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Property", "member": "Parallel", "coverage": "Direct" },
+    { "type": "TweenObject", "memberKind": "Event", "member": "Finished", "coverage": "Direct" }
+  ],
+  "label": "Animate Object Transparency",
+  "value": "target=Self;transparency=0;duration=1;transition=Sine;direction=InOut;speedScale=1;looped=false;parallel=false;waitToComplete=true",
+  "description": "Animates an object's Transparency value for fade in or fade out effects.",
+  "status": "Ready",
+  "previewTemplate": "Animate ${target} transparency to ${transparency}",
+  "searchKeywords": [
+    "do",
+    "tween",
+    "animate",
+    "transparency",
+    "fade",
+    "visible",
+    "invisible",
+    "object",
+    "smooth"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to animate.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [ "PartLike" ]
+    },
+    {
+      "key": "transparency",
+      "label": "Transparency",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Target transparency, usually 0 for visible or 1 for invisible.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "duration",
+      "label": "Duration Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Animation duration in seconds.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "transition",
+      "label": "Transition",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Sine",
+      "description": "Animation transition curve.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic",
+        "Quart",
+        "Quint",
+        "Expo",
+        "Circ",
+        "Back",
+        "Elastic",
+        "Bounce"
+      ]
+    },
+    {
+      "key": "direction",
+      "label": "Direction",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "InOut",
+      "description": "Animation easing direction.",
+      "valueSource": "Suggested Value",
+      "allowCustom": false,
+      "options": [
+        "In",
+        "Out",
+        "InOut"
+      ]
+    },
+    {
+      "key": "speedScale",
+      "label": "Speed Scale",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Multiplier for the tween speed.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "looped",
+      "label": "Loop",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "false",
+      "description": "When true, the tween repeats.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "parallel",
+      "label": "Parallel",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "false",
+      "description": "When true, chained tween steps can run together.",
+      "valueSource": "Suggested Value"
+    },
+    {
+      "key": "waitToComplete",
+      "label": "Wait To Complete",
+      "type": "Boolean",
+      "control": "Boolean",
+      "required": true,
+      "default": "true",
+      "description": "When true, the next action waits for the animation to finish.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do fade an object in or out smoothly.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

@@ -1,0 +1,43 @@
+{
+  "moduleId": "polytoria.gradient_sky.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetGradientSkyColors",
+  "type": "SetGradientSkyColors",
+  "apiType": "GradientSky.SkyGradientTop",
+  "apiReferences": [
+    { "type": "GradientSky", "memberKind": "Property", "member": "SkyGradientTop", "coverage": "Direct" },
+    { "type": "GradientSky", "memberKind": "Property", "member": "SkyGradientBottom", "coverage": "Direct" },
+    { "type": "GradientSky", "memberKind": "Property", "member": "SkyGradientExponent", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Gradient Sky Colors",
+  "value": "target=Self;topR=0.2;topG=0.5;topB=1;bottomR=1;bottomG=0.8;bottomB=0.4;exponent=1",
+  "description": "Changes the top color, bottom color, and exponent on a GradientSky object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} gradient sky colors",
+  "searchKeywords": ["sky", "gradient", "color", "top", "bottom", "lighting", "environment"],
+  "selectorHints": [
+    { "key": "target", "label": "Gradient Sky", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientSky object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GradientSkyObject"] },
+    { "key": "topR", "label": "Top Red", "type": "Number", "control": "Number", "required": true, "default": "0.2", "description": "Top red amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "topG", "label": "Top Green", "type": "Number", "control": "Number", "required": true, "default": "0.5", "description": "Top green amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "topB", "label": "Top Blue", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Top blue amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "bottomR", "label": "Bottom Red", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Bottom red amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "bottomG", "label": "Bottom Green", "type": "Number", "control": "Number", "required": true, "default": "0.8", "description": "Bottom green amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "bottomB", "label": "Bottom Blue", "type": "Number", "control": "Number", "required": true, "default": "0.4", "description": "Bottom blue amount from 0 to 1.", "valueSource": "Suggested Value" },
+    { "key": "exponent", "label": "Gradient Exponent", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "How sharply the sky transitions between colors.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do set the main top and bottom colors of a gradient sky.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sky Gradient"]
+}

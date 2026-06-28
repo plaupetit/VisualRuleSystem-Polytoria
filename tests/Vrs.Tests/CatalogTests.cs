@@ -119,7 +119,7 @@ public sealed class CatalogTests
         var triggers = catalog.Nodes.Where(node => node.Kind == NodeKind.Trigger).ToList();
 
         Assert.NotEmpty(triggers);
-        Assert.Equal(103, triggers.Count);
+        Assert.Equal(110, triggers.Count);
         foreach (var trigger in triggers)
         {
             Assert.Contains("target=Self", trigger.Value, StringComparison.OrdinalIgnoreCase);
@@ -404,13 +404,40 @@ public sealed class CatalogTests
             "ACT_SetMaxHealth",
             "ACT_SetRespawnTime",
             "ACT_SetStamina",
+            "COND_WalkSpeedAtLeast",
+            "COND_JumpPowerAtLeast",
+            "COND_SprintSpeedAtLeast",
+            "COND_MaxHealthAtLeast",
+            "COND_RespawnTimeAtLeast",
+            "COND_StaminaAtLeast",
+            "EV_OnWalkSpeedReached",
+            "EV_OnJumpPowerReached",
+            "EV_OnSprintSpeedReached",
+            "EV_OnMaxHealthReached",
+            "EV_OnRespawnTimeReached",
+            "EV_OnStaminaReached",
+            "ACT_BindInputButtonKey",
+            "ACT_SaveDatastoreValue",
+            "ACT_RemoveDatastoreValue",
             "ACT_TweenObjectPosition",
             "ACT_TweenObjectRotation",
             "ACT_TweenObjectScale",
             "ACT_TweenObjectColor",
+            "ACT_TweenObjectTransparency",
+            "COND_TweenPositionReached",
+            "COND_TweenRotationReached",
+            "COND_TweenScaleReached",
+            "COND_TweenColorReached",
+            "COND_TweenTransparencyReached",
+            "EV_OnTweenPositionReached",
+            "EV_OnTweenRotationReached",
+            "EV_OnTweenScaleReached",
+            "EV_OnTweenColorReached",
+            "EV_OnTweenTransparencyReached",
             "COND_PlayerExists",
             "COND_PlayerCountAtLeast",
             "COND_InputButtonDown",
+            "COND_InputActionExists",
             "COND_ObjectHasTag",
             "COND_ObjectIsA",
             "COND_ObjectHasChild",
@@ -427,6 +454,9 @@ public sealed class CatalogTests
             "PROP_InputAxisValue",
             "PROP_InputVectorX",
             "PROP_InputVectorY",
+            "PROP_InputButtonFromKey",
+            "PROP_DatastoreValue",
+            "PROP_DatastoreKey",
             "PROP_WalkSpeedValue",
             "PROP_JumpPowerValue",
             "PROP_SprintSpeedValue",
@@ -455,7 +485,9 @@ public sealed class CatalogTests
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
         var sendInput = catalog.Nodes.Single(node => node.IdBase == "ACT_SendInputEvent");
+        var sendInputText = catalog.Nodes.Single(node => node.IdBase == "ACT_SendInputTextEvent");
         var receiveInput = catalog.Nodes.Single(node => node.IdBase == "EV_OnVrsInputEvent");
+        var triggeringInputText = catalog.Nodes.Single(node => node.IdBase == "PROP_TriggeringInputText");
 
         Assert.Equal("Ready", sendInput.Status);
         Assert.Equal("Client", sendInput.RuntimeFamily);
@@ -463,6 +495,18 @@ public sealed class CatalogTests
         Assert.True(NodeCatalogService.IsAddable(sendInput));
         Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(sendInput, GraphScriptKind.Local));
         Assert.False(NodeCatalogService.IsCompatibleWithScriptKind(sendInput, GraphScriptKind.Server));
+        Assert.NotEmpty(sendInput.ApiReferences);
+        Assert.Contains(sendInput.ApiReferences, reference => reference.Type == "Hidden" && reference.Coverage == "Indirect");
+
+        Assert.Equal("Ready", sendInputText.Status);
+        Assert.Equal("Client", sendInputText.RuntimeFamily);
+        Assert.Equal("UserFacing", sendInputText.Surface);
+        Assert.True(NodeCatalogService.IsAddable(sendInputText));
+        Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(sendInputText, GraphScriptKind.Local));
+        Assert.False(NodeCatalogService.IsCompatibleWithScriptKind(sendInputText, GraphScriptKind.Server));
+        Assert.Contains(sendInputText.Parameters, parameter => parameter.Key == "payload" && parameter.Type == "String");
+        Assert.Contains(sendInputText.ApiReferences, reference => reference.Type == "NetMessage" && reference.Member == "AddString");
+        Assert.Contains(sendInputText.ApiReferences, reference => reference.Type == "HiddenBase" && reference.Coverage == "Indirect");
 
         Assert.Equal("Ready", receiveInput.Status);
         Assert.Equal("Server", receiveInput.RuntimeFamily);
@@ -471,6 +515,126 @@ public sealed class CatalogTests
         Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(receiveInput, GraphScriptKind.Server));
         Assert.False(NodeCatalogService.IsCompatibleWithScriptKind(receiveInput, GraphScriptKind.Local));
         Assert.Contains(receiveInput.Parameters, parameter => parameter.Key == "inputAction" && parameter.Control == "Choice");
+        Assert.Contains(receiveInput.ApiReferences, reference => reference.Type == "Hidden" && reference.Coverage == "Indirect");
+
+        Assert.Equal("Ready", triggeringInputText.Status);
+        Assert.Equal("Server", triggeringInputText.RuntimeFamily);
+        Assert.Equal("UserFacing", triggeringInputText.Surface);
+        Assert.True(NodeCatalogService.IsAddable(triggeringInputText));
+        Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(triggeringInputText, GraphScriptKind.Server));
+        Assert.False(NodeCatalogService.IsCompatibleWithScriptKind(triggeringInputText, GraphScriptKind.Local));
+        Assert.Contains(triggeringInputText.ApiReferences, reference => reference.Type == "NetMessage" && reference.Member == "GetString");
+    }
+
+    [Fact]
+    public void NetworkedObjectValueNodes_LoadReadyAnnotatedGameplayProperties()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedMembers = new Dictionary<string, string>
+        {
+            ["PROP_ObjectTypeName"] = "ClassName",
+            ["PROP_ObjectNetworkKey"] = "NetworkedObjectID",
+            ["PROP_ObjectSaveKey"] = "ObjectID",
+            ["PROP_ObjectIsNetworked"] = "ExistInNetwork"
+        };
+
+        foreach (var (id, member) in expectedMembers)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Scene Object", "Network"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.Contains(node.ApiReferences, reference =>
+                reference.Type == "NetworkedObject" &&
+                reference.MemberKind == "Property" &&
+                reference.Member == member);
+
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal(["Any"], target.AcceptedObjectGroups);
+        }
+    }
+
+    [Fact]
+    public void ApiCoveragePriorityPacks_LoadReadyAnnotatedNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "ACT_SetUIVisible",
+            "ACT_SetUIImage",
+            "PROP_UIVisible",
+            "PROP_UIImage",
+            "EV_OnTextInputChanged",
+            "EV_OnTextInputSubmitted",
+            "ACT_SetTextInputText",
+            "ACT_SetTextInputPlaceholder",
+            "ACT_SetTextInputReadOnly",
+            "ACT_FocusTextInput",
+            "PROP_TextInputText",
+            "PROP_TextInputPlaceholder",
+            "PROP_TextInputReadOnly",
+            "ACT_SetUIFieldZIndex",
+            "ACT_SetUIFieldIgnoresMouse",
+            "ACT_SetUIFieldClipDescendants",
+            "ACT_SetUIFieldRotation",
+            "ACT_SetUIFieldScale",
+            "ACT_SetScrollViewMode",
+            "ACT_SetGridLayoutColumns",
+            "ACT_SetGridLayoutSpacing",
+            "ACT_SetLayoutSpacing",
+            "ACT_SetLayoutChildAlignment",
+            "ACT_SetGui3DShaded",
+            "ACT_SetGui3DFaceCamera",
+            "ACT_SetGui3DTransparent",
+            "PROP_UIFieldZIndex",
+            "PROP_UIFieldIgnoresMouse",
+            "PROP_UIFieldClipDescendants",
+            "PROP_UIFieldRotation",
+            "PROP_UIFieldScale",
+            "PROP_ScrollViewHorizontalMode",
+            "PROP_ScrollViewVerticalMode",
+            "PROP_GridLayoutColumns",
+            "PROP_GridLayoutSpacing",
+            "PROP_LayoutSpacing",
+            "PROP_LayoutChildAlignment",
+            "PROP_Gui3DShaded",
+            "PROP_Gui3DFaceCamera",
+            "PROP_Gui3DTransparent",
+            "ACT_SetCameraFOV",
+            "PROP_CameraFOV",
+            "ACT_SetValueObjectValue",
+            "PROP_ValueObjectValue",
+            "ACT_SetIntegerValueObject",
+            "PROP_IntegerValueObject",
+            "ACT_SetInstanceValueObject",
+            "PROP_InstanceValueObject",
+            "PROP_WorldIsLocalTest",
+            "PROP_WorldIsOldFormat",
+            "PROP_WorldIdentifier",
+            "PROP_ServerIdentifier",
+            "PROP_WorldUptime",
+            "PROP_ServerTime",
+            "PROP_WorldObjectCount",
+            "ACT_SetDecalImage",
+            "PROP_DecalImage"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.NotEmpty(node.PalettePath);
+        }
     }
 
     [Fact]
@@ -485,22 +649,103 @@ public sealed class CatalogTests
             ["ACT_StopSound"] = ["Audio", "Playback"],
             ["ACT_SetSoundVolume"] = ["Audio", "Settings"],
             ["ACT_SetSoundLoop"] = ["Audio", "Settings"],
+            ["ACT_SetSoundAudio"] = ["Audio", "Settings"],
             ["PROP_SoundVolume"] = ["Audio", "Settings"],
+            ["PROP_SoundAudio"] = ["Audio", "Settings"],
             ["PROP_SoundIsPlaying"] = ["Audio", "Status"],
             ["PROP_SoundLength"] = ["Audio", "Status"],
             ["PROP_SoundTime"] = ["Audio", "Status"],
+            ["COND_SoundIsPlaying"] = ["Audio", "Status"],
+            ["COND_SoundIsLooping"] = ["Audio", "Settings"],
+            ["COND_SoundVolumeAtLeast"] = ["Audio", "Settings"],
+            ["COND_SoundVolumeAtMost"] = ["Audio", "Settings"],
             ["EV_OnSoundLoaded"] = ["Audio", "Playback"],
+            ["EV_OnSoundStarted"] = ["Audio", "Playback"],
+            ["EV_OnSoundStopped"] = ["Audio", "Playback"],
+            ["EV_OnSoundVolumeReached"] = ["Audio", "Settings"],
+            ["EV_OnSoundVolumeDroppedTo"] = ["Audio", "Settings"],
             ["ACT_SetFogEnabled"] = ["Lighting", "Fog"],
             ["ACT_SetFogColor"] = ["Lighting", "Fog"],
             ["ACT_SetFogDistances"] = ["Lighting", "Fog"],
             ["ACT_SetAmbientColor"] = ["Lighting", "Ambient"],
+            ["COND_FogIsEnabled"] = ["Lighting", "Fog"],
+            ["COND_FogStartDistanceAtLeast"] = ["Lighting", "Fog"],
+            ["COND_FogStartDistanceAtMost"] = ["Lighting", "Fog"],
+            ["COND_FogEndDistanceAtLeast"] = ["Lighting", "Fog"],
+            ["COND_FogEndDistanceAtMost"] = ["Lighting", "Fog"],
+            ["EV_OnFogEnabled"] = ["Lighting", "Fog Changes"],
+            ["EV_OnFogDisabled"] = ["Lighting", "Fog Changes"],
+            ["EV_OnFogStartDistanceReached"] = ["Lighting", "Fog Changes"],
+            ["EV_OnFogStartDistanceDroppedTo"] = ["Lighting", "Fog Changes"],
+            ["EV_OnFogEndDistanceReached"] = ["Lighting", "Fog Changes"],
+            ["EV_OnFogEndDistanceDroppedTo"] = ["Lighting", "Fog Changes"],
             ["ACT_SetLightColor"] = ["Lighting", "Light Settings"],
             ["ACT_SetLightBrightness"] = ["Lighting", "Light Settings"],
             ["ACT_SetLightShine"] = ["Lighting", "Light Settings"],
             ["ACT_SetLightShadows"] = ["Lighting", "Light Settings"],
+            ["COND_LightBrightnessAtLeast"] = ["Lighting", "Light Settings"],
+            ["COND_LightBrightnessAtMost"] = ["Lighting", "Light Settings"],
+            ["COND_LightShadowsEnabled"] = ["Lighting", "Light Settings"],
+            ["EV_OnLightBrightnessReached"] = ["Lighting", "Light Changes"],
+            ["EV_OnLightBrightnessDroppedTo"] = ["Lighting", "Light Changes"],
+            ["EV_OnLightShadowsEnabled"] = ["Lighting", "Light Changes"],
+            ["EV_OnLightShadowsDisabled"] = ["Lighting", "Light Changes"],
+            ["ACT_SetSunLightColor"] = ["Lighting", "Sun Light"],
+            ["ACT_SetSunLightBrightness"] = ["Lighting", "Sun Light"],
+            ["ACT_SetSunLightShine"] = ["Lighting", "Sun Light"],
+            ["ACT_SetSunLightShadows"] = ["Lighting", "Sun Light"],
+            ["COND_SunLightBrightnessAtLeast"] = ["Lighting", "Sun Light"],
+            ["COND_SunLightBrightnessAtMost"] = ["Lighting", "Sun Light"],
+            ["COND_SunLightShadowsEnabled"] = ["Lighting", "Sun Light"],
+            ["EV_OnSunLightBrightnessReached"] = ["Lighting", "Sun Light Changes"],
+            ["EV_OnSunLightBrightnessDroppedTo"] = ["Lighting", "Sun Light Changes"],
+            ["EV_OnSunLightShadowsEnabled"] = ["Lighting", "Sun Light Changes"],
+            ["EV_OnSunLightShadowsDisabled"] = ["Lighting", "Sun Light Changes"],
             ["ACT_SetPointLightRange"] = ["Lighting", "Light Reach"],
             ["ACT_SetSpotLightRange"] = ["Lighting", "Light Reach"],
             ["ACT_SetSpotLightAngle"] = ["Lighting", "Light Reach"],
+            ["ACT_SetColorAdjustBrightness"] = ["Lighting", "Color Adjust"],
+            ["ACT_SetColorAdjustContrast"] = ["Lighting", "Color Adjust"],
+            ["ACT_SetColorAdjustSaturation"] = ["Lighting", "Color Adjust"],
+            ["ACT_SetColorAdjustTint"] = ["Lighting", "Color Adjust"],
+            ["ACT_SetProceduralSkySunSize"] = ["Lighting", "Procedural Sky"],
+            ["ACT_SetProceduralSkyTint"] = ["Lighting", "Procedural Sky"],
+            ["ACT_SetProceduralSkyHorizonColor"] = ["Lighting", "Procedural Sky"],
+            ["ACT_SetProceduralSkyGroundColor"] = ["Lighting", "Procedural Sky"],
+            ["ACT_SetProceduralSkyExposure"] = ["Lighting", "Procedural Sky"],
+            ["COND_ProceduralSkySunSizeAtLeast"] = ["Lighting", "Procedural Sky"],
+            ["COND_ProceduralSkyTintIs"] = ["Lighting", "Procedural Sky"],
+            ["COND_ProceduralSkyHorizonColorIs"] = ["Lighting", "Procedural Sky"],
+            ["COND_ProceduralSkyGroundColorIs"] = ["Lighting", "Procedural Sky"],
+            ["COND_ProceduralSkyExposureAtLeast"] = ["Lighting", "Procedural Sky"],
+            ["EV_OnProceduralSkySunSizeReached"] = ["Lighting", "Procedural Sky Changes"],
+            ["EV_OnProceduralSkyTintChanged"] = ["Lighting", "Procedural Sky Changes"],
+            ["EV_OnProceduralSkyHorizonColorChanged"] = ["Lighting", "Procedural Sky Changes"],
+            ["EV_OnProceduralSkyGroundColorChanged"] = ["Lighting", "Procedural Sky Changes"],
+            ["EV_OnProceduralSkyExposureReached"] = ["Lighting", "Procedural Sky Changes"],
+            ["ACT_SetGradientSkyColors"] = ["Lighting", "Sky Gradient"],
+            ["ACT_SetGradientSkySunDisc"] = ["Lighting", "Sky Sun Disc"],
+            ["ACT_SetGradientSkySunHalo"] = ["Lighting", "Sky Sun Halo"],
+            ["ACT_SetGradientSkyHorizonLine"] = ["Lighting", "Sky Horizon"],
+            ["ACT_SetImageSkyAllImages"] = ["Lighting", "Image Sky Setup"],
+            ["ACT_SetImageSkyTopImage"] = ["Lighting", "Image Sky Sides"],
+            ["ACT_SetImageSkyBottomImage"] = ["Lighting", "Image Sky Sides"],
+            ["ACT_SetImageSkyLeftImage"] = ["Lighting", "Image Sky Sides"],
+            ["ACT_SetImageSkyRightImage"] = ["Lighting", "Image Sky Sides"],
+            ["ACT_SetImageSkyFrontImage"] = ["Lighting", "Image Sky Sides"],
+            ["ACT_SetImageSkyBackImage"] = ["Lighting", "Image Sky Sides"],
+            ["COND_ImageSkyTopImageIs"] = ["Lighting", "Image Sky Sides"],
+            ["COND_ImageSkyBottomImageIs"] = ["Lighting", "Image Sky Sides"],
+            ["COND_ImageSkyLeftImageIs"] = ["Lighting", "Image Sky Sides"],
+            ["COND_ImageSkyRightImageIs"] = ["Lighting", "Image Sky Sides"],
+            ["COND_ImageSkyFrontImageIs"] = ["Lighting", "Image Sky Sides"],
+            ["COND_ImageSkyBackImageIs"] = ["Lighting", "Image Sky Sides"],
+            ["EV_OnImageSkyTopImageChanged"] = ["Lighting", "Image Sky Changes"],
+            ["EV_OnImageSkyBottomImageChanged"] = ["Lighting", "Image Sky Changes"],
+            ["EV_OnImageSkyLeftImageChanged"] = ["Lighting", "Image Sky Changes"],
+            ["EV_OnImageSkyRightImageChanged"] = ["Lighting", "Image Sky Changes"],
+            ["EV_OnImageSkyFrontImageChanged"] = ["Lighting", "Image Sky Changes"],
+            ["EV_OnImageSkyBackImageChanged"] = ["Lighting", "Image Sky Changes"],
             ["PROP_FogEnabled"] = ["Lighting", "Fog"],
             ["PROP_FogStartDistance"] = ["Lighting", "Fog"],
             ["PROP_FogEndDistance"] = ["Lighting", "Fog"],
@@ -509,9 +754,40 @@ public sealed class CatalogTests
             ["PROP_LightBrightness"] = ["Lighting", "Light Settings"],
             ["PROP_LightShine"] = ["Lighting", "Light Settings"],
             ["PROP_LightShadows"] = ["Lighting", "Light Settings"],
+            ["PROP_SunLightColor"] = ["Lighting", "Sun Light"],
+            ["PROP_SunLightBrightness"] = ["Lighting", "Sun Light"],
+            ["PROP_SunLightShine"] = ["Lighting", "Sun Light"],
+            ["PROP_SunLightShadows"] = ["Lighting", "Sun Light"],
             ["PROP_PointLightRange"] = ["Lighting", "Light Reach"],
             ["PROP_SpotLightRange"] = ["Lighting", "Light Reach"],
-            ["PROP_SpotLightAngle"] = ["Lighting", "Light Reach"]
+            ["PROP_SpotLightAngle"] = ["Lighting", "Light Reach"],
+            ["PROP_ColorAdjustBrightness"] = ["Lighting", "Color Adjust"],
+            ["PROP_ColorAdjustContrast"] = ["Lighting", "Color Adjust"],
+            ["PROP_ColorAdjustSaturation"] = ["Lighting", "Color Adjust"],
+            ["PROP_ColorAdjustTint"] = ["Lighting", "Color Adjust"],
+            ["PROP_ProceduralSkySunSize"] = ["Lighting", "Procedural Sky"],
+            ["PROP_ProceduralSkyTint"] = ["Lighting", "Procedural Sky"],
+            ["PROP_ProceduralSkyHorizonColor"] = ["Lighting", "Procedural Sky"],
+            ["PROP_ProceduralSkyGroundColor"] = ["Lighting", "Procedural Sky"],
+            ["PROP_ProceduralSkyExposure"] = ["Lighting", "Procedural Sky"],
+            ["PROP_GradientSkyTopColor"] = ["Lighting", "Sky Gradient"],
+            ["PROP_GradientSkyBottomColor"] = ["Lighting", "Sky Gradient"],
+            ["PROP_GradientSkyExponent"] = ["Lighting", "Sky Gradient"],
+            ["PROP_GradientSkySunDiscColor"] = ["Lighting", "Sky Sun Disc"],
+            ["PROP_GradientSkySunDiscMultiplier"] = ["Lighting", "Sky Sun Disc"],
+            ["PROP_GradientSkySunDiscExponent"] = ["Lighting", "Sky Sun Disc"],
+            ["PROP_GradientSkySunHaloColor"] = ["Lighting", "Sky Sun Halo"],
+            ["PROP_GradientSkySunHaloExponent"] = ["Lighting", "Sky Sun Halo"],
+            ["PROP_GradientSkySunHaloContribution"] = ["Lighting", "Sky Sun Halo"],
+            ["PROP_GradientSkyHorizonLineColor"] = ["Lighting", "Sky Horizon"],
+            ["PROP_GradientSkyHorizonLineExponent"] = ["Lighting", "Sky Horizon"],
+            ["PROP_GradientSkyHorizonLineContribution"] = ["Lighting", "Sky Horizon"],
+            ["PROP_ImageSkyTopImage"] = ["Lighting", "Image Sky Sides"],
+            ["PROP_ImageSkyBottomImage"] = ["Lighting", "Image Sky Sides"],
+            ["PROP_ImageSkyLeftImage"] = ["Lighting", "Image Sky Sides"],
+            ["PROP_ImageSkyRightImage"] = ["Lighting", "Image Sky Sides"],
+            ["PROP_ImageSkyFrontImage"] = ["Lighting", "Image Sky Sides"],
+            ["PROP_ImageSkyBackImage"] = ["Lighting", "Image Sky Sides"]
         };
 
         foreach (var (id, expectedPath) in expectedIds)
@@ -530,14 +806,66 @@ public sealed class CatalogTests
     public void EffectsApiPack_LoadsReadyBeginnerNodes()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, (string[] Path, string TargetGroup)>
+        {
+            ["ACT_StartParticles"] = (["Effects", "Particles"], "ParticleObject"),
+            ["ACT_StopParticles"] = (["Effects", "Particles"], "ParticleObject"),
+            ["ACT_BurstParticles"] = (["Effects", "Particles"], "ParticleObject"),
+            ["ACT_SetParticleAmount"] = (["Effects", "Particles"], "ParticleObject"),
+            ["PROP_ParticlesPlaying"] = (["Effects", "Particles"], "ParticleObject"),
+            ["PROP_ParticleAmount"] = (["Effects", "Particles"], "ParticleObject"),
+            ["ACT_SetExplosionRadius"] = (["Effects", "Explosion"], "ExplosionObject"),
+            ["ACT_SetExplosionForce"] = (["Effects", "Explosion"], "ExplosionObject"),
+            ["ACT_SetExplosionDamage"] = (["Effects", "Explosion"], "ExplosionObject"),
+            ["ACT_SetExplosionAffectAnchored"] = (["Effects", "Explosion"], "ExplosionObject"),
+            ["PROP_ExplosionRadius"] = (["Effects", "Explosion"], "ExplosionObject"),
+            ["PROP_ExplosionForce"] = (["Effects", "Explosion"], "ExplosionObject"),
+            ["PROP_ExplosionDamage"] = (["Effects", "Explosion"], "ExplosionObject"),
+            ["PROP_ExplosionAffectAnchored"] = (["Effects", "Explosion"], "ExplosionObject"),
+            ["EV_OnExplosionTouched"] = (["Effects", "Explosion"], "ExplosionObject")
+        };
+
+        foreach (var (id, expected) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(expected.Path, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal([expected.TargetGroup], target.AcceptedObjectGroups);
+        }
+    }
+
+    [Fact]
+    public void GrabbableApiPack_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
         var expectedIds = new Dictionary<string, string[]>
         {
-            ["ACT_StartParticles"] = ["Effects", "Particles"],
-            ["ACT_StopParticles"] = ["Effects", "Particles"],
-            ["ACT_BurstParticles"] = ["Effects", "Particles"],
-            ["ACT_SetParticleAmount"] = ["Effects", "Particles"],
-            ["PROP_ParticlesPlaying"] = ["Effects", "Particles"],
-            ["PROP_ParticleAmount"] = ["Effects", "Particles"]
+            ["ACT_SetGrabForce"] = ["Scene Object", "Grab"],
+            ["ACT_SetGrabMaxRange"] = ["Scene Object", "Grab"],
+            ["ACT_SetGrabPickupRange"] = ["Scene Object", "Grab"],
+            ["ACT_SetGrabUsesDragForce"] = ["Scene Object", "Grab"],
+            ["ACT_SetGrabPermissionMode"] = ["Scene Object", "Grab"],
+            ["PROP_GrabForce"] = ["Scene Object", "Grab"],
+            ["PROP_GrabMaxRange"] = ["Scene Object", "Grab"],
+            ["PROP_GrabPickupRange"] = ["Scene Object", "Grab"],
+            ["PROP_GrabUsesDragForce"] = ["Scene Object", "Grab"],
+            ["PROP_GrabPermissionMode"] = ["Scene Object", "Grab"],
+            ["PROP_CurrentGrabber"] = ["Scene Object", "Grab"],
+            ["EV_OnObjectGrabbed"] = ["Scene Object", "Grab"],
+            ["EV_OnObjectReleased"] = ["Scene Object", "Grab"],
+            ["COND_GrabForceAtLeast"] = ["Scene Object", "Grab"],
+            ["COND_GrabMaxRangeAtLeast"] = ["Scene Object", "Grab"],
+            ["COND_GrabPickupRangeAtLeast"] = ["Scene Object", "Grab"],
+            ["COND_GrabUsesDragForce"] = ["Scene Object", "Grab"],
+            ["COND_GrabPermissionModeIs"] = ["Scene Object", "Grab"],
+            ["EV_OnGrabForceReached"] = ["Scene Object", "Grab Changes"],
+            ["EV_OnGrabMaxRangeReached"] = ["Scene Object", "Grab Changes"],
+            ["EV_OnGrabPickupRangeReached"] = ["Scene Object", "Grab Changes"]
         };
 
         foreach (var (id, expectedPath) in expectedIds)
@@ -550,8 +878,18 @@ public sealed class CatalogTests
             Assert.NotEmpty(node.BeginnerSummary);
             Assert.NotEmpty(node.SearchKeywords);
             var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
-            Assert.Equal(["ParticleObject"], target.AcceptedObjectGroups);
+            Assert.Equal(["GrabbableObject"], target.AcceptedObjectGroups);
         }
+
+        var permission = catalog.Nodes.Single(entry => entry.IdBase == "ACT_SetGrabPermissionMode");
+        var mode = Assert.Single(permission.Parameters, parameter => parameter.Key == "mode");
+        Assert.Equal("Choice", mode.Control);
+        Assert.Equal(["None", "Everyone", "Scripted"], mode.Options);
+
+        var permissionCondition = catalog.Nodes.Single(entry => entry.IdBase == "COND_GrabPermissionModeIs");
+        var expectedMode = Assert.Single(permissionCondition.Parameters, parameter => parameter.Key == "mode");
+        Assert.Equal("Choice", expectedMode.Control);
+        Assert.Equal(["None", "Everyone", "Scripted"], expectedMode.Options);
     }
 
     [Fact]
@@ -579,6 +917,176 @@ public sealed class CatalogTests
             Assert.NotEmpty(node.SearchKeywords);
             var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
             Assert.Equal(["MeshObject"], target.AcceptedObjectGroups);
+        }
+    }
+
+    [Fact]
+    public void CharacterAnimationApiPack_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, string[]>
+        {
+            ["ACT_PlayCharacterAnimation"] = ["Players", "Character Animation"],
+            ["ACT_PlayCharacterOneShotAnimation"] = ["Players", "Character Animation"],
+            ["ACT_StopCharacterAnimation"] = ["Players", "Character Animation"],
+            ["ACT_StopCharacterOneShotAnimation"] = ["Players", "Character Animation"],
+            ["ACT_SetCharacterState"] = ["Players", "Character Animation"],
+            ["ACT_SetCharacterAnimationSpeed"] = ["Players", "Character Animation"],
+            ["COND_CurrentCharacterAnimationIs"] = ["Players", "Character Animation"],
+            ["COND_CharacterHasAnimator"] = ["Players", "Character Animation"],
+            ["COND_CharacterStateIs"] = ["Players", "Character Animation"],
+            ["COND_CharacterAnimationSpeedAtLeast"] = ["Players", "Character Animation"],
+            ["COND_CharacterAnimationSpeedAtMost"] = ["Players", "Character Animation"],
+            ["COND_CharacterHasAttachment"] = ["Players", "Character Animation"],
+            ["EV_OnCharacterAnimationChanged"] = ["Players", "Character Animation Changes"],
+            ["EV_OnCharacterAnimationBecame"] = ["Players", "Character Animation Changes"],
+            ["EV_OnCharacterStateChanged"] = ["Players", "Character Animation Changes"],
+            ["EV_OnCharacterStateBecame"] = ["Players", "Character Animation Changes"],
+            ["EV_OnCharacterAnimationSpeedReached"] = ["Players", "Character Animation Changes"],
+            ["EV_OnCharacterAttachmentAvailable"] = ["Players", "Character Animation Changes"],
+            ["PROP_CurrentCharacterAnimation"] = ["Players", "Character Animation"],
+            ["PROP_CharacterAnimator"] = ["Players", "Character Animation"],
+            ["PROP_CharacterState"] = ["Players", "Character Animation"],
+            ["PROP_CharacterAnimationSpeed"] = ["Players", "Character Animation"],
+            ["PROP_CharacterAttachment"] = ["Players", "Character Animation"]
+        };
+
+        foreach (var (id, expectedPath) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(expectedPath, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal(["CharacterModelObject"], target.AcceptedObjectGroups);
+        }
+
+        var setState = catalog.Nodes.Single(entry => entry.IdBase == "ACT_SetCharacterState");
+        var state = Assert.Single(setState.Parameters, parameter => parameter.Key == "state");
+        Assert.Equal("Choice", state.Control);
+        Assert.Equal(["Idle", "Walking", "Running", "Jumping", "Climbing"], state.Options);
+
+        var attachmentValue = catalog.Nodes.Single(entry => entry.IdBase == "PROP_CharacterAttachment");
+        var attachment = Assert.Single(attachmentValue.Parameters, parameter => parameter.Key == "attachment");
+        Assert.Equal("Choice", attachment.Control);
+        Assert.Contains("Head", attachment.Options);
+        Assert.Contains("HandLeft", attachment.Options);
+        Assert.Contains("FootRight", attachment.Options);
+    }
+
+    [Fact]
+    public void CharacterAppearanceApiPack_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, (string[] Path, string TargetGroup)>
+        {
+            ["ACT_SetAccessoryAttachment"] = (["Players", "Character Appearance"], "AccessoryObject"),
+            ["PROP_AccessoryAttachment"] = (["Players", "Character Appearance"], "AccessoryObject"),
+            ["COND_AccessoryAttachmentIs"] = (["Players", "Character Appearance"], "AccessoryObject"),
+            ["ACT_SetClothingImage"] = (["Players", "Character Appearance"], "ClothingObject"),
+            ["PROP_ClothingImage"] = (["Players", "Character Appearance"], "ClothingObject"),
+            ["COND_ClothingImageIs"] = (["Players", "Character Appearance"], "ClothingObject"),
+            ["COND_ClothingHasImage"] = (["Players", "Character Appearance"], "ClothingObject"),
+            ["ACT_SetCharacterFaceImage"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["ACT_SetCharacterBodyMesh"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["ACT_SetCharacterBodyColor"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["ACT_LoadCharacterAppearance"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["ACT_ClearCharacterAppearance"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["ACT_StartCharacterRagdoll"] = (["Players", "Character Ragdoll"], "PolytorianModelObject"),
+            ["ACT_StopCharacterRagdoll"] = (["Players", "Character Ragdoll"], "PolytorianModelObject"),
+            ["PROP_CharacterFaceImage"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["PROP_CharacterBodyMesh"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["PROP_CharacterBodyColor"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["COND_CharacterFaceImageIs"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["COND_CharacterHasFaceImage"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["COND_CharacterBodyMeshIs"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["COND_CharacterHasBodyMesh"] = (["Players", "Character Appearance"], "PolytorianModelObject"),
+            ["PROP_CharacterRagdolling"] = (["Players", "Character Ragdoll"], "PolytorianModelObject"),
+            ["PROP_CharacterRagdollPosition"] = (["Players", "Character Ragdoll"], "PolytorianModelObject"),
+            ["PROP_CharacterRagdollRotation"] = (["Players", "Character Ragdoll"], "PolytorianModelObject"),
+            ["COND_CharacterIsRagdolling"] = (["Players", "Character Ragdoll"], "PolytorianModelObject"),
+            ["COND_CharacterIsNotRagdolling"] = (["Players", "Character Ragdoll"], "PolytorianModelObject"),
+            ["EV_OnCharacterRagdollStarted"] = (["Players", "Character Ragdoll"], "PolytorianModelObject"),
+            ["EV_OnCharacterRagdollStopped"] = (["Players", "Character Ragdoll"], "PolytorianModelObject")
+        };
+
+        foreach (var (id, expected) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(expected.Path, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal([expected.TargetGroup], target.AcceptedObjectGroups);
+        }
+
+        var accessory = catalog.Nodes.Single(entry => entry.IdBase == "ACT_SetAccessoryAttachment");
+        var accessoryAttachment = Assert.Single(accessory.Parameters, parameter => parameter.Key == "attachment");
+        Assert.Equal("Choice", accessoryAttachment.Control);
+        Assert.Contains("Head", accessoryAttachment.Options);
+        Assert.Contains("HandRight", accessoryAttachment.Options);
+        Assert.Contains("FootLeft", accessoryAttachment.Options);
+
+        var colorAction = catalog.Nodes.Single(entry => entry.IdBase == "ACT_SetCharacterBodyColor");
+        var bodyPart = Assert.Single(colorAction.Parameters, parameter => parameter.Key == "bodyPart");
+        Assert.Equal("Choice", bodyPart.Control);
+        Assert.Equal(["Head", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg"], bodyPart.Options);
+    }
+
+    [Fact]
+    public void WorldMarkerTrussEntityApiPack_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, (string[] Path, string TargetGroup)>
+        {
+            ["ACT_SetMarkerLength"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["ACT_SetMarkerAppearsOnTop"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["ACT_SetMarkerVisibleInDev"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["PROP_MarkerLength"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["PROP_MarkerAppearsOnTop"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["PROP_MarkerVisibleInDev"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["COND_MarkerLengthAtLeast"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["COND_MarkerAppearsOnTop"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["COND_MarkerVisibleInDev"] = (["Scene Object", "Markers"], "Marker3DObject"),
+            ["EV_OnMarkerLengthReached"] = (["Scene Object", "Marker Changes"], "Marker3DObject"),
+            ["EV_OnMarkerAppearsOnTopEnabled"] = (["Scene Object", "Marker Changes"], "Marker3DObject"),
+            ["EV_OnMarkerVisibleInDevEnabled"] = (["Scene Object", "Marker Changes"], "Marker3DObject"),
+            ["ACT_SetTrussClimbSpeed"] = (["Scene Object", "Climb"], "TrussObject"),
+            ["PROP_TrussClimbSpeed"] = (["Scene Object", "Climb"], "TrussObject"),
+            ["COND_TrussClimbSpeedAtLeast"] = (["Scene Object", "Climb"], "TrussObject"),
+            ["EV_OnTrussClimbSpeedReached"] = (["Scene Object", "Climb Changes"], "TrussObject"),
+            ["ACT_SetEntityCastsShadows"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["ACT_SetEntityIsSpawn"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["ACT_SetEntityColor"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["PROP_EntityCastsShadows"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["PROP_EntityIsSpawn"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["PROP_EntityColor"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["COND_EntityCastsShadows"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["COND_EntityIsSpawn"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["COND_EntityColorIs"] = (["Scene Object", "Entity"], "EntityObject"),
+            ["EV_OnEntityStartedCastingShadows"] = (["Scene Object", "Entity Changes"], "EntityObject"),
+            ["EV_OnEntityBecameSpawn"] = (["Scene Object", "Entity Changes"], "EntityObject"),
+            ["EV_OnEntityColorChanged"] = (["Scene Object", "Entity Changes"], "EntityObject")
+        };
+
+        foreach (var (id, expected) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(expected.Path, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.NotEmpty(node.ApiReferences);
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal([expected.TargetGroup], target.AcceptedObjectGroups);
         }
     }
 
@@ -631,6 +1139,15 @@ public sealed class CatalogTests
             ["COND_3DImageCastsShadows"] = ["Scene Object", "3D Image Display"],
             ["COND_3DImageUsesLighting"] = ["Scene Object", "3D Image Display"],
             ["COND_3DImageFacesCamera"] = ["Scene Object", "3D Image Display"],
+            ["COND_3DImageColorIs"] = ["Scene Object", "3D Image Display"],
+            ["COND_3DImageTextureScaleIs"] = ["Scene Object", "3D Image Texture"],
+            ["COND_3DImageTextureOffsetIs"] = ["Scene Object", "3D Image Texture"],
+            ["EV_On3DImageColorChanged"] = ["Scene Object", "3D Image Changes"],
+            ["EV_On3DImageShadowsEnabled"] = ["Scene Object", "3D Image Changes"],
+            ["EV_On3DImageLightingEnabled"] = ["Scene Object", "3D Image Changes"],
+            ["EV_On3DImageFaceCameraEnabled"] = ["Scene Object", "3D Image Changes"],
+            ["EV_On3DImageTextureScaleChanged"] = ["Scene Object", "3D Image Changes"],
+            ["EV_On3DImageTextureOffsetChanged"] = ["Scene Object", "3D Image Changes"],
             ["PROP_3DImageColor"] = ["Scene Object", "3D Image Display"],
             ["PROP_3DImageCastsShadows"] = ["Scene Object", "3D Image Display"],
             ["PROP_3DImageUsesLighting"] = ["Scene Object", "3D Image Display"],
@@ -669,9 +1186,20 @@ public sealed class CatalogTests
             ["ACT_Set3DTextLighting"] = ["Scene Object", "3D Text Display"],
             ["COND_3DTextIs"] = ["Scene Object", "3D Text Content"],
             ["COND_3DTextIsEmpty"] = ["Scene Object", "3D Text Content"],
+            ["COND_3DTextFontSizeAtLeast"] = ["Scene Object", "3D Text Content"],
+            ["COND_3DTextColorIs"] = ["Scene Object", "3D Text Display"],
+            ["COND_3DTextOutlineWidthAtLeast"] = ["Scene Object", "3D Text Display"],
             ["COND_3DTextFacesCamera"] = ["Scene Object", "3D Text Display"],
             ["COND_3DTextUsesRichText"] = ["Scene Object", "3D Text Content"],
             ["COND_3DTextUsesLighting"] = ["Scene Object", "3D Text Display"],
+            ["EV_On3DTextChanged"] = ["Scene Object", "3D Text Changes"],
+            ["EV_On3DTextSizeReached"] = ["Scene Object", "3D Text Changes"],
+            ["EV_On3DTextColorChanged"] = ["Scene Object", "3D Text Changes"],
+            ["EV_On3DTextOutlineWidthReached"] = ["Scene Object", "3D Text Changes"],
+            ["EV_On3DTextOutlineColorChanged"] = ["Scene Object", "3D Text Changes"],
+            ["EV_On3DTextFaceCameraEnabled"] = ["Scene Object", "3D Text Changes"],
+            ["EV_On3DTextRichTextEnabled"] = ["Scene Object", "3D Text Changes"],
+            ["EV_On3DTextLightingEnabled"] = ["Scene Object", "3D Text Changes"],
             ["PROP_3DText"] = ["Scene Object", "3D Text Content"],
             ["PROP_3DTextFontSize"] = ["Scene Object", "3D Text Content"],
             ["PROP_3DTextColor"] = ["Scene Object", "3D Text Display"],
@@ -821,6 +1349,55 @@ public sealed class CatalogTests
     }
 
     [Fact]
+    public void RigidBodyApiPack_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, string[]>
+        {
+            ["ACT_SetRigidBodyGravity"] = ["Scene Object", "Rigid Body"],
+            ["ACT_SetRigidBodyMass"] = ["Scene Object", "Rigid Body"],
+            ["ACT_SetRigidBodyFriction"] = ["Scene Object", "Rigid Body"],
+            ["ACT_SetRigidBodyDrag"] = ["Scene Object", "Rigid Body"],
+            ["ACT_SetRigidBodyAngularDrag"] = ["Scene Object", "Rigid Body"],
+            ["ACT_SetRigidBodyBounciness"] = ["Scene Object", "Rigid Body"],
+            ["COND_RigidBodyGravityEnabled"] = ["Scene Object", "Rigid Body"],
+            ["COND_RigidBodyMassAtLeast"] = ["Scene Object", "Rigid Body"],
+            ["COND_RigidBodyFrictionAtLeast"] = ["Scene Object", "Rigid Body"],
+            ["COND_RigidBodyDragAtLeast"] = ["Scene Object", "Rigid Body"],
+            ["COND_RigidBodyAngularDragAtLeast"] = ["Scene Object", "Rigid Body"],
+            ["COND_RigidBodyBouncinessAtLeast"] = ["Scene Object", "Rigid Body"],
+            ["EV_OnRigidBodyGravityEnabled"] = ["Scene Object", "Rigid Body Changes"],
+            ["EV_OnRigidBodyMassReached"] = ["Scene Object", "Rigid Body Changes"],
+            ["EV_OnRigidBodyFrictionReached"] = ["Scene Object", "Rigid Body Changes"],
+            ["EV_OnRigidBodyDragReached"] = ["Scene Object", "Rigid Body Changes"],
+            ["EV_OnRigidBodyAngularDragReached"] = ["Scene Object", "Rigid Body Changes"],
+            ["EV_OnRigidBodyBouncinessReached"] = ["Scene Object", "Rigid Body Changes"],
+            ["PROP_RigidBodyGravityEnabled"] = ["Scene Object", "Rigid Body"],
+            ["PROP_RigidBodyMass"] = ["Scene Object", "Rigid Body"],
+            ["PROP_RigidBodyFriction"] = ["Scene Object", "Rigid Body"],
+            ["PROP_RigidBodyDrag"] = ["Scene Object", "Rigid Body"],
+            ["PROP_RigidBodyAngularDrag"] = ["Scene Object", "Rigid Body"],
+            ["PROP_RigidBodyBounciness"] = ["Scene Object", "Rigid Body"]
+        };
+
+        foreach (var (id, expectedPath) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, node.ApiSurface);
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.Equal(expectedPath, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal(["RigidBodyObject"], target.AcceptedObjectGroups);
+        }
+    }
+
+    [Fact]
     public void TeamApiPack_LoadsReadyBeginnerNodes()
     {
         var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
@@ -835,7 +1412,9 @@ public sealed class CatalogTests
             ["PROP_GameTeamName"] = ["Game Rules", "Game Teams"],
             ["PROP_GameTeamColor"] = ["Game Rules", "Game Teams"],
             ["PROP_GameTeamPlayerCount"] = ["Game Rules", "Game Teams"],
-            ["PROP_GameTeamCount"] = ["Game Rules", "Game Teams"]
+            ["PROP_GameTeamPlayers"] = ["Game Rules", "Game Teams"],
+            ["PROP_GameTeamCount"] = ["Game Rules", "Game Teams"],
+            ["PROP_AllGameTeams"] = ["Game Rules", "Game Teams"]
         };
 
         foreach (var (id, expectedPath) in expectedIds)
@@ -843,6 +1422,77 @@ public sealed class CatalogTests
             var node = catalog.Nodes.Single(entry => entry.IdBase == id);
             Assert.Equal("Ready", node.Status);
             Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, node.ApiSurface);
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.Equal(expectedPath, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+        }
+    }
+
+    [Fact]
+    public void StatsApiPack_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, string[]>
+        {
+            ["ACT_SetPlayerStatNumber"] = ["Game Rules", "Player Stats"],
+            ["ACT_SetPlayerStatText"] = ["Game Rules", "Player Stats"],
+            ["COND_PlayerStatAtLeast"] = ["Game Rules", "Player Stats"],
+            ["PROP_PlayerStatValue"] = ["Game Rules", "Player Stats"],
+            ["PROP_PlayerStatDisplayValue"] = ["Game Rules", "Player Stats"],
+            ["PROP_StatDisplayName"] = ["Game Rules", "Player Stats"],
+            ["PROP_TeamStatTotal"] = ["Game Rules", "Player Stats"],
+            ["PROP_AllPlayerStats"] = ["Game Rules", "Player Stats"]
+        };
+
+        foreach (var (id, expectedPath) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, node.ApiSurface);
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.Equal(expectedPath, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+        }
+
+        var statTargetNodes = expectedIds.Keys
+            .Where(id => id != "PROP_AllPlayerStats")
+            .Select(id => catalog.Nodes.Single(entry => entry.IdBase == id));
+        foreach (var node in statTargetNodes)
+        {
+            var statTarget = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal(["StatObject"], statTarget.AcceptedObjectGroups);
+        }
+
+        var teamTotal = catalog.Nodes.Single(entry => entry.IdBase == "PROP_TeamStatTotal");
+        var team = Assert.Single(teamTotal.Parameters, parameter => parameter.Key == "team");
+        Assert.Equal(["TeamObject"], team.AcceptedObjectGroups);
+    }
+
+    [Fact]
+    public void SavedDataApiPack_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, string[]>
+        {
+            ["ACT_SaveDatastoreValue"] = ["Game Rules", "Saved Data"],
+            ["ACT_RemoveDatastoreValue"] = ["Game Rules", "Saved Data"],
+            ["PROP_DatastoreValue"] = ["Game Rules", "Saved Data"],
+            ["PROP_DatastoreKey"] = ["Game Rules", "Saved Data"]
+        };
+
+        foreach (var (id, expectedPath) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, node.ApiSurface);
+            Assert.NotEmpty(node.ApiReferences);
             Assert.Equal(expectedPath, node.PalettePath);
             Assert.True(NodeCatalogService.IsAddable(node));
             Assert.NotEmpty(node.BeginnerSummary);
@@ -873,8 +1523,13 @@ public sealed class CatalogTests
             var node = catalog.Nodes.Single(entry => entry.IdBase == id);
             Assert.Equal("Ready", node.Status);
             Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
             Assert.Equal(["UI & Feedback", "Built-In UI"], node.PalettePath);
             Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+            Assert.False(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.All(node.ApiReferences, reference => Assert.Equal("CoreUIService", reference.Type));
             Assert.NotEmpty(node.BeginnerSummary);
             Assert.NotEmpty(node.SearchKeywords);
         }
@@ -896,7 +1551,8 @@ public sealed class CatalogTests
             ["PROP_UIText"] = "UILabelObject",
             ["PROP_UIColor"] = "UIObject",
             ["PROP_UIFontSize"] = "UILabelObject",
-            ["PROP_UITextWrapped"] = "UILabelObject"
+            ["PROP_UITextWrapped"] = "UILabelObject",
+            ["PROP_PlayerUIRoot"] = ""
         };
 
         foreach (var (id, expectedGroup) in expectedIds)
@@ -909,6 +1565,12 @@ public sealed class CatalogTests
             Assert.NotEmpty(node.BeginnerSummary);
             Assert.NotEmpty(node.SearchKeywords);
 
+            if (id == "PROP_PlayerUIRoot")
+            {
+                Assert.Empty(node.Parameters);
+                continue;
+            }
+
             var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
             Assert.Equal([expectedGroup], target.AcceptedObjectGroups);
             Assert.Equal(["PlayerGUI", "CoreUI"], target.AcceptedSceneRoots);
@@ -918,6 +1580,799 @@ public sealed class CatalogTests
                 Assert.Equal("Target Context", target.ValueSource);
             }
         }
+    }
+
+    [Fact]
+    public void CustomUiConditionExpansion_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, (string[] PalettePath, string ExpectedGroup)>
+        {
+            ["COND_UIVisible"] = (["UI & Feedback", "UI"], "UIObject"),
+            ["COND_UIHidden"] = (["UI & Feedback", "UI"], "UIObject"),
+            ["COND_UIImageIs"] = (["UI & Feedback", "UI"], "UIObject"),
+            ["COND_UIImageHasImage"] = (["UI & Feedback", "UI"], "UIObject"),
+            ["COND_TextInputTextIs"] = (["UI & Feedback", "Text Input"], "UITextInputObject"),
+            ["COND_TextInputIsEmpty"] = (["UI & Feedback", "Text Input"], "UITextInputObject"),
+            ["COND_TextInputReadOnly"] = (["UI & Feedback", "Text Input"], "UITextInputObject"),
+            ["COND_TextInputEditable"] = (["UI & Feedback", "Text Input"], "UITextInputObject"),
+            ["COND_UIFieldIgnoresMouse"] = (["UI & Feedback", "UI Field"], "UIFieldObject"),
+            ["COND_UIFieldClipsChildren"] = (["UI & Feedback", "UI Field"], "UIFieldObject"),
+            ["COND_Gui3DShaded"] = (["UI & Feedback", "3D UI"], "GUI3DObject"),
+            ["COND_Gui3DFacesCamera"] = (["UI & Feedback", "3D UI"], "GUI3DObject"),
+            ["COND_Gui3DTransparent"] = (["UI & Feedback", "3D UI"], "GUI3DObject"),
+            ["COND_GridColumnsAtLeast"] = (["UI & Feedback", "UI Layout"], "UIGridLayoutObject"),
+            ["COND_ScrollViewHorizontalModeIs"] = (["UI & Feedback", "Scroll View"], "UIScrollViewObject")
+        };
+
+        foreach (var (id, expected) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal(NodeKind.Condition, node.Kind);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(expected.PalettePath, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Contains(expected.ExpectedGroup, target.AcceptedObjectGroups);
+        }
+    }
+
+    [Fact]
+    public void CustomUiTriggerExpansion_LoadsReadyBeginnerNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, (string[] PalettePath, string ExpectedGroup)>
+        {
+            ["EV_OnUIBecameVisible"] = (["UI & Feedback", "UI Changes"], "UIObject"),
+            ["EV_OnUIBecameHidden"] = (["UI & Feedback", "UI Changes"], "UIObject"),
+            ["EV_OnUIImageChanged"] = (["UI & Feedback", "UI Changes"], "UIObject"),
+            ["EV_OnTextInputBecameEmpty"] = (["UI & Feedback", "Text Input Changes"], "UITextInputObject"),
+            ["EV_OnTextInputNoLongerEmpty"] = (["UI & Feedback", "Text Input Changes"], "UITextInputObject"),
+            ["EV_OnTextInputBecameReadOnly"] = (["UI & Feedback", "Text Input Changes"], "UITextInputObject"),
+            ["EV_OnTextInputBecameEditable"] = (["UI & Feedback", "Text Input Changes"], "UITextInputObject"),
+            ["EV_OnUIFieldStartedIgnoringMouse"] = (["UI & Feedback", "UI Field Changes"], "UIFieldObject"),
+            ["EV_OnUIFieldStoppedIgnoringMouse"] = (["UI & Feedback", "UI Field Changes"], "UIFieldObject"),
+            ["EV_OnUIFieldStartedClippingChildren"] = (["UI & Feedback", "UI Field Changes"], "UIFieldObject"),
+            ["EV_OnUIFieldStoppedClippingChildren"] = (["UI & Feedback", "UI Field Changes"], "UIFieldObject"),
+            ["EV_OnGui3DShadedEnabled"] = (["UI & Feedback", "3D UI Changes"], "GUI3DObject"),
+            ["EV_OnGui3DShadedDisabled"] = (["UI & Feedback", "3D UI Changes"], "GUI3DObject"),
+            ["EV_OnGui3DFaceCameraEnabled"] = (["UI & Feedback", "3D UI Changes"], "GUI3DObject"),
+            ["EV_OnGui3DFaceCameraDisabled"] = (["UI & Feedback", "3D UI Changes"], "GUI3DObject"),
+            ["EV_OnGui3DTransparentEnabled"] = (["UI & Feedback", "3D UI Changes"], "GUI3DObject"),
+            ["EV_OnGui3DTransparentDisabled"] = (["UI & Feedback", "3D UI Changes"], "GUI3DObject"),
+            ["EV_OnGridColumnsReached"] = (["UI & Feedback", "UI Layout Changes"], "UIGridLayoutObject"),
+            ["EV_OnScrollViewHorizontalModeChanged"] = (["UI & Feedback", "Scroll View Changes"], "UIScrollViewObject")
+        };
+
+        foreach (var (id, expected) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal(NodeKind.Trigger, node.Kind);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(expected.PalettePath, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Contains(expected.ExpectedGroup, target.AcceptedObjectGroups);
+            Assert.Contains(node.Parameters, parameter => parameter.Key == "interval");
+        }
+    }
+
+    [Fact]
+    public void TextInputApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "EV_OnTextInputChanged",
+            "EV_OnTextInputSubmitted",
+            "ACT_SetTextInputText",
+            "ACT_SetTextInputPlaceholder",
+            "ACT_SetTextInputReadOnly",
+            "ACT_FocusTextInput",
+            "PROP_TextInputText",
+            "PROP_TextInputPlaceholder",
+            "PROP_TextInputReadOnly"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(["UI & Feedback", "Text Input"], node.PalettePath);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+            Assert.False(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal(["UITextInputObject"], target.AcceptedObjectGroups);
+            Assert.Equal(["PlayerGUI", "CoreUI"], target.AcceptedSceneRoots);
+        }
+    }
+
+    [Fact]
+    public void UiFieldAndScrollViewApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedGroups = new Dictionary<string, string>
+        {
+            ["ACT_SetUIFieldZIndex"] = "UIFieldObject",
+            ["ACT_SetUIFieldIgnoresMouse"] = "UIFieldObject",
+            ["ACT_SetUIFieldClipDescendants"] = "UIFieldObject",
+            ["ACT_SetUIFieldRotation"] = "UIFieldObject",
+            ["ACT_SetUIFieldScale"] = "UIFieldObject",
+            ["PROP_UIFieldZIndex"] = "UIFieldObject",
+            ["PROP_UIFieldIgnoresMouse"] = "UIFieldObject",
+            ["PROP_UIFieldClipDescendants"] = "UIFieldObject",
+            ["PROP_UIFieldRotation"] = "UIFieldObject",
+            ["PROP_UIFieldScale"] = "UIFieldObject",
+            ["ACT_SetScrollViewMode"] = "UIScrollViewObject",
+            ["PROP_ScrollViewHorizontalMode"] = "UIScrollViewObject",
+            ["PROP_ScrollViewVerticalMode"] = "UIScrollViewObject"
+        };
+
+        foreach (var (id, expectedGroup) in expectedGroups)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+            Assert.False(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+
+            var expectedPath = expectedGroup == "UIScrollViewObject"
+                ? new[] { "UI & Feedback", "Scroll View" }
+                : new[] { "UI & Feedback", "UI Field" };
+            Assert.Equal(expectedPath, node.PalettePath);
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal([expectedGroup], target.AcceptedObjectGroups);
+            Assert.Equal(["PlayerGUI", "CoreUI"], target.AcceptedSceneRoots);
+        }
+    }
+
+    [Fact]
+    public void UiLayoutAndGui3DApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedGroups = new Dictionary<string, string>
+        {
+            ["ACT_CreateUIContainer"] = "Any",
+            ["ACT_SetGridLayoutColumns"] = "UIGridLayoutObject",
+            ["ACT_SetGridLayoutSpacing"] = "UIGridLayoutObject",
+            ["PROP_GridLayoutColumns"] = "UIGridLayoutObject",
+            ["PROP_GridLayoutSpacing"] = "UIGridLayoutObject",
+            ["ACT_SetLayoutSpacing"] = "UIHVLayoutObject",
+            ["ACT_SetLayoutChildAlignment"] = "UIHVLayoutObject",
+            ["PROP_LayoutSpacing"] = "UIHVLayoutObject",
+            ["PROP_LayoutChildAlignment"] = "UIHVLayoutObject",
+            ["ACT_SetGui3DShaded"] = "GUI3DObject",
+            ["ACT_SetGui3DFaceCamera"] = "GUI3DObject",
+            ["ACT_SetGui3DTransparent"] = "GUI3DObject",
+            ["PROP_Gui3DShaded"] = "GUI3DObject",
+            ["PROP_Gui3DFaceCamera"] = "GUI3DObject",
+            ["PROP_Gui3DTransparent"] = "GUI3DObject"
+        };
+
+        foreach (var (id, expectedGroup) in expectedGroups)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+            Assert.False(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+
+            var expectedPath = expectedGroup == "GUI3DObject"
+                ? new[] { "UI & Feedback", "3D UI" }
+                : new[] { "UI & Feedback", "UI Layout" };
+            Assert.Equal(expectedPath, node.PalettePath);
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            if (id == "ACT_CreateUIContainer")
+            {
+                Assert.Equal(["UIFieldObject", "Any"], target.AcceptedObjectGroups);
+                Assert.Contains(node.ApiReferences, reference => reference.Type == "UIHLayout");
+                Assert.Contains(node.ApiReferences, reference => reference.Type == "UIVLayout");
+                Assert.Contains(node.ApiReferences, reference => reference.Type == "UIViewport");
+            }
+            else
+            {
+                Assert.Equal([expectedGroup], target.AcceptedObjectGroups);
+            }
+
+            if (expectedGroup == "GUI3DObject")
+            {
+                Assert.Equal(["World", "PlayerGUI", "CoreUI"], target.AcceptedSceneRoots);
+            }
+            else
+            {
+                Assert.Equal(["PlayerGUI", "CoreUI"], target.AcceptedSceneRoots);
+            }
+        }
+    }
+
+    [Fact]
+    public void IntegerAndInstanceValueApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedGroups = new Dictionary<string, string>
+        {
+            ["ACT_SetIntegerValueObject"] = "IntValueObject",
+            ["PROP_IntegerValueObject"] = "IntValueObject",
+            ["ACT_SetInstanceValueObject"] = "InstanceValueObject",
+            ["PROP_InstanceValueObject"] = "InstanceValueObject"
+        };
+
+        foreach (var (id, expectedGroup) in expectedGroups)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.Equal(["Game Rules", "Stored Values"], node.PalettePath);
+
+            var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+            Assert.Equal([expectedGroup], target.AcceptedObjectGroups);
+        }
+
+        var setInstance = catalog.Nodes.Single(entry => entry.IdBase == "ACT_SetInstanceValueObject");
+        var storedObject = Assert.Single(setInstance.Parameters, parameter => parameter.Key == "value");
+        Assert.Equal(["Any"], storedObject.AcceptedObjectGroups);
+    }
+
+    [Fact]
+    public void WorldInfoApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "PROP_WorldIsLocalTest",
+            "PROP_WorldIsOldFormat",
+            "PROP_WorldIdentifier",
+            "PROP_ServerIdentifier",
+            "PROP_WorldUptime",
+            "PROP_ServerTime",
+            "PROP_WorldObjectCount"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Game Rules", "World Info"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+            Assert.Empty(node.Parameters);
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.All(node.ApiReferences, reference => Assert.Equal("World", reference.Type));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+        }
+    }
+
+    [Fact]
+    public void EnvironmentBoundsApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new Dictionary<string, (string[] Path, string? TargetGroup)>
+        {
+            ["ACT_SetWorldGravity"] = (["Game Rules", "Environment"], null),
+            ["ACT_SetPartDestroyHeight"] = (["Game Rules", "Environment"], null),
+            ["ACT_SetAutoGenerateNavMesh"] = (["Game Rules", "Environment"], null),
+            ["ACT_RebuildNavMesh"] = (["Game Rules", "Environment"], null),
+            ["PROP_WorldGravity"] = (["Game Rules", "Environment"], null),
+            ["PROP_PartDestroyHeight"] = (["Game Rules", "Environment"], null),
+            ["PROP_AutoGenerateNavMesh"] = (["Game Rules", "Environment"], null),
+            ["PROP_CurrentCamera"] = (["Game Rules", "Environment"], null),
+            ["PROP_ObjectBoundsCenter"] = (["Scene Object", "Bounds"], "PartLike"),
+            ["PROP_ObjectBoundsSize"] = (["Scene Object", "Bounds"], "PartLike"),
+            ["PROP_ObjectBoundsExtents"] = (["Scene Object", "Bounds"], "PartLike"),
+            ["PROP_ObjectBoundsVolume"] = (["Scene Object", "Bounds"], "PartLike"),
+            ["COND_ObjectBoundsContainsPoint"] = (["Scene Object", "Bounds"], "PartLike")
+        };
+
+        foreach (var (id, expected) in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(expected.Path, node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+
+            if (expected.TargetGroup is not null)
+            {
+                var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+                Assert.Equal([expected.TargetGroup], target.AcceptedObjectGroups);
+            }
+        }
+    }
+
+    [Fact]
+    public void Vector2ApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "PROP_Vector2FromXY",
+            "PROP_Vector2X",
+            "PROP_Vector2Y",
+            "PROP_Vector2Magnitude",
+            "PROP_Vector2Normalized",
+            "PROP_Vector2Distance",
+            "PROP_Vector2Lerp",
+            "COND_Vector2DistanceAtMost"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Math", "Vector"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.All(node.ApiReferences, reference => Assert.Equal("Vector2", reference.Type));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+        }
+    }
+
+    [Fact]
+    public void RaycastApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "COND_RaycastHits",
+            "PROP_RaycastResult",
+            "PROP_RaycastHitObject",
+            "PROP_RaycastHitPosition",
+            "PROP_RaycastHitNormal",
+            "PROP_RaycastHitDistance"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Scene Object", "Raycast"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "Environment" && reference.Member == "Raycast");
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "RayResult");
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+        }
+    }
+
+    [Fact]
+    public void QuaternionApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "PROP_QuaternionIdentity",
+            "PROP_QuaternionFromComponents",
+            "PROP_QuaternionFromEuler",
+            "PROP_QuaternionToEuler",
+            "PROP_QuaternionFromAxisAngle",
+            "PROP_QuaternionLookRotation",
+            "PROP_QuaternionFromToRotation",
+            "PROP_QuaternionInverse",
+            "PROP_QuaternionNormalize",
+            "PROP_QuaternionLerp",
+            "PROP_QuaternionSlerp",
+            "PROP_QuaternionRotateTowards",
+            "PROP_QuaternionAngle",
+            "PROP_QuaternionDot",
+            "COND_QuaternionAngleAtMost"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Math", "Rotation"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.All(node.ApiReferences, reference => Assert.Equal("Quaternion", reference.Type));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+        }
+    }
+
+    [Fact]
+    public void ColorSeriesApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "PROP_ColorSeriesFromColors",
+            "PROP_ColorFromColorSeries",
+            "PROP_ColorSeriesPointCount",
+            "PROP_ColorSeriesPointColor",
+            "PROP_ColorSeriesPointOffset"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Math", "Color Series"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.All(node.ApiReferences, reference => Assert.Equal("ColorSeries", reference.Type));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+        }
+    }
+
+    [Fact]
+    public void BindableEventApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "EV_OnBindableEvent",
+            "ACT_FireBindableEvent",
+            "PROP_TriggeringBindablePayload"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Flow & Timing", "Local Events"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.All(node.ApiReferences, reference => Assert.Equal("BindableEvent", reference.Type));
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+        }
+    }
+
+    [Fact]
+    public void WorldContainerApiPack_LoadsReadyAnnotatedGameplayNode()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var node = catalog.Nodes.Single(entry => entry.IdBase == "ACT_CreateSceneContainer");
+
+        Assert.Equal("Ready", node.Status);
+        Assert.Equal("UserFacing", node.Surface);
+        Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+        Assert.Equal(["Scene Object", "Hierarchy"], node.PalettePath);
+        Assert.True(NodeCatalogService.IsAddable(node));
+        Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+        Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+        Assert.NotEmpty(node.BeginnerSummary);
+        Assert.NotEmpty(node.SearchKeywords);
+        Assert.Contains(node.ApiReferences, reference => reference.Type == "Instance" && reference.Member == "New");
+        Assert.Contains(node.ApiReferences, reference => reference.Type == "Folder");
+        Assert.Contains(node.ApiReferences, reference => reference.Type == "Model");
+
+        var target = Assert.Single(node.Parameters, parameter => parameter.Key == "target");
+        Assert.Equal(["Any"], target.AcceptedObjectGroups);
+        Assert.Equal(["World"], target.AcceptedSceneRoots);
+    }
+
+    [Fact]
+    public void InventoryApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "PROP_PlayerInventory",
+            "PROP_FindToolInInventory",
+            "COND_PlayerHasTool",
+            "ACT_GiveToolToPlayer"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Players", "Inventory"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "Inventory");
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+        }
+
+        var inventoryValue = catalog.Nodes.Single(entry => entry.IdBase == "PROP_PlayerInventory");
+        Assert.Equal("SceneObject", NodeCatalogService.CreateNode(inventoryValue).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+    }
+
+    [Fact]
+    public void ScriptSharedTableApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "ACT_SetSharedValue",
+            "ACT_IncrementSharedNumber",
+            "ACT_AppendSharedText",
+            "ACT_RemoveSharedValue",
+            "ACT_ClearSharedValues",
+            "ACT_ClearSharedPrefix",
+            "ACT_ClearSharedSuffix",
+            "COND_SharedValueExists",
+            "COND_SharedNumberAtLeast",
+            "COND_SharedValueMissing",
+            "COND_SharedNumberEquals",
+            "COND_SharedNumberAtMost",
+            "COND_SharedTextEquals",
+            "COND_SharedTextContains",
+            "EV_OnSharedValueChanged",
+            "EV_OnSharedValueExists",
+            "EV_OnSharedValueRemoved",
+            "EV_OnSharedNumberReachedAtLeast",
+            "EV_OnSharedNumberDroppedToAtMost",
+            "EV_OnSharedTextBecame",
+            "EV_OnSharedTextContains",
+            "PROP_ReadSharedValue",
+            "PROP_ReadSharedNumber",
+            "PROP_ReadSharedText"
+        };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Variables", "Shared"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "ScriptSharedTable");
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+        }
+
+        var readValue = catalog.Nodes.Single(entry => entry.IdBase == "PROP_ReadSharedValue");
+        var readNumber = catalog.Nodes.Single(entry => entry.IdBase == "PROP_ReadSharedNumber");
+        var readText = catalog.Nodes.Single(entry => entry.IdBase == "PROP_ReadSharedText");
+        Assert.Equal("Any", NodeCatalogService.CreateNode(readValue).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+        Assert.Equal("Number", NodeCatalogService.CreateNode(readNumber).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+        Assert.Equal("String", NodeCatalogService.CreateNode(readText).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+    }
+
+    [Fact]
+    public void ScriptRuntimeApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var scriptIds = new[]
+        {
+            "ACT_SetScriptEnabled",
+            "ACT_EnableScript",
+            "ACT_DisableScript",
+            "ACT_ToggleScriptEnabled",
+            "ACT_CallScriptFunction",
+            "ACT_CallScriptFunctionAsync",
+            "COND_ScriptIsEnabled",
+            "COND_ScriptIsDisabled",
+            "COND_ScriptCanCallFunction",
+            "COND_ScriptCanCallAsyncFunction",
+            "COND_ScriptTargetExists",
+            "COND_ScriptTargetMissing",
+            "EV_OnScriptEnabled",
+            "EV_OnScriptDisabled",
+            "EV_OnScriptEnabledChanged",
+            "EV_OnScriptCallAvailable",
+            "EV_OnScriptCallAsyncAvailable",
+            "EV_OnScriptTargetMissing",
+            "PROP_ScriptEnabled"
+        };
+
+        foreach (var id in scriptIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Scene Object", "Scripts"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "Script");
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "ServerScript");
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "ClientScript");
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "ModuleScript");
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+
+            var target = node.Parameters.FirstOrDefault(parameter => parameter.Key == "target");
+            Assert.NotNull(target);
+            Assert.Contains("ScriptObject", target.AcceptedObjectGroups);
+        }
+
+        var scriptEnabled = catalog.Nodes.Single(entry => entry.IdBase == "PROP_ScriptEnabled");
+        Assert.Equal("Boolean", NodeCatalogService.CreateNode(scriptEnabled).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+    }
+
+    [Fact]
+    public void MissingInstanceValidationPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[] { "COND_ObjectIsMissingInstance", "PROP_ObjectIsMissingInstance" };
+
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal(["Scene Object", "Validation"], node.PalettePath);
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.Contains(node.ApiReferences, reference => reference.Type == "MissingInstance");
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+
+            var target = node.Parameters.Single(parameter => parameter.Key == "target");
+            Assert.Contains("Any", target.AcceptedObjectGroups);
+        }
+
+        var missingValue = catalog.Nodes.Single(entry => entry.IdBase == "PROP_ObjectIsMissingInstance");
+        Assert.Equal("Boolean", NodeCatalogService.CreateNode(missingValue).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+    }
+
+    [Fact]
+    public void AssetMediaApiPack_LoadsReadyAnnotatedGameplayNodes()
+    {
+        var catalog = new NodeCatalogService().LoadCatalog(TestPaths.CatalogRoot);
+        var expectedIds = new[]
+        {
+            "PROP_AssetReference",
+            "PROP_ResourceAssetReference",
+            "PROP_FontAssetReference",
+            "ACT_SetPTImageAssetId",
+            "PROP_PTImageAssetId",
+            "ACT_SetPTAudioAssetId",
+            "PROP_PTAudioAssetId",
+            "ACT_SetPTMeshAssetId",
+            "PROP_PTMeshAssetId",
+            "ACT_SetPTMeshAnimationAssetId",
+            "PROP_PTMeshAnimationAssetId",
+            "ACT_SetMeshAnimationType",
+            "PROP_MeshAnimationInfoName",
+            "ACT_SetBuiltInAudioPreset",
+            "PROP_BuiltInAudioPreset",
+            "ACT_SetBuiltInFontSettings",
+            "PROP_BuiltInFontPreset",
+            "ACT_SetFileLinkAssetId",
+            "PROP_FileLinkAssetId",
+            "ACT_SetGradientImageSize",
+            "PROP_GradientImageWidth",
+            "COND_DecalImageIs",
+            "COND_DecalHasImage",
+            "COND_PTImageAssetIdIs",
+            "COND_PTAudioAssetIdIs",
+            "COND_PTMeshAssetIdIs",
+            "COND_PTMeshAnimationAssetIdIs",
+            "COND_BuiltInAudioPresetIs",
+            "COND_BuiltInFontPresetIs",
+            "COND_FileLinkAssetIdIs",
+            "COND_MeshAnimationTypeIs",
+            "COND_GradientImageWidthAtLeast",
+            "COND_GradientImageHeightAtLeast",
+            "EV_OnDecalImageChanged",
+            "EV_OnPTImageAssetIdChanged",
+            "EV_OnPTAudioAssetIdChanged",
+            "EV_OnPTMeshAssetIdChanged",
+            "EV_OnPTMeshAnimationAssetIdChanged",
+            "EV_OnBuiltInAudioPresetChanged",
+            "EV_OnBuiltInFontPresetChanged",
+            "EV_OnFileLinkAssetIdChanged",
+            "EV_OnMeshAnimationTypeChanged",
+            "EV_OnGradientImageWidthReached",
+            "EV_OnGradientImageHeightReached"
+        };
+
+        var coveredTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var id in expectedIds)
+        {
+            var node = catalog.Nodes.Single(entry => entry.IdBase == id);
+            Assert.Equal("Ready", node.Status);
+            Assert.Equal("UserFacing", node.Surface);
+            Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(node));
+            Assert.Equal("Assets", node.PalettePath.First());
+            Assert.True(NodeCatalogService.IsAddable(node));
+            Assert.NotEmpty(node.ApiReferences);
+            Assert.NotEmpty(node.BeginnerSummary);
+            Assert.NotEmpty(node.SearchKeywords);
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Server));
+            Assert.True(NodeCatalogService.IsCompatibleWithScriptKind(node, GraphScriptKind.Local));
+
+            foreach (var reference in node.ApiReferences)
+            {
+                coveredTypes.Add(reference.Type);
+            }
+        }
+
+        foreach (var requiredType in new[]
+        {
+            "BaseAsset",
+            "BuiltInAudioAsset",
+            "BuiltInFontAsset",
+            "FileLinkAsset",
+            "FontAsset",
+            "GradientImageAsset",
+            "MeshAnimationAsset",
+            "MeshAnimationInfo",
+            "PTAudioAsset",
+            "PTImageAsset",
+            "PTMeshAnimationAsset",
+            "PTMeshAsset",
+            "ResourceAsset"
+        })
+        {
+            Assert.Contains(requiredType, coveredTypes);
+        }
+
+        var assetReference = catalog.Nodes.Single(entry => entry.IdBase == "PROP_AssetReference");
+        var imageId = catalog.Nodes.Single(entry => entry.IdBase == "PROP_PTImageAssetId");
+        var audioPreset = catalog.Nodes.Single(entry => entry.IdBase == "PROP_BuiltInAudioPreset");
+        Assert.Equal("BaseAsset", NodeCatalogService.CreateNode(assetReference).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+        Assert.Equal("Number", NodeCatalogService.CreateNode(imageId).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+        Assert.Equal("String", NodeCatalogService.CreateNode(audioPreset).Ports.Single(port => port.Id == GraphPortDefaults.ValueOut).DataType);
+
+        var meshType = catalog.Nodes.Single(entry => entry.IdBase == "ACT_SetMeshAnimationType");
+        Assert.Contains("OneShotImpluse", meshType.Parameters.Single(parameter => parameter.Key == "animationType").Options);
     }
 
     [Fact]

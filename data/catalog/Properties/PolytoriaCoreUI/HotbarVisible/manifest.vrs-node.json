@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.coreui.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Client",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_BuiltInHotbarVisible",
   "type": "BuiltInHotbarVisible",
   "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "CoreUIService", "memberKind": "Property", "member": "UseHotbar", "coverage": "Direct" }
+  ],
   "label": "Hotbar Is Visible",
   "value": "",
   "description": "Outputs true when the built-in hotbar is visible.",

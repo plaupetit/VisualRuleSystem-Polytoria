@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.color_adjust.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ColorAdjustContrast",
+  "type": "ColorAdjustContrastValue",
+  "apiType": "ColorAdjustModifier.Contrast",
+  "apiReferences": [
+    { "type": "ColorAdjustModifier", "memberKind": "Property", "member": "Contrast", "coverage": "Direct" },
+    { "type": "LightingModifier", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Color Adjust Contrast",
+  "value": "target=Self",
+  "description": "Outputs the contrast adjustment from a ColorAdjustModifier.",
+  "status": "Ready",
+  "previewTemplate": "Color adjust contrast of ${target}",
+  "searchKeywords": ["lighting", "post process", "color adjust", "contrast", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ColorAdjustModifier object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ColorAdjustModifierObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads the contrast adjustment.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Color Adjust"]
+}

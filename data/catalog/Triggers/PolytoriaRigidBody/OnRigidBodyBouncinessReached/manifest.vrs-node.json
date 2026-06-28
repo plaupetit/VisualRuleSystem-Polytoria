@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.rigidbody.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Physics",
+  "idBase": "EV_OnRigidBodyBouncinessReached",
+  "type": "OnRigidBodyBouncinessReached",
+  "apiType": "RigidBody.Bounciness",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Bounciness", "coverage": "Partial" }
+  ],
+  "label": "On Rigid Body Bounciness Reached",
+  "value": "target=Self;bounciness=0;interval=0.25",
+  "description": "Starts when a RigidBody bounciness reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} bounciness reaches ${bounciness}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "bounciness", "bounce", "threshold", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "bounciness", "label": "Bounciness", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Bounciness threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks bounciness.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a rigid body gets bouncy enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body Changes"]
+}

@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.coreui.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Client",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_BuiltInUserCardVisible",
   "type": "BuiltInUserCardVisible",
   "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "CoreUIService", "memberKind": "Property", "member": "UseUserCard", "coverage": "Direct" }
+  ],
   "label": "User Card Is Visible",
   "value": "",
   "description": "Outputs true when the built-in user card is visible.",

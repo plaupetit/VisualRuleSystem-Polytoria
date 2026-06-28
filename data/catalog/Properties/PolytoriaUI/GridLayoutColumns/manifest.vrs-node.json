@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "UI Layout",
+  "idBase": "PROP_GridLayoutColumns",
+  "type": "GridLayoutColumnsValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "UIGridLayout", "memberKind": "Property", "member": "Columns", "coverage": "Direct" }
+  ],
+  "label": "Grid Columns",
+  "value": "target=Self",
+  "description": "Reads how many columns a UI grid layout uses.",
+  "status": "Ready",
+  "previewTemplate": "Columns of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "layout", "grid", "columns", "inventory", "menu"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grid Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grid layout to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIGridLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads how many columns a UI grid uses.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

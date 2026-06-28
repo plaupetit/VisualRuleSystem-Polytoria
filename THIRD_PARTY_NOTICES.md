@@ -40,6 +40,7 @@ project context only and is not an additional license restriction.
 Only the selected SVG icons used by the app should be committed. Full downloaded
 icon source snapshots are local selection material and are ignored by
 `.gitignore`.
+No Polytoria logo, icon, or official brand asset is used by the app icon set.
 
 | Component | Version / source | License | Included notice |
 | --- | --- | --- | --- |

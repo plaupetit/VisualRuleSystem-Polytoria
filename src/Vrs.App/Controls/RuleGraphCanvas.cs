@@ -126,6 +126,7 @@ public sealed partial class RuleGraphCanvas : Control
     private int nodePaletteSelectedIndex;
     private int nodePaletteScrollIndex;
     private bool nodePaletteCompatibleOnly = true;
+    private NodePaletteApiSurfaceFilter nodePaletteApiSurfaceFilter = NodePaletteApiSurfaceFilter.Gameplay;
     private string nodePaletteCurrentIntentKey = "";
     private readonly List<string> nodePaletteCurrentDomainPath = [];
     private Point nodePalettePointerPoint;

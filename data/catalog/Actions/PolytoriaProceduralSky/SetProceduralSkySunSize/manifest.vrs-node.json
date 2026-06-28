@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.procedural_sky.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetProceduralSkySunSize",
+  "type": "SetProceduralSkySunSize",
+  "apiType": "ProceduralSky.SunSize",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "SunSize", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Procedural Sky Sun Size",
+  "value": "target=Self;size=1",
+  "description": "Changes the sun size on a ProceduralSky object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} sun size ${size}",
+  "searchKeywords": ["sky", "procedural", "sun", "size", "lighting", "environment"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ProceduralSky object to update.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ProceduralSkyObject"]
+    },
+    {
+      "key": "size",
+      "label": "Sun Size",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "New sun size value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change how large the procedural sky sun appears.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

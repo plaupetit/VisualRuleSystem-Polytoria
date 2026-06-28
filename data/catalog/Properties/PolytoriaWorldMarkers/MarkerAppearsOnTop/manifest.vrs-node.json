@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Markers",
+  "idBase": "PROP_MarkerAppearsOnTop",
+  "type": "MarkerAppearsOnTopValue",
+  "apiType": "Marker3D.AppearOnTop",
+  "apiReferences": [
+    { "type": "Marker3D", "memberKind": "Property", "member": "AppearOnTop", "coverage": "Direct" }
+  ],
+  "label": "Marker On Top",
+  "value": "target=Self",
+  "description": "Reads whether a 3D marker draws above nearby objects.",
+  "status": "Ready",
+  "returnType": "Boolean",
+  "previewTemplate": "${target} marker on top",
+  "searchKeywords": ["marker", "3d", "top", "visible", "indicator"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] }
+  ],
+  "beginnerSummary": "Value returns whether a marker draws on top.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

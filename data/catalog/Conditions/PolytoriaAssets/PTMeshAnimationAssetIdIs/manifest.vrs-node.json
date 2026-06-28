@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Mesh Animation",
+  "idBase": "COND_PTMeshAnimationAssetIdIs",
+  "type": "PTMeshAnimationAssetIdIs",
+  "apiType": "PTMeshAnimationAsset.AssetID",
+  "apiReferences": [
+    { "type": "PTMeshAnimationAsset", "memberKind": "Property", "member": "AssetID", "coverage": "Direct" },
+    { "type": "MeshAnimationAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "PT Mesh Animation Asset ID Is",
+  "value": "target=Self;assetId=0",
+  "description": "Checks if a PTMeshAnimationAsset stores the expected animation asset ID.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} animation asset ID is ${assetId}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["mesh", "animation", "asset", "id", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Mesh Animation Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTMeshAnimationAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAnimationAssetObject"] },
+    { "key": "assetId", "label": "Asset ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Expected Polytoria mesh animation asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a mesh animation asset uses a specific ID.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Mesh Animation"]
+}

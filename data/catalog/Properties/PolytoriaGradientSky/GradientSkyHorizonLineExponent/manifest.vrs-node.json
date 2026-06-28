@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.gradient_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_GradientSkyHorizonLineExponent",
+  "type": "GradientSkyHorizonLineExponentValue",
+  "apiType": "GradientSky.HorizonLineExponent",
+  "apiReferences": [
+    { "type": "GradientSky", "memberKind": "Property", "member": "HorizonLineExponent", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Gradient Sky Horizon Line Exponent",
+  "value": "target=Self",
+  "description": "Outputs the horizon line exponent from a GradientSky object.",
+  "status": "Ready",
+  "previewTemplate": "Horizon line exponent of ${target}",
+  "searchKeywords": ["sky", "gradient", "horizon", "line", "exponent", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientSky object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["GradientSkyObject"] }
+  ],
+  "beginnerSummary": "Value reads the horizon line exponent.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sky Horizon"]
+}

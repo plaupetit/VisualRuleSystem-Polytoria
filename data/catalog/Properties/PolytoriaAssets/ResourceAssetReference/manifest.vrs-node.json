@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Assets",
+  "idBase": "PROP_ResourceAssetReference",
+  "type": "ResourceAssetReferenceValue",
+  "apiType": "ResourceAsset",
+  "apiReferences": [
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Direct" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Resource Asset Reference",
+  "value": "target=Self",
+  "description": "Outputs an existing runtime resource asset such as an image, audio, mesh, or font.",
+  "status": "Ready",
+  "previewTemplate": "Resource asset ${target}",
+  "searchKeywords": ["asset", "resource", "reference", "image", "audio", "mesh", "font"],
+  "parameters": [
+    { "key": "target", "label": "Resource Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Resource asset object to output.", "valueSource": "Target Context", "acceptedObjectGroups": ["ResourceAssetObject"] }
+  ],
+  "beginnerSummary": "Value: use an existing resource asset as a source.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "References"]
+}

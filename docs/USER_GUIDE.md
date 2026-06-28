@@ -4,8 +4,15 @@ This guide explains the main VisualRuleSystem Polytoria interface. VRS is a
 prototype, so some workflows are intentionally explicit: save the script file
 first, then link the saved script instance into Creator.
 
+The complete visual scripting workspace is the VRS desktop window. The
+Polytoria Creator addon is a `Tools > Addons` bridge surface for snapshots,
+command application, status, and optional auto bridge behavior; it is not a
+native docked Creator tab.
+
 ## Main Window
 
+- `Visual Scripting Workspace`: top-level workspace label and current script
+  file summary.
 - `Project` badge: shows whether VRS is linked to a Polytoria project and
   whether Creator is running.
 - `Addon beat` badge: shows the Creator bridge heartbeat, VRS focus state, and
@@ -17,6 +24,9 @@ first, then link the saved script instance into Creator.
   `Client`, or `Module` before deploying the saved file.
 - `File:` chip: shows the saved VRS script path under `scripts/VRS/`.
 - `Deploy File`: writes or updates the current Luau file in the project.
+- `Creator Bridge`: contains `Request Snapshot` for writing
+  `snapshot-request.json` and `Refresh Snapshot` for reading the latest
+  `scene-snapshot.json`.
 - `Input Manager`: creates VRS input presets and bridge-managed input events.
 - `Graph`: returns to the graph editor view.
 - `Output: F11`: opens the output overlay. Press `F11` to toggle it and `Esc`
@@ -67,6 +77,8 @@ The Inspector edits the selected node or selected graph item.
 The Creator Hierarchy mirrors the live Creator project snapshot from the bridge.
 
 - Select objects to inspect or use as deployment targets.
+- Use `Creator Bridge > Request Snapshot` when Creator has changed and you want
+  the addon to export a fresh hierarchy snapshot.
 - Right-click an object or folder to deploy the current saved script instance.
 - `Set Deploy Target` stores the selected object as the intended target.
 - `Rename Script Target...` changes the VRS script name used for future saved
@@ -104,7 +116,7 @@ every project object.
 
 - It creates or preserves VRS input presets in `input.json`.
 - It ensures bridge-managed `NetworkEvent` instances under
-  `World/Hidden/VRS/Events/Input`.
+  `World/Hidden/VRS/Events/User Input (NetworkEvent)/Input Manager`.
 - Client scripts can listen to input actions and send input events.
 - Server scripts can listen to VRS input events and use trigger context values
   such as the triggering player and action name.

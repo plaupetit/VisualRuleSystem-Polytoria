@@ -1,0 +1,58 @@
+{
+  "moduleId": "polytoria.scripts.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Script",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Scripts",
+  "idBase": "COND_ScriptTargetExists",
+  "type": "ScriptTargetExists",
+  "apiType": "Script",
+  "apiReferences": [
+    { "type": "Script", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ServerScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ClientScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ModuleScript", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Script Target Exists",
+  "value": "target=Target",
+  "description": "Checks whether a script target resolves to a real object.",
+  "status": "Ready",
+  "previewTemplate": "Script target ${target} exists",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "script",
+    "exists",
+    "found",
+    "target",
+    "condition",
+    "server script",
+    "client script",
+    "module script"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scripts",
+  "utilityLayer": "Scripts",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Script",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Script object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ScriptObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if the script target can be found.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Scripts"
+  ]
+}

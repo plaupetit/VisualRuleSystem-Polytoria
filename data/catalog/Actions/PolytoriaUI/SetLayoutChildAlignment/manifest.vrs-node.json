@@ -1,0 +1,42 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "UI Layout",
+  "idBase": "ACT_SetLayoutChildAlignment",
+  "type": "SetLayoutChildAlignment",
+  "apiType": "UIHVLayout.ChildAlignment",
+  "apiReferences": [
+    { "type": "UIHVLayout", "memberKind": "Property", "member": "ChildAlignment", "coverage": "Direct" },
+    { "type": "UILayoutAlignment", "memberKind": "Enum", "coverage": "Direct" }
+  ],
+  "label": "Set Layout Child Alignment",
+  "value": "target=Self;alignment=Center",
+  "description": "Changes how children are aligned inside a horizontal or vertical UI layout.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} child alignment to ${alignment}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "layout", "align", "alignment", "center", "start", "end"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "UI Layout",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "UI Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Layout to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIHVLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "alignment", "label": "Alignment", "type": "String", "control": "Choice", "required": true, "default": "Center", "description": "Child alignment mode.", "valueSource": "String / Choice", "options": ["Start", "Center", "End"] }
+  ],
+  "beginnerSummary": "Do align children at the start, center, or end of a UI layout.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

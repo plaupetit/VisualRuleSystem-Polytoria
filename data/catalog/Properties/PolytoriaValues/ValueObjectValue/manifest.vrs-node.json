@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.values.values",
+  "kind": "Property",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Values",
+  "idBase": "PROP_ValueObjectValue",
+  "type": "ValueObjectValue",
+  "apiType": "ValueBase",
+  "apiReferences": [
+    { "type": "ValueBase", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "NumberValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "StringValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "BoolValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "ColorValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "Vector2Value", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "Vector3Value", "memberKind": "Property", "member": "Value", "coverage": "Direct" }
+  ],
+  "label": "Value Object",
+  "value": "target=Self",
+  "description": "Outputs the Value property from a Polytoria value object.",
+  "status": "Ready",
+  "previewTemplate": "${target} value",
+  "searchKeywords": ["value", "numbervalue", "stringvalue", "boolvalue", "colorvalue", "vectorvalue"],
+  "parameters": [
+    { "key": "target", "label": "Value Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Value object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] }
+  ],
+  "beginnerSummary": "Value: read the Value field from a Polytoria value object.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Stored Values"]
+}

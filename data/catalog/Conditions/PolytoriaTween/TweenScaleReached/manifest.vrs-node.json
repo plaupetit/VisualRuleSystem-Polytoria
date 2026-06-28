@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.tween.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Tween",
+  "idBase": "COND_TweenScaleReached",
+  "type": "TweenScaleReached",
+  "apiType": "TweenObject",
+  "apiReferences": [
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenSize", "coverage": "Indirect" },
+    { "type": "Part", "memberKind": "Property", "member": "Scale", "coverage": "Direct" }
+  ],
+  "label": "Tween Scale Reached",
+  "value": "target=Self;vector=1,1,1;x=1;y=1;z=1;tolerance=0.01",
+  "description": "Checks whether an object has reached a target tween scale.",
+  "status": "Ready",
+  "previewTemplate": "${target} reached tween scale ${vector}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["tween", "animate", "scale", "size", "reached", "done", "object"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Target Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to inspect.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "vector", "label": "Target Scale", "type": "Vector3", "control": "Vector3", "required": true, "default": "1,1,1", "description": "Scale the tween should reach.", "valueSource": "Manual 3D Vector" },
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target X scale.", "valueSource": "Suggested Value" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target Y scale.", "valueSource": "Suggested Value" },
+    { "key": "z", "label": "Z", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target Z scale.", "valueSource": "Suggested Value" },
+    { "key": "tolerance", "label": "Tolerance", "type": "Number", "control": "Number", "required": true, "default": "0.01", "description": "Allowed scale difference.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if a scale animation has reached its target.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

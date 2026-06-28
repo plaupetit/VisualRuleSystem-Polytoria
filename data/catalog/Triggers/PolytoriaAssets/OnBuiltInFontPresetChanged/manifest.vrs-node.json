@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Fonts",
+  "idBase": "EV_OnBuiltInFontPresetChanged",
+  "type": "OnBuiltInFontPresetChanged",
+  "apiType": "BuiltInFontAsset.FontPreset",
+  "apiReferences": [{ "type": "BuiltInFontAsset", "memberKind": "Property", "member": "FontPreset", "coverage": "Partial" }],
+  "label": "On Built-In Font Preset Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a BuiltInFontAsset preset changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} font preset changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["font", "built-in", "preset", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Built-In Font Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BuiltInFontAsset to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["FontAssetObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the font preset.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a built-in font preset changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Font Changes"]
+}

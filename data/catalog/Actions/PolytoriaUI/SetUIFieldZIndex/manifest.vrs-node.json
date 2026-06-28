@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.ui.field",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "UI Field",
+  "idBase": "ACT_SetUIFieldZIndex",
+  "type": "SetUIFieldZIndex",
+  "apiType": "UIField.ZIndex",
+  "apiReferences": [
+    { "type": "UIField", "memberKind": "Property", "member": "ZIndex", "coverage": "Direct" }
+  ],
+  "label": "Set UI Layer",
+  "value": "target=Self;zIndex=1",
+  "description": "Changes the draw order layer of a UI field.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} layer to ${zIndex}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "field", "zindex", "layer", "order", "front", "behind"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "UI Field",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "UI Field", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI field to reorder.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "zIndex", "label": "Layer", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Higher values draw in front of lower values.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Do move a UI field in front of or behind other UI.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Field"]
+}

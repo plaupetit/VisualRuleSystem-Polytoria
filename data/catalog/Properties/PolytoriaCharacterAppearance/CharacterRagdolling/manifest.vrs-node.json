@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Character Appearance",
+  "idBase": "PROP_CharacterRagdolling",
+  "type": "CharacterRagdollingValue",
+  "apiType": "PolytorianModel.Ragdolling",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "Ragdolling", "coverage": "Direct" }
+  ],
+  "label": "Character Is Ragdolling",
+  "value": "target=Self",
+  "description": "Checks whether a character model is ragdolling.",
+  "status": "Ready",
+  "returnType": "Boolean",
+  "previewTemplate": "${target} is ragdolling",
+  "searchKeywords": ["character", "ragdoll", "fall", "physics", "state"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Value returns whether a character is ragdolling.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Ragdoll"]
+}

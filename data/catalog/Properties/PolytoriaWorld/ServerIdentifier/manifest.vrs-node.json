@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.world.info",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_ServerIdentifier",
+  "type": "ServerIdentifierValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "World", "memberKind": "Property", "member": "ServerID", "coverage": "Direct" }
+  ],
+  "label": "Server Identifier",
+  "value": "",
+  "description": "Outputs the current server's identifier text.",
+  "status": "Ready",
+  "previewTemplate": "Server identifier",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "server", "identifier", "text"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value reads the identifier text for the current server.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "World Info"]
+}

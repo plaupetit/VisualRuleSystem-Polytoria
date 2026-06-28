@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.sunlight.values",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_SunLightShadows",
+  "type": "SunLightShadowsValue",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Shadows", "coverage": "Direct" }
+  ],
+  "label": "Sun Light Shadows",
+  "value": "target=Self",
+  "description": "Outputs whether the main sun light casts shadows.",
+  "status": "Ready",
+  "previewTemplate": "Sun shadows of ${target}",
+  "searchKeywords": ["sun", "sunlight", "light", "lighting", "shadow", "shadows"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Sun Light", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "SunLight object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["SunLightObject"] }
+  ],
+  "beginnerSummary": "Value: check whether sun shadows are on.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light"]
+}

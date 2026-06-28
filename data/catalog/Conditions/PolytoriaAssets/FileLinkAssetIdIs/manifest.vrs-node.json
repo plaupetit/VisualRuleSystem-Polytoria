@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Files",
+  "idBase": "COND_FileLinkAssetIdIs",
+  "type": "FileLinkAssetIdIs",
+  "apiType": "FileLinkAsset.LinkedID",
+  "apiReferences": [
+    { "type": "FileLinkAsset", "memberKind": "Property", "member": "LinkedID", "coverage": "Direct" }
+  ],
+  "label": "File Link Asset ID Is",
+  "value": "target=Self;linkedId=;caseSensitive=true",
+  "description": "Checks if a FileLinkAsset has the expected linked ID.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} linked ID is ${linkedId}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["file", "link", "asset", "linkedid", "id", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "File Link Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "FileLinkAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["FileLinkAssetObject"] },
+    { "key": "linkedId", "label": "Linked ID", "type": "String", "control": "Text", "required": true, "default": "", "description": "Expected linked ID.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a file link asset points to a specific ID.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Files"]
+}

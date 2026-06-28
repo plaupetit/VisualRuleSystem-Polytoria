@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.environment",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_WorldGravity",
+  "type": "WorldGravityValue",
+  "apiType": "Environment.Gravity",
+  "apiReferences": [
+    { "type": "Environment", "memberKind": "Property", "member": "Gravity", "coverage": "Direct" }
+  ],
+  "label": "World Gravity",
+  "value": "",
+  "description": "Reads the gravity used by the world.",
+  "status": "Ready",
+  "returnType": "Number",
+  "previewTemplate": "World gravity",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "environment", "gravity", "physics", "fall"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value returns world gravity.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Environment"]
+}

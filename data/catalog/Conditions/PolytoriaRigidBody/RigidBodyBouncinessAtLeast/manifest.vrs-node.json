@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.rigidbody.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Physics",
+  "idBase": "COND_RigidBodyBouncinessAtLeast",
+  "type": "RigidBodyBouncinessAtLeast",
+  "apiType": "RigidBody.Bounciness",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Bounciness", "coverage": "Direct" }
+  ],
+  "label": "Rigid Body Bounciness At Least",
+  "value": "target=Self;bounciness=0",
+  "description": "Checks if a RigidBody bounciness is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} bounciness is at least ${bounciness}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "bounciness", "bounce", "elastic", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "bounciness", "label": "Minimum Bounciness", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Minimum bounciness.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a rigid body is bouncy enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

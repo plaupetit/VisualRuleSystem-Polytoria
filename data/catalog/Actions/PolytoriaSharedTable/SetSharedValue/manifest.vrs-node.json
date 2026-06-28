@@ -1,0 +1,63 @@
+{
+  "moduleId": "polytoria.sharedtable.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Shared Values",
+  "idBase": "ACT_SetSharedValue",
+  "type": "SetSharedValue",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Shared Value",
+  "value": "key=Score;value=0",
+  "description": "Stores a value in Polytoria's shared script table so other scripts can read it.",
+  "status": "Ready",
+  "previewTemplate": "Set shared ${key} to ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "value",
+    "between scripts",
+    "script shared table",
+    "store",
+    "set"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "key",
+      "label": "Key",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Shared table key to write.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "value",
+      "label": "Value",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "0",
+      "description": "Value to store. It can also come from a connected value node.",
+      "valueSource": "Any Value"
+    }
+  ],
+  "beginnerSummary": "Do store a value that other scripts can read later.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

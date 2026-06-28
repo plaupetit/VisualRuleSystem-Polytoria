@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.lighting.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Lighting",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Lighting",
+  "idBase": "EV_OnFogEnabled",
+  "type": "OnFogEnabled",
+  "apiType": "Lighting",
+  "apiReferences": [
+    { "type": "Lighting", "memberKind": "Property", "member": "FogEnabled", "coverage": "Partial" }
+  ],
+  "label": "On Fog Enabled",
+  "value": "interval=0.25",
+  "description": "Runs when world fog changes from off to on.",
+  "status": "Ready",
+  "previewTemplate": "When fog turns on",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["lighting", "fog", "enabled", "weather", "watch", "trigger"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks fog.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When world fog turns on after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Fog Changes"]
+}

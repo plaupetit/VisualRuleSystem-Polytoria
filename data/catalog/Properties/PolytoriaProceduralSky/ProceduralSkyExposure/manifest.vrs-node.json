@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.procedural_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ProceduralSkyExposure",
+  "type": "ProceduralSkyExposureValue",
+  "apiType": "ProceduralSky.Exposure",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "Exposure", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Procedural Sky Exposure",
+  "value": "target=Self",
+  "description": "Outputs the exposure from a ProceduralSky object.",
+  "status": "Ready",
+  "previewTemplate": "Exposure of ${target}",
+  "searchKeywords": ["sky", "procedural", "exposure", "brightness", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ProceduralSky object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ProceduralSkyObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads the procedural sky exposure.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

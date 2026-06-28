@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.assets.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Images",
+  "idBase": "EV_OnGradientImageWidthReached",
+  "type": "OnGradientImageWidthReached",
+  "apiType": "GradientImageAsset.Width",
+  "apiReferences": [{ "type": "GradientImageAsset", "memberKind": "Property", "member": "Width", "coverage": "Partial" }],
+  "label": "On Gradient Image Width Reached",
+  "value": "target=Self;width=256;interval=0.25",
+  "description": "Starts when a GradientImageAsset width reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} width reaches ${width}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["gradient", "image", "asset", "width", "size", "threshold"],
+  "parameters": [
+    { "key": "target", "label": "Gradient Image Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientImageAsset to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageAssetObject"] },
+    { "key": "width", "label": "Width", "type": "Number", "control": "Number", "required": true, "default": "256", "description": "Width threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the width.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a generated gradient image becomes wide enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Image Changes"]
+}

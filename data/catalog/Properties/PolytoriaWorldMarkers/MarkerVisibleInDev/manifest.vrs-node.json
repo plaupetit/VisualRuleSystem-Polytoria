@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Markers",
+  "idBase": "PROP_MarkerVisibleInDev",
+  "type": "MarkerVisibleInDevValue",
+  "apiType": "Marker3D.VisibleInDev",
+  "apiReferences": [
+    { "type": "Marker3D", "memberKind": "Property", "member": "VisibleInDev", "coverage": "Direct" }
+  ],
+  "label": "Marker Visible In Dev",
+  "value": "target=Self",
+  "description": "Reads whether a 3D marker is visible while building or testing.",
+  "status": "Ready",
+  "returnType": "Boolean",
+  "previewTemplate": "${target} marker dev visibility",
+  "searchKeywords": ["marker", "3d", "visible", "dev", "debug"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] }
+  ],
+  "beginnerSummary": "Value returns marker build visibility.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

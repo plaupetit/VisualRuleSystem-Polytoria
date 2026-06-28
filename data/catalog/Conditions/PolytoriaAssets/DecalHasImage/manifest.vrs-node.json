@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Images",
+  "idBase": "COND_DecalHasImage",
+  "type": "DecalHasImage",
+  "apiType": "Decal.Image",
+  "apiReferences": [
+    { "type": "Decal", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Decal Has Image",
+  "value": "target=Self",
+  "description": "Checks if a Decal has any image asset reference.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} has a decal image",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["decal", "image", "asset", "texture", "exists", "has"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Decal", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Decal object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] }
+  ],
+  "beginnerSummary": "Check whether a Decal has an image set.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

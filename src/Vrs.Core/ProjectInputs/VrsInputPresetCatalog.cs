@@ -1,3 +1,5 @@
+using Vrs.Core.RuntimeEvents;
+
 namespace Vrs.Core.ProjectInputs;
 
 /// <summary>
@@ -6,7 +8,7 @@ namespace Vrs.Core.ProjectInputs;
 /// </summary>
 public static class VrsInputPresetCatalog
 {
-    public const string RuntimeInputEventFolderPath = "World/Hidden/VRS/Events/Input";
+    public const string RuntimeInputEventFolderPath = VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath;
 
     private static readonly VrsInputPreset[] Presets =
     [

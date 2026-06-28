@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_SetBuiltInAudioPreset",
+  "type": "SetBuiltInAudioPreset",
+  "apiType": "BuiltInAudioAsset.AudioPreset",
+  "apiReferences": [
+    { "type": "BuiltInAudioAsset", "memberKind": "Property", "member": "AudioPreset", "coverage": "Direct" },
+    { "type": "AudioAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Built-In Audio Preset",
+  "value": "target=Self;preset=Jump",
+  "description": "Changes the built-in audio preset used by a BuiltInAudioAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} audio preset",
+  "searchKeywords": ["audio", "sound", "built-in", "builtin", "preset", "jump", "explosion"],
+  "selectorHints": [
+    { "key": "target", "label": "Built-In Audio Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Built-In Audio Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BuiltInAudioAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["AudioAssetObject"] },
+    { "key": "preset", "label": "Preset", "type": "String", "control": "Choice", "required": true, "default": "Jump", "description": "Built-in audio preset.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Jump", "Explosion"] }
+  ],
+  "beginnerSummary": "Do choose the sound preset stored on a built-in audio asset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Audio"]
+}

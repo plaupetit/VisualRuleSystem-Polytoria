@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Mesh Animation",
+  "idBase": "ACT_SetPTMeshAnimationAssetId",
+  "type": "SetPTMeshAnimationAssetId",
+  "apiType": "PTMeshAnimationAsset.AssetID",
+  "apiReferences": [
+    { "type": "PTMeshAnimationAsset", "memberKind": "Property", "member": "AssetID", "coverage": "Direct" },
+    { "type": "MeshAnimationAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set PT Mesh Animation Asset ID",
+  "value": "target=Self;assetId=0",
+  "description": "Changes the numeric Polytoria animation ID stored on a PTMeshAnimationAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} animation asset ID",
+  "searchKeywords": ["mesh", "animation", "asset", "ptmeshanimationasset", "id"],
+  "selectorHints": [
+    { "key": "target", "label": "Mesh Animation Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Mesh Animation Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTMeshAnimationAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAnimationAssetObject"] },
+    { "key": "assetId", "label": "Asset ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Polytoria mesh animation asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Do update the animation asset ID on a PTMeshAnimationAsset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Mesh Animation"]
+}

@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionFromToRotation",
+  "type": "QuaternionFromToRotation",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "FromToRotation", "coverage": "Direct" }
+  ],
+  "label": "Rotation From Direction To Direction",
+  "value": "fromDirection=0,0,1;toDirection=1,0,0",
+  "description": "Creates the rotation needed to turn one direction into another direction.",
+  "status": "Ready",
+  "previewTemplate": "Rotate ${fromDirection} toward ${toDirection}",
+  "searchKeywords": ["quaternion", "rotation", "from", "to", "direction", "align", "turn", "face"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "fromDirection", "label": "From Direction", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,0,1", "description": "Original direction.", "valueSource": "World Direction" },
+    { "key": "toDirection", "label": "To Direction", "type": "Vector3", "control": "Vector3", "required": true, "default": "1,0,0", "description": "Target direction.", "valueSource": "World Direction" }
+  ],
+  "beginnerSummary": "Value: make the rotation that turns one direction into another.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

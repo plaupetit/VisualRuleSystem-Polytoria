@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_LoadCharacterAppearance",
+  "type": "LoadCharacterAppearance",
+  "apiType": "PolytorianModel.LoadAppearance",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Method", "member": "LoadAppearance", "coverage": "Direct" }
+  ],
+  "label": "Load Character Appearance",
+  "value": "target=Self;userId=0;loadTools=true",
+  "description": "Loads a saved player appearance onto a character model.",
+  "status": "Ready",
+  "previewTemplate": "Load appearance ${userId} on ${target}",
+  "searchKeywords": ["character", "appearance", "avatar", "load", "user", "outfit"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] },
+    { "key": "userId", "label": "User ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "User ID to load.", "valueSource": "Suggested Value" },
+    { "key": "loadTools", "label": "Load Tools", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Also load equipped tools.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do load a saved player appearance.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

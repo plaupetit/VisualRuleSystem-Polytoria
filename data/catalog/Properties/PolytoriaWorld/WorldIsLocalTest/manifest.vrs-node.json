@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.world.info",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_WorldIsLocalTest",
+  "type": "WorldIsLocalTestValue",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "World", "memberKind": "Property", "member": "IsLocalTest", "coverage": "Direct" }
+  ],
+  "label": "Local Test Is Running",
+  "value": "",
+  "description": "Outputs true when the current session is a local test.",
+  "status": "Ready",
+  "previewTemplate": "Local test is running",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "session", "local", "test", "playtest"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value checks whether the game is running as a local test.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "World Info"]
+}

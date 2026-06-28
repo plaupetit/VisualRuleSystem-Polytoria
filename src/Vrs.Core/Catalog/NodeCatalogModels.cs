@@ -13,6 +13,7 @@ public sealed class NodeCatalogEntry
     public string ModuleId { get; set; } = "";
     public NodeKind Kind { get; set; } = NodeKind.Action;
     public string RuntimeFamily { get; set; } = "Shared";
+    public NodeApiSurface ApiSurface { get; set; } = NodeApiSurface.Unspecified;
     public string ApiGroup { get; set; } = "";
     public string Category { get; set; } = "";
     public string Subcategory { get; set; } = "";

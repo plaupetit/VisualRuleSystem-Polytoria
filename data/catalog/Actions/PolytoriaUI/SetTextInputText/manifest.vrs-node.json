@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Text Input",
+  "idBase": "ACT_SetTextInputText",
+  "type": "SetTextInputText",
+  "apiType": "UITextInput.Text",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "Text", "coverage": "Direct" }
+  ],
+  "label": "Set Text Input Text",
+  "value": "target=Self;text=Hello",
+  "description": "Changes the current text inside a UI text input.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} input text to ${text}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "input box", "field", "form", "typing", "text"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to change.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    },
+    {
+      "key": "text",
+      "label": "Text",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Hello",
+      "description": "Text to place inside the input.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do change what a player sees inside a text input.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

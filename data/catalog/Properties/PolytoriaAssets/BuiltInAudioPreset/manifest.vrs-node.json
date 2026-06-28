@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Audio",
+  "idBase": "PROP_BuiltInAudioPreset",
+  "type": "BuiltInAudioPresetValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "BuiltInAudioAsset", "memberKind": "Property", "member": "AudioPreset", "coverage": "Direct" },
+    { "type": "AudioAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Built-In Audio Preset",
+  "value": "target=Self",
+  "description": "Outputs the preset name from a BuiltInAudioAsset.",
+  "status": "Ready",
+  "previewTemplate": "${target} audio preset",
+  "searchKeywords": ["audio", "sound", "built-in", "preset"],
+  "parameters": [
+    { "key": "target", "label": "Built-In Audio Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BuiltInAudioAsset to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["AudioAssetObject"] }
+  ],
+  "beginnerSummary": "Value: read the preset name from a built-in audio asset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Audio"]
+}

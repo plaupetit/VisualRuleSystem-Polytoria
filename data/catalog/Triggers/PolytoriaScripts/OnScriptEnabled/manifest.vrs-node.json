@@ -1,0 +1,67 @@
+{
+  "moduleId": "polytoria.scripts.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Script",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Scripts",
+  "idBase": "EV_OnScriptEnabled",
+  "type": "OnScriptEnabled",
+  "apiType": "Script",
+  "apiReferences": [
+    { "type": "Script", "memberKind": "Property", "member": "IsEnabled", "coverage": "Direct" },
+    { "type": "ServerScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ClientScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ModuleScript", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "On Script Enabled",
+  "value": "target=Target;interval=0.25",
+  "description": "Starts a flow when a script target becomes enabled.",
+  "status": "Ready",
+  "previewTemplate": "When script ${target} becomes enabled",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "script",
+    "enabled",
+    "watch",
+    "trigger",
+    "server script",
+    "client script",
+    "module script"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scripts",
+  "utilityLayer": "Scripts",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Script",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Script object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ScriptObject"
+      ]
+    },
+    {
+      "key": "interval",
+      "label": "Check Every Seconds",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.25",
+      "description": "Polling interval used to detect runtime changes.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Trigger when a script becomes enabled.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Scripts"
+  ]
+}

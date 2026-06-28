@@ -8,6 +8,10 @@
   "idBase": "EV_OnInputButtonDown",
   "type": "OnInputButtonDown",
   "apiType": "InputService",
+  "apiReferences": [
+    { "type": "InputService", "memberKind": "Method", "member": "GetButton", "coverage": "Direct" },
+    { "type": "InputActionButton", "memberKind": "Event", "member": "Pressed", "coverage": "Direct" }
+  ],
   "label": "On Input Button Down",
   "value": "target=Self;actionName=Interact",
   "description": "Starts the rule when a named client input button action is pressed.",

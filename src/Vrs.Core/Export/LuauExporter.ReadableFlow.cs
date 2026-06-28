@@ -56,6 +56,18 @@ public sealed partial class LuauExporter
         {
             AppendReadableSoundLoadedTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
         }
+        else if (IsAudioLightingWatcherTrigger(trigger.Type))
+        {
+            AppendReadableAudioLightingWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsImageSkyWatcherTrigger(trigger.Type))
+        {
+            AppendReadableImageSkyWatcherTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsProceduralSkyWatcherTrigger(trigger.Type))
+        {
+            AppendReadableProceduralSkyWatcherTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
         else if (trigger.Type.Equals("OnMeshLoaded", StringComparison.OrdinalIgnoreCase))
         {
             AppendReadableMeshLoadedTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
@@ -68,6 +80,14 @@ public sealed partial class LuauExporter
         {
             AppendReadableNpcEventTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
         }
+        else if (IsCharacterRagdollEventTrigger(trigger.Type))
+        {
+            AppendReadableCharacterRagdollEventTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsCharacterAnimationWatcherTrigger(trigger.Type))
+        {
+            AppendReadableCharacterAnimationWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
         else if (trigger.Type.Equals("OnBodyPositionReachedTarget", StringComparison.OrdinalIgnoreCase))
         {
             AppendReadableBodyPositionReachedTargetTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
@@ -75,6 +95,46 @@ public sealed partial class LuauExporter
         else if (trigger.Type.Equals("OnUIButtonClicked", StringComparison.OrdinalIgnoreCase))
         {
             AppendReadableUiButtonClickedTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (trigger.Type.Equals("OnTextInputChanged", StringComparison.OrdinalIgnoreCase))
+        {
+            AppendReadableTextInputEventTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName, "Changed", "On Text Input Changed");
+        }
+        else if (trigger.Type.Equals("OnTextInputSubmitted", StringComparison.OrdinalIgnoreCase))
+        {
+            AppendReadableTextInputEventTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName, "Submitted", "On Text Input Submitted");
+        }
+        else if (IsCustomUiWatcherTrigger(trigger.Type))
+        {
+            AppendReadableCustomUiWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsText3DWatcherTrigger(trigger.Type))
+        {
+            AppendReadableText3DWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsImage3DWatcherTrigger(trigger.Type))
+        {
+            AppendReadableImage3DWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsAssetMediaWatcherTrigger(trigger.Type))
+        {
+            AppendReadableAssetMediaWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsWorldMarkerWatcherTrigger(trigger.Type))
+        {
+            AppendReadableWorldMarkerWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsSharedTableWatcherTrigger(trigger.Type))
+        {
+            AppendReadableSharedTableWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsScriptRuntimeWatcherTrigger(trigger.Type))
+        {
+            AppendReadableScriptRuntimeWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsTweenTargetWatcherTrigger(trigger.Type))
+        {
+            AppendReadableTweenTargetWatcherTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
         }
         else if (trigger.Type.Equals("OnPlayerGameTeamChanged", StringComparison.OrdinalIgnoreCase))
         {
@@ -154,6 +214,10 @@ public sealed partial class LuauExporter
         {
             AppendReadableVrsInputEventTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
         }
+        else if (trigger.Type.Equals("OnBindableEvent", StringComparison.OrdinalIgnoreCase))
+        {
+            AppendReadableBindableEventTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
         else if (trigger.Type.Equals("OnStateChanged", StringComparison.OrdinalIgnoreCase))
         {
             AppendReadableStateChangedTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
@@ -165,6 +229,14 @@ public sealed partial class LuauExporter
         else if (PhysicalEventTriggerTypes.Contains(trigger.Type))
         {
             AppendReadablePhysicalEventTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsRigidBodyWatcherTrigger(trigger.Type))
+        {
+            AppendReadableRigidBodyWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (IsGrabbableWatcherTrigger(trigger.Type))
+        {
+            AppendReadableGrabbableWatcherTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
         }
         else if (trigger.Type.Equals("OnRoundStarted", StringComparison.OrdinalIgnoreCase) ||
             trigger.Type.Equals("OnRoundEnded", StringComparison.OrdinalIgnoreCase))
@@ -269,6 +341,10 @@ public sealed partial class LuauExporter
         else if (PlayerCountWatcherTriggerTypes.Contains(trigger.Type))
         {
             AppendReadablePlayerCountTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
+        }
+        else if (trigger.Type.Equals("OnPlayerDefaultReached", StringComparison.OrdinalIgnoreCase))
+        {
+            AppendReadablePlayerDefaultTransitionTrigger(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, functionName);
         }
         else if (ObjectMovementWatcherTriggerTypes.Contains(trigger.Type))
         {

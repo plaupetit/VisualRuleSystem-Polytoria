@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.stats.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player Stats",
+  "idBase": "PROP_StatDisplayName",
+  "type": "StatDisplayName",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "Stat", "memberKind": "Method", "member": "GetDisplayName", "coverage": "Direct" },
+    { "type": "Stat", "memberKind": "Property", "member": "DisplayName", "coverage": "Direct" }
+  ],
+  "label": "Stat Display Name",
+  "value": "target=Target",
+  "description": "Outputs the display name of a Stat object.",
+  "status": "Ready",
+  "previewTemplate": "${target} display name",
+  "searchKeywords": ["stat", "stats", "display", "name", "leaderboard"],
+  "parameters": [
+    { "key": "target", "label": "Stat", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Target", "description": "Stat object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["StatObject"] }
+  ],
+  "beginnerSummary": "Value: read the user-facing name of a stat.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Player Stats"]
+}

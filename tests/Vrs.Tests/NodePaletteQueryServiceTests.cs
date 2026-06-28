@@ -258,6 +258,28 @@ public sealed class NodePaletteQueryServiceTests
     }
 
     [Fact]
+    public void Browse_ApiSurfaceFilterDefaultsToGameplayAndCanShowCreator()
+    {
+        var gameplay = SurfaceEntry("ACT_GameplayUi", "Gameplay UI Node", NodeApiSurface.Unspecified, "GUI");
+        var creator = SurfaceEntry("ACT_CreatorTool", "Creator Tool Node", NodeApiSurface.Creator, "AddonBridge");
+        var entries = new[] { gameplay, creator };
+
+        Assert.Equal(NodeApiSurface.Gameplay, NodeCatalogApiSurfaceService.GetEntrySurface(gameplay));
+        Assert.Equal(NodeApiSurface.Creator, NodeCatalogApiSurfaceService.GetEntrySurface(creator));
+
+        var gameplayRows = service.Browse(entries, BrowserOptions(apiSurfaceFilter: NodePaletteApiSurfaceFilter.Gameplay, currentIntentKey: "Do", currentDomainPath: ["Test"]));
+        var allRows = service.Browse(entries, BrowserOptions(apiSurfaceFilter: NodePaletteApiSurfaceFilter.All, currentIntentKey: "Do", currentDomainPath: ["Test"]));
+        var creatorRows = service.Browse(entries, BrowserOptions(apiSurfaceFilter: NodePaletteApiSurfaceFilter.Creator, currentIntentKey: "Do", currentDomainPath: ["Test"]));
+
+        Assert.Contains(gameplayRows, row => row.Entry?.IdBase == "ACT_GameplayUi");
+        Assert.DoesNotContain(gameplayRows, row => row.Entry?.IdBase == "ACT_CreatorTool");
+        Assert.Contains(allRows, row => row.Entry?.IdBase == "ACT_GameplayUi");
+        Assert.Contains(allRows, row => row.Entry?.IdBase == "ACT_CreatorTool");
+        Assert.DoesNotContain(creatorRows, row => row.Entry?.IdBase == "ACT_GameplayUi");
+        Assert.Contains(creatorRows, row => row.Entry?.IdBase == "ACT_CreatorTool");
+    }
+
+    [Fact]
     public void Source_NodePaletteSearchRenderingShowsResultCountAndMatchSummary()
     {
         var sourcePath = Path.Combine(TestPaths.RepositoryRoot, "src", "Vrs.App", "Controls", "RuleGraphCanvas.NodePalette.Rendering.cs");
@@ -266,6 +288,8 @@ public sealed class NodePaletteQueryServiceTests
         Assert.Contains("Search Results ·", source, StringComparison.Ordinal);
         Assert.Contains("MatchSummary", source, StringComparison.Ordinal);
         Assert.Contains("synonyms", source, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Gameplay", source, StringComparison.Ordinal);
+        Assert.Contains("Creator", source, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -275,6 +299,8 @@ public sealed class NodePaletteQueryServiceTests
         var source = File.ReadAllText(sourcePath);
 
         Assert.DoesNotContain(".Take(260)", source, StringComparison.Ordinal);
+        Assert.Contains("Key.G", source, StringComparison.Ordinal);
+        Assert.Contains("NodePaletteApiSurfaceFilter.Gameplay", source, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -431,6 +457,7 @@ public sealed class NodePaletteQueryServiceTests
     private static NodePaletteBrowserQueryOptions BrowserOptions(
         string search = "",
         bool compatibleOnly = true,
+        NodePaletteApiSurfaceFilter apiSurfaceFilter = NodePaletteApiSurfaceFilter.Gameplay,
         string currentIntentKey = "",
         IReadOnlyList<string>? currentDomainPath = null,
         Func<NodeCatalogEntry, string?>? incompatibilityReason = null,
@@ -440,8 +467,27 @@ public sealed class NodePaletteQueryServiceTests
             Search: search,
             ScriptKind: scriptKind,
             CompatibleOnly: compatibleOnly,
+            ApiSurfaceFilter: apiSurfaceFilter,
             CurrentIntentKey: currentIntentKey,
             CurrentDomainPath: currentDomainPath ?? [],
             IncompatibilityReason: incompatibilityReason ?? (_ => ""));
+    }
+
+    private static NodeCatalogEntry SurfaceEntry(string id, string label, NodeApiSurface apiSurface, string apiType)
+    {
+        return new NodeCatalogEntry
+        {
+            ModuleId = "test",
+            Kind = NodeKind.Action,
+            ApiSurface = apiSurface,
+            RuntimeFamily = "Shared",
+            IdBase = id,
+            Type = id,
+            Label = label,
+            ApiType = apiType,
+            Description = label,
+            Surface = "UserFacing",
+            PalettePath = ["Test"]
+        };
     }
 }

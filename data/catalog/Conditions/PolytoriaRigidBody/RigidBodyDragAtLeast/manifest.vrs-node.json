@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.rigidbody.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Physics",
+  "idBase": "COND_RigidBodyDragAtLeast",
+  "type": "RigidBodyDragAtLeast",
+  "apiType": "RigidBody.Drag",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Drag", "coverage": "Direct" }
+  ],
+  "label": "Rigid Body Drag At Least",
+  "value": "target=Self;drag=0",
+  "description": "Checks if a RigidBody drag is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} drag is at least ${drag}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "drag", "damping", "slow", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "drag", "label": "Minimum Drag", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Minimum drag.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a rigid body has enough linear drag.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

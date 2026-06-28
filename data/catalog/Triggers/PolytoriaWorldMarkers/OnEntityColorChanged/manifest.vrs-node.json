@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.worldmarkers.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Entity",
+  "idBase": "EV_OnEntityColorChanged",
+  "type": "OnEntityColorChanged",
+  "apiType": "Entity.Color",
+  "apiReferences": [{ "type": "Entity", "memberKind": "Property", "member": "Color", "coverage": "Partial" }],
+  "label": "On Entity Color Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when an entity color changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} color changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["entity", "color", "rgb", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks color.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when an entity color changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity Changes"]
+}

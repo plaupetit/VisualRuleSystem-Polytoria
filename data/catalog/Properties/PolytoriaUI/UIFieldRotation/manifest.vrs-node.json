@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.field",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "UI Field",
+  "idBase": "PROP_UIFieldRotation",
+  "type": "UIFieldRotationValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "UIField", "memberKind": "Property", "member": "Rotation", "coverage": "Direct" }
+  ],
+  "label": "UI Rotation",
+  "value": "target=Self",
+  "description": "Reads the rotation of a UI field.",
+  "status": "Ready",
+  "previewTemplate": "Rotation of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "field", "rotation", "angle"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "UI Field", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI field to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads the rotation of a UI field.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Field"]
+}

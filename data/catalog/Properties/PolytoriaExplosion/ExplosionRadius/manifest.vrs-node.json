@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.explosion.values",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Effects",
+  "idBase": "PROP_ExplosionRadius",
+  "type": "ExplosionRadiusValue",
+  "apiType": "Explosion.Radius",
+  "apiReferences": [
+    { "type": "Explosion", "memberKind": "Property", "member": "Radius", "coverage": "Direct" }
+  ],
+  "label": "Explosion Radius",
+  "value": "target=Self",
+  "description": "Outputs how far an explosion reaches.",
+  "status": "Ready",
+  "previewTemplate": "Radius of ${target}",
+  "searchKeywords": ["explosion", "blast", "radius", "range"],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Explosion", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Explosion object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["ExplosionObject"] }
+  ],
+  "beginnerSummary": "Value: use an explosion radius.",
+  "surface": "UserFacing",
+  "palettePath": ["Effects", "Explosion"]
+}

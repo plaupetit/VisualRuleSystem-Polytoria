@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Character Appearance",
+  "idBase": "COND_CharacterHasFaceImage",
+  "type": "CharacterHasFaceImage",
+  "apiType": "PolytorianModel.FaceImage",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "FaceImage", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Character Has Face Image",
+  "value": "target=Self",
+  "description": "Checks if a character has any face image assigned.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} has a face image",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["character", "face", "image", "avatar", "not empty", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Check if a character has a face image.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

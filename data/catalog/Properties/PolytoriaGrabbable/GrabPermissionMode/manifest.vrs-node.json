@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.grabbable",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_GrabPermissionMode",
+  "type": "GrabPermissionModeValue",
+  "apiType": "Grabbable.PermissionMode",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "PermissionMode", "coverage": "Direct" },
+    { "type": "GrabbablePermissionMode", "memberKind": "Enum", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Grab Permission",
+  "value": "target=Self",
+  "description": "Reads who can grab this object.",
+  "status": "Ready",
+  "returnType": "String",
+  "previewTemplate": "${target} grab permission",
+  "searchKeywords": ["grab", "grabbable", "permission", "mode", "allow"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] }
+  ],
+  "beginnerSummary": "Value returns the grab permission mode.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

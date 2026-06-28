@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.worldmarkers.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Entity",
+  "idBase": "COND_EntityIsSpawn",
+  "type": "EntityIsSpawn",
+  "apiType": "Entity.IsSpawn",
+  "apiReferences": [{ "type": "Entity", "memberKind": "Property", "member": "IsSpawn", "coverage": "Direct" }],
+  "label": "Entity Is Spawn",
+  "value": "target=Self",
+  "description": "Checks if an entity is marked as a spawn.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} is a spawn",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["entity", "spawn", "checkpoint", "start", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] }
+  ],
+  "beginnerSummary": "Check whether an entity is a spawn point.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity"]
+}

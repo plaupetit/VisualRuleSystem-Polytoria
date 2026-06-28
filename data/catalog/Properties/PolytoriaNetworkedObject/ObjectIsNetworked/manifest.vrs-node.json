@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.networkedobject.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input/Network",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Object Network",
+  "idBase": "PROP_ObjectIsNetworked",
+  "type": "ObjectIsNetworkedValue",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "NetworkedObject", "memberKind": "Property", "member": "ExistInNetwork", "coverage": "Direct" }
+  ],
+  "label": "Object Is Networked",
+  "value": "target=Self",
+  "description": "Outputs true when a scene object exists on the network.",
+  "status": "Ready",
+  "previewTemplate": "${target} exists on network",
+  "searchKeywords": ["value", "check", "object", "network", "exists", "local", "spawned", "scene"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose network state will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["Any"]
+    }
+  ],
+  "beginnerSummary": "Value reads whether a scene object exists on the network.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Network"]
+}

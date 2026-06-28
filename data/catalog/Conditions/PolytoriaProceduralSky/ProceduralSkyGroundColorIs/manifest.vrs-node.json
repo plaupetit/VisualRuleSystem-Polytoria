@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.procedural_sky.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_ProceduralSkyGroundColorIs",
+  "type": "ProceduralSkyGroundColorIs",
+  "apiType": "ProceduralSky.GroundColor",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "GroundColor", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Procedural Sky Ground Color Is",
+  "value": "target=Self;r=0.1;g=0.15;b=0.2",
+  "description": "Checks whether a ProceduralSky ground color matches a color.",
+  "status": "Ready",
+  "previewTemplate": "${target} ground color matches color",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["sky", "procedural", "ground", "color", "lighting", "condition"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Procedural Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ProceduralSky object to inspect.", "valueSource": "Target Context", "acceptedObjectGroups": ["ProceduralSkyObject"] },
+    { "key": "r", "label": "Red", "type": "Number", "control": "Number", "required": true, "default": "0.1", "description": "Expected red channel.", "valueSource": "Suggested Value" },
+    { "key": "g", "label": "Green", "type": "Number", "control": "Number", "required": true, "default": "0.15", "description": "Expected green channel.", "valueSource": "Suggested Value" },
+    { "key": "b", "label": "Blue", "type": "Number", "control": "Number", "required": true, "default": "0.2", "description": "Expected blue channel.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if the procedural sky ground uses a specific color.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

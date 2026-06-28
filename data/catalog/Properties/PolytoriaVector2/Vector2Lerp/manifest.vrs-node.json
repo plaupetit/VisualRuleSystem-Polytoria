@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.vector2.values",
+  "kind": "Property",
+  "apiGroup": "Math",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Vector",
+  "idBase": "PROP_Vector2Lerp",
+  "type": "Vector2Lerp",
+  "apiType": "Vector2",
+  "apiReferences": [
+    { "type": "Vector2", "memberKind": "Method", "member": "Lerp", "coverage": "Direct" }
+  ],
+  "label": "Blend Vector2",
+  "value": "from=0,0;to=1,1;amount=0.5",
+  "description": "Outputs a 2D vector between two other 2D vectors.",
+  "status": "Ready",
+  "previewTemplate": "Blend Vector2",
+  "searchKeywords": ["vector2", "vector", "lerp", "blend", "between", "interpolate"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "from", "label": "From", "type": "Vector2", "control": "Vector2", "required": true, "default": "0,0", "description": "Start vector.", "valueSource": "Vector2" },
+    { "key": "to", "label": "To", "type": "Vector2", "control": "Vector2", "required": true, "default": "1,1", "description": "End vector.", "valueSource": "Vector2" },
+    { "key": "amount", "label": "Amount", "type": "Number", "control": "Slider", "required": true, "default": "0.5", "min": 0, "max": 1, "step": 0.01, "description": "Blend amount from 0 to 1.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Value: pick a point between two Vector2 values.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Vector"]
+}

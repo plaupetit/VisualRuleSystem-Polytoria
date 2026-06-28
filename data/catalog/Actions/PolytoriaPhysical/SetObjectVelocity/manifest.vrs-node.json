@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.physical.actions",
   "kind": "Action",
+  "apiSurface": "Gameplay",
   "apiGroup": "World",
   "runtimeFamily": "Server",
   "category": "Actions",
@@ -8,6 +9,10 @@
   "idBase": "ACT_SetObjectVelocity",
   "type": "SetObjectVelocity",
   "apiType": "Physical.Velocity",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Velocity", "coverage": "Direct" },
+    { "type": "Physical", "memberKind": "Property", "member": "Velocity", "coverage": "Partial" }
+  ],
   "label": "Set Object Velocity",
   "value": "target=Self;x=0;y=0;z=0",
   "description": "Sets how fast a physics object moves in each direction.",

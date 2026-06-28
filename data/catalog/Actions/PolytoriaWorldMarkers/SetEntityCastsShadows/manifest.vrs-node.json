@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Entity",
+  "idBase": "ACT_SetEntityCastsShadows",
+  "type": "SetEntityCastsShadows",
+  "apiType": "Entity.CastShadows",
+  "apiReferences": [
+    { "type": "Entity", "memberKind": "Property", "member": "CastShadows", "coverage": "Direct" }
+  ],
+  "label": "Set Entity Shadows",
+  "value": "target=Self;enabled=true",
+  "description": "Controls whether an entity-like object casts shadows.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} shadows ${enabled}",
+  "searchKeywords": ["entity", "object", "shadow", "lighting", "visual"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity-like object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] },
+    { "key": "enabled", "label": "Enabled", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Whether the object casts shadows.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do turn entity shadows on or off.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity"]
+}

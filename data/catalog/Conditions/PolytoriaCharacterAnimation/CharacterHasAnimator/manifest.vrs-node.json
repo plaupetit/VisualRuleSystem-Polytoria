@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.character.animation.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Characters",
+  "idBase": "COND_CharacterHasAnimator",
+  "type": "CharacterHasAnimator",
+  "apiType": "CharacterModel.Animator",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "Animator", "coverage": "Direct" }
+  ],
+  "label": "Character Has Animator",
+  "value": "target=Self",
+  "description": "Checks if a character has an animation controller.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} has animator",
+  "searchKeywords": ["character", "animation", "animator", "controller", "exists"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] }
+  ],
+  "beginnerSummary": "Check if a character can play animations.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

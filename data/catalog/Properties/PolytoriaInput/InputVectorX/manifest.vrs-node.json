@@ -8,6 +8,10 @@
   "idBase": "PROP_InputVectorX",
   "type": "InputVectorX",
   "apiType": "Number",
+  "apiReferences": [
+    { "type": "InputService", "memberKind": "Method", "member": "GetVector2", "coverage": "Direct" },
+    { "type": "InputActionVector2", "memberKind": "Type", "coverage": "Partial" }
+  ],
   "label": "Input Vector X",
   "value": "actionName=Horizontal",
   "description": "Outputs the X component of a named Vector2 input action.",

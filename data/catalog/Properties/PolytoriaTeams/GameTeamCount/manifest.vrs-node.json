@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.teams.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Shared",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_GameTeamCount",
   "type": "GameTeamCount",
   "apiType": "Number",
+  "apiReferences": [
+    { "type": "Teams", "memberKind": "Method", "member": "GetTeams", "coverage": "Direct" }
+  ],
   "label": "Game Team Count",
   "value": "",
   "description": "Outputs how many game teams exist.",

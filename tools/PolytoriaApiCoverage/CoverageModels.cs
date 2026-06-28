@@ -38,6 +38,7 @@ public sealed record ApiCoverageResult(
     CatalogSummary Catalog,
     CoverageSummary Summary,
     IReadOnlyList<TypeCoverageRow> TypeRows,
+    IReadOnlyList<ApiCoverageRoadmapItem> Roadmap,
     IReadOnlyList<CatalogNodeCoverageRow> NodeRows,
     IReadOnlyList<string> CatalogWarnings);
 
@@ -55,6 +56,15 @@ public sealed record CoverageSummary(
     int PartialTypeCount,
     int IndirectOrSyntheticTypeCount,
     int InferredTypeCount,
+    int TargetRuntimeTypes,
+    int TargetRuntimeTypesWithCoverage,
+    int TargetRuntimeTypesWithoutCoverage,
+    int GameplayApiTypes,
+    int GameplayApiTypesWithCoverage,
+    int GameplayApiTypesWithoutCoverage,
+    int CreatorApiTypes,
+    int CreatorApiTypesWithCoverage,
+    int CreatorApiTypesWithoutCoverage,
     int LowConfidenceNodeCount,
     int NodesWithoutApiReference,
     double TypesWithAnyCoveragePercent,
@@ -63,6 +73,12 @@ public sealed record CoverageSummary(
     double PartialTypePercent,
     double IndirectOrSyntheticTypePercent,
     double InferredTypePercent,
+    double TargetRuntimeCoveragePercent,
+    double TargetRuntimeUncoveredPercent,
+    double GameplayApiCoveragePercent,
+    double GameplayApiUncoveredPercent,
+    double CreatorApiCoveragePercent,
+    double CreatorApiUncoveredPercent,
     double LowConfidenceNodePercent,
     double NodesWithoutApiReferencePercent);
 
@@ -70,7 +86,21 @@ public sealed record TypeCoverageRow(
     string Type,
     string Coverage,
     string Confidence,
+    string Category,
+    string ApiSurface,
+    int Priority,
+    bool IsVrsTargetRuntime,
+    string SuggestedNodePack,
     IReadOnlyList<string> Nodes);
+
+public sealed record ApiCoverageRoadmapItem(
+    string Type,
+    string Category,
+    int Priority,
+    string SuggestedNodePack,
+    string SuggestedNodeKind,
+    string SuggestedLabel,
+    string Reason);
 
 public sealed record CatalogNodeCoverageRow(
     string NodeId,

@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Character Appearance",
+  "idBase": "COND_CharacterHasBodyMesh",
+  "type": "CharacterHasBodyMesh",
+  "apiType": "PolytorianModel.BodyMesh",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "BodyMesh", "coverage": "Direct" },
+    { "type": "MeshAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Character Has Body Mesh",
+  "value": "target=Self",
+  "description": "Checks if a character has any body mesh assigned.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} has a body mesh",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["character", "body", "mesh", "avatar", "not empty", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Check if a character has a body mesh.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

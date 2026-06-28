@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.colorseries.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Color Series",
+  "idBase": "PROP_ColorFromColorSeries",
+  "type": "ColorFromColorSeries",
+  "apiType": "Color",
+  "apiReferences": [
+    { "type": "ColorSeries", "memberKind": "Method", "member": "Lerp", "coverage": "Direct" }
+  ],
+  "label": "Color From Color Series",
+  "value": "amount=0.5",
+  "description": "Outputs a color from a ColorSeries at an amount from 0 to 1.",
+  "status": "Ready",
+  "previewTemplate": "Color at ${amount} in series",
+  "searchKeywords": ["color series", "gradient", "lerp", "interpolate", "sample", "colorseries"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "series", "label": "Color Series", "type": "ColorSeries", "control": "Text", "required": true, "default": "", "description": "ColorSeries value to sample.", "valueSource": "Color Series" },
+    { "key": "amount", "label": "Amount", "type": "Number", "control": "Slider", "required": true, "default": "0.5", "min": 0, "max": 1, "step": 0.01, "description": "Position in the series from 0 to 1.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Value: sample a color from a gradient.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Color Series"]
+}

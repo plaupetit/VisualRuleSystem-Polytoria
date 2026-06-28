@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.animation.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Characters",
+  "idBase": "COND_CharacterHasAttachment",
+  "type": "CharacterHasAttachment",
+  "apiType": "CharacterModel.GetAttachment",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Method", "member": "GetAttachment", "coverage": "Direct" },
+    { "type": "CharacterAttachment", "memberKind": "Enum", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Character Has Attachment",
+  "value": "target=Self;attachment=Head",
+  "description": "Checks if a character exposes a body attachment.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} has ${attachment} attachment",
+  "searchKeywords": ["character", "attachment", "body", "head", "hand", "foot", "exists"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "attachment", "label": "Attachment", "type": "String", "control": "Choice", "required": true, "default": "Head", "description": "Body attachment to check.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Head", "UpperTorso", "LowerTorso", "ShoulderLeft", "ShoulderRight", "ElbowLeft", "ElbowRight", "HandLeft", "HandRight", "LegLeft", "LegRight", "KneeLeft", "KneeRight", "FootLeft", "FootRight"] }
+  ],
+  "beginnerSummary": "Check if a character has a usable body attachment.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

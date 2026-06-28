@@ -64,6 +64,16 @@ public sealed partial class RuleGraphCanvas
 
     private static string NormalizePaletteDataType(string value)
     {
+        if (value.Contains("Quaternion", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Quaternion";
+        }
+
+        if (value.Contains("ColorSeries", StringComparison.OrdinalIgnoreCase))
+        {
+            return "ColorSeries";
+        }
+
         if (value.Contains("Vector3", StringComparison.OrdinalIgnoreCase) ||
             value.Contains("Position", StringComparison.OrdinalIgnoreCase) ||
             value.Contains("Rotation", StringComparison.OrdinalIgnoreCase) ||

@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.character.animation.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Characters",
+  "idBase": "EV_OnCharacterAttachmentAvailable",
+  "type": "OnCharacterAttachmentAvailable",
+  "apiType": "CharacterModel.GetAttachment",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Method", "member": "GetAttachment", "coverage": "Partial" },
+    { "type": "CharacterAttachment", "memberKind": "Enum", "member": "", "coverage": "Partial" }
+  ],
+  "label": "On Character Attachment Available",
+  "value": "target=Self;attachment=Head;interval=0.25",
+  "description": "Starts when a character body attachment becomes available.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} ${attachment} attachment is available",
+  "searchKeywords": ["character", "attachment", "body", "head", "hand", "foot", "available", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "attachment", "label": "Attachment", "type": "String", "control": "Choice", "required": true, "default": "Head", "description": "Body attachment to wait for.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Head", "UpperTorso", "LowerTorso", "ShoulderLeft", "ShoulderRight", "ElbowLeft", "ElbowRight", "HandLeft", "HandRight", "LegLeft", "LegRight", "KneeLeft", "KneeRight", "FootLeft", "FootRight"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the attachment.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a character body attachment can be used.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation Changes"]
+}

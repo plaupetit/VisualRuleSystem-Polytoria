@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.values.int",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Stored Values",
+  "idBase": "PROP_IntegerValueObject",
+  "type": "IntegerValueObjectValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "IntValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" }
+  ],
+  "label": "Integer Value Object",
+  "value": "target=Self",
+  "description": "Outputs the whole-number Value property from an IntValue object.",
+  "status": "Ready",
+  "previewTemplate": "${target} integer value",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["value", "intvalue", "integer", "number", "score", "counter"],
+  "parameters": [
+    { "key": "target", "label": "Integer Value Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "IntValue object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["IntValueObject"] }
+  ],
+  "beginnerSummary": "Value reads a stored whole-number value.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Stored Values"]
+}

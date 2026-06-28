@@ -182,6 +182,10 @@ public sealed partial class LuauExporter
             "RGBColor" => RgbColorExpression(rule, node, nodesById, visitedNodeIds),
             "RandomColor" => new LuauExpression("Color.New(math.random(), math.random(), math.random(), 1)", "Color"),
             "ObjectName" => ObjectValueExpression(rule, node, nodesById, visitedNodeIds, "Name", "String", "Object Name", "return tostring(targetObject.Name)"),
+            "ObjectTypeName" => ObjectValueExpression(rule, node, nodesById, visitedNodeIds, "ClassName", "String", "Object Type Name", "return tostring(targetObject.ClassName)"),
+            "ObjectNetworkKey" => ObjectValueExpression(rule, node, nodesById, visitedNodeIds, "NetworkedObjectID", "String", "Object Network Key", "return tostring(targetObject.NetworkedObjectID)"),
+            "ObjectSaveKey" => ObjectValueExpression(rule, node, nodesById, visitedNodeIds, "ObjectID", "String", "Object Save Key", "return tostring(targetObject.ObjectID)"),
+            "ObjectIsNetworkedValue" => ObjectValueExpression(rule, node, nodesById, visitedNodeIds, "ExistInNetwork", "Boolean", "Object Is Networked", "return targetObject.ExistInNetwork == true"),
             "ObjectPosition" => ObjectValueExpression(rule, node, nodesById, visitedNodeIds, "Position", "Vector3", "Object Position", "return targetObject.Position"),
             "ObjectXPosition" => ObjectPositionAxisExpression(rule, node, nodesById, visitedNodeIds, "X", "x", "Object X Position"),
             "ObjectHeightPosition" => ObjectPositionAxisExpression(rule, node, nodesById, visitedNodeIds, "Y", "y", "Object Height Position"),
@@ -758,11 +762,29 @@ public sealed partial class LuauExporter
             "Number" => new LuauExpression(NumericLiteral(string.IsNullOrWhiteSpace(value) ? fallback : value, NumericLiteral(fallback, "0")), "Number"),
             "Boolean" => new LuauExpression(BooleanValue(string.IsNullOrWhiteSpace(value) ? fallback : value, fallback: false) ? "true" : "false", "Boolean"),
             "String" => new LuauExpression(LuauStringLiteral(value), "String"),
+            "Quaternion" => new LuauExpression(QuaternionLiteral(string.IsNullOrWhiteSpace(value) ? fallback : value, fallback), "Quaternion"),
+            "ColorSeries" => new LuauExpression(ColorSeriesLiteral(), "ColorSeries"),
+            "Vector2" => new LuauExpression(Vector2Literal(string.IsNullOrWhiteSpace(value) ? fallback : value, fallback), "Vector2"),
             "Vector3" => new LuauExpression(VectorLiteral(string.IsNullOrWhiteSpace(value) ? fallback : value, fallback), "Vector3"),
             "Color" => new LuauExpression(ColorLiteral(string.IsNullOrWhiteSpace(value) ? fallback : value, fallback), "Color"),
             _ => new LuauExpression(InferAnyLiteral(value), "Any")
         };
     }
+
+    private static string Vector2Literal(string value, string fallback)
+    {
+        var components = ParsePair(value, fallback, ["0", "0"]);
+        return $"makeVector2({components[0]}, {components[1]})";
+    }
+
+    private static string QuaternionLiteral(string value, string fallback)
+    {
+        var components = ParseTuple(value, fallback, ["0", "0", "0", "1"], 4);
+        return $"makeQuaternion({components[0]}, {components[1]}, {components[2]}, {components[3]})";
+    }
+
+    private static string ColorSeriesLiteral()
+        => "vrsColorSeriesFromColors(Color.New(1, 1, 1, 1), Color.New(0, 0, 0, 1))";
 
     private static string VectorLiteral(string value, string fallback)
     {
@@ -777,14 +799,20 @@ public sealed partial class LuauExporter
     }
 
     private static string[] ParseTriple(string value, string fallback, string[] componentFallbacks)
+        => ParseTuple(value, fallback, componentFallbacks, 3);
+
+    private static string[] ParsePair(string value, string fallback, string[] componentFallbacks)
+        => ParseTuple(value, fallback, componentFallbacks, 2);
+
+    private static string[] ParseTuple(string value, string fallback, string[] componentFallbacks, int maxComponents)
     {
         var source = string.IsNullOrWhiteSpace(value) ? fallback : value;
         var parts = source
             .Split([',', ';', ' '], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .Take(3)
+            .Take(maxComponents)
             .ToArray();
 
-        return Enumerable.Range(0, 3)
+        return Enumerable.Range(0, maxComponents)
             .Select(index => index < parts.Length
                 ? NumericLiteral(parts[index], componentFallbacks[index])
                 : componentFallbacks[index])

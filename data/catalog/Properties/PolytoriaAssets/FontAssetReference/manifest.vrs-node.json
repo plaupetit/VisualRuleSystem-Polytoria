@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Fonts",
+  "idBase": "PROP_FontAssetReference",
+  "type": "FontAssetReferenceValue",
+  "apiType": "FontAsset",
+  "apiReferences": [
+    { "type": "FontAsset", "memberKind": "Type", "member": "", "coverage": "Direct" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Font Asset Reference",
+  "value": "target=Self",
+  "description": "Outputs an existing font asset so it can be reused by UI or text nodes.",
+  "status": "Ready",
+  "previewTemplate": "Font asset ${target}",
+  "searchKeywords": ["font", "asset", "reference", "text"],
+  "parameters": [
+    { "key": "target", "label": "Font Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Font asset object to output.", "valueSource": "Target Context", "acceptedObjectGroups": ["FontAssetObject"] }
+  ],
+  "beginnerSummary": "Value: use an existing font asset as a source.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Fonts"]
+}

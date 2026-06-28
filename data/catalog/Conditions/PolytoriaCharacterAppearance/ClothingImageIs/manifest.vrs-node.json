@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.character.appearance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Character Appearance",
+  "idBase": "COND_ClothingImageIs",
+  "type": "ClothingImageIs",
+  "apiType": "Clothing.Image",
+  "apiReferences": [
+    { "type": "Clothing", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Clothing Image Is",
+  "value": "target=Self;image=;caseSensitive=false",
+  "description": "Checks if a clothing object uses a chosen image.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} clothing image is ${image}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["clothing", "shirt", "pants", "image", "appearance", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Clothing", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Clothing object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["ClothingObject"] },
+    { "key": "image", "label": "Image", "type": "String", "control": "Text", "required": true, "default": "", "description": "Expected image key or path.", "valueSource": "Suggested Value" },
+    { "key": "caseSensitive", "label": "Case Sensitive", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Use exact capitalization.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check the image used by clothing.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.worldmarkers.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Markers",
+  "idBase": "EV_OnMarkerVisibleInDevEnabled",
+  "type": "OnMarkerVisibleInDevEnabled",
+  "apiType": "Marker3D.VisibleInDev",
+  "apiReferences": [{ "type": "Marker3D", "memberKind": "Property", "member": "VisibleInDev", "coverage": "Partial" }],
+  "label": "On Marker Visible In Dev Enabled",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a 3D marker becomes visible in developer mode.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} becomes visible in dev",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["marker", "visible", "developer", "enabled", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker3D object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the marker.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a marker becomes visible in dev mode.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Marker Changes"]
+}

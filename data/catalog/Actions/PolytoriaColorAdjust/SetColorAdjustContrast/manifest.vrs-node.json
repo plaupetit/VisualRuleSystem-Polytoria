@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.color_adjust.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetColorAdjustContrast",
+  "type": "SetColorAdjustContrast",
+  "apiType": "ColorAdjustModifier.Contrast",
+  "apiReferences": [
+    { "type": "ColorAdjustModifier", "memberKind": "Property", "member": "Contrast", "coverage": "Direct" },
+    { "type": "LightingModifier", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Color Adjust Contrast",
+  "value": "target=Self;contrast=0",
+  "description": "Changes the contrast adjustment on a ColorAdjustModifier.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} color adjust contrast ${contrast}",
+  "searchKeywords": ["lighting", "post process", "color adjust", "contrast", "screen", "visual"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ColorAdjustModifier object to update.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ColorAdjustModifierObject"]
+    },
+    {
+      "key": "contrast",
+      "label": "Contrast",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Contrast adjustment value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change the scene post-effect contrast.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Color Adjust"]
+}

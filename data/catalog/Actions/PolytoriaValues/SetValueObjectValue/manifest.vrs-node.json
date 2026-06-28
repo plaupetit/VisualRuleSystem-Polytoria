@@ -1,0 +1,45 @@
+{
+  "moduleId": "polytoria.values.actions",
+  "kind": "Action",
+  "apiGroup": "Values",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Values",
+  "idBase": "ACT_SetValueObjectValue",
+  "type": "SetValueObjectValue",
+  "apiType": "ValueBase",
+  "apiReferences": [
+    { "type": "ValueBase", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "NumberValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "StringValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "BoolValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "ColorValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "Vector2Value", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "Vector3Value", "memberKind": "Property", "member": "Value", "coverage": "Direct" }
+  ],
+  "label": "Set Value Object",
+  "value": "target=Self;value=",
+  "description": "Sets the Value property on a Polytoria value object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} value",
+  "searchKeywords": ["value", "numbervalue", "stringvalue", "boolvalue", "colorvalue", "vectorvalue", "set"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Value Object",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Value Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Value object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "value", "label": "Value", "type": "Any", "control": "Text", "default": "", "description": "New value. Connect a typed value source for safer output.", "valueSource": "Any / Value Source" }
+  ],
+  "beginnerSummary": "Set the Value field of a NumberValue, StringValue, BoolValue, ColorValue, Vector2Value, or Vector3Value.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Stored Values"]
+}

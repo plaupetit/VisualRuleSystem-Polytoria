@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Images",
+  "idBase": "ACT_SetPTImageAssetId",
+  "type": "SetPTImageAssetId",
+  "apiType": "PTImageAsset.ImageID",
+  "apiReferences": [
+    { "type": "PTImageAsset", "memberKind": "Property", "member": "ImageID", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set PT Image Asset ID",
+  "value": "target=Self;assetId=0",
+  "description": "Changes the numeric Polytoria image ID stored on a PTImageAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} image ID",
+  "searchKeywords": ["image", "asset", "ptimageasset", "id", "texture", "picture"],
+  "selectorHints": [
+    { "key": "target", "label": "Image Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Image Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTImageAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageAssetObject"] },
+    { "key": "assetId", "label": "Asset ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Polytoria image asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Do update the image ID on a PTImageAsset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

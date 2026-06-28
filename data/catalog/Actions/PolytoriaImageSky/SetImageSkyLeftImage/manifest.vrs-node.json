@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.imagesky",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetImageSkyLeftImage",
+  "type": "SetImageSkyLeftImage",
+  "apiType": "ImageSky.LeftImage",
+  "apiReferences": [
+    { "type": "ImageSky", "memberKind": "Property", "member": "LeftImage", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Image Sky Left Image",
+  "value": "target=Self;image=",
+  "description": "Sets the left image on an ImageSky skybox.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} left sky image",
+  "searchKeywords": ["sky", "skybox", "image", "left", "asset", "lighting"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Image Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ImageSky object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageSkyObject"] },
+    { "key": "image", "label": "Left Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference for the left side.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Do change the left image of a custom skybox.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Image Sky Sides"]
+}

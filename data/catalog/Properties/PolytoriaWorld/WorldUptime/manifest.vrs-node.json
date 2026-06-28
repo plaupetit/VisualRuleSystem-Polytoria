@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.world.info",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_WorldUptime",
+  "type": "WorldUptimeValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "World", "memberKind": "Property", "member": "UpTime", "coverage": "Direct" }
+  ],
+  "label": "World Uptime",
+  "value": "",
+  "description": "Outputs how long the current world has been running.",
+  "status": "Ready",
+  "previewTemplate": "World uptime",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "uptime", "time", "duration", "running"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value reads how long the world has been running.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "World Info"]
+}

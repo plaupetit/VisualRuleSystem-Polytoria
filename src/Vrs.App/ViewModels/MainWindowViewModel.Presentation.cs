@@ -15,8 +15,15 @@ public partial class MainWindowViewModel
     public bool HasSelectedWireReroute => SelectedWireReroute is not null;
     public bool HasNoActiveProject => !HasLinkedProject;
     public bool CanUseCreatorBridgeCommands => HasLinkedProject && IsCreatorRuntimeReady;
+    public bool CanRequestCreatorSnapshot => HasLinkedProject || projectRuntimeStatus.IsValidProjectRoot(ActiveProjectRoot);
     public bool ShowsStateRuleBuilder => CurrentViewMode == GraphViewMode.Simple;
     public bool ShowsFragmentTools => CurrentViewMode == GraphViewMode.Advanced;
+    public string VisualScriptingWorkspaceSummary => $"{ScriptBindingSummary} -> {ScriptFilePreviewPath}";
+    public string CreatorBridgeWorkspaceSummary => HasLinkedProject
+        ? IsCreatorRuntimeReady
+            ? $"Creator ready -> {BridgeParentPath}/{ScriptCreatorPreviewName}"
+            : $"Project linked -> request snapshots or start Creator"
+        : "Link a Polytoria project to enable Creator bridge files";
     public string ScriptBindingSummary => graph.AuthoringMode == GraphAuthoringMode.CreatorLinked
         ? IsCreatorRuntimeReady
             ? $"Project {SelectedScriptKind}"

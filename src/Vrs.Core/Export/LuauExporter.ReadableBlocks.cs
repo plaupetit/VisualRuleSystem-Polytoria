@@ -620,9 +620,16 @@ public sealed partial class LuauExporter
             return;
         }
 
-        if (action.Type.Equals("SendInputEvent", StringComparison.OrdinalIgnoreCase))
+        if (action.Type.Equals("SendInputEvent", StringComparison.OrdinalIgnoreCase) ||
+            action.Type.Equals("SendInputTextEvent", StringComparison.OrdinalIgnoreCase))
         {
             AppendReadableSendInputEventAction(builder, rule, action, nodesById, indentLevel);
+            return;
+        }
+
+        if (action.Type.Equals("FireBindableEvent", StringComparison.OrdinalIgnoreCase))
+        {
+            AppendReadableFireBindableEventAction(builder, rule, action, nodesById, indentLevel);
             return;
         }
 

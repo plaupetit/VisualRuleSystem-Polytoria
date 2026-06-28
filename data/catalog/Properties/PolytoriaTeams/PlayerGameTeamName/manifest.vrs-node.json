@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.teams.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Shared",
   "category": "Properties",
@@ -8,6 +9,11 @@
   "idBase": "PROP_PlayerGameTeamName",
   "type": "PlayerGameTeamName",
   "apiType": "String",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Team", "coverage": "Direct" },
+    { "type": "Team", "memberKind": "Method", "member": "GetDisplayName", "coverage": "Direct" },
+    { "type": "Team", "memberKind": "Property", "member": "DisplayName", "coverage": "Direct" }
+  ],
   "label": "Player Game Team Name",
   "value": "",
   "description": "Outputs the name shown for the triggering player's game team.",

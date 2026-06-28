@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_SetClothingImage",
+  "type": "SetClothingImage",
+  "apiType": "Clothing.Image",
+  "apiReferences": [
+    { "type": "Clothing", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Clothing Image",
+  "value": "target=Self;image=",
+  "description": "Changes the image used by a clothing object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} clothing image",
+  "searchKeywords": ["clothing", "shirt", "pants", "image", "outfit", "avatar"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Clothing", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Clothing object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ClothingObject"] },
+    { "key": "image", "label": "Image", "type": "String", "control": "Text", "required": true, "default": "", "description": "Image asset key or path.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change a clothing image.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

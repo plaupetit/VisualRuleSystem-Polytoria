@@ -1,0 +1,42 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Text Input",
+  "idBase": "PROP_TextInputText",
+  "type": "TextInputTextValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "Text", "coverage": "Direct" }
+  ],
+  "label": "Text Input Text",
+  "value": "target=Self",
+  "description": "Reads the current text inside a UI text input.",
+  "status": "Ready",
+  "previewTemplate": "Text of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "text", "typed", "value", "form"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    }
+  ],
+  "beginnerSummary": "Value reads what the player typed into a text input.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

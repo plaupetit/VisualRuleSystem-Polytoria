@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.saved-data.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Saved Data",
+  "idBase": "ACT_RemoveDatastoreValue",
+  "type": "RemoveDatastoreValue",
+  "apiType": "Datastore.RemoveAsync",
+  "apiReferences": [
+    { "type": "DatastoreService", "memberKind": "Method", "member": "GetDatastore", "coverage": "Direct" },
+    { "type": "Datastore", "memberKind": "Method", "member": "RemoveAsync", "coverage": "Direct" },
+    { "type": "Datastore", "memberKind": "Method", "member": "Disconnect", "coverage": "Direct" }
+  ],
+  "label": "Remove Saved Value",
+  "value": "storeKey=PlayerData;entryKey=Coins",
+  "description": "Removes one saved value from a named data store.",
+  "status": "Ready",
+  "previewTemplate": "Remove ${entryKey} from ${storeKey}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["do", "delete", "remove", "clear", "saved", "data", "store", "player", "score", "coins"],
+  "corePack": true,
+  "familyFolder": "Polytoria Data",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "storeKey", "label": "Store Name", "type": "String", "control": "Text", "required": true, "default": "PlayerData", "description": "Saved data group to use.", "valueSource": "String / Manual Text Input" },
+    { "key": "entryKey", "label": "Entry Name", "type": "String", "control": "Text", "required": true, "default": "Coins", "description": "Saved value name inside the store.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Do clear one saved value when progress should reset.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Saved Data"]
+}

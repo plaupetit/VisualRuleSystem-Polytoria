@@ -7,6 +7,19 @@ public sealed partial class LuauExporter
 {
     // Image3D nodes cover documented world-image properties only. Asset/image
     // assignment is intentionally left for a later asset-picker pass.
+    private static readonly HashSet<string> Image3DWatcherTriggerTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "On3DImageColorChanged",
+        "On3DImageShadowsEnabled",
+        "On3DImageLightingEnabled",
+        "On3DImageFaceCameraEnabled",
+        "On3DImageTextureScaleChanged",
+        "On3DImageTextureOffsetChanged"
+    };
+
+    private static bool IsImage3DWatcherTrigger(string triggerType)
+        => Image3DWatcherTriggerTypes.Contains(triggerType);
+
     private static bool TryAppendReadableImage3DActionBody(
         StringBuilder builder,
         Rule rule,
@@ -73,8 +86,10 @@ public sealed partial class LuauExporter
 
     private static bool TryAppendReadableImage3DConditionBody(
         StringBuilder builder,
+        Rule rule,
         RuleNode condition,
         ReadableExportPlan plan,
+        IReadOnlyDictionary<string, RuleNode> nodesById,
         int indentLevel)
     {
         if (condition.Type.Equals("Image3DCastsShadows", StringComparison.OrdinalIgnoreCase))
@@ -95,7 +110,75 @@ public sealed partial class LuauExporter
             return true;
         }
 
+        if (condition.Type.Equals("Image3DColorIs", StringComparison.OrdinalIgnoreCase))
+        {
+            AppendImage3DColorCondition(builder, rule, condition, plan, nodesById, indentLevel);
+            return true;
+        }
+
+        if (condition.Type.Equals("Image3DTextureScaleIs", StringComparison.OrdinalIgnoreCase))
+        {
+            AppendImage3DVector2Condition(builder, rule, condition, plan, nodesById, indentLevel, "TextureScale", "1", "1");
+            return true;
+        }
+
+        if (condition.Type.Equals("Image3DTextureOffsetIs", StringComparison.OrdinalIgnoreCase))
+        {
+            AppendImage3DVector2Condition(builder, rule, condition, plan, nodesById, indentLevel, "TextureOffset", "0", "0");
+            return true;
+        }
+
         return false;
+    }
+
+    private static void AppendReadableImage3DWatcherTransitionTrigger(
+        StringBuilder builder,
+        Rule rule,
+        RuleNode trigger,
+        ReadableExportPlan plan,
+        IReadOnlyDictionary<string, RuleNode> nodesById,
+        HashSet<string> visited,
+        HashSet<string> reachedNodeIds,
+        string functionName)
+    {
+        var definition = Image3DWatcherDefinition.For(trigger.Type);
+        var interval = ParameterExpression(rule, trigger, nodesById, "interval", "Number", "0.25");
+
+        builder.AppendLine($"local function {functionName}()");
+        AppendReadableTriggerObjectResolution(builder, plan, trigger, 1);
+        builder.AppendLine("    local function readWatchedValue()");
+        builder.AppendLine("        if triggerObject == nil then");
+        builder.AppendLine("            return nil");
+        builder.AppendLine("        end");
+        builder.AppendLine($"        if triggerObject.{definition.PropertyName} == nil then");
+        builder.AppendLine("            return nil");
+        builder.AppendLine("        end");
+        if (definition.ValueKind == Image3DWatcherValueKind.Boolean)
+        {
+            builder.AppendLine($"        return triggerObject.{definition.PropertyName} == true");
+        }
+        else
+        {
+            builder.AppendLine($"        return triggerObject.{definition.PropertyName}");
+        }
+
+        builder.AppendLine("    end");
+        if (definition.TriggersOnAnyChange)
+        {
+            AppendReadableAnyChangeLoop(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, interval.Code, $", {definition.ContextField} = currentValue", 1);
+            builder.AppendLine("end");
+            return;
+        }
+
+        builder.AppendLine("    local function readMatched()");
+        builder.AppendLine("        local currentValue = readWatchedValue()");
+        builder.AppendLine("        if currentValue == nil then");
+        builder.AppendLine("            return false, nil");
+        builder.AppendLine("        end");
+        builder.AppendLine($"        return {definition.MatchExpression}, currentValue");
+        builder.AppendLine("    end");
+        AppendReadableTrueTransitionLoop(builder, rule, trigger, plan, nodesById, visited, reachedNodeIds, interval.Code, $", {definition.ContextField} = currentValue", 1);
+        builder.AppendLine("end");
     }
 
     private static LuauExpression? TryResolveReadableImage3DPropertyExpression(
@@ -129,6 +212,49 @@ public sealed partial class LuauExporter
         builder.AppendLine($"{indent}return imageObject.{propertyName} == true");
     }
 
+    private static void AppendImage3DColorCondition(
+        StringBuilder builder,
+        Rule rule,
+        RuleNode condition,
+        ReadableExportPlan plan,
+        IReadOnlyDictionary<string, RuleNode> nodesById,
+        int indentLevel)
+    {
+        var indent = IndentText(indentLevel);
+        var color = ColorExpression(rule, condition, nodesById);
+        AppendResolvedTargetVariable(builder, plan, condition, indentLevel, "imageObject");
+        builder.AppendLine($"{indent}if imageObject == nil or imageObject.Color == nil then");
+        builder.AppendLine($"{indent}    return false");
+        builder.AppendLine($"{indent}end");
+        builder.AppendLine($"{indent}local expectedColor = {color.Code}");
+        builder.AppendLine($"{indent}return imageObject.Color == expectedColor");
+    }
+
+    private static void AppendImage3DVector2Condition(
+        StringBuilder builder,
+        Rule rule,
+        RuleNode condition,
+        ReadableExportPlan plan,
+        IReadOnlyDictionary<string, RuleNode> nodesById,
+        int indentLevel,
+        string propertyName,
+        string fallbackX,
+        string fallbackY)
+    {
+        var indent = IndentText(indentLevel);
+        var expectedX = ParameterExpression(rule, condition, nodesById, "x", "Number", fallbackX);
+        var expectedY = ParameterExpression(rule, condition, nodesById, "y", "Number", fallbackY);
+        AppendResolvedTargetVariable(builder, plan, condition, indentLevel, "imageObject");
+        builder.AppendLine($"{indent}if imageObject == nil or imageObject.{propertyName} == nil then");
+        builder.AppendLine($"{indent}    return false");
+        builder.AppendLine($"{indent}end");
+        builder.AppendLine($"{indent}local currentX = vrsVector2Axis(imageObject.{propertyName}, \"X\", \"x\", {fallbackX})");
+        builder.AppendLine($"{indent}local currentY = vrsVector2Axis(imageObject.{propertyName}, \"Y\", \"y\", {fallbackY})");
+        builder.AppendLine($"{indent}local expectedX = tonumber({expectedX.Code}) or {fallbackX}");
+        builder.AppendLine($"{indent}local expectedY = tonumber({expectedY.Code}) or {fallbackY}");
+        builder.AppendLine($"{indent}return currentX == expectedX and currentY == expectedY");
+    }
+
     private static void AppendImage3DTargetVariable(
         StringBuilder builder,
         ReadableExportPlan plan,
@@ -147,5 +273,39 @@ public sealed partial class LuauExporter
         builder.AppendLine($"{indent}    print(\"{readableName} stopped: target 3D image does not expose {propertyName}.\")");
         builder.AppendLine($"{indent}    return");
         builder.AppendLine($"{indent}end");
+    }
+
+    private enum Image3DWatcherValueKind
+    {
+        Boolean,
+        Any
+    }
+
+    private sealed record Image3DWatcherDefinition(
+        string PropertyName,
+        Image3DWatcherValueKind ValueKind,
+        string ContextField,
+        string MatchExpression,
+        bool TriggersOnAnyChange = false)
+    {
+        public static Image3DWatcherDefinition For(string triggerType)
+        {
+            return triggerType switch
+            {
+                "On3DImageColorChanged" => Changed("Color", "image3DColor"),
+                "On3DImageShadowsEnabled" => Boolean("CastShadows", "image3DCastsShadows"),
+                "On3DImageLightingEnabled" => Boolean("Shaded", "image3DUsesLighting"),
+                "On3DImageFaceCameraEnabled" => Boolean("FaceCamera", "image3DFacesCamera"),
+                "On3DImageTextureScaleChanged" => Changed("TextureScale", "image3DTextureScale"),
+                "On3DImageTextureOffsetChanged" => Changed("TextureOffset", "image3DTextureOffset"),
+                _ => throw new ArgumentOutOfRangeException(nameof(triggerType), triggerType, "Unknown Image3D watcher trigger.")
+            };
+        }
+
+        private static Image3DWatcherDefinition Changed(string propertyName, string contextField)
+            => new(propertyName, Image3DWatcherValueKind.Any, contextField, "false", TriggersOnAnyChange: true);
+
+        private static Image3DWatcherDefinition Boolean(string propertyName, string contextField)
+            => new(propertyName, Image3DWatcherValueKind.Boolean, contextField, "currentValue == true");
     }
 }

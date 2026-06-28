@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.character.animation.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Characters",
+  "idBase": "EV_OnCharacterAnimationBecame",
+  "type": "OnCharacterAnimationBecame",
+  "apiType": "Animator.CurrentAnimation",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "Animator", "coverage": "Partial" },
+    { "type": "Animator", "memberKind": "Property", "member": "CurrentAnimation", "coverage": "Partial" }
+  ],
+  "label": "On Character Animation Became",
+  "value": "target=Self;animation=Idle;interval=0.25",
+  "description": "Starts when a character current animation becomes the expected animation.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} animation becomes ${animation}",
+  "searchKeywords": ["character", "animation", "animator", "became", "playing", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "animation", "label": "Animation", "type": "String", "control": "Text", "required": true, "default": "Idle", "description": "Animation key to wait for.", "valueSource": "String / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the animation.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a character starts a specific animation.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation Changes"]
+}

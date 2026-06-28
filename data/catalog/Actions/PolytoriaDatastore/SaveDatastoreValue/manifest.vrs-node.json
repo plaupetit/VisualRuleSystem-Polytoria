@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.saved-data.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Saved Data",
+  "idBase": "ACT_SaveDatastoreValue",
+  "type": "SaveDatastoreValue",
+  "apiType": "Datastore.SetAsync",
+  "apiReferences": [
+    { "type": "DatastoreService", "memberKind": "Method", "member": "GetDatastore", "coverage": "Direct" },
+    { "type": "Datastore", "memberKind": "Method", "member": "SetAsync", "coverage": "Direct" },
+    { "type": "Datastore", "memberKind": "Method", "member": "Disconnect", "coverage": "Direct" }
+  ],
+  "label": "Save Saved Value",
+  "value": "storeKey=PlayerData;entryKey=Coins;value=0",
+  "description": "Saves a text or number value in a named data store during play.",
+  "status": "Ready",
+  "previewTemplate": "Save ${entryKey} in ${storeKey}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["do", "save", "saved", "data", "store", "player", "score", "coins", "progress", "set"],
+  "corePack": true,
+  "familyFolder": "Polytoria Data",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "storeKey", "label": "Store Name", "type": "String", "control": "Text", "required": true, "default": "PlayerData", "description": "Saved data group to use.", "valueSource": "String / Manual Text Input" },
+    { "key": "entryKey", "label": "Entry Name", "type": "String", "control": "Text", "required": true, "default": "Coins", "description": "Saved value name inside the store.", "valueSource": "String / Manual Text Input" },
+    { "key": "value", "label": "Value", "type": "String", "control": "Text", "default": "0", "description": "Text or number to save.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Do save player progress, score, coins, or another simple value.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Saved Data"]
+}

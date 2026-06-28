@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionLookRotation",
+  "type": "QuaternionLookRotation",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "LookRotation", "coverage": "Direct" }
+  ],
+  "label": "Look Rotation",
+  "value": "forward=0,0,1;upwards=0,1,0",
+  "description": "Creates a rotation that looks in a direction.",
+  "status": "Ready",
+  "previewTemplate": "Look toward ${forward}",
+  "searchKeywords": ["quaternion", "rotation", "look", "direction", "forward", "camera", "face", "aim"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "forward", "label": "Forward Direction", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,0,1", "description": "Direction the rotation should face.", "valueSource": "World Direction" },
+    { "key": "upwards", "label": "Up Direction", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,1,0", "description": "Which direction counts as up.", "valueSource": "World Direction" }
+  ],
+  "beginnerSummary": "Value: make an object or camera face a direction.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

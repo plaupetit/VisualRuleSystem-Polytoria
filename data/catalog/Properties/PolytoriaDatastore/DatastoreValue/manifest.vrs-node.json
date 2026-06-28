@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.saved-data.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Saved Data",
+  "idBase": "PROP_DatastoreValue",
+  "type": "DatastoreValue",
+  "apiType": "Any",
+  "apiReferences": [
+    { "type": "DatastoreService", "memberKind": "Method", "member": "GetDatastore", "coverage": "Direct" },
+    { "type": "Datastore", "memberKind": "Method", "member": "GetAsync", "coverage": "Direct" },
+    { "type": "Datastore", "memberKind": "Method", "member": "Disconnect", "coverage": "Direct" }
+  ],
+  "label": "Saved Value",
+  "value": "storeKey=PlayerData;entryKey=Coins;fallbackValue=",
+  "description": "Outputs a saved value from a named data store.",
+  "status": "Ready",
+  "previewTemplate": "${entryKey} from ${storeKey}",
+  "searchKeywords": ["saved", "data", "store", "load", "read", "get", "player", "score", "coins", "progress"],
+  "parameters": [
+    { "key": "storeKey", "label": "Store Name", "type": "String", "control": "Text", "required": true, "default": "PlayerData", "description": "Saved data group to read.", "valueSource": "String / Manual Text Input" },
+    { "key": "entryKey", "label": "Entry Name", "type": "String", "control": "Text", "required": true, "default": "Coins", "description": "Saved value name inside the store.", "valueSource": "String / Manual Text Input" },
+    { "key": "fallbackValue", "label": "Fallback Value", "type": "String", "control": "Text", "default": "", "description": "Value to use when nothing was found.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Value: read saved progress, score, coins, or another simple value.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Saved Data"]
+}

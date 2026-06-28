@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.grabbable.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_GrabPickupRangeAtLeast",
+  "type": "GrabPickupRangeAtLeast",
+  "apiType": "Grabbable.MaxGrabbableRange",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "MaxGrabbableRange", "coverage": "Direct" }
+  ],
+  "label": "Grab Pickup Range At Least",
+  "value": "target=Self;range=15",
+  "description": "Checks if players can start grabbing this object from at least the expected distance.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} grab pickup range is at least ${range}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["grab", "grabbable", "pickup", "reach", "range", "distance", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "range", "label": "Minimum Range", "type": "Number", "control": "Number", "required": true, "default": "15", "description": "Minimum pickup range.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether players can start grabbing from far enough away.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

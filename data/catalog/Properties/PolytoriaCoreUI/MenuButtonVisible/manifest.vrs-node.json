@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.coreui.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Client",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_BuiltInMenuButtonVisible",
   "type": "BuiltInMenuButtonVisible",
   "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "CoreUIService", "memberKind": "Property", "member": "UseMenuButton", "coverage": "Direct" }
+  ],
   "label": "Menu Button Is Visible",
   "value": "",
   "description": "Outputs true when the built-in menu button is visible.",

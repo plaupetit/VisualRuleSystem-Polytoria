@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Characters",
+  "idBase": "ACT_SetCharacterState",
+  "type": "SetCharacterState",
+  "apiType": "CharacterModel.CurrentState",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "CurrentState", "coverage": "Direct" },
+    { "type": "CharacterModelState", "memberKind": "Enum", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Set Character State",
+  "value": "target=Self;state=Idle",
+  "description": "Changes the current animation state of a character.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} character state ${state}",
+  "searchKeywords": ["character", "animation", "state", "idle", "walking", "running", "jumping", "climbing"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "state", "label": "State", "type": "String", "control": "Choice", "required": true, "default": "Idle", "description": "Character animation state.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Idle", "Walking", "Running", "Jumping", "Climbing"] }
+  ],
+  "beginnerSummary": "Do set the character animation state.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

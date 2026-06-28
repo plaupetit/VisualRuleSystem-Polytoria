@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.grabbable.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnObjectReleased",
+  "type": "OnObjectReleased",
+  "apiType": "Grabbable.Released",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Event", "member": "Released", "coverage": "Direct" },
+    { "type": "Player", "memberKind": "Type", "member": "", "coverage": "Direct" }
+  ],
+  "label": "On Object Released",
+  "value": "target=Self",
+  "description": "Starts when a player releases this object.",
+  "status": "Ready",
+  "fallbackMode": "Log And Skip",
+  "previewTemplate": "When ${target} is released",
+  "searchKeywords": ["when", "release", "grab", "grabbable", "drop", "player"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Grabbable",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object that should listen for releases.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] }
+  ],
+  "beginnerSummary": "When a player releases this object, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

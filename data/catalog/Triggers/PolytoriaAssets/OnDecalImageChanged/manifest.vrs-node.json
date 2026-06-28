@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.assets.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Images",
+  "idBase": "EV_OnDecalImageChanged",
+  "type": "OnDecalImageChanged",
+  "apiType": "Decal.Image",
+  "apiReferences": [
+    { "type": "Decal", "memberKind": "Property", "member": "Image", "coverage": "Partial" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "On Decal Image Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a Decal image asset reference changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} decal image changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["decal", "image", "asset", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Decal", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Decal object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the image.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a Decal image changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Image Changes"]
+}

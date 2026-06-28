@@ -1,0 +1,26 @@
+{
+  "moduleId": "polytoria.ui.values",
+  "kind": "Property",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "UI",
+  "idBase": "PROP_UIVisible",
+  "type": "UIVisibleValue",
+  "apiType": "GUI.Visible",
+  "apiReferences": [
+    { "type": "GUI", "memberKind": "Property", "member": "Visible", "coverage": "Direct" }
+  ],
+  "label": "UI Visible",
+  "value": "target=Self",
+  "description": "Outputs whether a UI object exposes Visible and is currently visible.",
+  "status": "Ready",
+  "previewTemplate": "${target} visible",
+  "searchKeywords": ["ui", "gui", "visible", "shown", "hidden", "boolean"],
+  "parameters": [
+    { "key": "target", "label": "UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] }
+  ],
+  "beginnerSummary": "Value: whether a UI object is visible.",
+  "surface": "UserFacing",
+  "palettePath": ["UI"]
+}

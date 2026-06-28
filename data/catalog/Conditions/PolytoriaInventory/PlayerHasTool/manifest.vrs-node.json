@@ -1,0 +1,65 @@
+{
+  "moduleId": "polytoria.inventory.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Inventory",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Inventory",
+  "idBase": "COND_PlayerHasTool",
+  "type": "PlayerHasTool",
+  "apiType": "Inventory",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Inventory", "coverage": "Direct" },
+    { "type": "Inventory", "memberKind": "Type", "member": "", "coverage": "Direct" },
+    { "type": "Instance", "memberKind": "Method", "member": "FindChild", "coverage": "Partial" },
+    { "type": "Tool", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Player Has Tool",
+  "value": "player=;toolName=",
+  "description": "Checks whether a named tool exists in a player's inventory.",
+  "status": "Ready",
+  "previewTemplate": "Player has tool ${toolName}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "inventory",
+    "tool",
+    "has",
+    "owns",
+    "item",
+    "equipment",
+    "backpack",
+    "player"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "player",
+      "label": "Player",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Player whose inventory should be checked. Empty means the current triggering player.",
+      "valueSource": "Trigger Context"
+    },
+    {
+      "key": "toolName",
+      "label": "Tool Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "",
+      "description": "Name of the tool to check.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if a player already has a named tool.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Inventory"
+  ]
+}

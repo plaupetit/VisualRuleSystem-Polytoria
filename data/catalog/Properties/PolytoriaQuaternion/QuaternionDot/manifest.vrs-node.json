@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionDot",
+  "type": "QuaternionDot",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "Dot", "coverage": "Direct" }
+  ],
+  "label": "Rotation Dot",
+  "value": "first=0,0,0,1;second=0,1,0,0",
+  "description": "Returns the dot product of two rotations for advanced comparisons.",
+  "status": "Ready",
+  "previewTemplate": "Rotation dot",
+  "searchKeywords": ["quaternion", "rotation", "dot", "compare", "advanced", "orientation"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "first", "label": "First Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,0,0,1", "description": "First rotation.", "valueSource": "Rotation Value" },
+    { "key": "second", "label": "Second Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,1,0,0", "description": "Second rotation.", "valueSource": "Rotation Value" }
+  ],
+  "beginnerSummary": "Value: advanced similarity number between two rotations.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

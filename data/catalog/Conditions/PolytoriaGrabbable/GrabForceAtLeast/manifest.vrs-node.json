@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.grabbable.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_GrabForceAtLeast",
+  "type": "GrabForceAtLeast",
+  "apiType": "Grabbable.Force",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "Force", "coverage": "Direct" }
+  ],
+  "label": "Grab Force At Least",
+  "value": "target=Self;force=500",
+  "description": "Checks if a grabbable object pull force is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} grab force is at least ${force}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["grab", "grabbable", "drag", "force", "pull", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "force", "label": "Minimum Force", "type": "Number", "control": "Number", "required": true, "default": "500", "description": "Minimum grab force.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a grabbable object pulls strongly enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

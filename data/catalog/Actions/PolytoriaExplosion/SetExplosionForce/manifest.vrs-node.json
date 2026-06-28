@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.explosion",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Effects",
+  "idBase": "ACT_SetExplosionForce",
+  "type": "SetExplosionForce",
+  "apiType": "Explosion.Force",
+  "apiReferences": [
+    { "type": "Explosion", "memberKind": "Property", "member": "Force", "coverage": "Direct" }
+  ],
+  "label": "Set Explosion Force",
+  "value": "target=Self;force=500",
+  "description": "Changes how strongly an explosion pushes affected objects.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} explosion force ${force}",
+  "searchKeywords": ["explosion", "blast", "force", "push", "physics"],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Explosion", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Explosion object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ExplosionObject"] },
+    { "key": "force", "label": "Force", "type": "Number", "control": "Number", "required": true, "default": "500", "description": "New explosion push force.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change how hard an explosion pushes objects.",
+  "surface": "UserFacing",
+  "palettePath": ["Effects", "Explosion"]
+}

@@ -28,6 +28,72 @@ public sealed partial class BridgeFileService
         await WriteTextFileByReplaceAsync(Path.Combine(bridgeDirectory, "app-heartbeat.json"), json, cancellationToken).ConfigureAwait(false);
     }
 
+    public async Task WriteAppStateAsync(string bridgeDirectory, BridgeAppState state, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(state.SessionId))
+        {
+            state.SessionId = sessionId;
+        }
+
+        if (state.ProcessId == 0)
+        {
+            state.ProcessId = Environment.ProcessId;
+        }
+
+        if (string.IsNullOrWhiteSpace(state.UpdatedAtUtc))
+        {
+            state.UpdatedAtUtc = DateTimeOffset.UtcNow.ToString("O");
+        }
+
+        var json = JsonSerializer.Serialize(state, VrsJsonContext.Default.BridgeAppState);
+        await WriteTextFileByReplaceAsync(Path.Combine(bridgeDirectory, "app-state.json"), json, cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<BridgeAppState?> ReadAppStateAsync(string bridgeDirectory, CancellationToken cancellationToken = default)
+    {
+        var path = Path.Combine(bridgeDirectory, "app-state.json");
+        if (!File.Exists(path))
+        {
+            return null;
+        }
+
+        var json = await File.ReadAllTextAsync(path, cancellationToken).ConfigureAwait(false);
+        return JsonSerializer.Deserialize(json, VrsJsonContext.Default.BridgeAppState);
+    }
+
+    public async Task<string> WriteSnapshotRequestAsync(
+        string bridgeDirectory,
+        string reason,
+        string mode = "full",
+        CancellationToken cancellationToken = default)
+    {
+        var now = DateTimeOffset.UtcNow;
+        var request = new SnapshotRequest
+        {
+            RequestId = $"snapshot_request_{now:yyyyMMddHHmmssfff}_{Guid.NewGuid():N}",
+            CreatedAtUtc = now.ToString("O"),
+            Reason = string.IsNullOrWhiteSpace(reason) ? "manual" : reason.Trim(),
+            Mode = string.IsNullOrWhiteSpace(mode) ? "full" : mode.Trim(),
+            SessionId = sessionId
+        };
+
+        var json = JsonSerializer.Serialize(request, VrsJsonContext.Default.SnapshotRequest);
+        await WriteTextFileByReplaceAsync(Path.Combine(bridgeDirectory, "snapshot-request.json"), json, cancellationToken).ConfigureAwait(false);
+        return request.RequestId;
+    }
+
+    public async Task<SnapshotRequest?> ReadSnapshotRequestAsync(string bridgeDirectory, CancellationToken cancellationToken = default)
+    {
+        var path = Path.Combine(bridgeDirectory, "snapshot-request.json");
+        if (!File.Exists(path))
+        {
+            return null;
+        }
+
+        var json = await File.ReadAllTextAsync(path, cancellationToken).ConfigureAwait(false);
+        return JsonSerializer.Deserialize(json, VrsJsonContext.Default.SnapshotRequest);
+    }
+
     public async Task<CommandResults?> ReadCommandResultsAsync(string bridgeDirectory, CancellationToken cancellationToken = default)
     {
         var path = Path.Combine(bridgeDirectory, "command-results.json");

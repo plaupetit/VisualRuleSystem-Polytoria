@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Characters",
+  "idBase": "ACT_SetCharacterAnimationSpeed",
+  "type": "SetCharacterAnimationSpeed",
+  "apiType": "CharacterModel.CurrentSpeed",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "CurrentSpeed", "coverage": "Direct" }
+  ],
+  "label": "Set Character Animation Speed",
+  "value": "target=Self;speed=1",
+  "description": "Changes the current animation speed of a character.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} animation speed ${speed}",
+  "searchKeywords": ["character", "animation", "speed", "state", "faster", "slower"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "speed", "label": "Speed", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Animation speed multiplier.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do set the character animation speed.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

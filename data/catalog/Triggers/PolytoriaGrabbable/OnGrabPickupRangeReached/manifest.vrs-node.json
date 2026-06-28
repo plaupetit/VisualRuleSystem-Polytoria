@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.grabbable.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Scene Object",
+  "idBase": "EV_OnGrabPickupRangeReached",
+  "type": "OnGrabPickupRangeReached",
+  "apiType": "Grabbable.MaxGrabbableRange",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "MaxGrabbableRange", "coverage": "Partial" }
+  ],
+  "label": "On Grab Pickup Range Reached",
+  "value": "target=Self;range=15;interval=0.25",
+  "description": "Starts when a grabbable object's pickup range reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} grab pickup range reaches ${range}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["when", "grab", "grabbable", "pickup", "reach", "range", "threshold", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "range", "label": "Range", "type": "Number", "control": "Number", "required": true, "default": "15", "description": "Pickup range threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks pickup range.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when players can grab this object from far enough away.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab Changes"]
+}

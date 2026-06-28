@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.worldmarkers.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Markers",
+  "idBase": "EV_OnMarkerAppearsOnTopEnabled",
+  "type": "OnMarkerAppearsOnTopEnabled",
+  "apiType": "Marker3D.AppearOnTop",
+  "apiReferences": [{ "type": "Marker3D", "memberKind": "Property", "member": "AppearOnTop", "coverage": "Partial" }],
+  "label": "On Marker Appears On Top Enabled",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a 3D marker starts appearing on top.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} appears on top",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["marker", "on top", "enabled", "watcher", "debug"],
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker3D object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the marker.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a marker begins drawing on top.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Marker Changes"]
+}

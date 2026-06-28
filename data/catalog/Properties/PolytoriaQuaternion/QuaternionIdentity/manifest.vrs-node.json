@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionIdentity",
+  "type": "QuaternionIdentity",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Property", "member": "Identity", "coverage": "Direct" }
+  ],
+  "label": "Identity Rotation",
+  "value": "",
+  "description": "Returns the neutral rotation that does not turn anything.",
+  "status": "Ready",
+  "previewTemplate": "Identity rotation",
+  "searchKeywords": ["quaternion", "rotation", "identity", "neutral", "none", "zero", "orientation"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value: the neutral rotation.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

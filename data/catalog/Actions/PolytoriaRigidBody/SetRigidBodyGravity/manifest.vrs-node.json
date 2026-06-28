@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.rigidbody.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Physics",
+  "idBase": "ACT_SetRigidBodyGravity",
+  "type": "SetRigidBodyGravity",
+  "apiType": "RigidBody.UseGravity",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "UseGravity", "coverage": "Direct" }
+  ],
+  "label": "Set Rigid Body Gravity",
+  "value": "target=Self;enabled=true",
+  "description": "Turns gravity on or off for a RigidBody object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} gravity ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "gravity", "fall", "mass"],
+  "selectorHints": [
+    { "key": "target", "label": "Rigid Body", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose gravity setting will change.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "enabled", "label": "Gravity Enabled", "type": "Boolean", "control": "Boolean", "required": true, "default": "true", "description": "Checked means the rigid body is affected by gravity.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Turn gravity on or off for a physics rigid body.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

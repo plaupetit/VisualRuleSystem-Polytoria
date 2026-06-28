@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.vector2.conditions",
+  "kind": "Condition",
+  "apiGroup": "Math",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Vector",
+  "idBase": "COND_Vector2DistanceAtMost",
+  "type": "Vector2DistanceAtMost",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "Vector2", "memberKind": "Method", "member": "Distance", "coverage": "Direct" }
+  ],
+  "label": "Vector2 Distance At Most",
+  "value": "first=0,0;second=0,0;maximum=1",
+  "description": "Checks whether two 2D vectors are close enough.",
+  "status": "Ready",
+  "previewTemplate": "Vector2 distance <= ${maximum}",
+  "searchKeywords": ["vector2", "vector", "distance", "close", "near", "within", "ui", "input"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "first", "label": "First", "type": "Vector2", "control": "Vector2", "required": true, "default": "0,0", "description": "First 2D vector.", "valueSource": "Vector2" },
+    { "key": "second", "label": "Second", "type": "Vector2", "control": "Vector2", "required": true, "default": "0,0", "description": "Second 2D vector.", "valueSource": "Vector2" },
+    { "key": "maximum", "label": "Maximum Distance", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Largest allowed distance.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Check: true when two Vector2 values are close enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Vector"]
+}

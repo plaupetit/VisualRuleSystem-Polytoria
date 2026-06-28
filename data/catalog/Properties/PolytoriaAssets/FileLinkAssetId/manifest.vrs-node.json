@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Files",
+  "idBase": "PROP_FileLinkAssetId",
+  "type": "FileLinkAssetIdValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "FileLinkAsset", "memberKind": "Property", "member": "LinkedID", "coverage": "Direct" }
+  ],
+  "label": "File Link Asset ID",
+  "value": "target=Self",
+  "description": "Outputs the linked ID from a FileLinkAsset.",
+  "status": "Ready",
+  "previewTemplate": "${target} linked ID",
+  "searchKeywords": ["file", "link", "asset", "linkedid", "id"],
+  "parameters": [
+    { "key": "target", "label": "File Link Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "FileLinkAsset to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["FileLinkAssetObject"] }
+  ],
+  "beginnerSummary": "Value: read the linked ID from a file link asset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Files"]
+}

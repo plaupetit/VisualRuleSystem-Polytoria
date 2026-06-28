@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.ui.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "UI",
+  "idBase": "EV_OnUIBecameHidden",
+  "type": "OnUIBecameHidden",
+  "apiType": "GUI.Visible",
+  "apiReferences": [{ "type": "GUI", "memberKind": "Property", "member": "Visible", "coverage": "Partial" }],
+  "label": "On UI Became Hidden",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a UI object changes from visible to hidden.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} becomes hidden",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "hidden", "invisible", "disappears", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the UI state.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a UI object becomes hidden.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Changes"]
+}

@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.worldmarkers.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Climb",
+  "idBase": "EV_OnTrussClimbSpeedReached",
+  "type": "OnTrussClimbSpeedReached",
+  "apiType": "Truss.ClimbSpeed",
+  "apiReferences": [{ "type": "Truss", "memberKind": "Property", "member": "ClimbSpeed", "coverage": "Partial" }],
+  "label": "On Truss Climb Speed Reached",
+  "value": "target=Self;speed=12;interval=0.25",
+  "description": "Starts when a truss climb speed reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} climb speed reaches ${speed}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["truss", "climb", "ladder", "speed", "threshold", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Truss", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Truss object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["TrussObject"] },
+    { "key": "speed", "label": "Speed", "type": "Number", "control": "Number", "required": true, "default": "12", "description": "Speed threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks climb speed.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a climb speed becomes high enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Climb Changes"]
+}

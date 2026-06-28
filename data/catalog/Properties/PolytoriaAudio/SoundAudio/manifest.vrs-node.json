@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.audio.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Audio",
+  "idBase": "PROP_SoundAudio",
+  "type": "SoundAudioValue",
+  "apiType": "Sound.Audio",
+  "apiReferences": [
+    { "type": "Sound", "memberKind": "Property", "member": "Audio", "coverage": "Direct" },
+    { "type": "AudioAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Sound Audio",
+  "value": "target=Self",
+  "description": "Outputs the audio asset currently used by a sound object.",
+  "status": "Ready",
+  "previewTemplate": "Audio of ${target}",
+  "searchKeywords": ["audio", "sound", "asset", "music", "sfx", "clip", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SoundObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads which audio a sound object uses.",
+  "surface": "UserFacing",
+  "palettePath": ["Audio", "Settings"]
+}

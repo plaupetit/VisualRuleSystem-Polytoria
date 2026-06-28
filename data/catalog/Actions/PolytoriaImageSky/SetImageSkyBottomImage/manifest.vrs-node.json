@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.imagesky",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetImageSkyBottomImage",
+  "type": "SetImageSkyBottomImage",
+  "apiType": "ImageSky.BottomImage",
+  "apiReferences": [
+    { "type": "ImageSky", "memberKind": "Property", "member": "BottomImage", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Image Sky Bottom Image",
+  "value": "target=Self;image=",
+  "description": "Sets the bottom image on an ImageSky skybox.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} bottom sky image",
+  "searchKeywords": ["sky", "skybox", "image", "bottom", "asset", "lighting"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Image Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ImageSky object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageSkyObject"] },
+    { "key": "image", "label": "Bottom Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference for the bottom side.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Do change the bottom image of a custom skybox.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Image Sky Sides"]
+}

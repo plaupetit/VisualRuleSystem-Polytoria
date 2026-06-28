@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.ui.field",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "UI Field",
+  "idBase": "ACT_SetUIFieldClipDescendants",
+  "type": "SetUIFieldClipDescendants",
+  "apiType": "UIField.ClipDescendants",
+  "apiReferences": [
+    { "type": "UIField", "memberKind": "Property", "member": "ClipDescendants", "coverage": "Direct" }
+  ],
+  "label": "Set UI Clips Children",
+  "value": "target=Self;clipDescendants=true",
+  "description": "Controls whether child UI is clipped by this field.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} clips children ${clipDescendants}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "field", "clip", "children", "mask", "overflow"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "UI Field",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "UI Field", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI field to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "clipDescendants", "label": "Clip Children", "type": "Boolean", "control": "Toggle", "required": true, "default": "true", "description": "When enabled, child UI outside this field is clipped.", "valueSource": "Boolean / Toggle" }
+  ],
+  "beginnerSummary": "Do make a UI field hide or show overflowing child UI.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Field"]
+}

@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionInverse",
+  "type": "QuaternionInverse",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "Inverse", "coverage": "Direct" }
+  ],
+  "label": "Inverse Rotation",
+  "value": "rotation=0,0,0,1",
+  "description": "Creates the opposite rotation.",
+  "status": "Ready",
+  "previewTemplate": "Inverse rotation",
+  "searchKeywords": ["quaternion", "rotation", "inverse", "opposite", "undo", "orientation"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "rotation", "label": "Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,0,0,1", "description": "Rotation to invert.", "valueSource": "Rotation Value" }
+  ],
+  "beginnerSummary": "Value: get the opposite of a rotation.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

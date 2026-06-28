@@ -66,7 +66,9 @@ public sealed partial class LuauExporter
             "GameTeamName" => GameTeamTargetExpression(rule, node, nodesById, visitedNodeIds, "String", "Game Team Name", "if targetTeam.GetDisplayName ~= nil then return tostring(targetTeam:GetDisplayName()) end; if targetTeam.DisplayName ~= nil and tostring(targetTeam.DisplayName) ~= \"\" then return tostring(targetTeam.DisplayName) end; return tostring(targetTeam.Name or \"\")"),
             "GameTeamColor" => GameTeamTargetExpression(rule, node, nodesById, visitedNodeIds, "Color", "Game Team Color", "if targetTeam.Color == nil then return Color.New(1, 1, 1, 1) end return targetTeam.Color"),
             "GameTeamPlayerCount" => GameTeamTargetExpression(rule, node, nodesById, visitedNodeIds, "Number", "Game Team Player Count", "if targetTeam.GetPlayers == nil then return 0 end local players = targetTeam:GetPlayers(); if players == nil then return 0 end return #players"),
+            "GameTeamPlayers" => GameTeamTargetExpression(rule, node, nodesById, visitedNodeIds, "Any", "Game Team Players", "if targetTeam.GetPlayers == nil then return {} end local players = targetTeam:GetPlayers(); if players == nil then return {} end return players"),
             "GameTeamCount" => new LuauExpression("(function() if Teams == nil or Teams.GetTeams == nil then return 0 end local teams = Teams:GetTeams(); if teams == nil then return 0 end return #teams end)()", "Number"),
+            "AllGameTeams" => new LuauExpression("(function() if Teams == nil or Teams.GetTeams == nil then return {} end local teams = Teams:GetTeams(); if teams == nil then return {} end return teams end)()", "Any"),
             _ => null
         };
     }

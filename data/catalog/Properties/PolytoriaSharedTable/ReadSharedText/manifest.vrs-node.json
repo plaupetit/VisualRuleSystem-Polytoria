@@ -1,0 +1,61 @@
+{
+  "moduleId": "polytoria.sharedtable.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Shared Values",
+  "idBase": "PROP_ReadSharedText",
+  "type": "ReadSharedText",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Read Shared Text",
+  "value": "key=Log;fallback=",
+  "description": "Reads a shared value as text with a fallback.",
+  "status": "Ready",
+  "previewTemplate": "Read shared text ${key}",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "read",
+    "text",
+    "string",
+    "log"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "key",
+      "label": "Key",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Log",
+      "description": "Shared table key to read as text.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "fallback",
+      "label": "Fallback",
+      "type": "String",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Text to output when the shared value is missing.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: read a shared text value.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

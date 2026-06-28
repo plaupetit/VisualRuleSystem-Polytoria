@@ -1,0 +1,38 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Character Appearance",
+  "idBase": "PROP_CharacterBodyColor",
+  "type": "CharacterBodyColorValue",
+  "apiType": "PolytorianModel.HeadColor",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "HeadColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "TorsoColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "LeftArmColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "RightArmColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "LeftLegColor", "coverage": "Direct" },
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "RightLegColor", "coverage": "Direct" },
+    { "type": "Color", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Character Body Color",
+  "value": "target=Self;bodyPart=Head",
+  "description": "Reads one body color from a character model.",
+  "status": "Ready",
+  "returnType": "Color",
+  "previewTemplate": "${target} ${bodyPart} color",
+  "searchKeywords": ["character", "body", "color", "avatar", "appearance"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] },
+    { "key": "bodyPart", "label": "Body Part", "type": "String", "control": "Choice", "required": true, "default": "Head", "description": "Body part color to read.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Head", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg"] }
+  ],
+  "beginnerSummary": "Value returns one character body color.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

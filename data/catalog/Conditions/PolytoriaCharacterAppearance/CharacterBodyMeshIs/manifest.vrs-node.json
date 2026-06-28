@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.character.appearance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Character Appearance",
+  "idBase": "COND_CharacterBodyMeshIs",
+  "type": "CharacterBodyMeshIs",
+  "apiType": "PolytorianModel.BodyMesh",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "BodyMesh", "coverage": "Direct" },
+    { "type": "MeshAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Character Body Mesh Is",
+  "value": "target=Self;mesh=;caseSensitive=false",
+  "description": "Checks if a character body mesh matches a chosen mesh.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} body mesh is ${mesh}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["character", "body", "mesh", "avatar", "appearance", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] },
+    { "key": "mesh", "label": "Mesh", "type": "String", "control": "Text", "required": true, "default": "", "description": "Expected body mesh key or path.", "valueSource": "Suggested Value" },
+    { "key": "caseSensitive", "label": "Case Sensitive", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Use exact capitalization.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check a character body mesh.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

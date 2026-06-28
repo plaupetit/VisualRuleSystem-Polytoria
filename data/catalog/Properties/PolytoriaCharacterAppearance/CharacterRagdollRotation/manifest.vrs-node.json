@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Character Appearance",
+  "idBase": "PROP_CharacterRagdollRotation",
+  "type": "CharacterRagdollRotation",
+  "apiType": "PolytorianModel.RagdollRotation",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "RagdollRotation", "coverage": "Direct" },
+    { "type": "Vector3", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Character Ragdoll Rotation",
+  "value": "target=Self",
+  "description": "Reads the current ragdoll rotation from a character model.",
+  "status": "Ready",
+  "returnType": "Vector",
+  "previewTemplate": "${target} ragdoll rotation",
+  "searchKeywords": ["character", "ragdoll", "rotation", "physics", "fall"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Value returns the character ragdoll rotation.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Ragdoll"]
+}

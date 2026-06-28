@@ -5,8 +5,15 @@ for Polytoria 2.0. It provides a human-readable node graph editor that exports
 Luau scripts and coordinates with Polytoria Creator through a small bridge
 workflow.
 
+The full visual scripting workspace lives in the VRS desktop app. Polytoria
+Creator integration is intentionally lightweight: the Creator addon appears
+under `Tools > Addons` and provides snapshot, command-apply, status, and auto
+bridge tools. This increment does not implement a native docked Creator editor
+tab.
+
 This project is not affiliated with, endorsed by, sponsored by, or maintained by
 Polytoria.
+No Polytoria logo, icon, or official brand asset is used in this repository.
 
 The maintainer's current intent is personal, hobby, and non-commercial use.
 That statement is only context about the project origin; it does not add any
@@ -182,6 +189,10 @@ workflow explicit:
 - `Deploy File` writes or updates the saved Luau file under `scripts/VRS/`.
 - `Deploy Saved Script Instance Here` links or updates a Creator script instance
   from that saved file.
+- `Request Snapshot` writes `snapshot-request.json`; Creator handles it through
+  the addon bridge loop.
+- `app-state.json` is diagnostic workspace state for Creator status output, not
+  a mutation command.
 - The bridge addon applies instance/project changes inside Creator.
 
 ## License

@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.character.animation.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Characters",
+  "idBase": "EV_OnCharacterStateBecame",
+  "type": "OnCharacterStateBecame",
+  "apiType": "CharacterModel.CurrentState",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "CurrentState", "coverage": "Partial" },
+    { "type": "CharacterModelState", "memberKind": "Enum", "member": "", "coverage": "Partial" }
+  ],
+  "label": "On Character State Became",
+  "value": "target=Self;state=Idle;interval=0.25",
+  "description": "Starts when a character animation state becomes the expected state.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} state becomes ${state}",
+  "searchKeywords": ["character", "animation", "state", "became", "idle", "running", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "state", "label": "State", "type": "String", "control": "Choice", "required": true, "default": "Idle", "description": "Character animation state to wait for.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Idle", "Walking", "Running", "Jumping", "Climbing"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the state.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a character enters a movement state.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation Changes"]
+}

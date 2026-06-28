@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.character.appearance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Character Appearance",
+  "idBase": "COND_AccessoryAttachmentIs",
+  "type": "AccessoryAttachmentIs",
+  "apiType": "Accessory.TargetAttachment",
+  "apiReferences": [
+    { "type": "Accessory", "memberKind": "Property", "member": "TargetAttachment", "coverage": "Direct" },
+    { "type": "CharacterAttachment", "memberKind": "Enum", "coverage": "Direct" }
+  ],
+  "label": "Accessory Attachment Is",
+  "value": "target=Self;attachment=Head;caseSensitive=false",
+  "description": "Checks if an accessory uses a chosen attachment point.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} attachment is ${attachment}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["accessory", "attachment", "hat", "character", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Accessory", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Accessory to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["AccessoryObject"] },
+    { "key": "attachment", "label": "Attachment", "type": "String", "control": "Choice", "required": true, "default": "Head", "description": "Expected character attachment point.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Head", "UpperTorso", "LowerTorso", "ShoulderLeft", "ShoulderRight", "ElbowLeft", "ElbowRight", "HandLeft", "HandRight", "LegLeft", "LegRight", "KneeLeft", "KneeRight", "FootLeft", "FootRight"] },
+    { "key": "caseSensitive", "label": "Case Sensitive", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Use exact capitalization.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check where an accessory attaches.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

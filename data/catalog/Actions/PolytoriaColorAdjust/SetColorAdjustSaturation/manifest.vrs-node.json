@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.color_adjust.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetColorAdjustSaturation",
+  "type": "SetColorAdjustSaturation",
+  "apiType": "ColorAdjustModifier.Saturation",
+  "apiReferences": [
+    { "type": "ColorAdjustModifier", "memberKind": "Property", "member": "Saturation", "coverage": "Direct" },
+    { "type": "LightingModifier", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Color Adjust Saturation",
+  "value": "target=Self;saturation=0",
+  "description": "Changes the saturation adjustment on a ColorAdjustModifier.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} color adjust saturation ${saturation}",
+  "searchKeywords": ["lighting", "post process", "color adjust", "saturation", "screen", "visual"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ColorAdjustModifier object to update.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ColorAdjustModifierObject"]
+    },
+    {
+      "key": "saturation",
+      "label": "Saturation",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0",
+      "description": "Saturation adjustment value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do make the scene post-effect more or less colorful.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Color Adjust"]
+}

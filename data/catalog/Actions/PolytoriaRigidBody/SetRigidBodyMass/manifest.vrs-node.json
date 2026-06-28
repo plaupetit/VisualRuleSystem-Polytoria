@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.rigidbody.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Physics",
+  "idBase": "ACT_SetRigidBodyMass",
+  "type": "SetRigidBodyMass",
+  "apiType": "RigidBody.Mass",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Mass", "coverage": "Direct" }
+  ],
+  "label": "Set Rigid Body Mass",
+  "value": "target=Self;mass=1",
+  "description": "Sets the mass of a RigidBody object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} mass to ${mass}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "mass", "weight", "heavy"],
+  "selectorHints": [
+    { "key": "target", "label": "Rigid Body", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose mass will change.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "mass", "label": "Mass", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "New mass value.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Set how heavy a physics rigid body is.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

@@ -1,0 +1,69 @@
+{
+  "moduleId": "polytoria.input.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "Input",
+  "idBase": "COND_InputActionExists",
+  "type": "InputActionExists",
+  "apiType": "InputAction",
+  "apiReferences": [
+    { "type": "InputAction", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "InputService", "memberKind": "Method", "member": "GetButton", "coverage": "Direct" },
+    { "type": "InputService", "memberKind": "Method", "member": "GetAxis", "coverage": "Direct" },
+    { "type": "InputService", "memberKind": "Method", "member": "GetVector2", "coverage": "Direct" }
+  ],
+  "label": "Input Action Exists",
+  "value": "actionKind=Button;actionName=Interact",
+  "description": "Checks whether a client input action can be resolved by name.",
+  "status": "Ready",
+  "previewTemplate": "${actionKind} input ${actionName} exists",
+  "searchKeywords": [
+    "check",
+    "input",
+    "action",
+    "exists",
+    "bound",
+    "configured",
+    "button",
+    "axis",
+    "vector",
+    "client"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "actionKind",
+      "label": "Action Kind",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Button",
+      "description": "Input action type to check.",
+      "valueSource": "String / Choice",
+      "allowCustom": false,
+      "options": [
+        "Button",
+        "Axis",
+        "Vector2"
+      ]
+    },
+    {
+      "key": "actionName",
+      "label": "Input Action",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Interact",
+      "description": "Name of the Input action configured in Creator or created by the graph.",
+      "valueSource": "String / Choice"
+    }
+  ],
+  "beginnerSummary": "Check if a client input action is available before using it.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.vector2.values",
+  "kind": "Property",
+  "apiGroup": "Math",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Vector",
+  "idBase": "PROP_Vector2Magnitude",
+  "type": "Vector2Magnitude",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "Vector2", "memberKind": "Property", "member": "Magnitude", "coverage": "Direct" }
+  ],
+  "label": "Vector2 Length",
+  "value": "vector=0,0",
+  "description": "Outputs the length of a 2D vector.",
+  "status": "Ready",
+  "previewTemplate": "Vector2 length",
+  "searchKeywords": ["vector2", "vector", "length", "magnitude", "distance", "speed"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "vector", "label": "Vector", "type": "Vector2", "control": "Vector2", "required": true, "default": "0,0", "description": "2D vector to measure.", "valueSource": "Vector2" }
+  ],
+  "beginnerSummary": "Value: measure how long a Vector2 is.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Vector"]
+}

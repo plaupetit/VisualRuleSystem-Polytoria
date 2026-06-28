@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.text3d.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "3D Text",
+  "idBase": "EV_On3DTextLightingEnabled",
+  "type": "On3DTextLightingEnabled",
+  "apiType": "Text3D.Shaded",
+  "apiReferences": [
+    { "type": "Text3D", "memberKind": "Property", "member": "Shaded", "coverage": "Partial" }
+  ],
+  "label": "On 3D Text Lighting Enabled",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when lighting becomes enabled on 3D text.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} lighting is enabled",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d text", "text", "lighting", "shaded", "enabled", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "3D Text", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D text object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["Text3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks lighting.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when 3D text starts using lighting.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Text Changes"]
+}

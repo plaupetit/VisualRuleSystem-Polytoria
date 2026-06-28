@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Image Display",
+  "idBase": "COND_3DImageColorIs",
+  "type": "Image3DColorIs",
+  "apiType": "Image3D.Color",
+  "apiReferences": [
+    { "type": "Image3D", "memberKind": "Property", "member": "Color", "coverage": "Direct" }
+  ],
+  "label": "3D Image Color Is",
+  "value": "target=Self;r=1;g=1;b=1",
+  "description": "Checks if a 3D image uses the expected tint color.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} image color matches",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d image", "image", "color", "tint", "match", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "3D Image", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D image object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Image3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "r", "label": "Red", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Red color channel from 0 to 1.", "valueSource": "Number / Manual Value" },
+    { "key": "g", "label": "Green", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Green color channel from 0 to 1.", "valueSource": "Number / Manual Value" },
+    { "key": "b", "label": "Blue", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Blue color channel from 0 to 1.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check if a 3D image has a specific tint color.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Image Display"]
+}

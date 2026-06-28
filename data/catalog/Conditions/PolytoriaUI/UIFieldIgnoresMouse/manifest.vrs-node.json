@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.field",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "UI Field",
+  "idBase": "COND_UIFieldIgnoresMouse",
+  "type": "UIFieldIgnoresMouse",
+  "apiType": "UIField.IgnoreMouse",
+  "apiReferences": [
+    { "type": "UIField", "memberKind": "Property", "member": "IgnoreMouse", "coverage": "Direct" }
+  ],
+  "label": "UI Ignores Mouse",
+  "value": "target=Self",
+  "description": "Checks if a UI field ignores mouse interaction.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} ignores mouse",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "field", "mouse", "ignore", "click", "interaction"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "UI Field", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI field to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Check whether a UI field ignores mouse input.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Field"]
+}

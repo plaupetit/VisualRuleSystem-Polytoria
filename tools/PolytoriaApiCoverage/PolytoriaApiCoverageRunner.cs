@@ -49,6 +49,18 @@ public static class PolytoriaApiCoverageAnalyzer
         var inferredTypeCount = typeRows.Count(row => row.Coverage.Equals("Inferred", StringComparison.OrdinalIgnoreCase));
         var typesWithAnyCoverage = typeRows.Count(row => !row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
         var typesWithoutCoverage = typeRows.Count(row => row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
+        var targetRuntimeRows = typeRows.Where(row => row.IsVrsTargetRuntime).ToList();
+        var targetRuntimeTypes = targetRuntimeRows.Count;
+        var targetRuntimeTypesWithCoverage = targetRuntimeRows.Count(row => !row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
+        var targetRuntimeTypesWithoutCoverage = targetRuntimeRows.Count(row => row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
+        var gameplayRows = typeRows.Where(row => row.ApiSurface.Equals("Gameplay", StringComparison.OrdinalIgnoreCase)).ToList();
+        var gameplayApiTypes = gameplayRows.Count;
+        var gameplayApiTypesWithCoverage = gameplayRows.Count(row => !row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
+        var gameplayApiTypesWithoutCoverage = gameplayRows.Count(row => row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
+        var creatorRows = typeRows.Where(row => row.ApiSurface.Equals("Creator", StringComparison.OrdinalIgnoreCase)).ToList();
+        var creatorApiTypes = creatorRows.Count;
+        var creatorApiTypesWithCoverage = creatorRows.Count(row => !row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
+        var creatorApiTypesWithoutCoverage = creatorRows.Count(row => row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase));
         var lowConfidenceNodeCount = rows.Count(row => row.Confidence.Equals("Low", StringComparison.OrdinalIgnoreCase) || row.Confidence.Equals("Inferred", StringComparison.OrdinalIgnoreCase));
         var nodesWithoutApiReference = rows.Count(row => row.Coverage.Equals("NoReference", StringComparison.OrdinalIgnoreCase));
         var summary = new CoverageSummary(
@@ -61,6 +73,15 @@ public static class PolytoriaApiCoverageAnalyzer
             partialTypeCount,
             indirectOrSyntheticTypeCount,
             inferredTypeCount,
+            targetRuntimeTypes,
+            targetRuntimeTypesWithCoverage,
+            targetRuntimeTypesWithoutCoverage,
+            gameplayApiTypes,
+            gameplayApiTypesWithCoverage,
+            gameplayApiTypesWithoutCoverage,
+            creatorApiTypes,
+            creatorApiTypesWithCoverage,
+            creatorApiTypesWithoutCoverage,
             lowConfidenceNodeCount,
             nodesWithoutApiReference,
             Percent(typesWithAnyCoverage, source.Types.Count),
@@ -69,8 +90,15 @@ public static class PolytoriaApiCoverageAnalyzer
             Percent(partialTypeCount, source.Types.Count),
             Percent(indirectOrSyntheticTypeCount, source.Types.Count),
             Percent(inferredTypeCount, source.Types.Count),
+            Percent(targetRuntimeTypesWithCoverage, targetRuntimeTypes),
+            Percent(targetRuntimeTypesWithoutCoverage, targetRuntimeTypes),
+            Percent(gameplayApiTypesWithCoverage, gameplayApiTypes),
+            Percent(gameplayApiTypesWithoutCoverage, gameplayApiTypes),
+            Percent(creatorApiTypesWithCoverage, creatorApiTypes),
+            Percent(creatorApiTypesWithoutCoverage, creatorApiTypes),
             Percent(lowConfidenceNodeCount, catalog.Nodes.Count),
             Percent(nodesWithoutApiReference, catalog.Nodes.Count));
+        var roadmap = BuildRoadmap(typeRows);
 
         return new ApiCoverageResult(
             source,
@@ -78,6 +106,7 @@ public static class PolytoriaApiCoverageAnalyzer
             catalogSummary,
             summary,
             typeRows,
+            roadmap,
             rows.Select(row => MarkUnknownReferences(row, officialTypes)).ToList(),
             catalog.Warnings);
     }
@@ -170,7 +199,7 @@ public static class PolytoriaApiCoverageAnalyzer
             .GroupBy(item => item.Reference.Type, StringComparer.OrdinalIgnoreCase)
             .ToDictionary(
                 group => group.Key,
-                group => group.Select(item => item.Row).ToList(),
+                group => group.ToList(),
                 StringComparer.OrdinalIgnoreCase);
 
         return officialTypes
@@ -178,21 +207,168 @@ public static class PolytoriaApiCoverageAnalyzer
             {
                 if (!byType.TryGetValue(type.Name, out var nodeRows))
                 {
-                    return new TypeCoverageRow(type.Name, "Uncovered", "None", []);
+                    return CreateTypeCoverageRow(type.Name, "Uncovered", "None", []);
                 }
 
-                var coverage = StrongestCoverage(nodeRows.Select(row => row.Coverage));
-                var confidence = TypeRowConfidence(nodeRows);
+                var coverage = StrongestCoverage(nodeRows.Select(item =>
+                    string.IsNullOrWhiteSpace(item.Reference.Coverage)
+                        ? item.Row.Coverage
+                        : NormalizeCoverage(item.Reference.Coverage)));
+                var confidence = TypeRowConfidence(nodeRows.Select(item => item.Row).ToList());
                 var nodeLabels = nodeRows
-                    .Select(row => $"{row.NodeId} ({row.Label})")
+                    .Select(item => $"{item.Row.NodeId} ({item.Row.Label})")
                     .Distinct(StringComparer.OrdinalIgnoreCase)
                     .Order(StringComparer.OrdinalIgnoreCase)
                     .ToList();
 
-                return new TypeCoverageRow(type.Name, coverage, confidence, nodeLabels);
+                return CreateTypeCoverageRow(type.Name, coverage, confidence, nodeLabels);
             })
             .OrderBy(row => row.Type, StringComparer.OrdinalIgnoreCase)
             .ToList();
+    }
+
+    private static TypeCoverageRow CreateTypeCoverageRow(string typeName, string coverage, string confidence, IReadOnlyList<string> nodes)
+    {
+        var category = NodeCatalogApiSurfaceService.GetTypeCategory(typeName);
+        var apiSurface = NodeCatalogApiSurfaceService.GetTypeSurface(typeName, category);
+        var priority = ApiTypePriority(typeName, category);
+        return new TypeCoverageRow(
+            typeName,
+            coverage,
+            confidence,
+            category,
+            NodeCatalogApiSurfaceService.DisplayName(apiSurface),
+            priority,
+            apiSurface == NodeApiSurface.Gameplay && priority > 0,
+            SuggestedNodePack(typeName, category),
+            nodes);
+    }
+
+    private static IReadOnlyList<ApiCoverageRoadmapItem> BuildRoadmap(IReadOnlyList<TypeCoverageRow> typeRows)
+    {
+        return typeRows
+            .Where(row => row.IsVrsTargetRuntime && row.Coverage.Equals("Uncovered", StringComparison.OrdinalIgnoreCase))
+            .OrderBy(row => row.Priority)
+            .ThenBy(row => row.Category, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(row => row.Type, StringComparer.OrdinalIgnoreCase)
+            .Select(row => new ApiCoverageRoadmapItem(
+                row.Type,
+                row.Category,
+                row.Priority,
+                row.SuggestedNodePack,
+                SuggestedNodeKind(row.Type, row.Category),
+                SuggestedNodeLabel(row.Type),
+                SuggestedNodeReason(row.Type, row.Category)))
+            .ToList();
+    }
+
+    private static int ApiTypePriority(string typeName, string category)
+    {
+        if (category.Equals("Creator/Addons", StringComparison.OrdinalIgnoreCase))
+        {
+            return 0;
+        }
+
+        if (typeName is "NetMessage" or "InputAction" or "InputActionButton" or "InputActionAxis" or
+            "InputActionVector2" or "InputButton" or "InputButtonCollection" or "NetworkEvent")
+        {
+            return 1;
+        }
+
+        if (category is "UI" or "Data/Stats")
+        {
+            return 2;
+        }
+
+        if (typeName is "Camera" or "World" or "Folder" or "Model" or "NetworkedObject")
+        {
+            return 3;
+        }
+
+        if (category is "Assets" or "Runtime Gameplay")
+        {
+            return 4;
+        }
+
+        if (category is "Math/Structs")
+        {
+            return 5;
+        }
+
+        return 0;
+    }
+
+    private static string SuggestedNodePack(string typeName, string category)
+    {
+        if (typeName is "Camera" or "World" or "Folder" or "Model")
+        {
+            return "Pack 3 - Camera/World";
+        }
+
+        return category switch
+        {
+            "Input/Network" => "Pack 1 - Input/Network",
+            "UI" => "Pack 2 - UI",
+            "Data/Stats" => "Pack 4 - Values/Stats",
+            "Assets" => "Pack 5 - Assets/Media",
+            "Runtime Gameplay" => "Pack 3 - Camera/World or gameplay-specific pack",
+            "Math/Structs" => "Advanced - Math/Structs",
+            _ => "Out of scope for user nodes"
+        };
+    }
+
+    private static string SuggestedNodeKind(string typeName, string category)
+    {
+        if (typeName.StartsWith("InputAction", StringComparison.OrdinalIgnoreCase) || typeName.EndsWith("Value", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Property + Condition";
+        }
+
+        if (typeName.Contains("Service", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Action/Property wrapper";
+        }
+
+        if (category is "UI" or "Runtime Gameplay")
+        {
+            return "Action + Property + Trigger where events exist";
+        }
+
+        return "Property/Action";
+    }
+
+    private static string SuggestedNodeLabel(string typeName)
+    {
+        return typeName switch
+        {
+            "NetMessage" => "Input Message Text",
+            "Camera" => "Set Camera FOV",
+            "GUI" => "Set UI Visible",
+            "UIImage" => "Set UI Image",
+            "UITextInput" => "On Text Input Changed",
+            "Stat" => "Set Player Stat",
+            "Stats" => "Get Player Stats",
+            _ => $"Use {typeName}"
+        };
+    }
+
+    private static string SuggestedNodeReason(string typeName, string category)
+    {
+        if (typeName is "Camera" or "World" or "Folder" or "Model")
+        {
+            return "Useful for camera control, world organization, and scene hierarchy workflows.";
+        }
+
+        return category switch
+        {
+            "Creator/Addons" => "Creator/editor API is not part of the normal player-facing VRS runtime.",
+            "Input/Network" => "Useful for client input relays and server gameplay triggers.",
+            "UI" => "Useful for non-scripter feedback screens, prompts, buttons, and menus.",
+            "Data/Stats" => "Useful for scores, counters, stateful values, and persistent gameplay data.",
+            "Assets" => "Useful when nodes need to swap images, sounds, meshes, or fonts at runtime.",
+            "Math/Structs" => "Useful as supporting value nodes once gameplay workflows need them.",
+            _ => $"Potential {typeName} workflow node; confirm runtime usefulness before adding many wrappers."
+        };
     }
 
     private static string TypeRowConfidence(IReadOnlyList<CatalogNodeCoverageRow> nodeRows)

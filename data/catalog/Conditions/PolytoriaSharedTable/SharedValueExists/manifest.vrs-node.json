@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.sharedtable.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Shared Values",
+  "idBase": "COND_SharedValueExists",
+  "type": "SharedValueExists",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Shared Value Exists",
+  "value": "key=Score",
+  "description": "Checks whether a shared table key currently has a value.",
+  "status": "Ready",
+  "previewTemplate": "Shared ${key} exists",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "exists",
+    "has",
+    "value"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "key",
+      "label": "Key",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Shared table key to check.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Check if a shared value is currently set.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

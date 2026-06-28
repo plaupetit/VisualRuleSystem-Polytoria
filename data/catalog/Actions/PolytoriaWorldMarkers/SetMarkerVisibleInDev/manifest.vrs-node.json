@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Markers",
+  "idBase": "ACT_SetMarkerVisibleInDev",
+  "type": "SetMarkerVisibleInDev",
+  "apiType": "Marker3D.VisibleInDev",
+  "apiReferences": [
+    { "type": "Marker3D", "memberKind": "Property", "member": "VisibleInDev", "coverage": "Direct" }
+  ],
+  "label": "Set Marker Visible In Dev",
+  "value": "target=Self;enabled=true",
+  "description": "Controls whether a 3D marker is visible while building or testing.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} marker dev visibility ${enabled}",
+  "searchKeywords": ["marker", "3d", "visible", "dev", "debug"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] },
+    { "key": "enabled", "label": "Enabled", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Whether the marker is visible while building or testing.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do show or hide a marker while building.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

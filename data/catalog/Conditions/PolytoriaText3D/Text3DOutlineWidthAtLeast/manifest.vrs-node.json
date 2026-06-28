@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Text Display",
+  "idBase": "COND_3DTextOutlineWidthAtLeast",
+  "type": "Text3DOutlineWidthAtLeast",
+  "apiType": "Text3D.OutlineWidth",
+  "apiReferences": [
+    { "type": "Text3D", "memberKind": "Property", "member": "OutlineWidth", "coverage": "Direct" }
+  ],
+  "label": "3D Text Outline Width At Least",
+  "value": "target=Self;width=1",
+  "description": "Checks if 3D text outline width is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} outline width is at least ${width}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d text", "text", "outline", "width", "stroke", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "3D Text", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D text object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Text3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "width", "label": "Minimum Width", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Minimum outline width.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check if a 3D text outline is thick enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Text Display"]
+}

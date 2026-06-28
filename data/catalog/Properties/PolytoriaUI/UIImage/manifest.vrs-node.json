@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.ui.values",
+  "kind": "Property",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "UI",
+  "idBase": "PROP_UIImage",
+  "type": "UIImageValue",
+  "apiType": "UIImage.Image",
+  "apiReferences": [
+    { "type": "UIImage", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "UI Image",
+  "value": "target=Self",
+  "description": "Outputs the image asset reference from an UIImage object.",
+  "status": "Ready",
+  "previewTemplate": "${target} image",
+  "searchKeywords": ["ui", "image", "asset", "picture", "texture", "value"],
+  "parameters": [
+    { "key": "target", "label": "Image UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UIImage object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] }
+  ],
+  "beginnerSummary": "Value: current image of a UI image object.",
+  "surface": "UserFacing",
+  "palettePath": ["UI"]
+}

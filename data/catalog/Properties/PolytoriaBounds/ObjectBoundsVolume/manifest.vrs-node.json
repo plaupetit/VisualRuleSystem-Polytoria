@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.bounds",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Bounds",
+  "idBase": "PROP_ObjectBoundsVolume",
+  "type": "ObjectBoundsVolume",
+  "apiType": "Bounds.Volume",
+  "apiReferences": [
+    { "type": "Dynamic", "memberKind": "Method", "member": "GetBounds", "coverage": "Partial" },
+    { "type": "Bounds", "memberKind": "Property", "member": "Volume", "coverage": "Direct" }
+  ],
+  "label": "Object Bounds Volume",
+  "value": "target=Self",
+  "description": "Reads the volume of an object's bounds.",
+  "status": "Ready",
+  "returnType": "Number",
+  "previewTemplate": "${target} bounds volume",
+  "searchKeywords": ["bounds", "box", "volume", "object", "size", "zone"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to measure.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] }
+  ],
+  "beginnerSummary": "Value returns the volume of an object's bounds.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Bounds"]
+}

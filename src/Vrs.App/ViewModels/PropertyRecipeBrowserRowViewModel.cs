@@ -37,9 +37,9 @@ public sealed partial class PropertyRecipeBrowserRowViewModel : ObservableObject
     public string Tooltip => string.Join(
         "\n",
         new[] { Row.TooltipTitle, Row.TooltipText }.Where(line => !string.IsNullOrWhiteSpace(line)));
-    public string RowBackgroundHex => IsKeyboardSelected ? "#225f93" : IsCurrentValue ? "#263545" : "#2b2b2b";
-    public string PrimaryForegroundHex => IsKeyboardSelected ? "#ffffff" : "#d8dde4";
-    public string SecondaryForegroundHex => IsKeyboardSelected ? "#dcecff" : "#aeb8c4";
+    public string RowBackgroundHex => PickerRowPresentation.RowBackgroundHex(IsKeyboardSelected, IsCurrentValue);
+    public string PrimaryForegroundHex => PickerRowPresentation.PrimaryForegroundHex(IsKeyboardSelected);
+    public string SecondaryForegroundHex => PickerRowPresentation.SecondaryForegroundHex(IsKeyboardSelected);
 
     [ObservableProperty]
     private bool isKeyboardSelected;

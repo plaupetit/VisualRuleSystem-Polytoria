@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.tween.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Tween",
+  "idBase": "EV_OnTweenTransparencyReached",
+  "type": "OnTweenTransparencyReached",
+  "apiType": "TweenObject",
+  "apiReferences": [
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenNumber", "coverage": "Indirect" },
+    { "type": "Part", "memberKind": "Property", "member": "Transparency", "coverage": "Direct" }
+  ],
+  "label": "On Tween Transparency Reached",
+  "value": "target=Self;transparency=0;tolerance=0.01;interval=0.05",
+  "description": "Starts a flow when an object reaches a target tween transparency.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} reaches tween transparency ${transparency}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["tween", "animate", "transparency", "fade", "reached", "finished", "trigger"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Target Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "transparency", "label": "Transparency", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Target transparency.", "valueSource": "Suggested Value" },
+    { "key": "tolerance", "label": "Tolerance", "type": "Number", "control": "Number", "required": true, "default": "0.01", "description": "Allowed transparency difference.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.05", "description": "Polling interval used to detect completion.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Trigger when a fade animation reaches its target.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.sharedtable.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Shared Values",
+  "idBase": "ACT_RemoveSharedValue",
+  "type": "RemoveSharedValue",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Method", "member": "Remove", "coverage": "Direct" }
+  ],
+  "label": "Remove Shared Value",
+  "value": "key=Score",
+  "description": "Removes one key from the shared script table.",
+  "status": "Ready",
+  "previewTemplate": "Remove shared ${key}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "remove",
+    "delete",
+    "clear",
+    "unset"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "key",
+      "label": "Key",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Shared table key to remove.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do remove one shared value.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

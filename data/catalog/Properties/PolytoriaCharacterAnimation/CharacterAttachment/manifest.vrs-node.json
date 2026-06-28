@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Characters",
+  "idBase": "PROP_CharacterAttachment",
+  "type": "CharacterAttachment",
+  "apiType": "CharacterModel.GetAttachment",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Method", "member": "GetAttachment", "coverage": "Direct" },
+    { "type": "CharacterAttachment", "memberKind": "Enum", "member": "", "coverage": "Direct" },
+    { "type": "Dynamic", "memberKind": "Type", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Character Attachment",
+  "value": "target=Self;attachment=Head",
+  "description": "Gets a body attachment object from a character.",
+  "status": "Ready",
+  "returnType": "SceneObject",
+  "previewTemplate": "${target} ${attachment} attachment",
+  "searchKeywords": ["character", "attachment", "body", "head", "hand", "foot", "torso"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "attachment", "label": "Attachment", "type": "String", "control": "Choice", "required": true, "default": "Head", "description": "Body attachment to return.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Head", "UpperTorso", "LowerTorso", "ShoulderLeft", "ShoulderRight", "ElbowLeft", "ElbowRight", "HandLeft", "HandRight", "LegLeft", "LegRight", "KneeLeft", "KneeRight", "FootLeft", "FootRight"] }
+  ],
+  "beginnerSummary": "Value returns a body attachment object from a character.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

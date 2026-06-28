@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.imagesky.values",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ImageSkyRightImage",
+  "type": "ImageSkyRightImageValue",
+  "apiType": "ImageSky.RightImage",
+  "apiReferences": [
+    { "type": "ImageSky", "memberKind": "Property", "member": "RightImage", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Image Sky Right Image",
+  "value": "target=Self",
+  "description": "Outputs the right image reference from an ImageSky skybox.",
+  "status": "Ready",
+  "previewTemplate": "Right sky image of ${target}",
+  "searchKeywords": ["sky", "skybox", "image", "right", "asset"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Image Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ImageSky object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageSkyObject"] }
+  ],
+  "beginnerSummary": "Value: use the right image from a custom skybox.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Image Sky Sides"]
+}

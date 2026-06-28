@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Mesh Animation",
+  "idBase": "PROP_MeshAnimationInfoName",
+  "type": "MeshAnimationInfoNameValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "MeshAnimationInfo", "memberKind": "Property", "member": "Name", "coverage": "Direct" }
+  ],
+  "label": "Mesh Animation Info Name",
+  "value": "info=",
+  "description": "Outputs the Name field from a MeshAnimationInfo value.",
+  "status": "Ready",
+  "previewTemplate": "Animation info name",
+  "searchKeywords": ["mesh", "animation", "info", "name", "length", "playing"],
+  "parameters": [
+    { "key": "info", "label": "Animation Info", "type": "Any", "control": "Text", "required": true, "default": "", "description": "MeshAnimationInfo value to read.", "valueSource": "Value Source" }
+  ],
+  "beginnerSummary": "Value: read the animation name from a MeshAnimationInfo value.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Mesh Animation"]
+}

@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.explosion",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Effects",
+  "idBase": "ACT_SetExplosionDamage",
+  "type": "SetExplosionDamage",
+  "apiType": "Explosion.Damage",
+  "apiReferences": [
+    { "type": "Explosion", "memberKind": "Property", "member": "Damage", "coverage": "Direct" }
+  ],
+  "label": "Set Explosion Damage",
+  "value": "target=Self;damage=100",
+  "description": "Changes how much damage an explosion applies to players.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} explosion damage ${damage}",
+  "searchKeywords": ["explosion", "blast", "damage", "hurt", "kill", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Explosion", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Explosion object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ExplosionObject"] },
+    { "key": "damage", "label": "Damage", "type": "Number", "control": "Number", "required": true, "default": "100", "description": "New player damage amount.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change how much damage an explosion deals.",
+  "surface": "UserFacing",
+  "palettePath": ["Effects", "Explosion"]
+}

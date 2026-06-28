@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.bounds",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Bounds",
+  "idBase": "PROP_ObjectBoundsExtents",
+  "type": "ObjectBoundsExtents",
+  "apiType": "Bounds.Extents",
+  "apiReferences": [
+    { "type": "Dynamic", "memberKind": "Method", "member": "GetBounds", "coverage": "Partial" },
+    { "type": "Bounds", "memberKind": "Property", "member": "Extents", "coverage": "Direct" },
+    { "type": "Vector3", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Object Bounds Extents",
+  "value": "target=Self",
+  "description": "Reads the half-size extents of an object's bounds.",
+  "status": "Ready",
+  "returnType": "Vector3",
+  "previewTemplate": "${target} bounds extents",
+  "searchKeywords": ["bounds", "box", "extents", "half size", "object", "zone"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to measure.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] }
+  ],
+  "beginnerSummary": "Value returns the half-size extents of an object's bounds.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Bounds"]
+}

@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.procedural_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ProceduralSkyTint",
+  "type": "ProceduralSkyTintValue",
+  "apiType": "ProceduralSky.SkyTint",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "SkyTint", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Procedural Sky Tint",
+  "value": "target=Self",
+  "description": "Outputs the sky tint color from a ProceduralSky object.",
+  "status": "Ready",
+  "previewTemplate": "Sky tint of ${target}",
+  "searchKeywords": ["sky", "procedural", "tint", "color", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ProceduralSky object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ProceduralSkyObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads the procedural sky tint color.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

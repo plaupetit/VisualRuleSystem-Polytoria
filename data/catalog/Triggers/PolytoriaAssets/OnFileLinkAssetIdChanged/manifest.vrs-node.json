@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Files",
+  "idBase": "EV_OnFileLinkAssetIdChanged",
+  "type": "OnFileLinkAssetIdChanged",
+  "apiType": "FileLinkAsset.LinkedID",
+  "apiReferences": [{ "type": "FileLinkAsset", "memberKind": "Property", "member": "LinkedID", "coverage": "Partial" }],
+  "label": "On File Link Asset ID Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a FileLinkAsset linked ID changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} linked ID changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["file", "link", "asset", "linkedid", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "File Link Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "FileLinkAsset to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["FileLinkAssetObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the linked ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a file link asset ID changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "File Changes"]
+}

@@ -1,0 +1,68 @@
+{
+  "moduleId": "polytoria.inventory.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Inventory",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Inventory",
+  "idBase": "ACT_GiveToolToPlayer",
+  "type": "GiveToolToPlayer",
+  "apiType": "Inventory",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Inventory", "coverage": "Direct" },
+    { "type": "Inventory", "memberKind": "Type", "member": "", "coverage": "Direct" },
+    { "type": "Tool", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "Instance", "memberKind": "Property", "member": "Parent", "coverage": "Partial" }
+  ],
+  "label": "Give Tool To Player",
+  "value": "target=Target;player=",
+  "description": "Moves a Tool object into a player's inventory.",
+  "status": "Ready",
+  "previewTemplate": "Give ${target} to player",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "inventory",
+    "tool",
+    "give",
+    "item",
+    "equipment",
+    "backpack",
+    "player",
+    "reward"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Tool",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Tool object to move into the player's inventory.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ToolObject"
+      ]
+    },
+    {
+      "key": "player",
+      "label": "Player",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Player who should receive the tool. Empty means the current triggering player.",
+      "valueSource": "Trigger Context"
+    }
+  ],
+  "beginnerSummary": "Do give a tool to the current or selected player.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Inventory"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.values.instance",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Stored Values",
+  "idBase": "PROP_InstanceValueObject",
+  "type": "InstanceValueObjectValue",
+  "apiType": "Instance",
+  "apiReferences": [
+    { "type": "InstanceValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "Instance", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Stored Object Reference",
+  "value": "target=Self",
+  "description": "Outputs the stored scene object reference from an object reference value.",
+  "status": "Ready",
+  "previewTemplate": "${target} stored object",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["value", "instancevalue", "objectvalue", "reference", "scene object", "target"],
+  "parameters": [
+    { "key": "target", "label": "Object Reference Value", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object reference value to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["InstanceValueObject"] }
+  ],
+  "beginnerSummary": "Value reads a stored object reference.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Stored Values"]
+}

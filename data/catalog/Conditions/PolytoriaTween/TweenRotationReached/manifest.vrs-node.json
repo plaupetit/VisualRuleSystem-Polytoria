@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.tween.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Tween",
+  "idBase": "COND_TweenRotationReached",
+  "type": "TweenRotationReached",
+  "apiType": "TweenObject",
+  "apiReferences": [
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenRotation", "coverage": "Indirect" },
+    { "type": "Part", "memberKind": "Property", "member": "Rotation", "coverage": "Direct" }
+  ],
+  "label": "Tween Rotation Reached",
+  "value": "target=Self;vector=0,90,0;x=0;y=90;z=0;tolerance=0.01",
+  "description": "Checks whether an object has reached a target tween rotation.",
+  "status": "Ready",
+  "previewTemplate": "${target} reached tween rotation ${vector}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["tween", "animate", "rotation", "rotate", "reached", "done", "object"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Target Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to inspect.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "vector", "label": "Target Rotation", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,90,0", "description": "Rotation the tween should reach.", "valueSource": "Manual 3D Vector" },
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Target X rotation.", "valueSource": "Suggested Value" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "90", "description": "Target Y rotation.", "valueSource": "Suggested Value" },
+    { "key": "z", "label": "Z", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Target Z rotation.", "valueSource": "Suggested Value" },
+    { "key": "tolerance", "label": "Tolerance", "type": "Number", "control": "Number", "required": true, "default": "0.01", "description": "Allowed rotation difference.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if a rotation animation has reached its target.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

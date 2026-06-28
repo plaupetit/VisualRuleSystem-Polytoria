@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.rigidbody.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Physics",
+  "idBase": "COND_RigidBodyFrictionAtLeast",
+  "type": "RigidBodyFrictionAtLeast",
+  "apiType": "RigidBody.Friction",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Friction", "coverage": "Direct" }
+  ],
+  "label": "Rigid Body Friction At Least",
+  "value": "target=Self;friction=0.5",
+  "description": "Checks if a RigidBody friction is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} friction is at least ${friction}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "friction", "grip", "slippery", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "friction", "label": "Minimum Friction", "type": "Number", "control": "Number", "required": true, "default": "0.5", "description": "Minimum friction.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a rigid body has enough friction.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

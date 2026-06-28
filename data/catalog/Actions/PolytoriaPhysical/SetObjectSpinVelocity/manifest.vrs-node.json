@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.physical.actions",
   "kind": "Action",
+  "apiSurface": "Gameplay",
   "apiGroup": "World",
   "runtimeFamily": "Server",
   "category": "Actions",
@@ -8,6 +9,10 @@
   "idBase": "ACT_SetObjectSpinVelocity",
   "type": "SetObjectSpinVelocity",
   "apiType": "Physical.AngularVelocity",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "AngularVelocity", "coverage": "Direct" },
+    { "type": "Physical", "memberKind": "Property", "member": "AngularVelocity", "coverage": "Partial" }
+  ],
   "label": "Set Object Spin Velocity",
   "value": "target=Self;x=0;y=0;z=0",
   "description": "Sets how fast a physics object spins in each direction.",

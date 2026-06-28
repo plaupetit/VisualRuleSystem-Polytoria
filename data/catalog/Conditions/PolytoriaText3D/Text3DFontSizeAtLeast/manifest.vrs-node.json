@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.text3d",
+  "kind": "Condition",
+  "apiGroup": "World",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Text Content",
+  "idBase": "COND_3DTextFontSizeAtLeast",
+  "type": "Text3DFontSizeAtLeast",
+  "apiType": "Text3D.FontSize",
+  "apiReferences": [
+    { "type": "Text3D", "memberKind": "Property", "member": "FontSize", "coverage": "Direct" }
+  ],
+  "label": "3D Text Size At Least",
+  "value": "target=Self;size=24",
+  "description": "Checks if 3D text is at least the expected size.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} text size is at least ${size}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d text", "text", "font", "size", "minimum", "large"],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Text",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "3D Text", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D text object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Text3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "size", "label": "Minimum Size", "type": "Number", "control": "Number", "required": true, "default": "24", "description": "Minimum text size.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check if 3D text is large enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Text Content"]
+}

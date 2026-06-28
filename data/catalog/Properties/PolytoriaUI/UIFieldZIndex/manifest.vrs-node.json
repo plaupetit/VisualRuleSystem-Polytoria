@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.field",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "UI Field",
+  "idBase": "PROP_UIFieldZIndex",
+  "type": "UIFieldZIndexValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "UIField", "memberKind": "Property", "member": "ZIndex", "coverage": "Direct" }
+  ],
+  "label": "UI Layer",
+  "value": "target=Self",
+  "description": "Reads the draw order layer of a UI field.",
+  "status": "Ready",
+  "previewTemplate": "Layer of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "field", "zindex", "layer", "order"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "UI Field", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI field to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads the draw layer of a UI field.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Field"]
+}

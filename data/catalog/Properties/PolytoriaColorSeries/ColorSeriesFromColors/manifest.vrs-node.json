@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.colorseries.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Color Series",
+  "idBase": "PROP_ColorSeriesFromColors",
+  "type": "ColorSeriesFromColors",
+  "apiType": "ColorSeries",
+  "apiReferences": [
+    { "type": "ColorSeries", "memberKind": "Method", "member": "New", "coverage": "Direct" }
+  ],
+  "label": "Color Series From Colors",
+  "value": "min=1,1,1;max=0,0,0",
+  "description": "Creates a ColorSeries gradient from two colors.",
+  "status": "Ready",
+  "previewTemplate": "Color series from ${min} to ${max}",
+  "searchKeywords": ["color series", "gradient", "colors", "range", "colorseries", "lerp"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "min", "label": "Start Color", "type": "Color", "control": "Color", "required": true, "default": "1,1,1", "description": "Color at the beginning of the series.", "valueSource": "Color" },
+    { "key": "max", "label": "End Color", "type": "Color", "control": "Color", "required": true, "default": "0,0,0", "description": "Color at the end of the series.", "valueSource": "Color" }
+  ],
+  "beginnerSummary": "Value: make a gradient from two colors.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Color Series"]
+}

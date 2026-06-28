@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.rigidbody.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Physics",
+  "idBase": "EV_OnRigidBodyDragReached",
+  "type": "OnRigidBodyDragReached",
+  "apiType": "RigidBody.Drag",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Drag", "coverage": "Partial" }
+  ],
+  "label": "On Rigid Body Drag Reached",
+  "value": "target=Self;drag=0;interval=0.25",
+  "description": "Starts when a RigidBody drag reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} drag reaches ${drag}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "drag", "damping", "threshold", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "drag", "label": "Drag", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Drag threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks drag.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a rigid body gets enough drag.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body Changes"]
+}

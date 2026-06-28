@@ -1,0 +1,58 @@
+{
+  "moduleId": "polytoria.scripts.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Script",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Scripts",
+  "idBase": "COND_ScriptCanCallAsyncFunction",
+  "type": "ScriptCanCallAsyncFunction",
+  "apiType": "Script",
+  "apiReferences": [
+    { "type": "Script", "memberKind": "Method", "member": "CallAsync", "coverage": "Direct" },
+    { "type": "ServerScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ClientScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ModuleScript", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Script Can Call Async Function",
+  "value": "target=Target",
+  "description": "Checks whether a script object exposes an async callable function bridge.",
+  "status": "Ready",
+  "previewTemplate": "Script ${target} can call async function",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "script",
+    "call async",
+    "async function",
+    "method",
+    "condition",
+    "server script",
+    "client script",
+    "module script"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scripts",
+  "utilityLayer": "Scripts",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Script",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Script object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ScriptObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a script can receive an async named function call.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Scripts"
+  ]
+}

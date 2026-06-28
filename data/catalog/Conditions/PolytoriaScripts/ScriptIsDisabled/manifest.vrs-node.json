@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.scripts.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Script",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Scripts",
+  "idBase": "COND_ScriptIsDisabled",
+  "type": "ScriptIsDisabled",
+  "apiType": "Script",
+  "apiReferences": [
+    { "type": "Script", "memberKind": "Property", "member": "IsEnabled", "coverage": "Direct" },
+    { "type": "ServerScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ClientScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ModuleScript", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Script Is Disabled",
+  "value": "target=Target",
+  "description": "Checks whether a script object is currently disabled.",
+  "status": "Ready",
+  "previewTemplate": "Script ${target} is disabled",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "script",
+    "disabled",
+    "not enabled",
+    "condition",
+    "server script",
+    "client script",
+    "module script"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scripts",
+  "utilityLayer": "Scripts",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Script",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Script object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ScriptObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if a script object is disabled.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Scripts"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.gradient_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_GradientSkyExponent",
+  "type": "GradientSkyExponentValue",
+  "apiType": "GradientSky.SkyGradientExponent",
+  "apiReferences": [
+    { "type": "GradientSky", "memberKind": "Property", "member": "SkyGradientExponent", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Gradient Sky Exponent",
+  "value": "target=Self",
+  "description": "Outputs the gradient exponent from a GradientSky object.",
+  "status": "Ready",
+  "previewTemplate": "Gradient exponent of ${target}",
+  "searchKeywords": ["sky", "gradient", "exponent", "blend", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientSky object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["GradientSkyObject"] }
+  ],
+  "beginnerSummary": "Value reads how sharply a gradient sky blends.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sky Gradient"]
+}

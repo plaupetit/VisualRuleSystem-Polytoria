@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.worldmarkers.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Markers",
+  "idBase": "COND_MarkerAppearsOnTop",
+  "type": "MarkerAppearsOnTop",
+  "apiType": "Marker3D.AppearOnTop",
+  "apiReferences": [{ "type": "Marker3D", "memberKind": "Property", "member": "AppearOnTop", "coverage": "Direct" }],
+  "label": "Marker Appears On Top",
+  "value": "target=Self",
+  "description": "Checks if a 3D marker is configured to appear on top.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} appears on top",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["marker", "on top", "debug", "visible", "gizmo"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Marker", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Marker3D object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Marker3DObject"] }
+  ],
+  "beginnerSummary": "Check whether a marker draws on top.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Markers"]
+}

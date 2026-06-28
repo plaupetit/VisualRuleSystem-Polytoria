@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Audio",
+  "idBase": "ACT_SetPTAudioAssetId",
+  "type": "SetPTAudioAssetId",
+  "apiType": "PTAudioAsset.AudioID",
+  "apiReferences": [
+    { "type": "PTAudioAsset", "memberKind": "Property", "member": "AudioID", "coverage": "Direct" },
+    { "type": "AudioAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set PT Audio Asset ID",
+  "value": "target=Self;assetId=0",
+  "description": "Changes the numeric Polytoria audio ID stored on a PTAudioAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} audio ID",
+  "searchKeywords": ["audio", "asset", "ptaudioasset", "id", "sound", "music", "sfx"],
+  "selectorHints": [
+    { "key": "target", "label": "Audio Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Audio Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTAudioAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["AudioAssetObject"] },
+    { "key": "assetId", "label": "Asset ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Polytoria audio asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Do update the audio ID on a PTAudioAsset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Audio"]
+}

@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.sharedtable.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Shared Values",
+  "idBase": "COND_SharedTextContains",
+  "type": "SharedTextContains",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Shared Text Contains",
+  "value": "key=Log;search=Ready;caseSensitive=false",
+  "description": "Checks whether a shared text value contains search text.",
+  "status": "Ready",
+  "previewTemplate": "Shared ${key} text contains ${search}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["shared", "table", "variable", "global", "text", "contains", "find", "search", "string"],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Log", "description": "Shared table key to read as text.", "valueSource": "String / Manual Text Input" },
+    { "key": "search", "label": "Search Text", "type": "String", "control": "Text", "required": true, "default": "Ready", "description": "Text to look for.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Case Sensitive", "type": "Boolean", "control": "Toggle", "required": true, "default": "false", "description": "When enabled, uppercase and lowercase letters must match exactly.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a shared text value includes a word or sentence.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Shared"]
+}

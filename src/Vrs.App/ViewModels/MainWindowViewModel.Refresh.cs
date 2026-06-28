@@ -67,6 +67,10 @@ public partial class MainWindowViewModel
         DeployScriptFileCommand.NotifyCanExecuteChanged();
         EnsureInputManagerCommand.NotifyCanExecuteChanged();
         QueueCreateFolderCommand.NotifyCanExecuteChanged();
+        RequestCreatorSnapshotCommand.NotifyCanExecuteChanged();
+        OnPropertyChanged(nameof(CanRequestCreatorSnapshot));
+        OnPropertyChanged(nameof(VisualScriptingWorkspaceSummary));
+        OnPropertyChanged(nameof(CreatorBridgeWorkspaceSummary));
         NotifyDeployScriptPropertiesChanged();
     }
 
@@ -74,6 +78,8 @@ public partial class MainWindowViewModel
     {
         OnPropertyChanged(nameof(ScriptFilePreviewPath));
         OnPropertyChanged(nameof(ScriptFilePreviewText));
+        OnPropertyChanged(nameof(VisualScriptingWorkspaceSummary));
+        OnPropertyChanged(nameof(CreatorBridgeWorkspaceSummary));
     }
 
     private void SetStatus(string status)
@@ -237,7 +243,11 @@ public partial class MainWindowViewModel
             SelectedNode = Nodes.FirstOrDefault(node => node.Id == SelectedNode.Id);
         }
 
-        SelectedNode ??= Nodes.FirstOrDefault();
+        if (SelectedNode is null && !HasActiveNonNodeCanvasSelection())
+        {
+            SelectedNode = Nodes.FirstOrDefault();
+        }
+
         if (SelectedConnectionIndex >= Connections.Count)
         {
             SelectedConnectionIndex = -1;

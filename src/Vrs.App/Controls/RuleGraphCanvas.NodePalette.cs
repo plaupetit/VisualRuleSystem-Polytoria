@@ -20,6 +20,7 @@ public sealed partial class RuleGraphCanvas
         nodePaletteSelectedIndex = 0;
         nodePaletteScrollIndex = 0;
         nodePaletteCompatibleOnly = true;
+        nodePaletteApiSurfaceFilter = NodePaletteApiSurfaceFilter.Gameplay;
         nodePaletteCurrentIntentKey = "";
         nodePaletteCurrentDomainPath.Clear();
         nodePalettePointerPoint = nodePalettePoint;
@@ -62,6 +63,7 @@ public sealed partial class RuleGraphCanvas
                 Search: nodePaletteSearch,
                 ScriptKind: SelectedScriptKind,
                 CompatibleOnly: !includeIncompatible,
+                ApiSurfaceFilter: nodePaletteApiSurfaceFilter,
                 CurrentIntentKey: nodePaletteCurrentIntentKey,
                 CurrentDomainPath: nodePaletteCurrentDomainPath.ToList(),
                 IncompatibilityReason: entry => NodePaletteIncompatibilityReason(entry, nodePaletteConnectFrom)));
@@ -132,6 +134,12 @@ public sealed partial class RuleGraphCanvas
                 return true;
             }
 
+            if (HitTestNodePaletteApiSurfaceToggle(point, bounds))
+            {
+                _ = ToggleNodePaletteApiSurfaceFilter();
+                return true;
+            }
+
             var hit = HitTestNodePaletteEntry(point, entries);
             if (hit >= 0)
             {
@@ -153,6 +161,7 @@ public sealed partial class RuleGraphCanvas
             var handled = e.Key switch
             {
                 Key.D0 or Key.NumPad0 => ResetNodePaletteFilters(),
+                Key.G => ToggleNodePaletteApiSurfaceFilter(),
                 Key.K => ToggleNodePaletteCompatibleOnly(),
                 _ => false
             };

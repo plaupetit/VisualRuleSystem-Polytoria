@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.rigidbody.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Physics",
+  "idBase": "ACT_SetRigidBodyAngularDrag",
+  "type": "SetRigidBodyAngularDrag",
+  "apiType": "RigidBody.AngularDrag",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "AngularDrag", "coverage": "Direct" }
+  ],
+  "label": "Set Rigid Body Angular Drag",
+  "value": "target=Self;angularDrag=0",
+  "description": "Sets how much a spinning RigidBody slows down.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} angular drag to ${angularDrag}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "angular drag", "spin", "slow rotation"],
+  "selectorHints": [
+    { "key": "target", "label": "Rigid Body", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose angular drag will change.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "angularDrag", "label": "Angular Drag", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "New angular drag value.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Set how quickly a spinning rigid body slows down.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

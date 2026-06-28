@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.environment",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "World Info",
+  "idBase": "ACT_SetWorldGravity",
+  "type": "SetWorldGravity",
+  "apiType": "Environment.Gravity",
+  "apiReferences": [
+    { "type": "Environment", "memberKind": "Property", "member": "Gravity", "coverage": "Direct" }
+  ],
+  "label": "Set World Gravity",
+  "value": "gravity=9.81",
+  "description": "Changes the gravity used by the world.",
+  "status": "Ready",
+  "previewTemplate": "Set world gravity to ${gravity}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "environment", "gravity", "physics", "fall"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "gravity", "label": "Gravity", "type": "Number", "control": "Number", "required": true, "default": "9.81", "description": "New world gravity value.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do change world gravity.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Environment"]
+}

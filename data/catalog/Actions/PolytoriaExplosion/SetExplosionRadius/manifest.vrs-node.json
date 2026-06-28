@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.explosion",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Effects",
+  "idBase": "ACT_SetExplosionRadius",
+  "type": "SetExplosionRadius",
+  "apiType": "Explosion.Radius",
+  "apiReferences": [
+    { "type": "Explosion", "memberKind": "Property", "member": "Radius", "coverage": "Direct" }
+  ],
+  "label": "Set Explosion Radius",
+  "value": "target=Self;radius=12",
+  "description": "Changes how far an explosion reaches.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} explosion radius ${radius}",
+  "searchKeywords": ["explosion", "blast", "radius", "range", "effect"],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Explosion", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Explosion object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ExplosionObject"] },
+    { "key": "radius", "label": "Radius", "type": "Number", "control": "Number", "required": true, "default": "12", "description": "New explosion radius.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change how far an explosion reaches.",
+  "surface": "UserFacing",
+  "palettePath": ["Effects", "Explosion"]
+}

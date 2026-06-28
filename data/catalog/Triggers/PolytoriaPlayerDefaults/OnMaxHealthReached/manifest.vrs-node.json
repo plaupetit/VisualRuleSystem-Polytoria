@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.playerdefaults.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Player Defaults",
+  "idBase": "EV_OnMaxHealthReached",
+  "type": "OnPlayerDefaultReached",
+  "apiType": "PlayerDefaults.MaxHealth",
+  "apiReferences": [
+    { "type": "PlayerDefaults", "memberKind": "Property", "member": "MaxHealth", "coverage": "Partial" }
+  ],
+  "label": "On MaxHealth Reached",
+  "value": "propertyName=MaxHealth;value=100;interval=0.25",
+  "description": "Starts when the default max health reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When MaxHealth reaches ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["player", "defaults", "health", "max health", "hp", "threshold", "watcher"],
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "MaxHealth", "description": "PlayerDefaults property to watch.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] },
+    { "key": "value", "label": "Reached Value", "type": "Number", "control": "Number", "required": true, "default": "100", "description": "Value threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks this default.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when the default max health becomes high enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Changes"]
+}

@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.values.int",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Stored Values",
+  "idBase": "ACT_SetIntegerValueObject",
+  "type": "SetIntegerValueObject",
+  "apiType": "IntValue.Value",
+  "apiReferences": [
+    { "type": "IntValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" }
+  ],
+  "label": "Set Integer Value Object",
+  "value": "target=Self;value=0",
+  "description": "Sets the Value property on an IntValue object, rounded down to a whole number.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} integer to ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["value", "intvalue", "integer", "number", "score", "counter", "set"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Integer Value Object",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Integer Value Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "IntValue object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["IntValueObject"] },
+    { "key": "value", "label": "Value", "type": "Number", "control": "Number", "default": "0", "description": "New integer value. Decimal values are rounded down.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Set a stored whole-number value such as a score, counter, or level.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Stored Values"]
+}

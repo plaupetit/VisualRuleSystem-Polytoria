@@ -17,6 +17,21 @@ public static class CatalogDataTypeNormalizer
             return "Number";
         }
 
+        if (value.Contains("Quaternion", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Quaternion";
+        }
+
+        if (value.Contains("ColorSeries", StringComparison.OrdinalIgnoreCase))
+        {
+            return "ColorSeries";
+        }
+
+        if (value.Contains("Vector2", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Vector2";
+        }
+
         if (value.Contains("Vector3", StringComparison.OrdinalIgnoreCase) ||
             value.Contains("Position", StringComparison.OrdinalIgnoreCase) ||
             value.Contains("Rotation", StringComparison.OrdinalIgnoreCase) ||
@@ -33,7 +48,8 @@ public static class CatalogDataTypeNormalizer
 
         if (value.Contains("Object", StringComparison.OrdinalIgnoreCase) ||
             value.Contains("Instance", StringComparison.OrdinalIgnoreCase) ||
-            value.Equals("Player", StringComparison.OrdinalIgnoreCase))
+            value.Equals("Player", StringComparison.OrdinalIgnoreCase) ||
+            value.Equals("Inventory", StringComparison.OrdinalIgnoreCase))
         {
             return "SceneObject";
         }

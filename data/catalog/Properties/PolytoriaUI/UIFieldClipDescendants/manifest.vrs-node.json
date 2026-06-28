@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.field",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "UI Field",
+  "idBase": "PROP_UIFieldClipDescendants",
+  "type": "UIFieldClipDescendantsValue",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "UIField", "memberKind": "Property", "member": "ClipDescendants", "coverage": "Direct" }
+  ],
+  "label": "UI Clips Children",
+  "value": "target=Self",
+  "description": "Checks whether child UI is clipped by this field.",
+  "status": "Ready",
+  "previewTemplate": "${target} clips children",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "field", "clip", "children", "mask", "overflow"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "UI Field", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI field to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value tells whether a UI field clips child UI.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Field"]
+}

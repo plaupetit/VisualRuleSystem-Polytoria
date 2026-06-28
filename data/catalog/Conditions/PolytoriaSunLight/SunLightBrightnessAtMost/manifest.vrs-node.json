@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.sunlight.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_SunLightBrightnessAtMost",
+  "type": "SunLightBrightnessAtMost",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Brightness", "coverage": "Direct" }
+  ],
+  "label": "Sun Light Brightness Is At Most",
+  "value": "target=Self;brightness=0.25",
+  "description": "Checks if the main sun light is this dim or dimmer.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} sun brightness is at most ${brightness}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["sun", "sunlight", "light", "lighting", "brightness", "night", "at most", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Sun Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "SunLight object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SunLightObject"]
+    },
+    {
+      "key": "brightness",
+      "label": "Brightness",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.25",
+      "description": "Maximum sun light brightness.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if the sun light is dim enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light"]
+}

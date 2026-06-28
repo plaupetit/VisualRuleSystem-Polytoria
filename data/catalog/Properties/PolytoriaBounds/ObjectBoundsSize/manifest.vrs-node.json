@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.bounds",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Bounds",
+  "idBase": "PROP_ObjectBoundsSize",
+  "type": "ObjectBoundsSize",
+  "apiType": "Bounds.Size",
+  "apiReferences": [
+    { "type": "Dynamic", "memberKind": "Method", "member": "GetBounds", "coverage": "Partial" },
+    { "type": "Bounds", "memberKind": "Property", "member": "Size", "coverage": "Direct" },
+    { "type": "Vector3", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Object Bounds Size",
+  "value": "target=Self",
+  "description": "Reads the full size of an object's bounds.",
+  "status": "Ready",
+  "returnType": "Vector3",
+  "previewTemplate": "${target} bounds size",
+  "searchKeywords": ["bounds", "box", "size", "object", "dimensions", "zone"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to measure.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] }
+  ],
+  "beginnerSummary": "Value returns the size of an object's bounds.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Bounds"]
+}

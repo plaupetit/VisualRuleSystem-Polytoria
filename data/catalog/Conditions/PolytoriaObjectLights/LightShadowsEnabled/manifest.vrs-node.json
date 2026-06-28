@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.lighting.object.conditions",
+  "kind": "Condition",
+  "apiGroup": "Lighting",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_LightShadowsEnabled",
+  "type": "LightShadowsEnabled",
+  "apiType": "Light",
+  "apiReferences": [
+    { "type": "Light", "memberKind": "Property", "member": "Shadows", "coverage": "Direct" }
+  ],
+  "label": "Light Shadows Are Enabled",
+  "value": "target=Self",
+  "description": "Checks if a light casts shadows.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} casts shadows",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["lighting", "light", "shadow", "shadows", "cast", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["LightObject"]
+    }
+  ],
+  "beginnerSummary": "Check if a light casts shadows.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Light Settings"]
+}

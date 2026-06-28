@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.explosion",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Effects",
+  "idBase": "ACT_SetExplosionAffectAnchored",
+  "type": "SetExplosionAffectAnchored",
+  "apiType": "Explosion.AffectAnchored",
+  "apiReferences": [
+    { "type": "Explosion", "memberKind": "Property", "member": "AffectAnchored", "coverage": "Direct" }
+  ],
+  "label": "Set Explosion Affect Anchored",
+  "value": "target=Self;enabled=false",
+  "description": "Sets whether an explosion can affect anchored objects.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} affect anchored ${enabled}",
+  "searchKeywords": ["explosion", "blast", "anchored", "physics", "affect"],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Explosion", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Explosion object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ExplosionObject"] },
+    { "key": "enabled", "label": "Affect Anchored", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Whether anchored objects can be affected.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do choose if anchored objects are affected by an explosion.",
+  "surface": "UserFacing",
+  "palettePath": ["Effects", "Explosion"]
+}

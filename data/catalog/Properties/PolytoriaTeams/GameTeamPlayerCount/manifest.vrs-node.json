@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.teams.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Shared",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_GameTeamPlayerCount",
   "type": "GameTeamPlayerCount",
   "apiType": "Number",
+  "apiReferences": [
+    { "type": "Team", "memberKind": "Method", "member": "GetPlayers", "coverage": "Direct" }
+  ],
   "label": "Game Team Player Count",
   "value": "target=Target",
   "description": "Outputs how many players are assigned to a chosen game team.",

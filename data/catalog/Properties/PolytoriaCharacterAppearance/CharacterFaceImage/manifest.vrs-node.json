@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Character Appearance",
+  "idBase": "PROP_CharacterFaceImage",
+  "type": "CharacterFaceImageValue",
+  "apiType": "PolytorianModel.FaceImage",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "FaceImage", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Character Face Image",
+  "value": "target=Self",
+  "description": "Reads the face image on a character model.",
+  "status": "Ready",
+  "returnType": "String",
+  "previewTemplate": "${target} face image",
+  "searchKeywords": ["character", "face", "image", "avatar", "appearance"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Value returns a character face image.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

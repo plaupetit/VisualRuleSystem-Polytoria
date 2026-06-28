@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Assets",
+  "idBase": "ACT_SetDecalImage",
+  "type": "SetDecalImage",
+  "apiType": "Decal.Image",
+  "apiReferences": [
+    { "type": "Decal", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Decal Image",
+  "value": "target=Self;image=",
+  "description": "Changes the image asset reference used by a Decal object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} decal image",
+  "searchKeywords": ["decal", "image", "asset", "texture", "picture"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Decal",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Decal", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Decal object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "image", "label": "Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference or path.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Change the image displayed by a Decal.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

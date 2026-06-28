@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.teams.triggers",
   "kind": "Trigger",
+  "apiSurface": "Gameplay",
   "apiGroup": "Teams",
   "runtimeFamily": "Server",
   "category": "Events",
@@ -8,6 +9,10 @@
   "idBase": "EV_OnPlayerGameTeamChanged",
   "type": "OnPlayerGameTeamChanged",
   "apiType": "Player",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Event", "member": "TeamChanged", "coverage": "Direct" },
+    { "type": "Player", "memberKind": "Property", "member": "Team", "coverage": "Direct" }
+  ],
   "label": "On Player Game Team Changed",
   "value": "target=Self",
   "description": "Runs when a player is assigned a different game team.",

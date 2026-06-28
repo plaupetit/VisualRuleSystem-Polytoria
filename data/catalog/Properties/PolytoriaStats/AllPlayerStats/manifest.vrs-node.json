@@ -1,0 +1,25 @@
+{
+  "moduleId": "polytoria.stats.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player Stats",
+  "idBase": "PROP_AllPlayerStats",
+  "type": "AllPlayerStats",
+  "apiType": "Any",
+  "apiReferences": [
+    { "type": "Stats", "memberKind": "Method", "member": "GetStats", "coverage": "Direct" }
+  ],
+  "label": "All Player Stats",
+  "value": "",
+  "description": "Outputs the list of all Stat objects in the place.",
+  "status": "Ready",
+  "previewTemplate": "All player stats",
+  "searchKeywords": ["stat", "stats", "list", "all", "leaderboard"],
+  "parameters": [],
+  "beginnerSummary": "Value: use the full list of player stats.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Player Stats"]
+}

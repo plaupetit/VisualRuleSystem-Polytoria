@@ -1,0 +1,42 @@
+{
+  "moduleId": "polytoria.sunlight.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_SunLightShadowsEnabled",
+  "type": "SunLightShadowsEnabled",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Shadows", "coverage": "Direct" }
+  ],
+  "label": "Sun Light Shadows Are Enabled",
+  "value": "target=Self",
+  "description": "Checks if the main sun light casts shadows.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} sun casts shadows",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["sun", "sunlight", "light", "lighting", "shadow", "shadows", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Sun Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "SunLight object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SunLightObject"]
+    }
+  ],
+  "beginnerSummary": "Check if the sun light casts shadows.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light"]
+}

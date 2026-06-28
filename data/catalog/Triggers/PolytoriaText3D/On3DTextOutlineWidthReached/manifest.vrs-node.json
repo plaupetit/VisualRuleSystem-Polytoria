@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.text3d.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "3D Text",
+  "idBase": "EV_On3DTextOutlineWidthReached",
+  "type": "On3DTextOutlineWidthReached",
+  "apiType": "Text3D.OutlineWidth",
+  "apiReferences": [
+    { "type": "Text3D", "memberKind": "Property", "member": "OutlineWidth", "coverage": "Partial" }
+  ],
+  "label": "On 3D Text Outline Width Reached",
+  "value": "target=Self;width=1;interval=0.25",
+  "description": "Starts when 3D text outline width reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} outline width reaches ${width}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d text", "text", "outline", "width", "threshold", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "3D Text", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D text object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["Text3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "width", "label": "Outline Width", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Outline width threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the outline width.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a 3D text outline becomes thick enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Text Changes"]
+}

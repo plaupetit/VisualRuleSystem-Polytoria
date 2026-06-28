@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.worldmarkers.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Climb",
+  "idBase": "COND_TrussClimbSpeedAtLeast",
+  "type": "TrussClimbSpeedAtLeast",
+  "apiType": "Truss.ClimbSpeed",
+  "apiReferences": [{ "type": "Truss", "memberKind": "Property", "member": "ClimbSpeed", "coverage": "Direct" }],
+  "label": "Truss Climb Speed At Least",
+  "value": "target=Self;speed=12",
+  "description": "Checks if a truss climb speed is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} climb speed is at least ${speed}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["truss", "climb", "ladder", "speed", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Truss", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Truss object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["TrussObject"] },
+    { "key": "speed", "label": "Minimum Speed", "type": "Number", "control": "Number", "required": true, "default": "12", "description": "Minimum climb speed.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a truss climb speed is high enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Climb"]
+}

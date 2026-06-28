@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.environment",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "World Info",
+  "idBase": "ACT_SetPartDestroyHeight",
+  "type": "SetPartDestroyHeight",
+  "apiType": "Environment.PartDestroyHeight",
+  "apiReferences": [
+    { "type": "Environment", "memberKind": "Property", "member": "PartDestroyHeight", "coverage": "Direct" }
+  ],
+  "label": "Set Fall Destroy Height",
+  "value": "height=-100",
+  "description": "Changes the height where falling parts are removed.",
+  "status": "Ready",
+  "previewTemplate": "Set fall destroy height to ${height}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "environment", "fall", "destroy", "height", "void"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "height", "label": "Height", "type": "Number", "control": "Number", "required": true, "default": "-100", "description": "Height where falling parts are removed.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do set the fall cleanup height.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Environment"]
+}

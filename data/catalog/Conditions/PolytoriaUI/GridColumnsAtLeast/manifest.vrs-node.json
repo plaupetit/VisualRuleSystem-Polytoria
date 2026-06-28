@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "UI Layout",
+  "idBase": "COND_GridColumnsAtLeast",
+  "type": "GridColumnsAtLeast",
+  "apiType": "UIGridLayout.Columns",
+  "apiReferences": [
+    { "type": "UIGridLayout", "memberKind": "Property", "member": "Columns", "coverage": "Direct" }
+  ],
+  "label": "Grid Columns At Least",
+  "value": "target=Self;columns=2",
+  "description": "Checks if a UI grid has at least a chosen number of columns.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} columns >= ${columns}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "grid", "layout", "columns", "inventory", "menu", "at least"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grid Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grid layout to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIGridLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "columns", "label": "Minimum Columns", "type": "Number", "control": "Number", "required": true, "default": "2", "description": "Minimum number of columns required.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a UI grid has enough columns.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Mesh Animation",
+  "idBase": "PROP_PTMeshAnimationAssetId",
+  "type": "PTMeshAnimationAssetIdValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "PTMeshAnimationAsset", "memberKind": "Property", "member": "AssetID", "coverage": "Direct" },
+    { "type": "MeshAnimationAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "PT Mesh Animation Asset ID",
+  "value": "target=Self",
+  "description": "Outputs the numeric Polytoria animation ID from a PTMeshAnimationAsset.",
+  "status": "Ready",
+  "previewTemplate": "${target} animation asset ID",
+  "searchKeywords": ["mesh", "animation", "asset", "ptmeshanimationasset", "id"],
+  "parameters": [
+    { "key": "target", "label": "Mesh Animation Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTMeshAnimationAsset to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAnimationAssetObject"] }
+  ],
+  "beginnerSummary": "Value: read the animation asset ID from a PTMeshAnimationAsset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Mesh Animation"]
+}

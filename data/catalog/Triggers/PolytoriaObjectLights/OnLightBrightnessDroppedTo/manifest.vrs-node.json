@@ -1,0 +1,36 @@
+{
+  "moduleId": "polytoria.lighting.object.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Lighting",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Lighting",
+  "idBase": "EV_OnLightBrightnessDroppedTo",
+  "type": "OnLightBrightnessDroppedTo",
+  "apiType": "Light",
+  "apiReferences": [
+    { "type": "Light", "memberKind": "Property", "member": "Brightness", "coverage": "Partial" }
+  ],
+  "label": "On Light Brightness Dropped To",
+  "value": "target=Self;brightness=0.25;interval=0.25",
+  "description": "Runs when a light becomes dim enough.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} brightness drops to ${brightness}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["lighting", "light", "brightness", "lamp", "dim", "dropped", "watch", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Light", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Watched Light", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Light object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["LightObject"] },
+    { "key": "brightness", "label": "Brightness", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "Brightness that starts the connected nodes.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the light.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When a watched light becomes dim enough after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Light Changes"]
+}

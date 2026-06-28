@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.coreui.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Client",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_BuiltInEmoteWheelVisible",
   "type": "BuiltInEmoteWheelVisible",
   "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "CoreUIService", "memberKind": "Property", "member": "UseEmoteWheel", "coverage": "Direct" }
+  ],
   "label": "Emote Wheel Is Visible",
   "value": "",
   "description": "Outputs true when the built-in emote wheel is visible.",

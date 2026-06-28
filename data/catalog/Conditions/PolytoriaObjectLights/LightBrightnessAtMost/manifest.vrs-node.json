@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.lighting.object.conditions",
+  "kind": "Condition",
+  "apiGroup": "Lighting",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_LightBrightnessAtMost",
+  "type": "LightBrightnessAtMost",
+  "apiType": "Light",
+  "apiReferences": [
+    { "type": "Light", "memberKind": "Property", "member": "Brightness", "coverage": "Direct" }
+  ],
+  "label": "Light Brightness Is At Most",
+  "value": "target=Self;brightness=0.25",
+  "description": "Checks if a light is this dim or dimmer.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} brightness is at most ${brightness}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["lighting", "light", "brightness", "lamp", "dim", "at most", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["LightObject"]
+    },
+    {
+      "key": "brightness",
+      "label": "Brightness",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "0.25",
+      "description": "Maximum brightness.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a light is dim enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Light Settings"]
+}

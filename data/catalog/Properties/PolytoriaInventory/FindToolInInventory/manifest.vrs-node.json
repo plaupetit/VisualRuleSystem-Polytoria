@@ -1,0 +1,63 @@
+{
+  "moduleId": "polytoria.inventory.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Inventory",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Inventory",
+  "idBase": "PROP_FindToolInInventory",
+  "type": "FindToolInInventory",
+  "apiType": "Tool",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Inventory", "coverage": "Direct" },
+    { "type": "Inventory", "memberKind": "Type", "member": "", "coverage": "Direct" },
+    { "type": "Instance", "memberKind": "Method", "member": "FindChild", "coverage": "Partial" },
+    { "type": "Tool", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Find Tool In Inventory",
+  "value": "player=;toolName=",
+  "description": "Outputs a named tool from a player's inventory, or nil if it is missing.",
+  "status": "Ready",
+  "previewTemplate": "Find tool ${toolName} in player inventory",
+  "searchKeywords": [
+    "inventory",
+    "tool",
+    "find",
+    "item",
+    "equipment",
+    "backpack",
+    "player"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "player",
+      "label": "Player",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Player whose inventory should be searched. Empty means the current triggering player.",
+      "valueSource": "Trigger Context"
+    },
+    {
+      "key": "toolName",
+      "label": "Tool Name",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "",
+      "description": "Name of the tool to find.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Value: find a tool by name in the player's inventory.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Inventory"
+  ]
+}

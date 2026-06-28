@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.audio.conditions",
+  "kind": "Condition",
+  "apiGroup": "Audio",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Audio",
+  "idBase": "COND_SoundVolumeAtLeast",
+  "type": "SoundVolumeAtLeast",
+  "apiType": "Sound",
+  "apiReferences": [
+    { "type": "Sound", "memberKind": "Property", "member": "Volume", "coverage": "Direct" }
+  ],
+  "label": "Sound Volume Is At Least",
+  "value": "target=Self;volume=1",
+  "description": "Checks if a sound is at least this loud.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} volume is at least ${volume}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "sound", "volume", "loud", "at least", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SoundObject"]
+    },
+    {
+      "key": "volume",
+      "label": "Volume",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Minimum volume.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a sound is loud enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Audio", "Settings"]
+}

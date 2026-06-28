@@ -9,13 +9,15 @@
   "type": "OnVrsInputEvent",
   "apiType": "NetworkEvent",
   "apiReferences": [
-    { "type": "NetworkEvent", "memberKind": "Event", "member": "InvokedServer", "coverage": "Direct" }
+    { "type": "NetworkEvent", "memberKind": "Event", "member": "InvokedServer", "coverage": "Direct" },
+    { "type": "Hidden", "memberKind": "Type", "member": "", "coverage": "Indirect" },
+    { "type": "HiddenBase", "memberKind": "Type", "member": "", "coverage": "Indirect" }
   ],
-  "label": "On VRS Input Event",
+  "label": "On Input Network Event",
   "value": "target=Self;inputAction=Jump",
-  "description": "Starts the rule when a VRS input NetworkEvent is invoked by a client.",
+  "description": "Starts the rule when a User Input (NetworkEvent) relay is invoked by a client.",
   "status": "Ready",
-  "previewTemplate": "When VRS input ${inputAction} arrives on ${target}",
+  "previewTemplate": "When input ${inputAction} arrives on ${target}",
   "searchKeywords": [
     "when",
     "input",
@@ -64,11 +66,11 @@
       "control": "Choice",
       "required": true,
       "default": "Jump",
-      "description": "Button input action whose VRS NetworkEvent is listened to on the server.",
+      "description": "Button input action whose User Input (NetworkEvent) relay is listened to on the server.",
       "valueSource": "String / Choice"
     }
   ],
-  "beginnerSummary": "Server trigger: react to a client input event sent through VRS Hidden events.",
+  "beginnerSummary": "Server trigger: react to a client input event sent through Hidden/VRS User Input (NetworkEvent) relays.",
   "surface": "UserFacing",
   "palettePath": ["Players", "Input"]
 }

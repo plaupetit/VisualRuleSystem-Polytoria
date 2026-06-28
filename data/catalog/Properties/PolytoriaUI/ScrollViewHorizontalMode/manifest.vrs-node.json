@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.ui.scroll",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Scroll View",
+  "idBase": "PROP_ScrollViewHorizontalMode",
+  "type": "ScrollViewHorizontalModeValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "UIScrollView", "memberKind": "Property", "member": "HorizontalScrollMode", "coverage": "Direct" },
+    { "type": "UIScrollMode", "memberKind": "Enum", "coverage": "Direct" }
+  ],
+  "label": "Horizontal Scroll Mode",
+  "value": "target=Self",
+  "description": "Reads the horizontal scroll mode of a scroll view.",
+  "status": "Ready",
+  "previewTemplate": "Horizontal scroll mode of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "scroll", "horizontal", "mode", "scrollview"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Scroll View", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Scroll view to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIScrollViewObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads horizontal scrolling behavior.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Scroll View"]
+}

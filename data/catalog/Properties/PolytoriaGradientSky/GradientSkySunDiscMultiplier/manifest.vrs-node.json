@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.gradient_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_GradientSkySunDiscMultiplier",
+  "type": "GradientSkySunDiscMultiplierValue",
+  "apiType": "GradientSky.SunDiscMultiplier",
+  "apiReferences": [
+    { "type": "GradientSky", "memberKind": "Property", "member": "SunDiscMultiplier", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Gradient Sky Sun Disc Multiplier",
+  "value": "target=Self",
+  "description": "Outputs the sun disc multiplier from a GradientSky object.",
+  "status": "Ready",
+  "previewTemplate": "Sun disc multiplier of ${target}",
+  "searchKeywords": ["sky", "gradient", "sun", "disc", "multiplier", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientSky object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["GradientSkyObject"] }
+  ],
+  "beginnerSummary": "Value reads the sun disc multiplier.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sky Sun Disc"]
+}

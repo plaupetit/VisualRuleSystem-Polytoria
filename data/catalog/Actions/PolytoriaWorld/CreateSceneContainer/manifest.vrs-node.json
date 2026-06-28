@@ -1,0 +1,73 @@
+{
+  "moduleId": "polytoria.world.create",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "World Objects",
+  "idBase": "ACT_CreateSceneContainer",
+  "type": "CreateSceneContainer",
+  "apiType": "Instance.New",
+  "apiReferences": [
+    { "type": "Instance", "memberKind": "Method", "member": "New", "coverage": "Direct" },
+    { "type": "Folder", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Model", "memberKind": "Type", "coverage": "Direct" }
+  ],
+  "label": "Create Scene Container",
+  "value": "target=World;containerKind=Folder;objectName=NewContainer",
+  "description": "Creates a folder or model under a scene parent.",
+  "status": "Ready",
+  "previewTemplate": "Create ${containerKind} under ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["do", "create", "folder", "model", "group", "parent", "hierarchy", "scene", "world"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Parent Object",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Parent Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "World",
+      "description": "Scene object that receives the new container.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["Any"],
+      "acceptedSceneRoots": ["World"]
+    },
+    {
+      "key": "containerKind",
+      "label": "Container Kind",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "Folder",
+      "description": "Kind of container to create.",
+      "valueSource": "String / Choice",
+      "options": ["Folder", "Model"]
+    },
+    {
+      "key": "objectName",
+      "label": "Object Name",
+      "type": "String",
+      "control": "Text",
+      "default": "NewContainer",
+      "description": "Optional name for the new container.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do create a folder or model to organize scene objects.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Hierarchy"]
+}

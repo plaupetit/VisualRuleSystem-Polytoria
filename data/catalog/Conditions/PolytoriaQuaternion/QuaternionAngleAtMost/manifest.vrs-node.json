@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.quaternion.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Rotation",
+  "idBase": "COND_QuaternionAngleAtMost",
+  "type": "QuaternionAngleAtMost",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "Angle", "coverage": "Direct" }
+  ],
+  "label": "Rotation Angle At Most",
+  "value": "first=0,0,0,1;second=0,1,0,0;maximum=5",
+  "description": "Checks whether two rotations are close enough in degrees.",
+  "status": "Ready",
+  "previewTemplate": "Rotation angle <= ${maximum}",
+  "searchKeywords": ["quaternion", "rotation", "angle", "close", "near", "within", "compare", "degrees"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "first", "label": "First Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,0,0,1", "description": "First rotation.", "valueSource": "Rotation Value" },
+    { "key": "second", "label": "Second Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,1,0,0", "description": "Second rotation.", "valueSource": "Rotation Value" },
+    { "key": "maximum", "label": "Maximum Degrees", "type": "Number", "control": "Number", "required": true, "default": "5", "description": "Largest allowed angle difference.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Check: true when two rotations are close enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.rigidbody.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Physics",
+  "idBase": "EV_OnRigidBodyGravityEnabled",
+  "type": "OnRigidBodyGravityEnabled",
+  "apiType": "RigidBody.UseGravity",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "UseGravity", "coverage": "Partial" }
+  ],
+  "label": "On Rigid Body Gravity Enabled",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when gravity becomes enabled on a RigidBody object.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} starts using gravity",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "gravity", "enabled", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks gravity.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when gravity becomes enabled on a rigid body.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body Changes"]
+}

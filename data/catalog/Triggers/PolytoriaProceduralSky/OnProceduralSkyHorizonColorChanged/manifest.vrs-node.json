@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.procedural_sky.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Lighting",
+  "idBase": "EV_OnProceduralSkyHorizonColorChanged",
+  "type": "OnProceduralSkyHorizonColorChanged",
+  "apiType": "ProceduralSky.HorizonColor",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "HorizonColor", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "On Procedural Sky Horizon Color Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts a flow when a ProceduralSky horizon color changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} horizon color changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["sky", "procedural", "horizon", "color", "lighting", "trigger"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Procedural Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ProceduralSky object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["ProceduralSkyObject"] },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "Polling interval used to detect changes.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Trigger when the procedural sky horizon color changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky Changes"]
+}

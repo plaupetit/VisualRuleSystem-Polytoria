@@ -1,0 +1,60 @@
+{
+  "moduleId": "polytoria.procedural_sky.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetProceduralSkyExposure",
+  "type": "SetProceduralSkyExposure",
+  "apiType": "ProceduralSky.Exposure",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "Exposure", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Procedural Sky Exposure",
+  "value": "target=Self;exposure=1",
+  "description": "Changes the exposure on a ProceduralSky object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} sky exposure ${exposure}",
+  "searchKeywords": ["sky", "procedural", "exposure", "brightness", "lighting", "environment"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ProceduralSky object to update.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ProceduralSkyObject"]
+    },
+    {
+      "key": "exposure",
+      "label": "Exposure",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "New exposure value.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do change the procedural sky exposure.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

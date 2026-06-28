@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.grabbable.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Scene Object",
+  "idBase": "COND_GrabUsesDragForce",
+  "type": "GrabUsesDragForce",
+  "apiType": "Grabbable.UseDragForce",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "UseDragForce", "coverage": "Direct" }
+  ],
+  "label": "Grab Uses Drag Force",
+  "value": "target=Self",
+  "description": "Checks if grabbing uses physics drag force on this object.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} uses grab force",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["grab", "grabbable", "drag", "force", "physics", "enabled"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] }
+  ],
+  "beginnerSummary": "Check whether grabbing uses physics force.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.color_adjust.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ColorAdjustSaturation",
+  "type": "ColorAdjustSaturationValue",
+  "apiType": "ColorAdjustModifier.Saturation",
+  "apiReferences": [
+    { "type": "ColorAdjustModifier", "memberKind": "Property", "member": "Saturation", "coverage": "Direct" },
+    { "type": "LightingModifier", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Color Adjust Saturation",
+  "value": "target=Self",
+  "description": "Outputs the saturation adjustment from a ColorAdjustModifier.",
+  "status": "Ready",
+  "previewTemplate": "Color adjust saturation of ${target}",
+  "searchKeywords": ["lighting", "post process", "color adjust", "saturation", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ColorAdjustModifier object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ColorAdjustModifierObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads the saturation adjustment.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Color Adjust"]
+}

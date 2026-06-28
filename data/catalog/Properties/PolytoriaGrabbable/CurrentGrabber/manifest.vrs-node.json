@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.grabbable",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Scene Object",
+  "idBase": "PROP_CurrentGrabber",
+  "type": "CurrentGrabber",
+  "apiType": "Grabbable.Dragger",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "Dragger", "coverage": "Direct" },
+    { "type": "Player", "memberKind": "Type", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Current Grabber",
+  "value": "target=Self",
+  "description": "Reads the player currently dragging this object.",
+  "status": "Ready",
+  "returnType": "Player",
+  "previewTemplate": "${target} current grabber",
+  "searchKeywords": ["grab", "grabbable", "dragger", "player", "holder"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] }
+  ],
+  "beginnerSummary": "Value returns the player currently dragging the object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

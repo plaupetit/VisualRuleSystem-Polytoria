@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.environment",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_CurrentCamera",
+  "type": "CurrentCameraValue",
+  "apiType": "Environment.CurrentCamera",
+  "apiReferences": [
+    { "type": "Environment", "memberKind": "Property", "member": "CurrentCamera", "coverage": "Direct" },
+    { "type": "Camera", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Current Camera",
+  "value": "",
+  "description": "Reads the current gameplay camera.",
+  "status": "Ready",
+  "returnType": "SceneObject",
+  "previewTemplate": "Current camera",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "environment", "camera", "current", "client"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value returns the current camera.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Environment"]
+}

@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Characters",
+  "idBase": "PROP_CharacterAnimationSpeed",
+  "type": "CharacterAnimationSpeedValue",
+  "apiType": "CharacterModel.CurrentSpeed",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "CurrentSpeed", "coverage": "Direct" }
+  ],
+  "label": "Character Animation Speed",
+  "value": "target=Self",
+  "description": "Reads the current animation speed of a character.",
+  "status": "Ready",
+  "returnType": "Number",
+  "previewTemplate": "${target} animation speed",
+  "searchKeywords": ["character", "animation", "speed", "state", "faster", "slower"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] }
+  ],
+  "beginnerSummary": "Value returns the character animation speed.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

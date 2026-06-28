@@ -1,0 +1,77 @@
+{
+  "moduleId": "polytoria.scripts.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Script",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Scripts",
+  "idBase": "ACT_CallScriptFunction",
+  "type": "CallScriptFunction",
+  "apiType": "Script",
+  "apiReferences": [
+    { "type": "Script", "memberKind": "Method", "member": "Call", "coverage": "Direct" },
+    { "type": "ServerScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ClientScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ModuleScript", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Call Script Function",
+  "value": "target=Target;functionName=Run;argument=",
+  "description": "Calls a named function exposed by a script object.",
+  "status": "Ready",
+  "previewTemplate": "Call ${functionName} on script ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "script",
+    "call",
+    "function",
+    "invoke",
+    "server script",
+    "client script",
+    "module script"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scripts",
+  "utilityLayer": "Scripts",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Script",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Script object that exposes the function.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ScriptObject"
+      ]
+    },
+    {
+      "key": "functionName",
+      "label": "Function",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Run",
+      "description": "Function name to call inside the target script.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "argument",
+      "label": "Argument",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Optional argument passed to the function.",
+      "valueSource": "Any Value"
+    }
+  ],
+  "beginnerSummary": "Advanced: call a function inside another script object.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Scripts"
+  ]
+}

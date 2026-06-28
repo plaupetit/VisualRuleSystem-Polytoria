@@ -1,0 +1,42 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Text Input",
+  "idBase": "PROP_TextInputReadOnly",
+  "type": "TextInputReadOnlyValue",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "ReadOnly", "coverage": "Direct" }
+  ],
+  "label": "Text Input Read Only",
+  "value": "target=Self",
+  "description": "Checks whether a UI text input is locked from player editing.",
+  "status": "Ready",
+  "previewTemplate": "${target} is read only",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "readonly", "read only", "locked", "disabled"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    }
+  ],
+  "beginnerSummary": "Value tells whether a text input is locked.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

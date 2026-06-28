@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Character Appearance",
+  "idBase": "PROP_AccessoryAttachment",
+  "type": "AccessoryAttachmentValue",
+  "apiType": "Accessory.TargetAttachment",
+  "apiReferences": [
+    { "type": "Accessory", "memberKind": "Property", "member": "TargetAttachment", "coverage": "Direct" },
+    { "type": "CharacterAttachment", "memberKind": "Enum", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Accessory Attachment",
+  "value": "target=Self",
+  "description": "Reads where an accessory attaches on a character.",
+  "status": "Ready",
+  "returnType": "String",
+  "previewTemplate": "${target} attachment",
+  "searchKeywords": ["accessory", "attachment", "hat", "body", "head"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Accessory", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Accessory to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["AccessoryObject"] }
+  ],
+  "beginnerSummary": "Value returns where an accessory attaches.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

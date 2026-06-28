@@ -12,6 +12,8 @@ internal static class RecipeIconPresentation
     {
         return CatalogDataTypeNormalizer.NormalizeValueType(dataType) switch
         {
+            "Quaternion" => "ROT",
+            "ColorSeries" => "GRD",
             "Vector3" => "XYZ",
             "SceneObject" => "OBJ",
             "Color" => "RGB",
@@ -26,6 +28,8 @@ internal static class RecipeIconPresentation
     {
         return CatalogDataTypeNormalizer.NormalizeValueType(dataType) switch
         {
+            "Quaternion" => "#a78bfa",
+            "ColorSeries" => "#f472b6",
             "Vector3" => "#67e8f9",
             "SceneObject" => "#7dd3fc",
             "Color" => "#fb7185",
@@ -40,6 +44,8 @@ internal static class RecipeIconPresentation
     {
         return CatalogDataTypeNormalizer.NormalizeValueType(dataType) switch
         {
+            "Quaternion" => "#2e2448",
+            "ColorSeries" => "#3a1e36",
             "Vector3" => "#14333e",
             "SceneObject" => "#14333e",
             "Color" => "#3a1e2a",

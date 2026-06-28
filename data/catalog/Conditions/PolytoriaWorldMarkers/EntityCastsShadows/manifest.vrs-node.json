@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.worldmarkers.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Scene Objects",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Entity",
+  "idBase": "COND_EntityCastsShadows",
+  "type": "EntityCastsShadows",
+  "apiType": "Entity.CastShadows",
+  "apiReferences": [{ "type": "Entity", "memberKind": "Property", "member": "CastShadows", "coverage": "Direct" }],
+  "label": "Entity Casts Shadows",
+  "value": "target=Self",
+  "description": "Checks if an entity casts shadows.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} casts shadows",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["entity", "shadow", "lighting", "casts", "visual"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] }
+  ],
+  "beginnerSummary": "Check whether an entity casts shadows.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity"]
+}

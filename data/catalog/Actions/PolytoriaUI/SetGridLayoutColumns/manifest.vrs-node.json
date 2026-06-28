@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "UI Layout",
+  "idBase": "ACT_SetGridLayoutColumns",
+  "type": "SetGridLayoutColumns",
+  "apiType": "UIGridLayout.Columns",
+  "apiReferences": [
+    { "type": "UIGridLayout", "memberKind": "Property", "member": "Columns", "coverage": "Direct" }
+  ],
+  "label": "Set Grid Columns",
+  "value": "target=Self;columns=3",
+  "description": "Changes how many columns a UI grid layout uses.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} grid columns to ${columns}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "layout", "grid", "columns", "inventory", "menu"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Grid Layout",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "Grid Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grid layout to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIGridLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "columns", "label": "Columns", "type": "Number", "control": "Number", "required": true, "default": "3", "description": "Number of columns to use.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Do set how many columns a UI grid uses.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

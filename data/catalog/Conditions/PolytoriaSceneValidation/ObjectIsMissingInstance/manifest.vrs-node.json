@@ -1,0 +1,55 @@
+{
+  "moduleId": "polytoria.scene.validation.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "MissingInstance",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Validation",
+  "idBase": "COND_ObjectIsMissingInstance",
+  "type": "ObjectIsMissingInstance",
+  "apiType": "MissingInstance",
+  "apiReferences": [
+    { "type": "MissingInstance", "memberKind": "Type", "member": "", "coverage": "Direct" },
+    { "type": "Instance", "memberKind": "Property", "member": "ClassName", "coverage": "Partial" }
+  ],
+  "label": "Object Is Missing Instance",
+  "value": "target=Target",
+  "description": "Checks whether a target resolved to Polytoria's MissingInstance placeholder.",
+  "status": "Ready",
+  "previewTemplate": "${target} is missing",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "missing",
+    "instance",
+    "invalid",
+    "broken",
+    "object",
+    "link",
+    "validation"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scene Validation",
+  "utilityLayer": "Validation",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Object to test for MissingInstance.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "Any"
+      ]
+    }
+  ],
+  "beginnerSummary": "Check if an object reference is broken or invalid.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Validation"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Assets",
+  "idBase": "PROP_DecalImage",
+  "type": "DecalImageValue",
+  "apiType": "Decal.Image",
+  "apiReferences": [
+    { "type": "Decal", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Decal Image",
+  "value": "target=Self",
+  "description": "Outputs the image asset reference from a Decal object.",
+  "status": "Ready",
+  "previewTemplate": "${target} decal image",
+  "searchKeywords": ["decal", "image", "asset", "texture", "picture", "value"],
+  "parameters": [
+    { "key": "target", "label": "Decal", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Decal object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] }
+  ],
+  "beginnerSummary": "Value: current image of a Decal.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.audio.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Audio",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Audio",
+  "idBase": "EV_OnSoundStarted",
+  "type": "OnSoundStarted",
+  "apiType": "Sound",
+  "apiReferences": [
+    { "type": "Sound", "memberKind": "Property", "member": "Playing", "coverage": "Partial" }
+  ],
+  "label": "On Sound Started",
+  "value": "target=Self;interval=0.25",
+  "description": "Runs when a sound changes from not playing to playing.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} starts playing",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "sound", "started", "playing", "music", "watch", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Sound", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    { "key": "target", "label": "Watched Sound", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Sound object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["SoundObject"] },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the sound.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When a watched sound starts playing after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Audio", "Playback"]
+}

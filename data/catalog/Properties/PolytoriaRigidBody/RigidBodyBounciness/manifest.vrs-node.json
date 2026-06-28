@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.rigidbody.properties",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Physics",
+  "idBase": "PROP_RigidBodyBounciness",
+  "type": "RigidBodyBouncinessValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Bounciness", "coverage": "Direct" }
+  ],
+  "label": "Rigid Body Bounciness",
+  "value": "target=Self",
+  "description": "Outputs how much a RigidBody bounces after impact.",
+  "status": "Ready",
+  "previewTemplate": "Bounciness of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "bounce", "bounciness", "impact"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose bounciness will be read.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] }
+  ],
+  "beginnerSummary": "Value: use how much a rigid body bounces after impact.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

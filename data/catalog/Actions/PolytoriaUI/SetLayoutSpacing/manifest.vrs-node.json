@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "UI Layout",
+  "idBase": "ACT_SetLayoutSpacing",
+  "type": "SetLayoutSpacing",
+  "apiType": "UIHVLayout.Spacing",
+  "apiReferences": [
+    { "type": "UIHVLayout", "memberKind": "Property", "member": "Spacing", "coverage": "Direct" }
+  ],
+  "label": "Set Layout Spacing",
+  "value": "target=Self;spacing=8",
+  "description": "Changes spacing between children in a horizontal or vertical UI layout.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} layout spacing to ${spacing}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "layout", "spacing", "gap", "horizontal", "vertical"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "UI Layout",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "UI Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Layout to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIHVLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "spacing", "label": "Spacing", "type": "Number", "control": "Number", "required": true, "default": "8", "description": "Space between child UI elements.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Do set the gap between items in a UI layout.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

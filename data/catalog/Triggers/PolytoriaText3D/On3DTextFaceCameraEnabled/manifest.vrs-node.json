@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.text3d.triggers",
+  "kind": "Trigger",
+  "apiGroup": "World",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "3D Text",
+  "idBase": "EV_On3DTextFaceCameraEnabled",
+  "type": "On3DTextFaceCameraEnabled",
+  "apiType": "Text3D.FaceCamera",
+  "apiReferences": [
+    { "type": "Text3D", "memberKind": "Property", "member": "FaceCamera", "coverage": "Partial" }
+  ],
+  "label": "On 3D Text Face Camera Enabled",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when 3D text starts facing the camera.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} faces camera",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d text", "text", "face camera", "billboard", "enabled", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "3D Text", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D text object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["Text3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks face-camera mode.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when 3D text starts facing the camera.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Text Changes"]
+}

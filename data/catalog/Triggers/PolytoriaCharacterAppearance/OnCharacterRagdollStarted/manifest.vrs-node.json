@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Character Appearance",
+  "idBase": "EV_OnCharacterRagdollStarted",
+  "type": "OnCharacterRagdollStarted",
+  "apiType": "PolytorianModel.RagdollStarted",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Event", "member": "RagdollStarted", "coverage": "Direct" }
+  ],
+  "label": "On Character Ragdoll Started",
+  "value": "target=Self",
+  "description": "Starts the rule when a character starts ragdolling.",
+  "status": "Ready",
+  "fallbackMode": "Log And Skip",
+  "previewTemplate": "When ${target} starts ragdolling",
+  "searchKeywords": ["character", "ragdoll", "started", "fall", "physics", "trigger"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Character",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to listen to.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "When a character starts ragdolling.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Ragdoll"]
+}

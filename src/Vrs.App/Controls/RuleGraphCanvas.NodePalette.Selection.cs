@@ -55,6 +55,7 @@ public sealed partial class RuleGraphCanvas
     private bool ResetNodePaletteFilters()
     {
         nodePaletteCompatibleOnly = true;
+        nodePaletteApiSurfaceFilter = NodePaletteApiSurfaceFilter.Gameplay;
         nodePaletteCurrentIntentKey = "";
         nodePaletteCurrentDomainPath.Clear();
         ResetNodePaletteSelection();
@@ -65,6 +66,19 @@ public sealed partial class RuleGraphCanvas
     private bool ToggleNodePaletteCompatibleOnly()
     {
         nodePaletteCompatibleOnly = !nodePaletteCompatibleOnly;
+        ResetNodePaletteSelection();
+        InvalidateVisual();
+        return true;
+    }
+
+    private bool ToggleNodePaletteApiSurfaceFilter()
+    {
+        nodePaletteApiSurfaceFilter = nodePaletteApiSurfaceFilter switch
+        {
+            NodePaletteApiSurfaceFilter.Gameplay => NodePaletteApiSurfaceFilter.All,
+            NodePaletteApiSurfaceFilter.All => NodePaletteApiSurfaceFilter.Creator,
+            _ => NodePaletteApiSurfaceFilter.Gameplay
+        };
         ResetNodePaletteSelection();
         InvalidateVisual();
         return true;
@@ -124,6 +138,11 @@ public sealed partial class RuleGraphCanvas
     private bool HitTestNodePaletteCompatibleToggle(Point point, Rect paletteBounds)
     {
         return NodePaletteCompatibleToggleBounds(paletteBounds).Contains(point);
+    }
+
+    private bool HitTestNodePaletteApiSurfaceToggle(Point point, Rect paletteBounds)
+    {
+        return NodePaletteApiSurfaceToggleBounds(paletteBounds).Contains(point);
     }
 
     private bool HandleNodePalettePointerMoved(Point point)

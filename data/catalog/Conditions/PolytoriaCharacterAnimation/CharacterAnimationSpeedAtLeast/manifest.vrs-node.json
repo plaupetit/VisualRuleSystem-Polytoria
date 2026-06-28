@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.character.animation.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Characters",
+  "idBase": "COND_CharacterAnimationSpeedAtLeast",
+  "type": "CharacterAnimationSpeedAtLeast",
+  "apiType": "CharacterModel.CurrentSpeed",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "CurrentSpeed", "coverage": "Direct" }
+  ],
+  "label": "Character Animation Speed At Least",
+  "value": "target=Self;speed=1",
+  "description": "Checks if the character animation speed is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} animation speed is at least ${speed}",
+  "searchKeywords": ["character", "animation", "speed", "rate", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "speed", "label": "Minimum Speed", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Minimum animation speed.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check if a character animation is fast enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

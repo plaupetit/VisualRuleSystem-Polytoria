@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Climb",
+  "idBase": "PROP_TrussClimbSpeed",
+  "type": "TrussClimbSpeedValue",
+  "apiType": "Truss.ClimbSpeed",
+  "apiReferences": [
+    { "type": "Truss", "memberKind": "Property", "member": "ClimbSpeed", "coverage": "Direct" }
+  ],
+  "label": "Truss Climb Speed",
+  "value": "target=Self",
+  "description": "Reads how fast players climb a truss.",
+  "status": "Ready",
+  "returnType": "Number",
+  "previewTemplate": "${target} climb speed",
+  "searchKeywords": ["truss", "climb", "ladder", "speed", "movement"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Truss", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Truss to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["TrussObject"] }
+  ],
+  "beginnerSummary": "Value returns truss climb speed.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Climb"]
+}

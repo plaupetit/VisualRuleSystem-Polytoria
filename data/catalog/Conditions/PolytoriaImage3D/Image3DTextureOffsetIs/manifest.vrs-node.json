@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.image3d",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "World",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "3D Image Texture",
+  "idBase": "COND_3DImageTextureOffsetIs",
+  "type": "Image3DTextureOffsetIs",
+  "apiType": "Image3D.TextureOffset",
+  "apiReferences": [
+    { "type": "Image3D", "memberKind": "Property", "member": "TextureOffset", "coverage": "Direct" }
+  ],
+  "label": "3D Image Texture Offset Is",
+  "value": "target=Self;x=0;y=0",
+  "description": "Checks if a 3D image texture offset matches the expected X and Y values.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} texture offset is ${x}, ${y}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["3d image", "image", "texture", "offset", "scroll", "match", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria 3D Image",
+  "utilityLayer": "Scene",
+  "parameters": [
+    { "key": "target", "label": "3D Image", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D image object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["Image3DObject"], "acceptedSceneRoots": ["World"] },
+    { "key": "x", "label": "X Offset", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Expected horizontal texture offset.", "valueSource": "Number / Manual Value" },
+    { "key": "y", "label": "Y Offset", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Expected vertical texture offset.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check if a 3D image texture is shifted to a specific offset.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "3D Image Texture"]
+}

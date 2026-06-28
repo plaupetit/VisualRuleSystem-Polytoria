@@ -13,6 +13,7 @@ project-relative JSON files with the standalone VisualRuleSystem app:
 - pending-commands.json: commands queued by the visual app
 - command-results.json: visible result of the last manual apply
 - status.json: quick diagnostics for permission and parsing failures
+- app-state.json: VisualRuleSystem workspace summary for status diagnostics
 - command-history.jsonl: one JSON result line per handled command id
 
 By default, Creator only applies commands when the user presses
@@ -34,6 +35,7 @@ local SCENE_EVENTS_DIR = BRIDGE_DIR .. "/scene-events"
 local SCENE_EVENTS_MANIFEST_PATH = SCENE_EVENTS_DIR .. "/manifest.json"
 local SETTINGS_PATH = BRIDGE_DIR .. "/settings.json"
 local APP_HEARTBEAT_PATH = BRIDGE_DIR .. "/app-heartbeat.json"
+local APP_STATE_PATH = BRIDGE_DIR .. "/app-state.json"
 local SNAPSHOT_REQUEST_PATH = BRIDGE_DIR .. "/snapshot-request.json"
 local PENDING_COMMANDS_PATH = BRIDGE_DIR .. "/pending-commands.json"
 local COMMAND_RESULTS_PATH = BRIDGE_DIR .. "/command-results.json"
@@ -378,6 +380,52 @@ local function readAppHeartbeat()
 	end
 
 	return true, "app heartbeat active", payload
+end
+
+local function appendSummaryField(parts, label, value)
+	if value == nil then
+		return
+	end
+
+	local text = tostring(value)
+	if text ~= "" then
+		table.insert(parts, label .. "=" .. text)
+	end
+end
+
+local function readAppStateSummary()
+	local text = readText(APP_STATE_PATH)
+	if text == nil or text == "" then
+		return nil
+	end
+
+	local payload = jsonDecode(text)
+	if payload == nil or type(payload) ~= "table" then
+		return "app-state parse failed"
+	end
+
+	local parts = {}
+	local scriptText = tostring(payload.scriptKind or "")
+	local creatorScriptName = tostring(payload.creatorScriptName or "")
+	if creatorScriptName ~= "" then
+		scriptText = scriptText == "" and creatorScriptName or (scriptText .. " " .. creatorScriptName)
+	end
+
+	appendSummaryField(parts, "project", payload.activeProjectName)
+	appendSummaryField(parts, "mode", payload.projectUiMode)
+	appendSummaryField(parts, "script", scriptText)
+	appendSummaryField(parts, "file", payload.projectRelativeScriptPath)
+	appendSummaryField(parts, "selected", payload.selectedCreatorObjectPath)
+	appendSummaryField(parts, "deployParent", payload.deployParentPath)
+	appendSummaryField(parts, "nodes", payload.nodeCount)
+	appendSummaryField(parts, "validation", tostring(payload.validationErrorCount or 0) .. " error(s), " .. tostring(payload.validationWarningCount or 0) .. " warning(s)")
+	appendSummaryField(parts, "beat", payload.bridgeBeatText)
+
+	if #parts == 0 then
+		return "app-state present"
+	end
+
+	return table.concat(parts, "; ")
 end
 
 local function handleSnapshotRequest(quiet)
@@ -2638,12 +2686,20 @@ local function printBridgeStatus()
 	print("[Visual Bridge] Scene events manifest path: " .. SCENE_EVENTS_MANIFEST_PATH)
 	print("[Visual Bridge] Settings path: " .. SETTINGS_PATH)
 	print("[Visual Bridge] App heartbeat path: " .. APP_HEARTBEAT_PATH)
+	print("[Visual Bridge] App state path: " .. APP_STATE_PATH)
 	print("[Visual Bridge] Snapshot request path: " .. SNAPSHOT_REQUEST_PATH)
 	print("[Visual Bridge] Pending commands path: " .. PENDING_COMMANDS_PATH)
 	print("[Visual Bridge] Command results path: " .. COMMAND_RESULTS_PATH)
 	print("[Visual Bridge] Status path: " .. STATUS_PATH)
 	print("[Visual Bridge] History path: " .. COMMAND_HISTORY_PATH)
-	writeStatus("status_printed", "Bridge paths printed in Creator console.", nil)
+	local appStateSummary = readAppStateSummary()
+	if appStateSummary ~= nil then
+		print("[Visual Bridge] App state: " .. appStateSummary)
+	end
+	writeStatus("status_printed", "Bridge paths printed in Creator console.", {
+		appStatePath = APP_STATE_PATH,
+		appStateSummary = appStateSummary,
+	})
 end
 
 local function toggleAutoBridge()

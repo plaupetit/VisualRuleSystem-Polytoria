@@ -1,0 +1,44 @@
+{
+  "moduleId": "polytoria.ui.scroll",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "Scroll View",
+  "idBase": "ACT_SetScrollViewMode",
+  "type": "SetScrollViewMode",
+  "apiType": "UIScrollView",
+  "apiReferences": [
+    { "type": "UIScrollView", "memberKind": "Property", "member": "HorizontalScrollMode", "coverage": "Direct" },
+    { "type": "UIScrollView", "memberKind": "Property", "member": "VerticalScrollMode", "coverage": "Direct" },
+    { "type": "UIScrollMode", "memberKind": "Enum", "coverage": "Direct" }
+  ],
+  "label": "Set Scroll View Mode",
+  "value": "target=Self;axis=Both;mode=Auto",
+  "description": "Changes horizontal or vertical scrolling behavior on a scroll view.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} ${axis} scroll to ${mode}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "scroll", "scrollview", "horizontal", "vertical", "overflow"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Scroll View",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "Scroll View", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Scroll view to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIScrollViewObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "axis", "label": "Axis", "type": "String", "control": "Choice", "required": true, "default": "Both", "description": "Which scroll direction to change.", "valueSource": "String / Choice", "options": ["Both", "Horizontal", "Vertical"] },
+    { "key": "mode", "label": "Mode", "type": "String", "control": "Choice", "required": true, "default": "Auto", "description": "Scroll bar behavior.", "valueSource": "String / Choice", "options": ["Disabled", "Auto", "AlwaysShow", "NeverShow"] }
+  ],
+  "beginnerSummary": "Do control how a scroll view shows horizontal or vertical scrolling.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Scroll View"]
+}

@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.rigidbody.properties",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Physics",
+  "idBase": "PROP_RigidBodyGravityEnabled",
+  "type": "RigidBodyGravityEnabledValue",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "UseGravity", "coverage": "Direct" }
+  ],
+  "label": "Rigid Body Gravity Enabled",
+  "value": "target=Self",
+  "description": "Outputs true when a RigidBody uses gravity.",
+  "status": "Ready",
+  "previewTemplate": "Gravity enabled on ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "gravity", "fall"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose gravity setting will be read.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] }
+  ],
+  "beginnerSummary": "Value: use whether a rigid body is affected by gravity.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

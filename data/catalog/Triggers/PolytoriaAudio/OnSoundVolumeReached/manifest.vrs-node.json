@@ -1,0 +1,36 @@
+{
+  "moduleId": "polytoria.audio.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Audio",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Events",
+  "subcategory": "Audio",
+  "idBase": "EV_OnSoundVolumeReached",
+  "type": "OnSoundVolumeReached",
+  "apiType": "Sound",
+  "apiReferences": [
+    { "type": "Sound", "memberKind": "Property", "member": "Volume", "coverage": "Partial" }
+  ],
+  "label": "On Sound Volume Reached",
+  "value": "target=Self;volume=1;interval=0.25",
+  "description": "Runs when a sound volume becomes high enough.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} volume reaches ${volume}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "sound", "volume", "loud", "reached", "watch", "trigger"],
+  "selectorHints": [
+    { "key": "target", "label": "Watched Sound", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    { "key": "target", "label": "Watched Sound", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Sound object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["SoundObject"] },
+    { "key": "volume", "label": "Volume", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Volume that starts the connected nodes.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often the script checks the sound.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "When a watched sound becomes loud enough after the script starts, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Audio", "Settings"]
+}

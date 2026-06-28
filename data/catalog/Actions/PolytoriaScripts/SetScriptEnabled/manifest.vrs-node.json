@@ -1,0 +1,67 @@
+{
+  "moduleId": "polytoria.scripts.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Script",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Scripts",
+  "idBase": "ACT_SetScriptEnabled",
+  "type": "SetScriptEnabled",
+  "apiType": "Script",
+  "apiReferences": [
+    { "type": "Script", "memberKind": "Property", "member": "IsEnabled", "coverage": "Direct" },
+    { "type": "ServerScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ClientScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ModuleScript", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Script Enabled",
+  "value": "target=Target;enabled=true",
+  "description": "Enables or disables a script object at runtime.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} script enabled ${enabled}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "script",
+    "enabled",
+    "disable",
+    "server script",
+    "client script",
+    "module script",
+    "runtime"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scripts",
+  "utilityLayer": "Scripts",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Script",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Script object to enable or disable.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ScriptObject"
+      ]
+    },
+    {
+      "key": "enabled",
+      "label": "Enabled",
+      "type": "Boolean",
+      "control": "Checkbox",
+      "required": true,
+      "default": "true",
+      "description": "Checked means the script should be enabled.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Do turn a script object on or off.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Scripts"
+  ]
+}

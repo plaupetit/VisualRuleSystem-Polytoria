@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.playerdefaults.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Player Defaults",
+  "idBase": "COND_MaxHealthAtLeast",
+  "type": "PlayerDefaultAtLeast",
+  "apiType": "PlayerDefaults.MaxHealth",
+  "apiReferences": [
+    { "type": "PlayerDefaults", "memberKind": "Property", "member": "MaxHealth", "coverage": "Direct" }
+  ],
+  "label": "MaxHealth At Least",
+  "value": "propertyName=MaxHealth;value=100",
+  "description": "Checks if the default max health is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If MaxHealth is at least ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["player", "defaults", "health", "max health", "hp", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "MaxHealth", "description": "PlayerDefaults property to check.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] },
+    { "key": "value", "label": "Minimum Value", "type": "Number", "control": "Number", "required": true, "default": "100", "description": "Minimum default value.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether the default max health is high enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Health"]
+}

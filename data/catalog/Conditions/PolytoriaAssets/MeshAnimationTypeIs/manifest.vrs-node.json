@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Mesh Animation",
+  "idBase": "COND_MeshAnimationTypeIs",
+  "type": "MeshAnimationTypeIs",
+  "apiType": "MeshAnimationAsset.AnimationType",
+  "apiReferences": [
+    { "type": "MeshAnimationAsset", "memberKind": "Property", "member": "AnimationType", "coverage": "Direct" }
+  ],
+  "label": "Mesh Animation Type Is",
+  "value": "target=Self;animationType=Normal;caseSensitive=true",
+  "description": "Checks if a MeshAnimationAsset uses the expected playback type.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} animation type is ${animationType}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["mesh", "animation", "type", "loop", "oneshot", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Mesh Animation Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "MeshAnimationAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAnimationAssetObject"] },
+    { "key": "animationType", "label": "Animation Type", "type": "String", "control": "Choice", "required": true, "default": "Normal", "description": "Expected mesh animation playback mode.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Normal", "Looped", "PingPong", "OneShot", "OneShotImpluse"] },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check whether a mesh animation asset uses a playback type.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Mesh Animation"]
+}

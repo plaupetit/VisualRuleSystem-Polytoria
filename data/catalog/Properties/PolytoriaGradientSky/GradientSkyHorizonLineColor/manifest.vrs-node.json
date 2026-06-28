@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.gradient_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_GradientSkyHorizonLineColor",
+  "type": "GradientSkyHorizonLineColorValue",
+  "apiType": "GradientSky.HorizonLineColor",
+  "apiReferences": [
+    { "type": "GradientSky", "memberKind": "Property", "member": "HorizonLineColor", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Gradient Sky Horizon Line Color",
+  "value": "target=Self",
+  "description": "Outputs the horizon line color from a GradientSky object.",
+  "status": "Ready",
+  "previewTemplate": "Horizon line color of ${target}",
+  "searchKeywords": ["sky", "gradient", "horizon", "line", "color", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientSky object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["GradientSkyObject"] }
+  ],
+  "beginnerSummary": "Value reads the horizon line color.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sky Horizon"]
+}

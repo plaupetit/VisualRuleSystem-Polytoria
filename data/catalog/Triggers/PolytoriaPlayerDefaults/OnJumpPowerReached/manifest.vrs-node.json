@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.playerdefaults.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Player Defaults",
+  "runtimeFamily": "Server",
+  "category": "Triggers",
+  "subcategory": "Player Defaults",
+  "idBase": "EV_OnJumpPowerReached",
+  "type": "OnPlayerDefaultReached",
+  "apiType": "PlayerDefaults.JumpPower",
+  "apiReferences": [
+    { "type": "PlayerDefaults", "memberKind": "Property", "member": "JumpPower", "coverage": "Partial" }
+  ],
+  "label": "On JumpPower Reached",
+  "value": "propertyName=JumpPower;value=8;interval=0.25",
+  "description": "Starts when the default jump power reaches a threshold.",
+  "status": "Ready",
+  "previewTemplate": "When JumpPower reaches ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["player", "defaults", "jump", "power", "movement", "threshold", "watcher"],
+  "parameters": [
+    { "key": "propertyName", "label": "Default Property", "type": "String", "control": "Choice", "required": true, "default": "JumpPower", "description": "PlayerDefaults property to watch.", "valueSource": "Suggested Value", "allowCustom": false, "options": ["WalkSpeed", "JumpPower", "SprintSpeed", "MaxHealth", "RespawnTime", "Stamina"] },
+    { "key": "value", "label": "Reached Value", "type": "Number", "control": "Number", "required": true, "default": "8", "description": "Value threshold to wait for.", "valueSource": "Number / Manual Value" },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks this default.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when the default jump power becomes high enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Default Changes"]
+}

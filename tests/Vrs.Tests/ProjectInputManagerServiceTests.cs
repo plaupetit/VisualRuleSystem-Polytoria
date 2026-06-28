@@ -1,12 +1,27 @@
 using System.Text.Json;
 using Vrs.Core.Persistence;
 using Vrs.Core.ProjectInputs;
+using Vrs.Core.RuntimeEvents;
 using Vrs.Graph.Model;
 
 namespace Vrs.Tests;
 
 public sealed class ProjectInputManagerServiceTests
 {
+    [Fact]
+    public void InputManagerRuntimeEventPath_IsNestedUnderUserInputNetworkEventFolder()
+    {
+        Assert.Equal(
+            "World/Hidden/VRS/Events/User Input (NetworkEvent)/Input Manager",
+            VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath);
+        Assert.Equal(
+            VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath,
+            VrsInputPresetCatalog.RuntimeInputEventFolderPath);
+        Assert.Equal(
+            $"{VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath}/Jump",
+            VrsInputPresetCatalog.ToChoice("Jump", VrsInputActionType.Button, "Preset").EventPath);
+    }
+
     [Fact]
     public async Task EnsurePresetActions_CreatesStandardPresetsWithoutOverwritingExistingActions()
     {
@@ -81,7 +96,7 @@ public sealed class ProjectInputManagerServiceTests
 
             Assert.Equal("Project+Preset", jump.Source);
             Assert.Equal("Project", custom.Source);
-            Assert.Equal("World/Hidden/VRS/Events/Input/Jump", jump.EventPath);
+            Assert.Equal($"{VrsInputPresetCatalog.RuntimeInputEventFolderPath}/Jump", jump.EventPath);
             Assert.Contains(choices, choice => choice.Name == "Interact" && choice.Source == "Preset");
         }
         finally

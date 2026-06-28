@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "Text Input",
+  "idBase": "EV_OnTextInputSubmitted",
+  "type": "OnTextInputSubmitted",
+  "apiType": "UITextInput.Submitted",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Event", "member": "Submitted", "coverage": "Direct" }
+  ],
+  "label": "On Text Input Submitted",
+  "value": "target=Self",
+  "description": "Starts when the player submits a UI text input.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} is submitted",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "text input", "submit", "submitted", "enter", "form", "event"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Text Input",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Text input object to watch.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["UITextInputObject"],
+      "acceptedSceneRoots": ["PlayerGUI", "CoreUI"]
+    }
+  ],
+  "beginnerSummary": "When the player submits a text input field.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

@@ -8,6 +8,10 @@
   "idBase": "PROP_InputVectorY",
   "type": "InputVectorY",
   "apiType": "Number",
+  "apiReferences": [
+    { "type": "InputService", "memberKind": "Method", "member": "GetVector2", "coverage": "Direct" },
+    { "type": "InputActionVector2", "memberKind": "Type", "coverage": "Partial" }
+  ],
   "label": "Input Vector Y",
   "value": "actionName=Vertical",
   "description": "Outputs the Y component of a named Vector2 input action.",

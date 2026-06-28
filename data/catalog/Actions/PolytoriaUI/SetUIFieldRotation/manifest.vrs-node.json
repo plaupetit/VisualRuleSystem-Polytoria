@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.ui.field",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "UI Field",
+  "idBase": "ACT_SetUIFieldRotation",
+  "type": "SetUIFieldRotation",
+  "apiType": "UIField.Rotation",
+  "apiReferences": [
+    { "type": "UIField", "memberKind": "Property", "member": "Rotation", "coverage": "Direct" }
+  ],
+  "label": "Set UI Rotation",
+  "value": "target=Self;rotation=0",
+  "description": "Changes the rotation of a UI field.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} rotation to ${rotation}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "field", "rotation", "rotate", "angle", "turn"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "UI Field",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "UI Field", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI field to rotate.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "rotation", "label": "Rotation", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Rotation angle to apply.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Do rotate a UI field.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Field"]
+}

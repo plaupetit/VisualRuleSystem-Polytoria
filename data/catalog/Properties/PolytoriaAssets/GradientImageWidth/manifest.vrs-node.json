@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Images",
+  "idBase": "PROP_GradientImageWidth",
+  "type": "GradientImageWidthValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "GradientImageAsset", "memberKind": "Property", "member": "Width", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Gradient Image Width",
+  "value": "target=Self",
+  "description": "Outputs the generated width stored on a GradientImageAsset.",
+  "status": "Ready",
+  "previewTemplate": "${target} gradient width",
+  "searchKeywords": ["gradient", "image", "asset", "width", "size"],
+  "parameters": [
+    { "key": "target", "label": "Gradient Image Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientImageAsset to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageAssetObject"] }
+  ],
+  "beginnerSummary": "Value: read the generated width from a gradient image asset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

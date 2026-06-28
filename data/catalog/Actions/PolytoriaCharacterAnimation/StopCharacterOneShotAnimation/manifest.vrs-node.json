@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Characters",
+  "idBase": "ACT_StopCharacterOneShotAnimation",
+  "type": "StopCharacterOneShotAnimation",
+  "apiType": "Animator.StopOneShotAnimation",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "Animator", "coverage": "Direct" },
+    { "type": "Animator", "memberKind": "Method", "member": "StopOneShotAnimation", "coverage": "Direct" }
+  ],
+  "label": "Stop Character One Shot",
+  "value": "target=Self",
+  "description": "Stops the current one-shot character animation.",
+  "status": "Ready",
+  "previewTemplate": "Stop one-shot animation on ${target}",
+  "searchKeywords": ["character", "animation", "animator", "stop", "one shot", "emote"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to stop animating.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] }
+  ],
+  "beginnerSummary": "Do stop the current short character animation.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

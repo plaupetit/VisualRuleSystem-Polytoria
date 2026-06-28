@@ -108,9 +108,9 @@ public sealed partial class ChoicePickerDisplayItemViewModel : ObservableObject
     public string IconLabel => Choice.IconLabel;
     public string IconAccentHex => Choice.IconAccentHex;
     public string IconBackgroundHex => Choice.IconBackgroundHex;
-    public string RowBackgroundHex => IsKeyboardSelected ? "#225f93" : IsCurrentValue ? "#263545" : "#2b2b2b";
-    public string PrimaryForegroundHex => IsKeyboardSelected ? "#ffffff" : "#d8dde4";
-    public string SecondaryForegroundHex => IsKeyboardSelected ? "#dcecff" : "#aeb8c4";
+    public string RowBackgroundHex => PickerRowPresentation.RowBackgroundHex(IsKeyboardSelected, IsCurrentValue);
+    public string PrimaryForegroundHex => PickerRowPresentation.PrimaryForegroundHex(IsKeyboardSelected);
+    public string SecondaryForegroundHex => PickerRowPresentation.SecondaryForegroundHex(IsKeyboardSelected);
 
     [ObservableProperty]
     private bool isKeyboardSelected;
@@ -233,9 +233,9 @@ public sealed partial class ChoicePickerBrowserRowViewModel : ObservableObject
     public string IconAccentHex { get; }
     public string IconBackgroundHex { get; }
     public string RightLabel => IsFolder ? ">" : IconLabel;
-    public string RowBackgroundHex => IsKeyboardSelected ? "#225f93" : IsCurrentValue ? "#263545" : "#2b2b2b";
-    public string PrimaryForegroundHex => IsKeyboardSelected ? "#ffffff" : "#d8dde4";
-    public string SecondaryForegroundHex => IsKeyboardSelected ? "#dcecff" : "#aeb8c4";
+    public string RowBackgroundHex => PickerRowPresentation.RowBackgroundHex(IsKeyboardSelected, IsCurrentValue);
+    public string PrimaryForegroundHex => PickerRowPresentation.PrimaryForegroundHex(IsKeyboardSelected);
+    public string SecondaryForegroundHex => PickerRowPresentation.SecondaryForegroundHex(IsKeyboardSelected);
 
     [ObservableProperty]
     private bool isKeyboardSelected;

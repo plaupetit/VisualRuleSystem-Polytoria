@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionFromEuler",
+  "type": "QuaternionFromEuler",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "Euler", "coverage": "Direct" }
+  ],
+  "label": "Rotation From Euler",
+  "value": "euler=0,0,0",
+  "description": "Creates a quaternion rotation from easy-to-read Euler angles.",
+  "status": "Ready",
+  "previewTemplate": "Rotation from Euler ${euler}",
+  "searchKeywords": ["quaternion", "rotation", "euler", "angle", "orientation", "turn", "pitch", "yaw", "roll"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "euler", "label": "Euler Angles", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,0,0", "description": "Rotation angles in degrees as X, Y, Z.", "valueSource": "Euler Rotation" }
+  ],
+  "beginnerSummary": "Value: make a rotation from normal X/Y/Z angles.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

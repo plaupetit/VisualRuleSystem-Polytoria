@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Assets",
+  "idBase": "PROP_AssetReference",
+  "type": "AssetReferenceValue",
+  "apiType": "BaseAsset",
+  "apiReferences": [
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Asset Reference",
+  "value": "target=Self",
+  "description": "Outputs an existing Polytoria asset object so it can be passed into image, audio, mesh, or font fields.",
+  "status": "Ready",
+  "previewTemplate": "Asset ${target}",
+  "searchKeywords": ["asset", "reference", "baseasset", "resource", "media"],
+  "parameters": [
+    { "key": "target", "label": "Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Asset object to output.", "valueSource": "Target Context", "acceptedObjectGroups": ["AssetObject"] }
+  ],
+  "beginnerSummary": "Value: use an existing asset object as a source.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "References"]
+}

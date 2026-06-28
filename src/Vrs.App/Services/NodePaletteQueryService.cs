@@ -14,7 +14,8 @@ public sealed class NodePaletteQueryService
         NodePaletteBrowserQueryOptions options)
     {
         var searchActive = !string.IsNullOrWhiteSpace(options.Search);
-        var candidates = BuildCandidates(entries, options.IncompatibilityReason);
+        var candidates = BuildCandidates(entries, options.IncompatibilityReason)
+            .Where(candidate => MatchesApiSurface(candidate.Entry, options.ApiSurfaceFilter));
 
         if (searchActive)
         {
@@ -64,12 +65,24 @@ public sealed class NodePaletteQueryService
         NodePaletteQueryOptions options,
         int maxDomains = 6)
     {
-        return QueryInternal(entries, options with { DomainFilter = "", CompatibleOnly = false }, "")
+        var searchActive = !string.IsNullOrWhiteSpace(options.Search);
+        var matches = QueryInternal(entries, options with { DomainFilter = "", CompatibleOnly = false }, "")
             .Where(entry => !options.CompatibleOnly || entry.IsCompatible)
-            .GroupBy(entry => entry.DomainLabel, StringComparer.OrdinalIgnoreCase)
-            .OrderByDescending(group => group.Count())
-            .ThenBy(group => group.Key, StringComparer.OrdinalIgnoreCase)
-            .Take(Math.Max(0, maxDomains))
+            .Select((entry, index) => new { Entry = entry, Index = index })
+            .ToList();
+
+        var groups = matches.GroupBy(item => item.Entry.DomainLabel, StringComparer.OrdinalIgnoreCase);
+        var orderedGroups = searchActive
+            ? groups
+                .OrderBy(group => group.Min(item => item.Index))
+                .ThenByDescending(group => group.Count())
+                .ThenBy(group => group.Key, StringComparer.OrdinalIgnoreCase)
+            : groups
+                .OrderByDescending(group => group.Count())
+                .ThenBy(group => group.Key, StringComparer.OrdinalIgnoreCase);
+
+        return orderedGroups
+            .Take(searchActive ? int.MaxValue : Math.Max(0, maxDomains))
             .Select(group => group.Key)
             .ToList();
     }
@@ -236,6 +249,21 @@ public sealed class NodePaletteQueryService
         {
             SearchScore = result.IsMatch ? result.Score : 0,
             MatchSummary = result.MatchSummary
+        };
+    }
+
+    private static bool MatchesApiSurface(NodeCatalogEntry entry, NodePaletteApiSurfaceFilter filter)
+    {
+        if (filter == NodePaletteApiSurfaceFilter.All)
+        {
+            return true;
+        }
+
+        var surface = NodeCatalogApiSurfaceService.GetEntrySurface(entry);
+        return filter switch
+        {
+            NodePaletteApiSurfaceFilter.Creator => surface == NodeApiSurface.Creator,
+            _ => surface == NodeApiSurface.Gameplay
         };
     }
 

@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.animation.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Characters",
+  "idBase": "COND_CurrentCharacterAnimationIs",
+  "type": "CurrentCharacterAnimationIs",
+  "apiType": "Animator.CurrentAnimation",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "Animator", "coverage": "Direct" },
+    { "type": "Animator", "memberKind": "Property", "member": "CurrentAnimation", "coverage": "Direct" }
+  ],
+  "label": "Current Character Animation Is",
+  "value": "target=Self;animation=Idle",
+  "description": "Checks if a character animation controller is currently playing the expected animation.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} animation is ${animation}",
+  "searchKeywords": ["character", "animation", "animator", "current", "playing", "idle", "run"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] },
+    { "key": "animation", "label": "Animation", "type": "String", "control": "Text", "required": true, "default": "Idle", "description": "Animation key to compare.", "valueSource": "String / Manual Value" }
+  ],
+  "beginnerSummary": "Check which looping animation a character is playing.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

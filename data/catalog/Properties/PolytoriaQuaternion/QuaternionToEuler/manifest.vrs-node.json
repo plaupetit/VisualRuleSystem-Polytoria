@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionToEuler",
+  "type": "QuaternionToEuler",
+  "apiType": "Vector3",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "ToEuler", "coverage": "Direct" }
+  ],
+  "label": "Rotation To Euler",
+  "value": "rotation=0,0,0,1",
+  "description": "Converts a quaternion rotation into readable X/Y/Z Euler angles.",
+  "status": "Ready",
+  "previewTemplate": "Euler angles from rotation",
+  "searchKeywords": ["quaternion", "rotation", "euler", "convert", "angle", "orientation", "vector3"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "rotation", "label": "Rotation", "type": "Quaternion", "control": "Text", "required": true, "default": "0,0,0,1", "description": "Quaternion rotation to convert.", "valueSource": "Rotation Value" }
+  ],
+  "beginnerSummary": "Value: convert a rotation into normal X/Y/Z angles.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

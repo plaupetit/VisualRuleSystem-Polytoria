@@ -194,6 +194,7 @@ public partial class MainWindowViewModel
 
     private void ApplySceneDeploymentTarget(SceneObject sceneObject)
     {
+        SelectedCreatorObjectPath = sceneObject.Path;
         if (IsScriptSceneObject(sceneObject))
         {
             BridgeParentPath = DeploymentParentPath(sceneObject);

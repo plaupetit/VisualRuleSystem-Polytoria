@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.rigidbody.properties",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Physics",
+  "idBase": "PROP_RigidBodyFriction",
+  "type": "RigidBodyFrictionValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Friction", "coverage": "Direct" }
+  ],
+  "label": "Rigid Body Friction",
+  "value": "target=Self",
+  "description": "Outputs how much a RigidBody resists sliding.",
+  "status": "Ready",
+  "previewTemplate": "Friction of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "friction", "slide", "slippery"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose friction will be read.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] }
+  ],
+  "beginnerSummary": "Value: use how much a rigid body resists sliding.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

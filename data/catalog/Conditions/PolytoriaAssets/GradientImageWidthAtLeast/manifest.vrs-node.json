@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Images",
+  "idBase": "COND_GradientImageWidthAtLeast",
+  "type": "GradientImageWidthAtLeast",
+  "apiType": "GradientImageAsset.Width",
+  "apiReferences": [
+    { "type": "GradientImageAsset", "memberKind": "Property", "member": "Width", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Gradient Image Width At Least",
+  "value": "target=Self;width=256",
+  "description": "Checks if a GradientImageAsset width is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} width is at least ${width}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["gradient", "image", "asset", "width", "size", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Image Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientImageAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageAssetObject"] },
+    { "key": "width", "label": "Minimum Width", "type": "Number", "control": "Number", "required": true, "default": "256", "description": "Minimum expected image width.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a generated gradient image is wide enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

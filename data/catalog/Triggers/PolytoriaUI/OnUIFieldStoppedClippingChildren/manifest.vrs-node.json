@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.ui.field.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Triggers",
+  "subcategory": "UI Field",
+  "idBase": "EV_OnUIFieldStoppedClippingChildren",
+  "type": "OnUIFieldStoppedClippingChildren",
+  "apiType": "UIField.ClipDescendants",
+  "apiReferences": [{ "type": "UIField", "memberKind": "Property", "member": "ClipDescendants", "coverage": "Partial" }],
+  "label": "On UI Stopped Clipping Children",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a UI field stops clipping child UI.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} stops clipping children",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "field", "clip", "children", "overflow", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "UI Field", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI field to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the UI field.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a UI field stops clipping children.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Field Changes"]
+}

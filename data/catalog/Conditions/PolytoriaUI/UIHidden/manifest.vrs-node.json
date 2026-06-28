@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "UI",
+  "idBase": "COND_UIHidden",
+  "type": "UIHidden",
+  "apiType": "GUI.Visible",
+  "apiReferences": [
+    { "type": "GUI", "memberKind": "Property", "member": "Visible", "coverage": "Direct" }
+  ],
+  "label": "UI Is Hidden",
+  "value": "target=Self",
+  "description": "Checks if a UI object is currently hidden.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} is hidden",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "hidden", "invisible", "hide", "interface"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UI object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Check whether a UI object is hidden.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI"]
+}

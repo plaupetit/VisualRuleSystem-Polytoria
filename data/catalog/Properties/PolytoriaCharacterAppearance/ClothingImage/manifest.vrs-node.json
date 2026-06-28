@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Character Appearance",
+  "idBase": "PROP_ClothingImage",
+  "type": "ClothingImageValue",
+  "apiType": "Clothing.Image",
+  "apiReferences": [
+    { "type": "Clothing", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Clothing Image",
+  "value": "target=Self",
+  "description": "Reads the image used by a clothing object.",
+  "status": "Ready",
+  "returnType": "String",
+  "previewTemplate": "${target} clothing image",
+  "searchKeywords": ["clothing", "shirt", "pants", "image", "outfit", "avatar"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Clothing", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Clothing object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["ClothingObject"] }
+  ],
+  "beginnerSummary": "Value returns a clothing image.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

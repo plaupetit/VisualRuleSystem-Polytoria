@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.bindable.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input/Network",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Local Events",
+  "idBase": "PROP_TriggeringBindablePayload",
+  "type": "TriggeringBindablePayload",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "BindableEvent", "memberKind": "Event", "member": "Invoked", "coverage": "Direct" }
+  ],
+  "label": "Bindable Event Payload Text",
+  "value": "",
+  "description": "Outputs the first payload value received by On Bindable Event as text.",
+  "status": "Ready",
+  "previewTemplate": "Bindable event payload text",
+  "searchKeywords": ["bindable", "bindableevent", "local event", "payload", "message", "text", "same boundary"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "beginnerSummary": "Value: read text sent by a local BindableEvent.",
+  "surface": "UserFacing",
+  "palettePath": ["Flow & Timing", "Local Events"]
+}

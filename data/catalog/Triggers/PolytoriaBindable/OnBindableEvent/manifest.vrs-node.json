@@ -1,0 +1,39 @@
+{
+  "moduleId": "polytoria.bindable.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input/Network",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Local Events",
+  "idBase": "EV_OnBindableEvent",
+  "type": "OnBindableEvent",
+  "apiType": "BindableEvent",
+  "apiReferences": [
+    { "type": "BindableEvent", "memberKind": "Event", "member": "Invoked", "coverage": "Direct" }
+  ],
+  "label": "On Bindable Event",
+  "value": "target=Self",
+  "description": "Starts the rule when a same-side BindableEvent relay is invoked.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} is invoked",
+  "searchKeywords": ["bindable", "bindableevent", "local event", "same boundary", "invoked", "trigger", "signal", "message"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Bindable Event",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Bindable Event", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "BindableEvent object to listen to.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] }
+  ],
+  "beginnerSummary": "Trigger: react when a local same-side BindableEvent fires.",
+  "surface": "UserFacing",
+  "palettePath": ["Flow & Timing", "Local Events"]
+}

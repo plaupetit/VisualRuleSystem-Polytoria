@@ -1,0 +1,50 @@
+{
+  "moduleId": "polytoria.inventory.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Inventory",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Inventory",
+  "idBase": "PROP_PlayerInventory",
+  "type": "PlayerInventory",
+  "apiType": "Inventory",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Inventory", "coverage": "Direct" },
+    { "type": "Inventory", "memberKind": "Type", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Player Inventory",
+  "value": "player=",
+  "description": "Outputs the inventory container owned by a player.",
+  "status": "Ready",
+  "previewTemplate": "Inventory of player",
+  "searchKeywords": [
+    "inventory",
+    "tool",
+    "backpack",
+    "player",
+    "item",
+    "equipment"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Tools",
+  "utilityLayer": "Tools",
+  "parameters": [
+    {
+      "key": "player",
+      "label": "Player",
+      "type": "Any",
+      "control": "Text",
+      "required": false,
+      "default": "",
+      "description": "Player whose inventory should be read. Empty means the current triggering player.",
+      "valueSource": "Trigger Context"
+    }
+  ],
+  "beginnerSummary": "Value: use a player's inventory container.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Players",
+    "Inventory"
+  ]
+}

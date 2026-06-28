@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.rigidbody.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Physics",
+  "idBase": "ACT_SetRigidBodyBounciness",
+  "type": "SetRigidBodyBounciness",
+  "apiType": "RigidBody.Bounciness",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Bounciness", "coverage": "Direct" }
+  ],
+  "label": "Set Rigid Body Bounciness",
+  "value": "target=Self;bounciness=0",
+  "description": "Sets how much a RigidBody bounces after impact.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} bounciness to ${bounciness}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "bounce", "bounciness", "impact"],
+  "selectorHints": [
+    { "key": "target", "label": "Rigid Body", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose bounciness will change.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] },
+    { "key": "bounciness", "label": "Bounciness", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "New bounciness value.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Set how much a rigid body bounces after impact.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.saved-data.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Saved Data",
+  "idBase": "PROP_DatastoreKey",
+  "type": "DatastoreKey",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "DatastoreService", "memberKind": "Method", "member": "GetDatastore", "coverage": "Direct" },
+    { "type": "Datastore", "memberKind": "Property", "member": "Key", "coverage": "Direct" },
+    { "type": "Datastore", "memberKind": "Method", "member": "Disconnect", "coverage": "Direct" }
+  ],
+  "label": "Saved Store Name",
+  "value": "storeKey=PlayerData",
+  "description": "Outputs the name reported by a saved data store.",
+  "status": "Ready",
+  "previewTemplate": "Store name ${storeKey}",
+  "searchKeywords": ["saved", "data", "store", "name", "key", "read"],
+  "parameters": [
+    { "key": "storeKey", "label": "Store Name", "type": "String", "control": "Text", "required": true, "default": "PlayerData", "description": "Saved data group to inspect.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Value: read the saved data store name.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Saved Data"]
+}

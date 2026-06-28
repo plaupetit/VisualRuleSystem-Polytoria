@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Images",
+  "idBase": "EV_OnPTImageAssetIdChanged",
+  "type": "OnPTImageAssetIdChanged",
+  "apiType": "PTImageAsset.ImageID",
+  "apiReferences": [{ "type": "PTImageAsset", "memberKind": "Property", "member": "ImageID", "coverage": "Partial" }],
+  "label": "On PT Image Asset ID Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a PTImageAsset image ID changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} image ID changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["image", "asset", "id", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Image Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTImageAsset to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageAssetObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the image ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when an image asset ID changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Image Changes"]
+}

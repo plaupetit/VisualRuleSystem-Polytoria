@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.grabbable",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Scene Object",
+  "idBase": "ACT_SetGrabForce",
+  "type": "SetGrabForce",
+  "apiType": "Grabbable.Force",
+  "apiReferences": [
+    { "type": "Grabbable", "memberKind": "Property", "member": "Force", "coverage": "Direct" }
+  ],
+  "label": "Set Grab Force",
+  "value": "target=Self;force=500",
+  "description": "Changes how strongly a grabbable object is pulled while dragged.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} grab force ${force}",
+  "searchKeywords": ["grab", "grabbable", "drag", "force", "pull", "physics"],
+  "corePack": true,
+  "familyFolder": "Polytoria Grabbable",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grabbable", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grabbable object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GrabbableObject"] },
+    { "key": "force", "label": "Force", "type": "Number", "control": "Number", "required": true, "default": "500", "description": "Pull force used while dragging.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do change how strongly an object is pulled when grabbed.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Grab"]
+}

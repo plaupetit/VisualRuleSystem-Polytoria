@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.tween.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Tween",
+  "idBase": "COND_TweenColorReached",
+  "type": "TweenColorReached",
+  "apiType": "TweenObject",
+  "apiReferences": [
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenColor", "coverage": "Indirect" },
+    { "type": "Part", "memberKind": "Property", "member": "Color", "coverage": "Direct" }
+  ],
+  "label": "Tween Color Reached",
+  "value": "target=Self;r=1;g=1;b=1",
+  "description": "Checks whether an object has reached a target tween color.",
+  "status": "Ready",
+  "previewTemplate": "${target} reached tween color",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["tween", "animate", "color", "reached", "done", "object"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Target Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to inspect.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "r", "label": "Red", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target red channel.", "valueSource": "Suggested Value" },
+    { "key": "g", "label": "Green", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target green channel.", "valueSource": "Suggested Value" },
+    { "key": "b", "label": "Blue", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target blue channel.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if a color animation has reached its target.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Vrs.Core.Bridge;
 using Vrs.Core.Persistence;
+using Vrs.Core.RuntimeEvents;
 using Vrs.Graph.Model;
 
 namespace Vrs.Core.ProjectInputs;
@@ -12,7 +13,7 @@ namespace Vrs.Core.ProjectInputs;
 public sealed partial class ProjectInputManagerService
 {
     public const string RegistryRelativePath = ".vrs/input-manager.json";
-    public const string ManagerFolderPath = "World/Hidden/VRS Input Manager";
+    public const string ManagerFolderPath = VrsRuntimeEventPaths.ManagedUserInputNetworkEventsPath;
 
     public VrsInputGenerationPlan BuildGenerationPlan(Rule rule)
     {

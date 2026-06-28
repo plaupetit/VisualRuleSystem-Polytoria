@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.world.markers",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Entity",
+  "idBase": "ACT_SetEntityIsSpawn",
+  "type": "SetEntityIsSpawn",
+  "apiType": "Entity.IsSpawn",
+  "apiReferences": [
+    { "type": "Entity", "memberKind": "Property", "member": "IsSpawn", "coverage": "Direct" }
+  ],
+  "label": "Set Entity Spawn",
+  "value": "target=Self;enabled=true",
+  "description": "Controls whether an entity-like object is used as a spawn point.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} spawn ${enabled}",
+  "searchKeywords": ["entity", "spawn", "checkpoint", "start", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Entity", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Entity-like object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["EntityObject"] },
+    { "key": "enabled", "label": "Enabled", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Whether the object is a spawn point.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Do turn an entity spawn point on or off.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Entity"]
+}

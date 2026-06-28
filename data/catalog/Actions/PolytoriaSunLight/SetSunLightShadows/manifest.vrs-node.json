@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.sunlight",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetSunLightShadows",
+  "type": "SetSunLightShadows",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Shadows", "coverage": "Direct" }
+  ],
+  "label": "Set Sun Light Shadows",
+  "value": "target=Self;shadows=true",
+  "description": "Enables or disables shadows from the main sun light.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} sun shadows ${shadows}",
+  "searchKeywords": ["sun", "sunlight", "light", "lighting", "shadow", "shadows"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Sun Light", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "SunLight object to change.", "valueSource": "Target Context", "acceptedObjectGroups": ["SunLightObject"] },
+    { "key": "shadows", "label": "Shadows", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Whether the sun casts shadows.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do turn sun shadows on or off.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light"]
+}

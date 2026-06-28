@@ -110,8 +110,25 @@
 
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="320,6,*,6,*" Background="#101318">
         <Border Grid.Row="0" Grid.ColumnSpan="5" Background="#1e2430" Padding="10" BorderBrush="#303642" BorderThickness="0,0,0,1">
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                <WrapPanel Grid.Column="0"
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" ColumnSpacing="12" RowSpacing="8">
+                <StackPanel Grid.Row="0"
+                            Grid.Column="0"
+                            Orientation="Horizontal"
+                            Spacing="10"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Visual Scripting Workspace"
+                               Foreground="#f2f7ff"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding VisualScriptingWorkspaceSummary}"
+                               Foreground="#9aa8b5"
+                               FontSize="12"
+                               VerticalAlignment="Center"
+                               TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+                <WrapPanel Grid.Row="1"
+                           Grid.Column="0"
                            Orientation="Horizontal"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center">
@@ -181,9 +198,33 @@
                             ToolTip.Tip="Write or update the VRS .luau file in scripts/VRS. Instance deploy is done from the Creator hierarchy."
                             Margin="0,0,8,4"
                             VerticalAlignment="Center"/>
+                    <Border Background="#101820"
+                            BorderBrush="#334557"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="6"
+                            Margin="0,0,8,4"
+                            VerticalAlignment="Center"
+                            ToolTip.Tip="{Binding CreatorBridgeWorkspaceSummary}">
+                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                            <TextBlock Text="Creator Bridge"
+                                       Foreground="#c8d3df"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
+                            <Button Content="Request Snapshot"
+                                    Command="{Binding RequestCreatorSnapshotCommand}"
+                                    Padding="8,4"
+                                    ToolTip.Tip="Write snapshot-request.json for the Creator addon."/>
+                            <Button Content="Refresh Snapshot"
+                                    Command="{Binding RefreshSnapshotCommand}"
+                                    Padding="8,4"
+                                    ToolTip.Tip="Reload the latest scene-snapshot.json into VRS."/>
+                        </StackPanel>
+                    </Border>
                     <Button Content="Input Manager"
                             Command="{Binding EnsureInputManagerCommand}"
-                            ToolTip.Tip="Generate VRS input presets in input.json and ensure NetworkEvents under World/Hidden/VRS/Events/Input."
+                            ToolTip.Tip="Generate VRS input presets in input.json and ensure NetworkEvents under World/Hidden/VRS/Events/User Input (NetworkEvent)/Input Manager."
                             Margin="0,0,8,4"
                             VerticalAlignment="Center"/>
                     <Button Content="Graph" ToolTip.Tip="Save, load, import, and export the editable graph package." Margin="0,0,8,4" VerticalAlignment="Center">
@@ -254,7 +295,7 @@
                     <Button Content="State Fragment" Command="{Binding CreateStateFragmentFromSelectionCommand}" IsVisible="{Binding ShowsFragmentTools}" Margin="0,0,8,4" VerticalAlignment="Center"/>
                     <Button Content="Expand Fragment" Command="{Binding ExpandSelectedFragmentCommand}" IsVisible="{Binding ShowsFragmentTools}" Margin="0,0,8,4" VerticalAlignment="Center"/>
                 </WrapPanel>
-                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                     <TextBlock Text="{Binding StartupStatus}" Foreground="#80c7ff" FontSize="12"/>
                     <TextBlock Text="{Binding StatusText}" Foreground="#c8d3df" FontSize="12"/>
                 </StackPanel>

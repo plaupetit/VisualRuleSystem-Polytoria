@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.world.info",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_WorldIdentifier",
+  "type": "WorldIdentifierValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "World", "memberKind": "Property", "member": "WorldID", "coverage": "Direct" }
+  ],
+  "label": "World Identifier",
+  "value": "",
+  "description": "Outputs the current world's identifier text.",
+  "status": "Ready",
+  "previewTemplate": "World identifier",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "identifier", "place", "server", "text"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value reads the identifier text for the current world.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "World Info"]
+}

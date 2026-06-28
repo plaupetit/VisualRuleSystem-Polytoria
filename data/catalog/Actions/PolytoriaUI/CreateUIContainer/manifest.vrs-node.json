@@ -1,0 +1,49 @@
+{
+  "moduleId": "polytoria.ui.create",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "UI Layout",
+  "idBase": "ACT_CreateUIContainer",
+  "type": "CreateUIContainer",
+  "apiType": "Instance.New",
+  "apiReferences": [
+    { "type": "Instance", "memberKind": "Method", "member": "New", "coverage": "Direct" },
+    { "type": "UIContainer", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "UIFlowLayout", "memberKind": "Type", "coverage": "Partial" },
+    { "type": "UIHFlow", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "UIHLayout", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "UIVFlow", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "UIVLayout", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "UIViewport", "memberKind": "Type", "coverage": "Direct" }
+  ],
+  "label": "Create UI Container",
+  "value": "target=PlayerGUI;uiKind=Horizontal Layout;objectName=MenuLayout",
+  "description": "Creates a layout, flow, or viewport object under a UI parent.",
+  "status": "Ready",
+  "previewTemplate": "Create ${uiKind} under ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["do", "ui", "gui", "create", "layout", "flow", "viewport", "menu", "screen", "container"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Parent UI",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject", "CatalogValue"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Parent UI", "type": "Object Path", "control": "SceneObject", "required": true, "default": "PlayerGUI", "description": "UI parent that receives the new object.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIFieldObject", "Any"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "uiKind", "label": "UI Kind", "type": "String", "control": "Choice", "required": true, "default": "Horizontal Layout", "description": "Kind of UI object to create.", "valueSource": "String / Choice", "options": ["Horizontal Layout", "Vertical Layout", "Horizontal Flow", "Vertical Flow", "Viewport"] },
+    { "key": "objectName", "label": "Object Name", "type": "String", "control": "Text", "default": "MenuLayout", "description": "Optional name for the new UI object.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Do create a UI layout, flow, or viewport under a player UI parent.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

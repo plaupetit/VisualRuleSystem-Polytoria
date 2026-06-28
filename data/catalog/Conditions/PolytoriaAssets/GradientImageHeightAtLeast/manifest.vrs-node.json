@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Images",
+  "idBase": "COND_GradientImageHeightAtLeast",
+  "type": "GradientImageHeightAtLeast",
+  "apiType": "GradientImageAsset.Height",
+  "apiReferences": [
+    { "type": "GradientImageAsset", "memberKind": "Property", "member": "Height", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Gradient Image Height At Least",
+  "value": "target=Self;height=256",
+  "description": "Checks if a GradientImageAsset height is at least the expected value.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} height is at least ${height}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["gradient", "image", "asset", "height", "size", "minimum"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Image Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientImageAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageAssetObject"] },
+    { "key": "height", "label": "Minimum Height", "type": "Number", "control": "Number", "required": true, "default": "256", "description": "Minimum expected image height.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a generated gradient image is tall enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

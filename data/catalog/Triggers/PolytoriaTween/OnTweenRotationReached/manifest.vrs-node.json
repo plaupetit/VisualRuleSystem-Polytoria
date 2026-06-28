@@ -1,0 +1,38 @@
+{
+  "moduleId": "polytoria.tween.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Tween",
+  "idBase": "EV_OnTweenRotationReached",
+  "type": "OnTweenRotationReached",
+  "apiType": "TweenObject",
+  "apiReferences": [
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenRotation", "coverage": "Indirect" },
+    { "type": "Part", "memberKind": "Property", "member": "Rotation", "coverage": "Direct" }
+  ],
+  "label": "On Tween Rotation Reached",
+  "value": "target=Self;vector=0,90,0;x=0;y=90;z=0;tolerance=0.01;interval=0.05",
+  "description": "Starts a flow when an object reaches a target tween rotation.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} reaches tween rotation ${vector}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["tween", "animate", "rotation", "rotate", "reached", "finished", "trigger"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Target Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "vector", "label": "Target Rotation", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,90,0", "description": "Rotation the tween should reach.", "valueSource": "Manual 3D Vector" },
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Target X rotation.", "valueSource": "Suggested Value" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "90", "description": "Target Y rotation.", "valueSource": "Suggested Value" },
+    { "key": "z", "label": "Z", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Target Z rotation.", "valueSource": "Suggested Value" },
+    { "key": "tolerance", "label": "Tolerance", "type": "Number", "control": "Number", "required": true, "default": "0.01", "description": "Allowed rotation difference.", "valueSource": "Suggested Value" },
+    { "key": "interval", "label": "Check Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.05", "description": "Polling interval used to detect completion.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Trigger when a rotation animation reaches its target.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

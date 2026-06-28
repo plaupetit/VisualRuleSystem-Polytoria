@@ -1,0 +1,51 @@
+{
+  "moduleId": "polytoria.lighting.object.conditions",
+  "kind": "Condition",
+  "apiGroup": "Lighting",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_LightBrightnessAtLeast",
+  "type": "LightBrightnessAtLeast",
+  "apiType": "Light",
+  "apiReferences": [
+    { "type": "Light", "memberKind": "Property", "member": "Brightness", "coverage": "Direct" }
+  ],
+  "label": "Light Brightness Is At Least",
+  "value": "target=Self;brightness=1",
+  "description": "Checks if a light is at least this bright.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} brightness is at least ${brightness}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["lighting", "light", "brightness", "lamp", "at least", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Light",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Light object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["LightObject"]
+    },
+    {
+      "key": "brightness",
+      "label": "Brightness",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "1",
+      "description": "Minimum brightness.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check if a light is bright enough.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Light Settings"]
+}

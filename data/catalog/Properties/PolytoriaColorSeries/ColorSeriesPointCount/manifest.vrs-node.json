@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.colorseries.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Color Series",
+  "idBase": "PROP_ColorSeriesPointCount",
+  "type": "ColorSeriesPointCount",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "ColorSeries", "memberKind": "Property", "member": "PointCount", "coverage": "Direct" }
+  ],
+  "label": "Color Series Point Count",
+  "value": "",
+  "description": "Outputs how many color points are in a ColorSeries.",
+  "status": "Ready",
+  "previewTemplate": "Color series point count",
+  "searchKeywords": ["color series", "gradient", "point count", "count", "colorseries"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "series", "label": "Color Series", "type": "ColorSeries", "control": "Text", "required": true, "default": "", "description": "ColorSeries value to inspect.", "valueSource": "Color Series" }
+  ],
+  "beginnerSummary": "Value: count the points in a gradient.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Color Series"]
+}

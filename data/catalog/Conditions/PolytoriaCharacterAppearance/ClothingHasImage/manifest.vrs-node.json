@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Character Appearance",
+  "idBase": "COND_ClothingHasImage",
+  "type": "ClothingHasImage",
+  "apiType": "Clothing.Image",
+  "apiReferences": [
+    { "type": "Clothing", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Clothing Has Image",
+  "value": "target=Self",
+  "description": "Checks if a clothing object has any image assigned.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} has a clothing image",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["clothing", "shirt", "pants", "image", "not empty", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Clothing", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Clothing object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["ClothingObject"] }
+  ],
+  "beginnerSummary": "Check if clothing has an image assigned.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

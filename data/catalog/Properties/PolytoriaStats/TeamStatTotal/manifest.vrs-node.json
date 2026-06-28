@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.stats.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player Stats",
+  "idBase": "PROP_TeamStatTotal",
+  "type": "TeamStatTotal",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "Stat", "memberKind": "Method", "member": "GetTotalForTeam", "coverage": "Direct" }
+  ],
+  "label": "Team Stat Total",
+  "value": "target=Target;team=Target",
+  "description": "Outputs the total numeric value of a Stat for a chosen game team.",
+  "status": "Ready",
+  "previewTemplate": "${target} total for ${team}",
+  "searchKeywords": ["stat", "stats", "team", "total", "score", "points", "leaderboard"],
+  "parameters": [
+    { "key": "target", "label": "Stat", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Target", "description": "Stat object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["StatObject"] },
+    { "key": "team", "label": "Game Team", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Target", "description": "Team object to total.", "valueSource": "Target Context", "acceptedObjectGroups": ["TeamObject"] }
+  ],
+  "beginnerSummary": "Value: sum one stat across all players in a game team.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Player Stats"]
+}

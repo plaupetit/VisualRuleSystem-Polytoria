@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.tween.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Tween",
+  "idBase": "COND_TweenTransparencyReached",
+  "type": "TweenTransparencyReached",
+  "apiType": "TweenObject",
+  "apiReferences": [
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenNumber", "coverage": "Indirect" },
+    { "type": "Part", "memberKind": "Property", "member": "Transparency", "coverage": "Direct" }
+  ],
+  "label": "Tween Transparency Reached",
+  "value": "target=Self;transparency=0;tolerance=0.01",
+  "description": "Checks whether an object has reached a target tween transparency.",
+  "status": "Ready",
+  "previewTemplate": "${target} reached tween transparency ${transparency}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["tween", "animate", "transparency", "fade", "reached", "done", "object"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Target Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object to inspect.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "transparency", "label": "Transparency", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Target transparency.", "valueSource": "Suggested Value" },
+    { "key": "tolerance", "label": "Tolerance", "type": "Number", "control": "Number", "required": true, "default": "0.01", "description": "Allowed transparency difference.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if a fade animation has reached its target.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

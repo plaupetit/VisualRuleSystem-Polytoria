@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.coreui.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Client",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_BuiltInBackpackAvailable",
   "type": "BuiltInBackpackAvailable",
   "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "CoreUIService", "memberKind": "Property", "member": "UseBackpack", "coverage": "Direct" }
+  ],
   "label": "Backpack Is Available",
   "value": "",
   "description": "Outputs true when the built-in backpack can be opened.",

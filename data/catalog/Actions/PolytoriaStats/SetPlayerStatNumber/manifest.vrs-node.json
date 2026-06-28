@@ -1,0 +1,37 @@
+{
+  "moduleId": "polytoria.stats",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Player Stats",
+  "idBase": "ACT_SetPlayerStatNumber",
+  "type": "SetPlayerStatNumber",
+  "apiType": "Stat.Set",
+  "apiReferences": [
+    { "type": "Stat", "memberKind": "Method", "member": "Set", "coverage": "Direct" }
+  ],
+  "label": "Set Player Stat Number",
+  "value": "target=Target;player=;value=0",
+  "description": "Sets a numeric Stat value for the triggering player or a connected player source.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} number to ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["stat", "stats", "score", "points", "number", "player", "set", "leaderboard"],
+  "selectorHints": [
+    { "key": "target", "label": "Stat", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] },
+    { "key": "player", "label": "Player", "dataType": "Player", "allowedSources": ["TriggeringPlayer", "CatalogValue"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Stats",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Stat", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Target", "description": "Stat object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["StatObject"] },
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player whose stat changes. Empty means the current triggering player.", "valueSource": "Trigger Context" },
+    { "key": "value", "label": "Value", "type": "Number", "control": "Number", "default": "0", "description": "New numeric stat value.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Set a player's numeric stat, such as score, coins, or level.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Player Stats"]
+}

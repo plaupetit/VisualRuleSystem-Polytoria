@@ -1,0 +1,36 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Mesh Animation",
+  "idBase": "ACT_SetMeshAnimationType",
+  "type": "SetMeshAnimationType",
+  "apiType": "MeshAnimationAsset.AnimationType",
+  "apiReferences": [
+    { "type": "MeshAnimationAsset", "memberKind": "Property", "member": "AnimationType", "coverage": "Direct" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Mesh Animation Type",
+  "value": "target=Self;animationType=Normal",
+  "description": "Changes the playback type stored on a MeshAnimationAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} animation type",
+  "searchKeywords": ["mesh", "animation", "type", "loop", "oneshot", "pingpong"],
+  "selectorHints": [
+    { "key": "target", "label": "Mesh Animation Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Mesh Animation Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "MeshAnimationAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAnimationAssetObject"] },
+    { "key": "animationType", "label": "Animation Type", "type": "String", "control": "Choice", "required": true, "default": "Normal", "description": "Mesh animation playback mode.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Normal", "Looped", "PingPong", "OneShot", "OneShotImpluse"] }
+  ],
+  "beginnerSummary": "Do change the playback type of a mesh animation asset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Mesh Animation"]
+}

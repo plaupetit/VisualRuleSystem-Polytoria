@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.world.info",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_WorldObjectCount",
+  "type": "WorldObjectCountValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "World", "memberKind": "Property", "member": "InstanceCount", "coverage": "Direct" }
+  ],
+  "label": "World Object Count",
+  "value": "",
+  "description": "Outputs how many objects are currently in the world.",
+  "status": "Ready",
+  "previewTemplate": "World object count",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "object", "count", "scene", "performance"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value reads how many objects are currently in the world.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "World Info"]
+}

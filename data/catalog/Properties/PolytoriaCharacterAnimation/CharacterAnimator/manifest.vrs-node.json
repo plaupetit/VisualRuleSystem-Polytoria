@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Characters",
+  "idBase": "PROP_CharacterAnimator",
+  "type": "CharacterAnimator",
+  "apiType": "CharacterModel.Animator",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "Animator", "coverage": "Direct" },
+    { "type": "Animator", "memberKind": "Type", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Character Animation Controller",
+  "value": "target=Self",
+  "description": "Gets the animation controller from a character.",
+  "status": "Ready",
+  "returnType": "SceneObject",
+  "previewTemplate": "${target} animation controller",
+  "searchKeywords": ["character", "animation", "animator", "controller", "player"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] }
+  ],
+  "beginnerSummary": "Value returns the animation controller from a character.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

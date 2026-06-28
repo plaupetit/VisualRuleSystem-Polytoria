@@ -1,0 +1,52 @@
+{
+  "moduleId": "polytoria.sharedtable.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Shared Values",
+  "idBase": "ACT_ClearSharedSuffix",
+  "type": "ClearSharedSuffix",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Method", "member": "ClearSuffix", "coverage": "Direct" }
+  ],
+  "label": "Clear Shared Suffix",
+  "value": "suffix=:temp",
+  "description": "Clears shared table keys that end with a suffix.",
+  "status": "Ready",
+  "previewTemplate": "Clear shared keys ending with ${suffix}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "clear",
+    "suffix",
+    "namespace",
+    "remove"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "suffix",
+      "label": "Suffix",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": ":temp",
+      "description": "Suffix for keys to clear.",
+      "valueSource": "String / Manual Text Input"
+    }
+  ],
+  "beginnerSummary": "Do clear a group of shared values by key suffix.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

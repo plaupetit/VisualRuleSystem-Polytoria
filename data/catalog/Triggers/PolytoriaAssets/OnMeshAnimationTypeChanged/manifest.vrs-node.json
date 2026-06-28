@@ -1,0 +1,27 @@
+{
+  "moduleId": "polytoria.assets.triggers",
+  "kind": "Trigger",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Triggers",
+  "subcategory": "Mesh Animation",
+  "idBase": "EV_OnMeshAnimationTypeChanged",
+  "type": "OnMeshAnimationTypeChanged",
+  "apiType": "MeshAnimationAsset.AnimationType",
+  "apiReferences": [{ "type": "MeshAnimationAsset", "memberKind": "Property", "member": "AnimationType", "coverage": "Partial" }],
+  "label": "On Mesh Animation Type Changed",
+  "value": "target=Self;interval=0.25",
+  "description": "Starts when a MeshAnimationAsset playback type changes.",
+  "status": "Ready",
+  "previewTemplate": "When ${target} animation type changes",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["mesh", "animation", "type", "loop", "changed", "watcher"],
+  "parameters": [
+    { "key": "target", "label": "Mesh Animation Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "MeshAnimationAsset to watch.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAnimationAssetObject"] },
+    { "key": "interval", "label": "Poll Every Seconds", "type": "Number", "control": "Number", "required": true, "default": "0.25", "description": "How often VRS checks the animation type.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Trigger when a mesh animation playback type changes.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Mesh Animation Changes"]
+}

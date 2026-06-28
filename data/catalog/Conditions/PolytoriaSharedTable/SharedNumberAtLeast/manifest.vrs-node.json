@@ -1,0 +1,62 @@
+{
+  "moduleId": "polytoria.sharedtable.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Shared Values",
+  "idBase": "COND_SharedNumberAtLeast",
+  "type": "SharedNumberAtLeast",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Shared Number At Least",
+  "value": "key=Score;minimum=10",
+  "description": "Checks whether a shared numeric value is at least a minimum.",
+  "status": "Ready",
+  "previewTemplate": "Shared ${key} is at least ${minimum}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "shared",
+    "table",
+    "variable",
+    "global",
+    "number",
+    "score",
+    "minimum",
+    "compare"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    {
+      "key": "key",
+      "label": "Key",
+      "type": "String",
+      "control": "Text",
+      "required": true,
+      "default": "Score",
+      "description": "Shared table key to read as a number.",
+      "valueSource": "String / Manual Text Input"
+    },
+    {
+      "key": "minimum",
+      "label": "Minimum",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "10",
+      "description": "Minimum required number.",
+      "valueSource": "Number / Manual Number Input"
+    }
+  ],
+  "beginnerSummary": "Check a shared score or counter against a minimum.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Variables",
+    "Shared"
+  ]
+}

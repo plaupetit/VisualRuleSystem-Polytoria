@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.bounds",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Bounds",
+  "idBase": "COND_ObjectBoundsContainsPoint",
+  "type": "ObjectBoundsContainsPoint",
+  "apiType": "Bounds.Contains",
+  "apiReferences": [
+    { "type": "Dynamic", "memberKind": "Method", "member": "GetBounds", "coverage": "Partial" },
+    { "type": "Bounds", "memberKind": "Method", "member": "Contains", "coverage": "Direct" },
+    { "type": "Vector3", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Object Bounds Contains Point",
+  "value": "target=Self;x=0;y=0;z=0",
+  "description": "Checks whether an object's bounds contain a world point.",
+  "status": "Ready",
+  "previewTemplate": "${target} bounds contains (${x}, ${y}, ${z})",
+  "searchKeywords": ["bounds", "box", "contains", "point", "inside", "zone"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object bounds to test.", "valueSource": "Target Context", "acceptedObjectGroups": ["PartLike"] },
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Point X position.", "valueSource": "Manual Value" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Point Y position.", "valueSource": "Manual Value" },
+    { "key": "z", "label": "Z", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Point Z position.", "valueSource": "Manual Value" }
+  ],
+  "beginnerSummary": "Check whether a point is inside an object's bounds.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Bounds"]
+}

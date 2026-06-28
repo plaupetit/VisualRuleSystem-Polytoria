@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.teams.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Shared",
   "category": "Properties",
@@ -8,6 +9,10 @@
   "idBase": "PROP_PlayerGameTeamColor",
   "type": "PlayerGameTeamColor",
   "apiType": "Color",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Team", "coverage": "Direct" },
+    { "type": "Team", "memberKind": "Property", "member": "Color", "coverage": "Direct" }
+  ],
   "label": "Player Game Team Color",
   "value": "",
   "description": "Outputs the color of the triggering player's game team.",

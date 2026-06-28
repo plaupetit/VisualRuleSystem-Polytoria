@@ -1,0 +1,35 @@
+{
+  "moduleId": "polytoria.raycast.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Raycast",
+  "idBase": "PROP_RaycastHitDistance",
+  "type": "RaycastHitDistance",
+  "apiType": "RayResult.Distance",
+  "apiReferences": [
+    { "type": "Environment", "memberKind": "Method", "member": "Raycast", "coverage": "Direct" },
+    { "type": "RayResult", "memberKind": "Property", "member": "Distance", "coverage": "Direct" }
+  ],
+  "label": "Raycast Hit Distance",
+  "value": "origin=0,0,0;direction=0,-1,0;maxDistance=100",
+  "description": "Casts a ray and outputs the distance to the hit point.",
+  "status": "Ready",
+  "returnType": "Number",
+  "previewTemplate": "Raycast hit distance",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["raycast", "ray", "hit", "distance", "range", "length", "laser"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "origin", "label": "Origin", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,0,0", "description": "World position where the ray starts.", "valueSource": "World Point" },
+    { "key": "direction", "label": "Direction", "type": "Vector3", "control": "Vector3", "required": true, "default": "0,-1,0", "description": "Direction the ray travels.", "valueSource": "World Direction" },
+    { "key": "maxDistance", "label": "Max Distance", "type": "Number", "control": "Number", "required": true, "default": "100", "description": "Maximum ray distance.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Value: get how far the ray traveled before hitting.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Raycast"]
+}

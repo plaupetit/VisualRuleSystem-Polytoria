@@ -1,0 +1,39 @@
+{
+  "moduleId": "polytoria.assets.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Images",
+  "idBase": "ACT_SetGradientImageSize",
+  "type": "SetGradientImageSize",
+  "apiType": "GradientImageAsset.Width",
+  "apiReferences": [
+    { "type": "GradientImageAsset", "memberKind": "Property", "member": "Width", "coverage": "Direct" },
+    { "type": "GradientImageAsset", "memberKind": "Property", "member": "Height", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ResourceAsset", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "BaseAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Set Gradient Image Size",
+  "value": "target=Self;width=256;height=256",
+  "description": "Changes the generated pixel size stored on a GradientImageAsset.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} gradient image size",
+  "searchKeywords": ["gradient", "image", "asset", "width", "height", "size"],
+  "selectorHints": [
+    { "key": "target", "label": "Gradient Image Asset", "dataType": "SceneObject", "allowedSources": ["Self", "Target", "SceneObject"], "allowedScopes": ["Script", "State", "Graph"] }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Gradient Image Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "GradientImageAsset to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageAssetObject"] },
+    { "key": "width", "label": "Width", "type": "Number", "control": "Number", "required": true, "default": "256", "description": "Generated image width.", "valueSource": "Number / Manual Value" },
+    { "key": "height", "label": "Height", "type": "Number", "control": "Number", "required": true, "default": "256", "description": "Generated image height.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Do change the generated size of a gradient image asset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Images"]
+}

@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.explosion.triggers",
+  "kind": "Trigger",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Events",
+  "subcategory": "Effects",
+  "idBase": "EV_OnExplosionTouched",
+  "type": "OnExplosionTouched",
+  "apiType": "Explosion.Touched",
+  "apiReferences": [
+    { "type": "Explosion", "memberKind": "Event", "member": "Touched", "coverage": "Direct" }
+  ],
+  "label": "On Explosion Touched Object",
+  "value": "target=Self",
+  "description": "Starts when an explosion affects an object.",
+  "status": "Ready",
+  "fallbackMode": "Log And Skip",
+  "previewTemplate": "When ${target} explosion affects an object",
+  "searchKeywords": ["when", "explosion", "blast", "touch", "hit", "affected", "object"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Explosion",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Effects",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Explosion", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Explosion object that should listen for affected objects.", "valueSource": "Target Context", "acceptedObjectGroups": ["ExplosionObject"] }
+  ],
+  "beginnerSummary": "When this explosion affects an object, run the connected nodes.",
+  "surface": "UserFacing",
+  "palettePath": ["Effects", "Explosion"]
+}

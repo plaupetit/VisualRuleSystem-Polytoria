@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.lighting.conditions",
+  "kind": "Condition",
+  "apiGroup": "Lighting",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Lighting",
+  "idBase": "COND_FogStartDistanceAtLeast",
+  "type": "FogStartDistanceAtLeast",
+  "apiType": "Lighting",
+  "apiReferences": [
+    { "type": "Lighting", "memberKind": "Property", "member": "FogStartDistance", "coverage": "Direct" }
+  ],
+  "label": "Fog Start Distance Is At Least",
+  "value": "distance=25",
+  "description": "Checks if fog starts at least this far away.",
+  "status": "Ready",
+  "previewTemplate": "If fog starts at least ${distance} away",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["lighting", "fog", "start", "distance", "at least", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    {
+      "key": "distance",
+      "label": "Distance",
+      "type": "Number",
+      "control": "Number",
+      "required": true,
+      "default": "25",
+      "description": "Minimum fog start distance.",
+      "valueSource": "Suggested Value"
+    }
+  ],
+  "beginnerSummary": "Check how far from the player fog starts.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Fog"]
+}

@@ -212,6 +212,8 @@ public static class NodeCatalogPresentationService
     {
         return CatalogDataTypeNormalizer.NormalizeValueType(value) switch
         {
+            "Quaternion" => "Rotation",
+            "ColorSeries" => "Color Series",
             "Vector3" => "3D Vector",
             "SceneObject" => "Scene Object",
             "String" => "Text",

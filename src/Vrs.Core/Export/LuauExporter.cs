@@ -51,6 +51,7 @@ public sealed partial class LuauExporter
         bool UsesObbyTouchResolver,
         bool UsesObbyObjectPosition,
         bool UsesEssentialsRuntime,
+        bool UsesTweenTargetRuntime,
         bool UsesInputEventRuntime);
 
     private static void AppendReadableScript(

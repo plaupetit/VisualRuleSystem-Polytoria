@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.rigidbody.properties",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Physics",
+  "idBase": "PROP_RigidBodyMass",
+  "type": "RigidBodyMassValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "RigidBody", "memberKind": "Property", "member": "Mass", "coverage": "Direct" }
+  ],
+  "label": "Rigid Body Mass",
+  "value": "target=Self",
+  "description": "Outputs the mass of a RigidBody object.",
+  "status": "Ready",
+  "previewTemplate": "Mass of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["rigidbody", "rigid body", "physics", "mass", "weight"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Rigid Body", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "RigidBody object whose mass will be read.", "valueSource": "Target Context", "acceptedObjectGroups": ["RigidBodyObject"] }
+  ],
+  "beginnerSummary": "Value: use how heavy a rigid body is.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Rigid Body"]
+}

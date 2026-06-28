@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "UI Layout",
+  "idBase": "PROP_LayoutChildAlignment",
+  "type": "LayoutChildAlignmentValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "UIHVLayout", "memberKind": "Property", "member": "ChildAlignment", "coverage": "Direct" },
+    { "type": "UILayoutAlignment", "memberKind": "Enum", "coverage": "Direct" }
+  ],
+  "label": "Layout Child Alignment",
+  "value": "target=Self",
+  "description": "Reads child alignment on a horizontal or vertical UI layout.",
+  "status": "Ready",
+  "previewTemplate": "Child alignment of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "layout", "align", "alignment", "center", "start", "end"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "UI Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Layout to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIHVLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads child alignment in a UI layout.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.networkedobject.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input/Network",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Object Network",
+  "idBase": "PROP_ObjectNetworkKey",
+  "type": "ObjectNetworkKey",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "NetworkedObject", "memberKind": "Property", "member": "NetworkedObjectID", "coverage": "Direct" }
+  ],
+  "label": "Object Network Key",
+  "value": "target=Self",
+  "description": "Outputs the unique network key for a scene object during this session.",
+  "status": "Ready",
+  "previewTemplate": "Network key of ${target}",
+  "searchKeywords": ["value", "object", "network", "key", "id", "session", "scene"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object whose network key will be read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["Any"]
+    }
+  ],
+  "beginnerSummary": "Value reads the unique network key of a scene object.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Network"]
+}

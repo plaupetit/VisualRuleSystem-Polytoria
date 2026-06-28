@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.world.info",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "World Info",
+  "idBase": "PROP_WorldIsOldFormat",
+  "type": "WorldIsOldFormatValue",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "World", "memberKind": "Property", "member": "IsLegacyWorld", "coverage": "Direct" }
+  ],
+  "label": "Old World Format",
+  "value": "",
+  "description": "Outputs true when the current world uses the older world format.",
+  "status": "Ready",
+  "previewTemplate": "Old world format",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "legacy", "old", "format"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Value checks whether the game uses the older world format.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "World Info"]
+}

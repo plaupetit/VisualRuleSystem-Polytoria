@@ -1,0 +1,57 @@
+{
+  "moduleId": "polytoria.scripts.actions",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Script",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Scripts",
+  "idBase": "ACT_ToggleScriptEnabled",
+  "type": "ToggleScriptEnabled",
+  "apiType": "Script",
+  "apiReferences": [
+    { "type": "Script", "memberKind": "Property", "member": "IsEnabled", "coverage": "Direct" },
+    { "type": "ServerScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ClientScript", "memberKind": "Type", "member": "", "coverage": "Partial" },
+    { "type": "ModuleScript", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Toggle Script Enabled",
+  "value": "target=Target",
+  "description": "Switches a script object between enabled and disabled.",
+  "status": "Ready",
+  "previewTemplate": "Toggle script ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": [
+    "script",
+    "toggle",
+    "enabled",
+    "disable",
+    "server script",
+    "client script",
+    "module script"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria Scripts",
+  "utilityLayer": "Scripts",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Script",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Target",
+      "description": "Script object to toggle.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": [
+        "ScriptObject"
+      ]
+    }
+  ],
+  "beginnerSummary": "Do toggle a script object on or off.",
+  "surface": "UserFacing",
+  "palettePath": [
+    "Scene Object",
+    "Scripts"
+  ]
+}

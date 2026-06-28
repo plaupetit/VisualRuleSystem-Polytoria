@@ -170,6 +170,9 @@ public partial class MainWindowViewModel
     private string bridgeParentPath = "World/Hidden";
 
     [ObservableProperty]
+    private string selectedCreatorObjectPath = "";
+
+    [ObservableProperty]
     private bool bridgeDryRun = true;
 
     [ObservableProperty]

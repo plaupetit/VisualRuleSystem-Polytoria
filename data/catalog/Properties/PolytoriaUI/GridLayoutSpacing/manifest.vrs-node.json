@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "UI Layout",
+  "idBase": "PROP_GridLayoutSpacing",
+  "type": "GridLayoutSpacingValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "UIGridLayout", "memberKind": "Property", "member": "Spacing", "coverage": "Direct" }
+  ],
+  "label": "Grid Spacing",
+  "value": "target=Self",
+  "description": "Reads spacing between cells in a UI grid layout.",
+  "status": "Ready",
+  "previewTemplate": "Grid spacing of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "layout", "grid", "spacing", "gap"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Grid Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grid layout to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIGridLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads the gap between cells in a UI grid.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

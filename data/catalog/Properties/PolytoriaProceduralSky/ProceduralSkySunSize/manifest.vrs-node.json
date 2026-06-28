@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.procedural_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ProceduralSkySunSize",
+  "type": "ProceduralSkySunSizeValue",
+  "apiType": "ProceduralSky.SunSize",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "SunSize", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Procedural Sky Sun Size",
+  "value": "target=Self",
+  "description": "Outputs the sun size from a ProceduralSky object.",
+  "status": "Ready",
+  "previewTemplate": "Sun size of ${target}",
+  "searchKeywords": ["sky", "procedural", "sun", "size", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ProceduralSky object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ProceduralSkyObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads the procedural sky sun size.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

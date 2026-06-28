@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.sharedtable.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "ScriptSharedTable",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Shared Values",
+  "idBase": "COND_SharedNumberEquals",
+  "type": "SharedNumberEquals",
+  "apiType": "ScriptSharedTable",
+  "apiReferences": [
+    { "type": "ScriptSharedTable", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Shared Number Equals",
+  "value": "key=Score;expected=10",
+  "description": "Checks whether a shared numeric value equals a number.",
+  "status": "Ready",
+  "previewTemplate": "Shared ${key} equals ${expected}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["shared", "table", "variable", "global", "number", "equals", "score", "compare"],
+  "corePack": true,
+  "familyFolder": "Polytoria Shared Table",
+  "utilityLayer": "Variables",
+  "parameters": [
+    { "key": "key", "label": "Key", "type": "String", "control": "Text", "required": true, "default": "Score", "description": "Shared table key to read as a number.", "valueSource": "String / Manual Text Input" },
+    { "key": "expected", "label": "Expected", "type": "Number", "control": "Number", "required": true, "default": "10", "description": "Number that must match.", "valueSource": "Number / Manual Number Input" }
+  ],
+  "beginnerSummary": "Check whether a shared score or counter is exactly a number.",
+  "surface": "UserFacing",
+  "palettePath": ["Variables", "Shared"]
+}

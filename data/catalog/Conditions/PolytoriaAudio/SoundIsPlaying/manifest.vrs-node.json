@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.audio.conditions",
+  "kind": "Condition",
+  "apiGroup": "Audio",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Audio",
+  "idBase": "COND_SoundIsPlaying",
+  "type": "SoundIsPlaying",
+  "apiType": "Sound",
+  "apiReferences": [
+    { "type": "Sound", "memberKind": "Property", "member": "Playing", "coverage": "Direct" }
+  ],
+  "label": "Sound Is Playing",
+  "value": "target=Self",
+  "description": "Checks if a sound object is currently playing.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} is playing",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "sound", "playing", "music", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SoundObject"]
+    }
+  ],
+  "beginnerSummary": "Check if a sound is currently playing.",
+  "surface": "UserFacing",
+  "palettePath": ["Audio", "Status"]
+}

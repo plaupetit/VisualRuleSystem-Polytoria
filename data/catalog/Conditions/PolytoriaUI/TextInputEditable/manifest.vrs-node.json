@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.textinput",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Conditions",
+  "subcategory": "Text Input",
+  "idBase": "COND_TextInputEditable",
+  "type": "TextInputEditable",
+  "apiType": "UITextInput.ReadOnly",
+  "apiReferences": [
+    { "type": "UITextInput", "memberKind": "Property", "member": "ReadOnly", "coverage": "Direct" }
+  ],
+  "label": "Text Input Is Editable",
+  "value": "target=Self",
+  "description": "Checks if a text input can be edited by the player.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} is editable",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "text input", "editable", "typing", "unlocked", "enabled"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Text Input", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Text input object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["UITextInputObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Check whether a text input can be edited.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Text Input"]
+}

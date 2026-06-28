@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.character.animation",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Characters",
+  "idBase": "ACT_StopCharacterAnimation",
+  "type": "StopCharacterAnimation",
+  "apiType": "Animator.StopAnimation",
+  "apiReferences": [
+    { "type": "CharacterModel", "memberKind": "Property", "member": "Animator", "coverage": "Direct" },
+    { "type": "Animator", "memberKind": "Method", "member": "StopAnimation", "coverage": "Direct" }
+  ],
+  "label": "Stop Character Animation",
+  "value": "target=Self",
+  "description": "Stops the current looping character animation.",
+  "status": "Ready",
+  "previewTemplate": "Stop animation on ${target}",
+  "searchKeywords": ["character", "animation", "animator", "stop", "loop"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to stop animating.", "valueSource": "Target Context", "acceptedObjectGroups": ["CharacterModelObject"] }
+  ],
+  "beginnerSummary": "Do stop the current looping character animation.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Animation"]
+}

@@ -1,0 +1,29 @@
+{
+  "moduleId": "polytoria.environment",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "World Info",
+  "idBase": "ACT_RebuildNavMesh",
+  "type": "RebuildNavMesh",
+  "apiType": "Environment.RebuildNavMesh",
+  "apiReferences": [
+    { "type": "Environment", "memberKind": "Method", "member": "RebuildNavMesh", "coverage": "Direct" }
+  ],
+  "label": "Rebuild Nav Mesh",
+  "value": "",
+  "description": "Rebuilds NPC navigation after changing the world.",
+  "status": "Ready",
+  "previewTemplate": "Rebuild nav mesh",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["world", "environment", "navmesh", "navigation", "npc", "path", "rebuild"],
+  "corePack": true,
+  "familyFolder": "Polytoria World",
+  "utilityLayer": "Gameplay",
+  "parameters": [],
+  "beginnerSummary": "Do rebuild NPC navigation.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Environment"]
+}

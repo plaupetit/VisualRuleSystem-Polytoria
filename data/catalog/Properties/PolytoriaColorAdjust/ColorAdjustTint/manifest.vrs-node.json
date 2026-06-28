@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.color_adjust.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ColorAdjustTint",
+  "type": "ColorAdjustTintValue",
+  "apiType": "ColorAdjustModifier.TintColor",
+  "apiReferences": [
+    { "type": "ColorAdjustModifier", "memberKind": "Property", "member": "TintColor", "coverage": "Direct" },
+    { "type": "LightingModifier", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Color Adjust Tint",
+  "value": "target=Self",
+  "description": "Outputs the tint color from a ColorAdjustModifier.",
+  "status": "Ready",
+  "previewTemplate": "Color adjust tint of ${target}",
+  "searchKeywords": ["lighting", "post process", "color adjust", "tint", "color", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Color Adjust",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ColorAdjustModifier object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ColorAdjustModifierObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads the tint color adjustment.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Color Adjust"]
+}

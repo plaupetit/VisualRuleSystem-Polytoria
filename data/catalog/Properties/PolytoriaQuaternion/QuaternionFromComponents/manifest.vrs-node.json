@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.quaternion.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Math/Structs",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Rotation",
+  "idBase": "PROP_QuaternionFromComponents",
+  "type": "QuaternionFromComponents",
+  "apiType": "Quaternion",
+  "apiReferences": [
+    { "type": "Quaternion", "memberKind": "Method", "member": "New", "coverage": "Direct" }
+  ],
+  "label": "Quaternion From Components",
+  "value": "x=0;y=0;z=0;w=1",
+  "description": "Creates a rotation from raw quaternion X, Y, Z, and W components.",
+  "status": "Ready",
+  "previewTemplate": "Quaternion (${x}, ${y}, ${z}, ${w})",
+  "searchKeywords": ["quaternion", "rotation", "components", "xyzw", "advanced", "orientation"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Quaternion X component.", "valueSource": "Number" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Quaternion Y component.", "valueSource": "Number" },
+    { "key": "z", "label": "Z", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Quaternion Z component.", "valueSource": "Number" },
+    { "key": "w", "label": "W", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Quaternion W component.", "valueSource": "Number" }
+  ],
+  "beginnerSummary": "Value: make a rotation from raw quaternion components.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Rotation"]
+}

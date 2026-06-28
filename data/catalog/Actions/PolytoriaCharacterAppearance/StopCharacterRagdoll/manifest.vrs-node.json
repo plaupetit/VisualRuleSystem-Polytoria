@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_StopCharacterRagdoll",
+  "type": "StopCharacterRagdoll",
+  "apiType": "PolytorianModel.StopRagdoll",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Method", "member": "StopRagdoll", "coverage": "Direct" }
+  ],
+  "label": "Stop Character Ragdoll",
+  "value": "target=Self",
+  "description": "Stops ragdoll on a character model.",
+  "status": "Ready",
+  "previewTemplate": "Stop ragdoll on ${target}",
+  "searchKeywords": ["character", "ragdoll", "recover", "stand", "physics"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Do stop character ragdoll.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Ragdoll"]
+}

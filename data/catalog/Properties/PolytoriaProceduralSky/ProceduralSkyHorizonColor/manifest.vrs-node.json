@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.procedural_sky.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Runtime Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Lighting",
+  "idBase": "PROP_ProceduralSkyHorizonColor",
+  "type": "ProceduralSkyHorizonColorValue",
+  "apiType": "ProceduralSky.HorizonColor",
+  "apiReferences": [
+    { "type": "ProceduralSky", "memberKind": "Property", "member": "HorizonColor", "coverage": "Direct" },
+    { "type": "Sky", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Procedural Sky Horizon Color",
+  "value": "target=Self",
+  "description": "Outputs the horizon color from a ProceduralSky object.",
+  "status": "Ready",
+  "previewTemplate": "Horizon color of ${target}",
+  "searchKeywords": ["sky", "procedural", "horizon", "color", "value"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Procedural Sky",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "ProceduralSky object to read.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["ProceduralSkyObject"]
+    }
+  ],
+  "beginnerSummary": "Value reads the procedural sky horizon color.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Procedural Sky"]
+}

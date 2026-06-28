@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.ui.3d",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "3D UI",
+  "idBase": "ACT_SetGui3DTransparent",
+  "type": "SetGui3DTransparent",
+  "apiType": "GUI3D.Transparent",
+  "apiReferences": [
+    { "type": "GUI3D", "memberKind": "Property", "member": "Transparent", "coverage": "Direct" }
+  ],
+  "label": "Set 3D UI Transparent",
+  "value": "target=Self;transparent=true",
+  "description": "Turns transparency on or off for a 3D GUI.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} transparent to ${transparent}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "3d", "gui3d", "transparent", "opacity"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "3D UI",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "3D UI", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D GUI to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["GUI3DObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] },
+    { "key": "transparent", "label": "Transparent", "type": "Boolean", "control": "Checkbox", "required": true, "default": "true", "description": "Whether the 3D UI is transparent.", "valueSource": "Boolean / Manual" }
+  ],
+  "beginnerSummary": "Do toggle transparency on a 3D UI.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "3D UI"]
+}

@@ -1,0 +1,33 @@
+{
+  "moduleId": "polytoria.assets.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Audio",
+  "idBase": "COND_PTAudioAssetIdIs",
+  "type": "PTAudioAssetIdIs",
+  "apiType": "PTAudioAsset.AudioID",
+  "apiReferences": [
+    { "type": "PTAudioAsset", "memberKind": "Property", "member": "AudioID", "coverage": "Direct" },
+    { "type": "AudioAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "PT Audio Asset ID Is",
+  "value": "target=Self;assetId=0",
+  "description": "Checks if a PTAudioAsset stores the expected numeric audio ID.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} audio ID is ${assetId}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "asset", "ptaudioasset", "id", "sound", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Audio Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTAudioAsset to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["AudioAssetObject"] },
+    { "key": "assetId", "label": "Asset ID", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Expected Polytoria audio asset ID.", "valueSource": "Number / Manual Value" }
+  ],
+  "beginnerSummary": "Check whether an audio asset uses a specific ID.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Audio"]
+}

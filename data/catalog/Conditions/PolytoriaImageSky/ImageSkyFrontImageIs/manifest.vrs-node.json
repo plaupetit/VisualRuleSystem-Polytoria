@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.imagesky.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Lighting",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Image Sky",
+  "idBase": "COND_ImageSkyFrontImageIs",
+  "type": "ImageSkyFrontImageIs",
+  "apiType": "ImageSky.FrontImage",
+  "apiReferences": [{ "type": "ImageSky", "memberKind": "Property", "member": "FrontImage", "coverage": "Direct" }],
+  "label": "Image Sky Front Image Is",
+  "value": "target=Self;image=;caseSensitive=false",
+  "description": "Checks if an ImageSky front face uses the expected image.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} front sky image is ${image}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["image", "sky", "front", "skybox", "asset", "equals"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Image Sky", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "ImageSky object to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["ImageSkyObject"] },
+    { "key": "image", "label": "Expected Image", "type": "String", "control": "Text", "required": true, "default": "", "description": "Expected front image asset reference.", "valueSource": "String / Manual Text Input" },
+    { "key": "caseSensitive", "label": "Match Exact Capitals", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Checked means capital letters must match too.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check the front image of a skybox.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Image Sky Sides"]
+}

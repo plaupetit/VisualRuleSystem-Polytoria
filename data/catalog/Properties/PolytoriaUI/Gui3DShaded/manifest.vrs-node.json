@@ -1,0 +1,31 @@
+{
+  "moduleId": "polytoria.ui.3d",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "3D UI",
+  "idBase": "PROP_Gui3DShaded",
+  "type": "Gui3DShadedValue",
+  "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "GUI3D", "memberKind": "Property", "member": "Shaded", "coverage": "Direct" }
+  ],
+  "label": "3D UI Shaded",
+  "value": "target=Self",
+  "description": "Reads whether lighting shading is enabled on a 3D GUI.",
+  "status": "Ready",
+  "previewTemplate": "Shaded state of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "3d", "gui3d", "shaded", "lighting"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "3D UI", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "3D GUI to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["GUI3DObject"], "acceptedSceneRoots": ["World", "PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads whether a 3D UI uses lighting shading.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "3D UI"]
+}

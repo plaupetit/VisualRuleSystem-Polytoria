@@ -57,6 +57,7 @@ public partial class MainWindowViewModel
 
             ApplyProjectRuntimeStatus(projectRuntimeStatus.BuildLinkedProjectStatus(projectRoot, bridgeDirectory));
             ApplyBridgeSyncResult(sync, options, updateStatus, onlyReportCommandId);
+            await PublishBridgeAppStateAsync(bridgeDirectory).ConfigureAwait(true);
             return sync;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)

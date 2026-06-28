@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.sunlight",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Lighting",
+  "idBase": "ACT_SetSunLightBrightness",
+  "type": "SetSunLightBrightness",
+  "apiType": "SunLight",
+  "apiReferences": [
+    { "type": "SunLight", "memberKind": "Type", "coverage": "Direct" },
+    { "type": "Light", "memberKind": "Property", "member": "Brightness", "coverage": "Direct" }
+  ],
+  "label": "Set Sun Light Brightness",
+  "value": "target=Self;brightness=1",
+  "description": "Changes how bright the main sun light is.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} sun brightness ${brightness}",
+  "searchKeywords": ["sun", "sunlight", "light", "lighting", "brightness", "day"],
+  "corePack": true,
+  "familyFolder": "Polytoria Lighting",
+  "utilityLayer": "Lighting",
+  "parameters": [
+    { "key": "target", "label": "Sun Light", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "SunLight object to change.", "valueSource": "Target Context", "acceptedObjectGroups": ["SunLightObject"] },
+    { "key": "brightness", "label": "Brightness", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "New sun light brightness.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Do make the sun brighter or dimmer.",
+  "surface": "UserFacing",
+  "palettePath": ["Lighting", "Sun Light"]
+}

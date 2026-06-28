@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.teams",
   "kind": "Condition",
+  "apiSurface": "Gameplay",
   "apiGroup": "Teams",
   "runtimeFamily": "Shared",
   "category": "Conditions",
@@ -8,6 +9,9 @@
   "idBase": "COND_PlayerIsInGameTeam",
   "type": "PlayerIsInGameTeam",
   "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "Player", "memberKind": "Property", "member": "Team", "coverage": "Direct" }
+  ],
   "label": "Player Is In Game Team",
   "value": "target=Target",
   "description": "Checks whether the triggering player is assigned to a chosen game team.",

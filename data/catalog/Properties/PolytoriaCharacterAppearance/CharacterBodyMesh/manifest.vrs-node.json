@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Property",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Character Appearance",
+  "idBase": "PROP_CharacterBodyMesh",
+  "type": "CharacterBodyMeshValue",
+  "apiType": "PolytorianModel.BodyMesh",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "BodyMesh", "coverage": "Direct" },
+    { "type": "MeshAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "Character Body Mesh",
+  "value": "target=Self",
+  "description": "Reads the body mesh on a character model.",
+  "status": "Ready",
+  "returnType": "String",
+  "previewTemplate": "${target} body mesh",
+  "searchKeywords": ["character", "body", "mesh", "avatar", "appearance"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] }
+  ],
+  "beginnerSummary": "Value returns a character body mesh.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

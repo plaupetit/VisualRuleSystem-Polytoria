@@ -1,0 +1,49 @@
+{
+  "moduleId": "polytoria.values.instance",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "Stored Values",
+  "idBase": "ACT_SetInstanceValueObject",
+  "type": "SetInstanceValueObject",
+  "apiType": "InstanceValue.Value",
+  "apiReferences": [
+    { "type": "InstanceValue", "memberKind": "Property", "member": "Value", "coverage": "Direct" },
+    { "type": "Instance", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set Stored Object Reference",
+  "value": "target=Self;value=Self",
+  "description": "Stores a scene object reference inside an object reference value.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} stored object to ${value}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["value", "instancevalue", "objectvalue", "reference", "scene object", "target", "set"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Object Reference Value",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    },
+    {
+      "key": "value",
+      "label": "Stored Object",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Object Reference Value", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Object reference value to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["InstanceValueObject"] },
+    { "key": "value", "label": "Stored Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Scene object to store.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] }
+  ],
+  "beginnerSummary": "Set a stored object reference that another rule can read later.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Stored Values"]
+}

@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.ui.scroll",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Scroll View",
+  "idBase": "PROP_ScrollViewVerticalMode",
+  "type": "ScrollViewVerticalModeValue",
+  "apiType": "String",
+  "apiReferences": [
+    { "type": "UIScrollView", "memberKind": "Property", "member": "VerticalScrollMode", "coverage": "Direct" },
+    { "type": "UIScrollMode", "memberKind": "Enum", "coverage": "Direct" }
+  ],
+  "label": "Vertical Scroll Mode",
+  "value": "target=Self",
+  "description": "Reads the vertical scroll mode of a scroll view.",
+  "status": "Ready",
+  "previewTemplate": "Vertical scroll mode of ${target}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "scroll", "vertical", "mode", "scrollview"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Scroll View", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Scroll view to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIScrollViewObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] }
+  ],
+  "beginnerSummary": "Value reads vertical scrolling behavior.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Scroll View"]
+}

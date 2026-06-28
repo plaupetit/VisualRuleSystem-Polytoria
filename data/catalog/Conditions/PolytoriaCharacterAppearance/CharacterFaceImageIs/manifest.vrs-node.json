@@ -1,0 +1,34 @@
+{
+  "moduleId": "polytoria.character.appearance.conditions",
+  "kind": "Condition",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Conditions",
+  "subcategory": "Character Appearance",
+  "idBase": "COND_CharacterFaceImageIs",
+  "type": "CharacterFaceImageIs",
+  "apiType": "PolytorianModel.FaceImage",
+  "apiReferences": [
+    { "type": "PolytorianModel", "memberKind": "Property", "member": "FaceImage", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Character Face Image Is",
+  "value": "target=Self;image=;caseSensitive=false",
+  "description": "Checks if a character face image matches a chosen image.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} face image is ${image}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["character", "face", "image", "avatar", "appearance", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Character", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Character to check.", "valueSource": "Target Context", "acceptedObjectGroups": ["PolytorianModelObject"] },
+    { "key": "image", "label": "Image", "type": "String", "control": "Text", "required": true, "default": "", "description": "Expected face image key or path.", "valueSource": "Suggested Value" },
+    { "key": "caseSensitive", "label": "Case Sensitive", "type": "Boolean", "control": "Checkbox", "required": true, "default": "false", "description": "Use exact capitalization.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check a character face image.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

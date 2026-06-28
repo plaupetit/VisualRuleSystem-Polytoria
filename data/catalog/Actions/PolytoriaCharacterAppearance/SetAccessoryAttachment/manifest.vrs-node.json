@@ -1,0 +1,32 @@
+{
+  "moduleId": "polytoria.character.appearance",
+  "kind": "Action",
+  "apiGroup": "Runtime Gameplay",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Server",
+  "category": "Actions",
+  "subcategory": "Character Appearance",
+  "idBase": "ACT_SetAccessoryAttachment",
+  "type": "SetAccessoryAttachment",
+  "apiType": "Accessory.TargetAttachment",
+  "apiReferences": [
+    { "type": "Accessory", "memberKind": "Property", "member": "TargetAttachment", "coverage": "Direct" },
+    { "type": "CharacterAttachment", "memberKind": "Enum", "member": "", "coverage": "Direct" }
+  ],
+  "label": "Set Accessory Attachment",
+  "value": "target=Self;attachment=Head",
+  "description": "Changes where an accessory attaches on a character.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} attachment ${attachment}",
+  "searchKeywords": ["accessory", "attach", "attachment", "hat", "body", "head"],
+  "corePack": true,
+  "familyFolder": "Polytoria Characters",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Accessory", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Accessory to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["AccessoryObject"] },
+    { "key": "attachment", "label": "Attachment", "type": "String", "control": "Choice", "required": true, "default": "Head", "description": "Character attachment point.", "valueSource": "String / Choice", "allowCustom": false, "options": ["Head", "UpperTorso", "LowerTorso", "ShoulderLeft", "ShoulderRight", "ElbowLeft", "ElbowRight", "HandLeft", "HandRight", "LegLeft", "LegRight", "KneeLeft", "KneeRight", "FootLeft", "FootRight"] }
+  ],
+  "beginnerSummary": "Do choose where an accessory attaches.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Character Appearance"]
+}

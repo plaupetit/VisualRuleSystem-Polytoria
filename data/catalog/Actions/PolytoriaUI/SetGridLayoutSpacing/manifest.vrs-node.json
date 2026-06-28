@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.ui.layout",
+  "kind": "Action",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Actions",
+  "subcategory": "UI Layout",
+  "idBase": "ACT_SetGridLayoutSpacing",
+  "type": "SetGridLayoutSpacing",
+  "apiType": "UIGridLayout.Spacing",
+  "apiReferences": [
+    { "type": "UIGridLayout", "memberKind": "Property", "member": "Spacing", "coverage": "Direct" }
+  ],
+  "label": "Set Grid Spacing",
+  "value": "target=Self;spacing=8",
+  "description": "Changes spacing between cells in a UI grid layout.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} grid spacing to ${spacing}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["ui", "gui", "layout", "grid", "spacing", "gap", "inventory", "menu"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Grid Layout",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "parameters": [
+    { "key": "target", "label": "Grid Layout", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "Grid layout to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["UIGridLayoutObject"], "acceptedSceneRoots": ["PlayerGUI", "CoreUI"] },
+    { "key": "spacing", "label": "Spacing", "type": "Number", "control": "Number", "required": true, "default": "8", "description": "Space between grid cells.", "valueSource": "Number / Manual" }
+  ],
+  "beginnerSummary": "Do set the gap between cells in a UI grid.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "UI Layout"]
+}

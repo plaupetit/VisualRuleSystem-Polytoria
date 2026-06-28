@@ -1,0 +1,25 @@
+{
+  "moduleId": "polytoria.ui.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "UI",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "UI",
+  "idBase": "PROP_PlayerUIRoot",
+  "type": "PlayerUIRoot",
+  "apiType": "PlayerGUI",
+  "apiReferences": [
+    { "type": "PlayerGUI", "memberKind": "Type", "coverage": "Direct" }
+  ],
+  "label": "Player UI Root",
+  "value": "",
+  "description": "Outputs the root object that contains the player's custom UI.",
+  "status": "Ready",
+  "previewTemplate": "Player UI root",
+  "searchKeywords": ["ui", "gui", "player", "screen", "root", "parent", "menu", "custom"],
+  "parameters": [],
+  "beginnerSummary": "Value: the parent object for custom player UI.",
+  "surface": "UserFacing",
+  "palettePath": ["UI & Feedback", "Custom UI"]
+}

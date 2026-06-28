@@ -1,0 +1,40 @@
+{
+  "moduleId": "polytoria.ui.actions",
+  "kind": "Action",
+  "apiGroup": "UI",
+  "runtimeFamily": "Shared",
+  "category": "Actions",
+  "subcategory": "UI",
+  "idBase": "ACT_SetUIImage",
+  "type": "SetUIImage",
+  "apiType": "UIImage.Image",
+  "apiReferences": [
+    { "type": "UIImage", "memberKind": "Property", "member": "Image", "coverage": "Direct" },
+    { "type": "ImageAsset", "memberKind": "Type", "coverage": "Partial" }
+  ],
+  "label": "Set UI Image",
+  "value": "target=Self;image=",
+  "description": "Changes the image asset reference used by an UIImage object.",
+  "status": "Ready",
+  "previewTemplate": "Set ${target} image",
+  "searchKeywords": ["ui", "image", "asset", "picture", "icon", "texture"],
+  "selectorHints": [
+    {
+      "key": "target",
+      "label": "Image UI Object",
+      "dataType": "SceneObject",
+      "allowedSources": ["Self", "Target", "SceneObject"],
+      "allowedScopes": ["Script", "State", "Graph"]
+    }
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "target", "label": "Image UI Object", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "UIImage object to update.", "valueSource": "Target Context", "acceptedObjectGroups": ["Any"] },
+    { "key": "image", "label": "Image", "type": "String", "control": "Text", "default": "", "description": "Image asset reference or path.", "valueSource": "String / Manual Text Input" }
+  ],
+  "beginnerSummary": "Change the image displayed by a UI image object.",
+  "surface": "UserFacing",
+  "palettePath": ["UI"]
+}

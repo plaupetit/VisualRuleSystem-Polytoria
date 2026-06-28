@@ -1,0 +1,30 @@
+{
+  "moduleId": "polytoria.vector2.values",
+  "kind": "Property",
+  "apiGroup": "Math",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Vector",
+  "idBase": "PROP_Vector2Distance",
+  "type": "Vector2Distance",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "Vector2", "memberKind": "Method", "member": "Distance", "coverage": "Direct" }
+  ],
+  "label": "Vector2 Distance",
+  "value": "first=0,0;second=0,0",
+  "description": "Outputs the distance between two 2D vectors.",
+  "status": "Ready",
+  "previewTemplate": "Vector2 distance",
+  "searchKeywords": ["vector2", "vector", "distance", "length", "between", "ui", "input"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    { "key": "first", "label": "First", "type": "Vector2", "control": "Vector2", "required": true, "default": "0,0", "description": "First 2D vector.", "valueSource": "Vector2" },
+    { "key": "second", "label": "Second", "type": "Vector2", "control": "Vector2", "required": true, "default": "0,0", "description": "Second 2D vector.", "valueSource": "Vector2" }
+  ],
+  "beginnerSummary": "Value: measure distance between two 2D vectors.",
+  "surface": "UserFacing",
+  "palettePath": ["Math", "Vector"]
+}

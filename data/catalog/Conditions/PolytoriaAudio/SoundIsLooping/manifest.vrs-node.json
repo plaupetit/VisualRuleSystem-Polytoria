@@ -1,0 +1,41 @@
+{
+  "moduleId": "polytoria.audio.conditions",
+  "kind": "Condition",
+  "apiGroup": "Audio",
+  "apiSurface": "Gameplay",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Audio",
+  "idBase": "COND_SoundIsLooping",
+  "type": "SoundIsLooping",
+  "apiType": "Sound",
+  "apiReferences": [
+    { "type": "Sound", "memberKind": "Property", "member": "Loop", "coverage": "Direct" }
+  ],
+  "label": "Sound Is Looping",
+  "value": "target=Self",
+  "description": "Checks if a sound object is set to loop.",
+  "status": "Ready",
+  "previewTemplate": "If ${target} loops",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["audio", "sound", "loop", "looping", "repeat", "check"],
+  "corePack": true,
+  "familyFolder": "Polytoria Audio",
+  "utilityLayer": "Audio",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Sound",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Sound object to check.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["SoundObject"]
+    }
+  ],
+  "beginnerSummary": "Check if a sound is set to loop.",
+  "surface": "UserFacing",
+  "palettePath": ["Audio", "Settings"]
+}

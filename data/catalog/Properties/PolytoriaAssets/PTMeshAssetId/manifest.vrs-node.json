@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.assets.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Assets",
+  "runtimeFamily": "Shared",
+  "category": "Properties",
+  "subcategory": "Meshes",
+  "idBase": "PROP_PTMeshAssetId",
+  "type": "PTMeshAssetIdValue",
+  "apiType": "Number",
+  "apiReferences": [
+    { "type": "PTMeshAsset", "memberKind": "Property", "member": "AssetID", "coverage": "Direct" },
+    { "type": "MeshAsset", "memberKind": "Type", "member": "", "coverage": "Partial" }
+  ],
+  "label": "PT Mesh Asset ID",
+  "value": "target=Self",
+  "description": "Outputs the numeric Polytoria mesh ID from a PTMeshAsset.",
+  "status": "Ready",
+  "previewTemplate": "${target} mesh ID",
+  "searchKeywords": ["mesh", "asset", "ptmeshasset", "id"],
+  "parameters": [
+    { "key": "target", "label": "Mesh Asset", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Self", "description": "PTMeshAsset to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["MeshAssetObject"] }
+  ],
+  "beginnerSummary": "Value: read the mesh ID from a PTMeshAsset.",
+  "surface": "UserFacing",
+  "palettePath": ["Assets", "Meshes"]
+}

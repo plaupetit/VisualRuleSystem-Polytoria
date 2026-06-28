@@ -1,6 +1,7 @@
 {
   "moduleId": "polytoria.coreui.values",
   "kind": "Property",
+  "apiSurface": "Gameplay",
   "apiGroup": "Values",
   "runtimeFamily": "Client",
   "category": "Properties",
@@ -8,6 +9,9 @@
   "idBase": "PROP_PlayerCanRespawn",
   "type": "PlayerCanRespawn",
   "apiType": "Boolean",
+  "apiReferences": [
+    { "type": "CoreUIService", "memberKind": "Property", "member": "CanRespawn", "coverage": "Direct" }
+  ],
   "label": "Player Can Respawn",
   "value": "",
   "description": "Outputs true when the built-in respawn option is allowed.",

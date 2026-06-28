@@ -1,0 +1,68 @@
+{
+  "moduleId": "polytoria.input.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Input",
+  "runtimeFamily": "Client",
+  "category": "Properties",
+  "subcategory": "Input",
+  "idBase": "PROP_InputButtonFromKey",
+  "type": "InputButtonFromKey",
+  "apiType": "InputButton.New",
+  "apiReferences": [
+    { "type": "InputButton", "memberKind": "Method", "member": "New", "coverage": "Direct" },
+    { "type": "InputButton", "memberKind": "Property", "member": "KeyCode", "coverage": "Direct" }
+  ],
+  "label": "Input Button From Key",
+  "value": "keyCode=E",
+  "description": "Builds an InputButton value from a Polytoria KeyCode enum name.",
+  "status": "Ready",
+  "previewTemplate": "Input button ${keyCode}",
+  "searchKeywords": [
+    "value",
+    "input",
+    "button",
+    "key",
+    "keycode",
+    "keyboard",
+    "mouse",
+    "client"
+  ],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "keyCode",
+      "label": "Key Code",
+      "type": "String",
+      "control": "Choice",
+      "required": true,
+      "default": "E",
+      "description": "Polytoria KeyCode enum name to turn into an InputButton.",
+      "valueSource": "String / Choice",
+      "allowCustom": true,
+      "options": [
+        "E",
+        "F",
+        "Q",
+        "R",
+        "Space",
+        "Enter",
+        "Shift",
+        "Ctrl",
+        "Alt",
+        "MouseLeft",
+        "MouseRight",
+        "MouseMiddle",
+        "GamepadA",
+        "GamepadB",
+        "GamepadX",
+        "GamepadY"
+      ]
+    }
+  ],
+  "beginnerSummary": "Value: create an input button from a key name.",
+  "surface": "UserFacing",
+  "palettePath": ["Players", "Input"]
+}

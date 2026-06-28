@@ -1,0 +1,56 @@
+{
+  "moduleId": "polytoria.tween.conditions",
+  "kind": "Condition",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Tween",
+  "runtimeFamily": "Shared",
+  "category": "Conditions",
+  "subcategory": "Tween",
+  "idBase": "COND_TweenPositionReached",
+  "type": "TweenPositionReached",
+  "apiType": "TweenObject",
+  "apiReferences": [
+    { "type": "TweenObject", "memberKind": "Method", "member": "TweenPosition", "coverage": "Indirect" },
+    { "type": "Part", "memberKind": "Property", "member": "Position", "coverage": "Direct" }
+  ],
+  "label": "Tween Position Reached",
+  "value": "target=Self;vector=0,1,0;x=0;y=1;z=0;tolerance=0.01",
+  "description": "Checks whether an object has reached a target tween position.",
+  "status": "Ready",
+  "previewTemplate": "${target} reached tween position ${vector}",
+  "fallbackMode": "Log And Skip",
+  "searchKeywords": ["tween", "animate", "position", "reached", "done", "finished", "object"],
+  "corePack": true,
+  "familyFolder": "Polytoria API",
+  "utilityLayer": "Gameplay",
+  "parameters": [
+    {
+      "key": "target",
+      "label": "Target Object",
+      "type": "Object Path",
+      "control": "SceneObject",
+      "required": true,
+      "default": "Self",
+      "description": "Object to inspect.",
+      "valueSource": "Target Context",
+      "acceptedObjectGroups": ["PartLike"]
+    },
+    {
+      "key": "vector",
+      "label": "Target Position",
+      "type": "Vector3",
+      "control": "Vector3",
+      "required": true,
+      "default": "0,1,0",
+      "description": "Position the tween should reach.",
+      "valueSource": "Manual 3D Vector"
+    },
+    { "key": "x", "label": "X", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Target X position.", "valueSource": "Suggested Value" },
+    { "key": "y", "label": "Y", "type": "Number", "control": "Number", "required": true, "default": "1", "description": "Target Y position.", "valueSource": "Suggested Value" },
+    { "key": "z", "label": "Z", "type": "Number", "control": "Number", "required": true, "default": "0", "description": "Target Z position.", "valueSource": "Suggested Value" },
+    { "key": "tolerance", "label": "Tolerance", "type": "Number", "control": "Number", "required": true, "default": "0.01", "description": "Allowed distance from the target.", "valueSource": "Suggested Value" }
+  ],
+  "beginnerSummary": "Check if a position animation has reached its target.",
+  "surface": "UserFacing",
+  "palettePath": ["Scene Object", "Animation"]
+}

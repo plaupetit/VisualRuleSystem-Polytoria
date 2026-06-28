@@ -1,0 +1,28 @@
+{
+  "moduleId": "polytoria.stats.values",
+  "kind": "Property",
+  "apiSurface": "Gameplay",
+  "apiGroup": "Data/Stats",
+  "runtimeFamily": "Server",
+  "category": "Properties",
+  "subcategory": "Player Stats",
+  "idBase": "PROP_PlayerStatValue",
+  "type": "PlayerStatValue",
+  "apiType": "Any",
+  "apiReferences": [
+    { "type": "Stat", "memberKind": "Method", "member": "Get", "coverage": "Direct" }
+  ],
+  "label": "Player Stat Value",
+  "value": "target=Target;player=",
+  "description": "Outputs a player's raw Stat value.",
+  "status": "Ready",
+  "previewTemplate": "${target} value",
+  "searchKeywords": ["stat", "stats", "score", "points", "value", "player", "leaderboard"],
+  "parameters": [
+    { "key": "target", "label": "Stat", "type": "Object Path", "control": "SceneObject", "required": true, "default": "Target", "description": "Stat object to read.", "valueSource": "Target Context", "acceptedObjectGroups": ["StatObject"] },
+    { "key": "player", "label": "Player", "type": "Any", "control": "Text", "required": false, "default": "", "description": "Player to read. Empty means the current triggering player.", "valueSource": "Trigger Context" }
+  ],
+  "beginnerSummary": "Value: read a player's raw stat value.",
+  "surface": "UserFacing",
+  "palettePath": ["Game Rules", "Player Stats"]
+}
